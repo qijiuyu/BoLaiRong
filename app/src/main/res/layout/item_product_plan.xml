@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/tv_plan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生产计划：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_delivery_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交付日期：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_plan"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="备注：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_delivery_time"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2020-03-03 10:00:00"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/time"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未审核"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_time"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/color_70DF5D"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

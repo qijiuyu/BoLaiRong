@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bian.dan.blr">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.SENSOR_INFO" />
+    <uses-permission android:name="android.permission.SENSOR_ENABLE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+    <application
+        android:name=".application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.TabActivity"  android:screenOrientation="portrait"  android:launchMode="singleTask"/>
+        <activity android:name=".activity.main.MainActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.audit.AuditActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.statistical.StatisticalActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.ContractManagerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.AddContractActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.ContractDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.InventoryListActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.OutBoundActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.AddOutBoundActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.AddProductActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.OutBoundDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.ProductionPlanActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.AddProductPlanActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.AddProductActivity2"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.ProductPlanDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.LogListActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.AddLogActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.LogDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.CustomerManagerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.SelectContractCodeActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.sales.AddCustomerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.CustomerDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.FinancialActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.SelectMaterialActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.AddFinancialActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.FinancialDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.SelectCustomerActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.procurement.ProcurementActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.procurement.AddProcurementActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.procurement.AddProductActivity3"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.procurement.ProcurementDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.procurement.SupplierListActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.procurement.AddSupplierActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.procurement.SupplierDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.DeviceListActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.warehouse.AddDeviceActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".activity.main.warehouse.DeviceDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.WareHouseManagerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.warehouse.InventoryDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.SdEnterActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.warehouse.AddSdEnterActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.warehouse.AddProductActivity4"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.warehouse.SdEnterDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.SalesOutBoundActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.main.warehouse.SalesOutBoundDetailsActivity"  android:screenOrientation="portrait"/>
+
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="入库单号：2093848"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="采购员：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_code"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="采购日期：2020=03-03"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/time"
+            android:drawablePadding="7dp"
+            android:text="2020-03-03 10:00:00"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="15dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

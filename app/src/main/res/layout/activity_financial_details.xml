@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <include layout="@layout/head"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_create_people"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="录入人：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+
+            <TextView
+                android:id="@+id/tv_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="录入时间：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_apply_peple"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="申请人：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="收款人账号：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="开户行：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="电话：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="金额：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_remark"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="款项用途及金额：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="附件"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <com.zxdc.utils.library.view.MyGridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:numColumns="3"
+                android:verticalSpacing="10dp">
+            </com.zxdc.utils.library.view.MyGridView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_audit_people"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="审批：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_audit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="审批时间：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_audit_result"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="审批结果：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_transfer"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="转账：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_transfer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="填写时间：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:id="@+id/tv_transfer_money"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="转账金额：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="凭证"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

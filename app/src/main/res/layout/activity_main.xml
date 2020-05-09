@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </com.youth.banner.Banner>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/notice"
+                    android:layout_centerVertical="true"/>
+
+                <com.bian.dan.blr.view.SwitchTextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="30dp">
+                </com.bian.dan.blr.view.SwitchTextView>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/next"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_D8D8D8"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销售"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_htgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="合同管理"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/htgl"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_kcmx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="库存明细"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/kcmx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_ckd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="出库单"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/ckd"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_scjh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="生产计划"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/scjh"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_rz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="日志"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/rz"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_khgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="客户管理"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/khgl"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_sales_cwbx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="财务报销"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/cwbx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="采购"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/main_item_bg2"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:orientation="horizontal">
+
+                <com.zxdc.utils.library.view.ClickTextView
+                    android:id="@+id/tv_collect_cgd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="采购单"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:drawableTop="@mipmap/cgd"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_horizontal"/>
+
+                <com.zxdc.utils.library.view.ClickTextView
+                    android:id="@+id/tv_collect_gysgl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="供应商管理"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:drawableTop="@mipmap/gysgl"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_horizontal"/>
+
+                <com.zxdc.utils.library.view.ClickTextView
+                    android:id="@+id/tv_collect_cwbx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="财务报销"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    android:drawableTop="@mipmap/cwbx"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="仓库"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_ckgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="仓库管理"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/kcmx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_sdrkd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="手动入库单"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/sdrkd"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_ckd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="销售出库单"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/ckd"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_cgrkd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="采购入库单"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/cgrkd"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_sccrk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="生产出入库"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/sccrk"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_qlb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="请领表"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/khgl"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_smsqb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="售卖申请表"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/smsqb"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_sbgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="设备管理"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/sbgl"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_house_cwbx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="财务报销"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/cwbx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="财务"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg2"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_financial_gzgl"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="工资管理"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/gzgl"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_financial_cwbx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="财务报销"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/cwbx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生产"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg2"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="horizontal">
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_production_scjh"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="生产计划"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/scjh"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_production_ckd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="出库单"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/scckd"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <com.zxdc.utils.library.view.ClickTextView
+                        android:id="@+id/tv_production_cwbx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="财务报销"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"
+                        android:drawableTop="@mipmap/cwbx"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_horizontal"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

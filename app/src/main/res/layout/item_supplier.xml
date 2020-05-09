@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="供应商名称：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所属行业：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系人：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_industry"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_below="@id/tv_contact"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="15dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
