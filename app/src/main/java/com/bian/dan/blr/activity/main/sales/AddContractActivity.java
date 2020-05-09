@@ -18,8 +18,8 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.ConstractDetails;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.FileBean;
-import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.FileList;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -311,9 +311,9 @@ public class AddContractActivity extends BaseActivity {
                  if(data==null){
                      return;
                  }
-                 SelectCustomer.ListBean listBean = (SelectCustomer.ListBean) data.getSerializableExtra("listBean");
-                 tvName.setText(listBean.getCustomerName());
-                 tvName.setTag(listBean.getId());
+                 Customer customer = (Customer) data.getSerializableExtra("customer");
+                 tvName.setText(customer.getCustomerName());
+                 tvName.setTag(customer.getId());
                  break;
             default:
                 break;

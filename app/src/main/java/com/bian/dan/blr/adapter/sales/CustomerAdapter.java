@@ -1,6 +1,7 @@
 package com.bian.dan.blr.adapter.sales;
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.zxdc.utils.library.bean.Customer;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,15 +19,16 @@ import butterknife.ButterKnife;
 public class CustomerAdapter extends BaseAdapter {
 
     private Activity activity;
-
-    public CustomerAdapter(Activity activity) {
+    private List<Customer> list;
+    public CustomerAdapter(Activity activity,List<Customer> list) {
         super();
         this.activity = activity;
+        this.list=list;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return list==null ? 0 : list.size();
     }
 
     @Override
@@ -45,6 +50,12 @@ public class CustomerAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
+        Customer customer=list.get(position);
+        holder.tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">"+customer.getCustomerName()+"</font>"));
+        holder.tvPeople.setText(Html.fromHtml("联系人：<font color=\"#000000\">"+customer.getContacts()+"</font>"));
+        holder.tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">"+customer.getPhone()+"</font>"));
+        holder.tvPosition.setText(Html.fromHtml("职位：<font color=\"#000000\">"+customer.getPosition()+"</font>"));
+        holder.tvStatus.setText(customer.getStatusName());
         return view;
     }
 

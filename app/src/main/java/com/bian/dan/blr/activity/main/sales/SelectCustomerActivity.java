@@ -15,6 +15,7 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.SelectCustomerAdapter;
 import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -45,7 +46,7 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
     EditText etKey;
     //要搜索的关键字
     private String keys;
-    private List<SelectCustomer.ListBean> listAll = new ArrayList<>();
+    private List<Customer> listAll = new ArrayList<>();
     private SelectCustomerAdapter selectCustomerAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +68,9 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
         listView.setAdapter(selectCustomerAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SelectCustomer.ListBean listBean=listAll.get(position);
+                Customer customer=listAll.get(position);
                 Intent intent = new Intent();
-                intent.putExtra("listBean", listBean);
+                intent.putExtra("customer", customer);
                 setResult(100, intent);
                 SelectCustomerActivity.this.finish();
             }
@@ -123,7 +124,7 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
                     return;
                 }
                 if (customer.isSussess()) {
-                    List<SelectCustomer.ListBean> list =customer.getCustomer();
+                    List<Customer> list =customer.getCustomer();
                     listAll.addAll(list);
                     selectCustomerAdapter.notifyDataSetChanged();
                     if (list.size() < HttpMethod.limit) {

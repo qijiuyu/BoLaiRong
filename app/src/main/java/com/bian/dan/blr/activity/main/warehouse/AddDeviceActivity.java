@@ -154,7 +154,7 @@ public class AddDeviceActivity extends BaseActivity {
                 addDeviceP.setManufacturers(manufacturer);
                 addDeviceP.setAmount(Double.parseDouble(money));
                 addDeviceP.setDeptId((int)tvDepartment.getTag());
-                addDeviceP.setPurcTime(time+" 00:00:00");
+                addDeviceP.setPurcTime(time);
                 List<FileList> list=new ArrayList<>();
                 for (int i = 0; i < imgList.size(); i++) {
                      FileList fileList=new FileList();

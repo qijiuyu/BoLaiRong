@@ -63,4 +63,12 @@ public class HttpConstant {
 
     public static final String GET_LOG_LIST="saleLog/getList";
 
+    public static final String GET_LOG_DETAILS="saleLog/getDetail";
+
+    public static final String GET_DICT="dict/list";
+
+    public static final String ADD_CUSTOMER="customer/save";
+
+    public static final String GET_CUSTOMER="customer/getList";
+
 }

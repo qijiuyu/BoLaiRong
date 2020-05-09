@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.Customer;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 public class SelectCustomerAdapter extends BaseAdapter {
 
     private Activity activity;
-    private List<SelectCustomer.ListBean> list;
-    public SelectCustomerAdapter(Activity activity, List<SelectCustomer.ListBean> list) {
+    private List<Customer> list;
+    public SelectCustomerAdapter(Activity activity, List<Customer> list) {
         super();
         this.activity = activity;
         this.list = list;
@@ -50,8 +50,8 @@ public class SelectCustomerAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        SelectCustomer.ListBean listBean=list.get(position);
-        holder.tvName.setText(listBean.getCustomerName());
+        Customer customer=list.get(position);
+        holder.tvName.setText(customer.getCustomerName());
         return view;
     }
 

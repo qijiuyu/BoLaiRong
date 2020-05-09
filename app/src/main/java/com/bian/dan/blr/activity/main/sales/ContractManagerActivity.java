@@ -17,7 +17,7 @@ import com.bian.dan.blr.persenter.sales.ContractManagerPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
-import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -204,10 +204,10 @@ public class ContractManagerActivity extends BaseActivity implements MyRefreshLa
             //选择客户名称回执
             case 100:
                  if(data!=null){
-                     SelectCustomer.ListBean listBean = (SelectCustomer.ListBean) data.getSerializableExtra("listBean");
-                     if(listBean!=null){
-                         tvName.setTag(String.valueOf(listBean.getId()));
-                         tvName.setText(listBean.getCustomerName());
+                     Customer customer = (Customer) data.getSerializableExtra("customer");
+                     if(customer!=null){
+                         tvName.setTag(String.valueOf(customer.getId()));
+                         tvName.setText(customer.getCustomerName());
                      }
                  }
                  break;

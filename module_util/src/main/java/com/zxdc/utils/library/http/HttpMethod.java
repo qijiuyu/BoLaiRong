@@ -5,11 +5,14 @@ import com.zxdc.utils.library.bean.CheckCode;
 import com.zxdc.utils.library.bean.ConstractDetails;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
+import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceType;
+import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.Log;
+import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Office;
@@ -21,6 +24,7 @@ import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
+import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
@@ -499,6 +503,74 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<Log> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取日志详情
+     */
+    public static void getLogDetails(int id,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getLogDetails(id).enqueue(new Callback<LogDetails>() {
+            public void onResponse(Call<LogDetails> call, Response<LogDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<LogDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取字典数据
+     */
+    public static void getDict(int pid,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getDict(pid).enqueue(new Callback<Dict>() {
+            public void onResponse(Call<Dict> call, Response<Dict> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Dict> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 增加客户
+     */
+    public static void addCustomer(AddCustomerP addCustomerP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addCustomer(addCustomerP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取客户列表
+     */
+    public static void getCustomer(int privateState,String privateId,String contacts,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomer(privateState,privateId,contacts,page,limit).enqueue(new Callback<CustomerList>() {
+            public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<CustomerList> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

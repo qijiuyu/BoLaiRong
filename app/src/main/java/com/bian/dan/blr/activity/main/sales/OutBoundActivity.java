@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.OutBoundAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBound;
-import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -175,10 +175,10 @@ public class OutBoundActivity extends BaseActivity implements MyRefreshLayoutLis
             //选择客户名称回执
             case 100:
                 if(data!=null){
-                    SelectCustomer.ListBean listBean = (SelectCustomer.ListBean) data.getSerializableExtra("listBean");
-                    if(listBean!=null){
-                        tvKey.setTag(String.valueOf(listBean.getId()));
-                        tvKey.setText(listBean.getCustomerName());
+                    Customer customer = (Customer) data.getSerializableExtra("customer");
+                    if(customer!=null){
+                        tvKey.setTag(String.valueOf(customer.getId()));
+                        tvKey.setText(customer.getCustomerName());
                     }
                 }
                 break;

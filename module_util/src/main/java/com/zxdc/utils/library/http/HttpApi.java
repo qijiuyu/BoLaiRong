@@ -6,11 +6,14 @@ import com.zxdc.utils.library.bean.CheckCode;
 import com.zxdc.utils.library.bean.ConstractDetails;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
+import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceType;
+import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.Log;
+import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
@@ -20,6 +23,7 @@ import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
+import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
@@ -111,5 +115,17 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_LOG_LIST)
     Call<Log> getLogList(@Query("customerId") String customerId, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_LOG_DETAILS)
+    Call<LogDetails> getLogDetails(@Query("id") int id);
+
+    @GET(HttpConstant.GET_DICT)
+    Call<Dict> getDict(@Query("pid") int pid);
+
+    @PUT(HttpConstant.ADD_CUSTOMER)
+    Call<BaseBean> addCustomer(@Body AddCustomerP addCustomerP);
+
+    @GET(HttpConstant.GET_CUSTOMER)
+    Call<CustomerList> getCustomer(@Query("privateState") int privateState,@Query("privateId")String privateId,@Query("contacts") String contacts, @Query("page") int page, @Query("limit") int limit);
 
 }

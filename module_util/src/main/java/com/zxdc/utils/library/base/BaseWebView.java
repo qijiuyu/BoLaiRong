@@ -78,7 +78,6 @@ public class BaseWebView extends BaseActivity {
                 }
                 if(newProgress==100){
 //                    pg.setVisibility(View.GONE);//加载完网页进度条消失
-                    EventBus.getDefault().post(new EventBusType(EventStatus.HTML_LOADING_SUCCESS));
                 }else{
 //                    pg.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
 //                    pg.setProgress(newProgress);//设置进度值

@@ -14,10 +14,11 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.LogListAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -71,7 +72,10 @@ public class LogListActivity extends BaseActivity implements MyRefreshLayoutList
         listView.setAdapter(logListAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setClass(LogDetailsActivity.class);
+                Log.ListBean listBean=listAll.get(position);
+                Intent intent=new Intent(activity,LogDetailsActivity.class);
+                intent.putExtra("listBean",listBean);
+                startActivity(intent);
             }
         });
 
@@ -174,10 +178,10 @@ public class LogListActivity extends BaseActivity implements MyRefreshLayoutList
             //选择客户名称回执
             case 100:
                 if(data!=null){
-                    SelectCustomer.ListBean listBean = (SelectCustomer.ListBean) data.getSerializableExtra("listBean");
-                    if(listBean!=null){
-                        tvKey.setTag(String.valueOf(listBean.getId()));
-                        tvKey.setText(listBean.getCustomerName());
+                    Customer customer = (Customer) data.getSerializableExtra("customer");
+                    if(customer!=null){
+                        tvKey.setTag(String.valueOf(customer.getId()));
+                        tvKey.setText(customer.getCustomerName());
                     }
                 }
                 break;

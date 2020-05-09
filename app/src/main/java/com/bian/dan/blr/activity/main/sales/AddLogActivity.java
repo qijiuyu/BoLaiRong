@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -113,19 +113,19 @@ public class AddLogActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 100 && data != null) {
-            SelectCustomer.ListBean listBean = (SelectCustomer.ListBean) data.getSerializableExtra("listBean");
-            if(listBean==null){
+            Customer customer = (Customer) data.getSerializableExtra("customer");
+            if(customer==null){
                 return;
             }
-            tvName.setText(listBean.getCustomerName());
-            tvName.setTag(listBean.getId());
-            tvPeople.setText(listBean.getContacts());
-            tvMobile.setText(listBean.getPhone());
-            tvPosition.setText(listBean.getPosition());
-            tvWx.setText(listBean.getWechat());
-            tvQq.setText(listBean.getQq());
-            tvEmail.setText(listBean.getEmail());
-            tvAddress.setText(listBean.getPostAddress());
+            tvName.setText(customer.getCustomerName());
+            tvName.setTag(customer.getId());
+            tvPeople.setText(customer.getContacts());
+            tvMobile.setText(customer.getPhone());
+            tvPosition.setText(customer.getPosition());
+            tvWx.setText(customer.getWechat());
+            tvQq.setText(customer.getQq());
+            tvEmail.setText(customer.getEmail());
+            tvAddress.setText(customer.getPostAddress());
         }
     }
 }
