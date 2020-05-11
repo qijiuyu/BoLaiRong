@@ -9,14 +9,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.sales.AddProductAdapter;
 import com.bian.dan.blr.adapter.sales.OutBoundDetailsAdapter;
+import com.bian.dan.blr.adapter.sales.OutBoundGoodAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
-import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
-import com.zxdc.utils.library.bean.SaleDetails;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.BigDecimalUtil;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -146,17 +144,17 @@ public class OutBoundDetailsActivity extends BaseActivity {
                         /**
                          * 产品列表
                          */
-                        AddProductAdapter addProductAdapter=new AddProductAdapter(activity,outBoundDetails.getGoodsList());
-                        listView.setAdapter(addProductAdapter);
+                        OutBoundGoodAdapter outBoundGoodAdapter=new OutBoundGoodAdapter(activity,outBoundDetails.getGoodsList());
+                        listView.setAdapter(outBoundGoodAdapter);
                         /**
                          * 计算总数量，总金额
                          */
                         int totalNum=0;
                         double totalMoney=0;
                         for (int i=0;i<outBoundDetails.getGoodsList().size();i++){
-                            final Goods goods=outBoundDetails.getGoodsList().get(i);
-                            totalNum=totalNum+goods.getNum();
-                            totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goods.getProp2()));
+                            final OutBoundDetails.GoodList goodList=outBoundDetails.getGoodsList().get(i);
+                            totalNum=totalNum+goodList.getNum();
+                            totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goodList.getProp2()));
                         }
                         tvProductNum.setText("数量："+totalNum);
                         tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
@@ -179,7 +177,7 @@ public class OutBoundDetailsActivity extends BaseActivity {
                          */
                         if(outBoundDetails.getSaleDetailList()!=null && outBoundDetails.getSaleDetailList().size()>0){
                             linOut.setVisibility(View.VISIBLE);
-                            SaleDetails saleDetails=outBoundDetails.getSaleDetailList().get(0);
+                            OutBoundDetails.SaleDetails saleDetails=outBoundDetails.getSaleDetailList().get(0);
                             tvOutboundName.setText(Html.fromHtml("出库人：<font color=\"#000000\">" + saleDetails.getCreateName() + "</font>"));
                             tvOutboundTime.setText(Html.fromHtml("出库时间：<font color=\"#000000\">" + saleDetails.getCreateDate() + "</font>"));
                             listOutbound.setAdapter(new OutBoundDetailsAdapter(activity,outBoundDetails.getSaleDetailList()));

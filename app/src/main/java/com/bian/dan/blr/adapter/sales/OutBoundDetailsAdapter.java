@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.zxdc.utils.library.bean.SaleDetails;
+import com.zxdc.utils.library.bean.OutBoundDetails;
 
 import java.util.List;
 
@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 public class OutBoundDetailsAdapter extends BaseAdapter {
 
     private Activity activity;
-    private List<SaleDetails> list;
-    public OutBoundDetailsAdapter(Activity activity,List<SaleDetails> list) {
+    private List<OutBoundDetails.SaleDetails> list;
+    public OutBoundDetailsAdapter(Activity activity,List<OutBoundDetails.SaleDetails> list) {
         super();
         this.activity = activity;
         this.list=list;
@@ -50,7 +50,7 @@ public class OutBoundDetailsAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        SaleDetails saleDetails=list.get(position);
+        OutBoundDetails.SaleDetails saleDetails=list.get(position);
         holder.tvName.setText(saleDetails.getGoodsName());
         holder.tvBrand.setText(saleDetails.getBrand());
         holder.tvSpce.setText(saleDetails.getSpec());

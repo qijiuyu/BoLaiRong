@@ -5,15 +5,15 @@ import java.util.List;
 
 public class OutBoundDetails extends BaseBean {
 
-    private List<Goods> goodsList;
+    private List<GoodList> goodsList;
     private List<SaleDetails> saleDetailList;
     private DetailsBean outOrder;
 
-    public List<Goods> getGoodsList() {
+    public List<GoodList> getGoodsList() {
         return goodsList;
     }
 
-    public void setGoodsList(List<Goods> goodsList) {
+    public void setGoodsList(List<GoodList> goodsList) {
         this.goodsList = goodsList;
     }
 
@@ -31,6 +31,275 @@ public class OutBoundDetails extends BaseBean {
 
     public void setOutOrder(DetailsBean outOrder) {
         this.outOrder = outOrder;
+    }
+
+    public static class GoodList implements Serializable{
+        private int id;
+        //物料名称
+        private String name="";
+        //物料型号
+        private String spec="";
+        private int units;
+        //单位
+        private String unitStr="";
+        //规格
+        private String brand="";
+        private int type;
+        //物料类别
+        private String typeStr="";
+        //数量
+        private int num;
+        //单价
+        private String prop1="";
+        //总价
+        private String prop2="";
+        //备注
+        private String memo="";
+        //是否开票
+        private String prop3="";
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSpec() {
+            return spec;
+        }
+
+        public void setSpec(String spec) {
+            this.spec = spec;
+        }
+
+        public int getUnits() {
+            return units;
+        }
+
+        public void setUnits(int units) {
+            this.units = units;
+        }
+
+        public String getUnitStr() {
+            return unitStr;
+        }
+
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public String getTypeStr() {
+            return typeStr;
+        }
+
+        public void setTypeStr(String typeStr) {
+            this.typeStr = typeStr;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public String getProp1() {
+            return prop1;
+        }
+
+        public void setProp1(String prop1) {
+            this.prop1 = prop1;
+        }
+
+        public String getProp2() {
+            return prop2;
+        }
+
+        public void setProp2(String prop2) {
+            this.prop2 = prop2;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
+        }
+
+        public String getProp3() {
+            return prop3;
+        }
+
+        public void setProp3(String prop3) {
+            this.prop3 = prop3;
+        }
+    }
+
+
+    public static class SaleDetails implements Serializable{
+        private int id;
+        private int outId;
+        private String goodsName="";
+        private String brand="";
+        private String spec="";
+        private int units;
+        private String unitStr="";
+        private int stockType;
+        private String stockTypeStr="";
+        private String batchNo="";
+        private int num;
+        private double prop1;
+        private double prop2;
+        private String createName="";
+        private String createDate="";
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getOutId() {
+            return outId;
+        }
+
+        public void setOutId(int outId) {
+            this.outId = outId;
+        }
+
+        public String getGoodsName() {
+            return goodsName;
+        }
+
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public String getSpec() {
+            return spec;
+        }
+
+        public void setSpec(String spec) {
+            this.spec = spec;
+        }
+
+        public int getUnits() {
+            return units;
+        }
+
+        public void setUnits(int units) {
+            this.units = units;
+        }
+
+        public String getUnitStr() {
+            return unitStr;
+        }
+
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
+        }
+
+        public int getStockType() {
+            return stockType;
+        }
+
+        public void setStockType(int stockType) {
+            this.stockType = stockType;
+        }
+
+        public String getStockTypeStr() {
+            return stockTypeStr;
+        }
+
+        public void setStockTypeStr(String stockTypeStr) {
+            this.stockTypeStr = stockTypeStr;
+        }
+
+        public String getBatchNo() {
+            return batchNo;
+        }
+
+        public void setBatchNo(String batchNo) {
+            this.batchNo = batchNo;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public double getProp1() {
+            return prop1;
+        }
+
+        public void setProp1(double prop1) {
+            this.prop1 = prop1;
+        }
+
+        public double getProp2() {
+            return prop2;
+        }
+
+        public void setProp2(double prop2) {
+            this.prop2 = prop2;
+        }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
     }
 
     public static class DetailsBean implements Serializable{

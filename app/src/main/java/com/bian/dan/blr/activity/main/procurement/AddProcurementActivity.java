@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.persenter.procurement.AddProcurementPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.view.MeasureListView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +25,8 @@ public class AddProcurementActivity extends BaseActivity {
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.listView)
-    ListView listView;
+    MeasureListView listView;
+    private AddProcurementPersenter addProcurementPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_procurement);
@@ -36,7 +38,8 @@ public class AddProcurementActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        tvHead.setText("新增出库单");
+        tvHead.setText("新增采购单");
+        addProcurementPersenter=new AddProcurementPersenter(this);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_time, R.id.tv_product,R.id.tv_submit})
@@ -47,11 +50,11 @@ public class AddProcurementActivity extends BaseActivity {
                 break;
             //采购日期
             case R.id.tv_time:
+                addProcurementPersenter.selectTime(tvTime);
                 break;
             //采购列表
             case R.id.tv_product:
-                 Intent intent=new Intent(this,AddProductActivity3.class);
-                 startActivityForResult(intent,100);
+                 setClass(AddProductActivity3.class,200);
                  break;
             case R.id.tv_submit:
                 break;

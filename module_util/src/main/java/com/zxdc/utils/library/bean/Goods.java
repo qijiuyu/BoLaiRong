@@ -5,31 +5,55 @@ import java.io.Serializable;
 public class Goods implements Serializable {
 
     private int id;
+    //物料名称
     private String name="";
+    //物料型号
     private String spec="";
     private int units;
+    //单位
     private String unitStr="";
+    //规格
     private String brand="";
     private int type;
+    //物料类别
     private String typeStr="";
+    //数量
     private int num;
-    private String prop1="";
-    private String prop2="";
+    //单价
+    private String price="";
+    //总价
+    private String totalMoney="";
+    //备注
     private String memo="";
-    private String prop3="";
+    //是否开票
+    private String isInvoice="";
+    //地址
+    private String address;
+    //付款方式
+    private int payType;
+    //付款时间
+    private String payTime;
+    //供应商id
+    private int companyId;
+    //供应商名称
+    private String company;
+    //联系人
+    private String contract;
+    //电话
+    private String mobile;
     public  Goods(){}
 
-    public Goods(int id,String name, String spec, String unitStr, String brand, int num, String prop1, String prop2, String memo, String prop3) {
+    public Goods(int id,String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, String isInvoice) {
         this.id=id;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
         this.brand = brand;
         this.num = num;
-        this.prop1 = prop1;
-        this.prop2 = prop2;
+        this.price = price;
+        this.totalMoney = totalMoney;
         this.memo = memo;
-        this.prop3 = prop3;
+        this.isInvoice = isInvoice;
     }
 
     public Goods(int id, String name, String spec, String brand, int num, String memo) {
@@ -39,6 +63,26 @@ public class Goods implements Serializable {
         this.brand = brand;
         this.num = num;
         this.memo = memo;
+    }
+
+    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String price, String totalMoney, String memo, String address, int payType, String payTime, int companyId, String company, String contract,String mobile) {
+        this.id = id;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.typeStr = typeStr;
+        this.num = num;
+        this.price = price;
+        this.totalMoney = totalMoney;
+        this.memo = memo;
+        this.address = address;
+        this.payType = payType;
+        this.payTime = payTime;
+        this.companyId = companyId;
+        this.company = company;
+        this.contract = contract;
+        this.mobile=mobile;
     }
 
     public int getId() {
@@ -113,21 +157,6 @@ public class Goods implements Serializable {
         this.num = num;
     }
 
-    public String getProp1() {
-        return prop1;
-    }
-
-    public void setProp1(String prop1) {
-        this.prop1 = prop1;
-    }
-
-    public String getProp2() {
-        return prop2;
-    }
-
-    public void setProp2(String prop2) {
-        this.prop2 = prop2;
-    }
 
     public String getMemo() {
         return memo;
@@ -137,13 +166,83 @@ public class Goods implements Serializable {
         this.memo = memo;
     }
 
-    public String getProp3() {
-        return prop3;
+    public String getPrice() {
+        return price;
     }
 
-    public void setProp3(String prop3) {
-        this.prop3 = prop3;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
+    public String getTotalMoney() {
+        return totalMoney;
+    }
 
+    public void setTotalMoney(String totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public String getIsInvoice() {
+        return isInvoice;
+    }
+
+    public void setIsInvoice(String isInvoice) {
+        this.isInvoice = isInvoice;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPayType() {
+        return payType;
+    }
+
+    public void setPayType(int payType) {
+        this.payType = payType;
+    }
+
+    public String getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(String payTime) {
+        this.payTime = payTime;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getContract() {
+        return contract;
+    }
+
+    public void setContract(String contract) {
+        this.contract = contract;
+    }
+
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

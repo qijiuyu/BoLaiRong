@@ -9,88 +9,97 @@
 
     <include layout="@layout/head"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp">
+        android:scrollbars="none"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp">
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginBottom="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="采购日期"
-                android:textSize="15sp"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:hint="请选择"
-                android:textColor="@color/color_666666"
-                android:textSize="15sp"
-                android:drawablePadding="7dp"
-                android:drawableRight="@mipmap/next"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="采购日期"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:hint="请选择"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:drawablePadding="7dp"
+                    android:drawableRight="@mipmap/next"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.7dp"
-            android:background="@color/color_f9f9f9"/>
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="采购列表"
-                android:textSize="15sp"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
-            <TextView
-                android:id="@+id/tv_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:hint="请选择"
-                android:textColor="@color/color_666666"
-                android:textSize="15sp"
-                android:drawablePadding="7dp"
-                android:drawableRight="@mipmap/next"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="采购列表"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:hint="请选择"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:drawablePadding="7dp"
+                    android:drawableRight="@mipmap/next"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.7dp"
-            android:background="@color/color_f9f9f9"/>
+            </RelativeLayout>
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
 
-    </LinearLayout>
+            <com.zxdc.utils.library.view.MeasureListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </com.zxdc.utils.library.view.MeasureListView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.zxdc.utils.library.view.ClickTextView
         android:id="@+id/tv_submit"

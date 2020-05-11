@@ -12,7 +12,12 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.bian.dan.blr.activity.main.MainActivity;
 import com.bian.dan.blr.activity.statistical.StatisticalActivity;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.LoginP;
+import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ActivitysLifecycle;
+import com.zxdc.utils.library.util.SPUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.util.error.CockroachUtil;
 
@@ -50,6 +55,8 @@ public class TabActivity extends android.app.TabActivity {
         setContentView(R.layout.activity_tab);
         ButterKnife.bind(this);
         initView();
+        //刷新token
+        refreshToken();
     }
 
 
@@ -111,6 +118,25 @@ public class TabActivity extends android.app.TabActivity {
             }
         }
         tabhost.setCurrentTab(type);
+    }
+
+
+    /**
+     * 刷新token
+     */
+    private void refreshToken(){
+        final LoginP loginP= (LoginP) SPUtil.getInstance(this).getObject(SPUtil.ACCOUNT,LoginP.class);
+        HttpMethod.login(loginP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                UserInfo userInfo= (UserInfo) object;
+                if(userInfo.isSussess()){
+                    //存储token
+                    SPUtil.getInstance(TabActivity.this).addString(SPUtil.TOKEN,userInfo.getToken());
+                }
+            }
+            public void onFail(Throwable t) {
+            }
+        });
     }
 
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
 import com.bian.dan.blr.activity.main.sales.FinancialActivity;
@@ -81,10 +82,10 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_sales_cwbx:
                 setClass(FinancialActivity.class);
                 break;
-//            //采购单
-//            case R.id.tv_collect_cgd:
-//                setClass(ProcurementActivity.class);
-//                break;
+            //采购单
+            case R.id.tv_collect_cgd:
+                setClass(ProcurementActivity.class);
+                break;
 //            //供应商管理
 //            case R.id.tv_collect_gysgl:
 //                setClass(SupplierListActivity.class);
