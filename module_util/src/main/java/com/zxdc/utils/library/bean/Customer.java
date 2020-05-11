@@ -4,38 +4,38 @@ import java.io.Serializable;
 
 public class Customer implements Serializable {
     private int id;
-    private String customerName;//客户名称
+    private String customerName="";//客户名称
     private int state;//审批状态：0，未审批 1，审批通过 2，审批未通过
     private int status;//客户性质,读取数据字段pid=3
-    private String statusName;//客户性质名称
+    private String statusName="";//客户性质名称
     private int industry;//	所属行业id
-    private String industryStr;//所属行业
-    private String contacts;//联系人
-    private String position;//职位
-    private String phone;//电话
-    private String wechat;//	微信
-    private String qq;
-    private String email;//邮箱
-    private String url;
-    private String corAccount;//对公账号
-    private String openBank;//开户行id
-    private String openBankStr;//开户行
-    private String accName;//户名
-    private String landline;//座机号
-    private String postAddress;//收货地址
-    private String address;//地址
+    private String industryStr="";//所属行业
+    private String contacts="";//联系人
+    private String position="";//职位
+    private String phone="";//电话
+    private String wechat="";//	微信
+    private String qq="";
+    private String email="";//邮箱
+    private String url="";
+    private String corAccount="";//对公账号
+    private int openBank;//开户行id
+    private String openBankStr="";//开户行
+    private String accName="";//户名
+    private String landline="";//座机号
+    private String postAddress="";//收货地址
+    private String address="";//地址
     private int approvalId;//	审批人id
-    private String approvalName;//审批人名称
-    private String privateName;//所属人名称
-    private String approvalDate;//审批时间
+    private String approvalName="";//审批人名称
+    private String privateName="";//所属人名称
+    private String approvalDate="";//审批时间
     private int privateState;//私有状态： 1，私有 2，公有
     private int privateId;//所属人id
-    private String memo;//备注信息
+    private String memo="";//备注信息
     private int createId;//	创建人id
     private int updateId;//修改人id
-    private String createDate;//创建时间
-    private String updateDate;//修改时间
-    private String ein;//税号
+    private String createDate="";//创建时间
+    private String updateDate="";//修改时间
+    private String ein="";//税号
 
     public int getId() {
         return id;
@@ -157,11 +157,11 @@ public class Customer implements Serializable {
         this.corAccount = corAccount;
     }
 
-    public String getOpenBank() {
+    public int getOpenBank() {
         return openBank;
     }
 
-    public void setOpenBank(String openBank) {
+    public void setOpenBank(int openBank) {
         this.openBank = openBank;
     }
 

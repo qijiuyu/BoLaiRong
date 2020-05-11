@@ -114,8 +114,6 @@ public class ContractDetailsActivity extends BaseActivity {
                         tvEntry.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
                         tvEntryTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                         tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
-
-                        tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
                         tvSignTime.setText(Html.fromHtml("签订时间：<font color=\"#000000\">" + detailsBean.getSignedTime() + "</font>"));
                         tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));

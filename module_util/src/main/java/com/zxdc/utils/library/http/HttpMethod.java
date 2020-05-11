@@ -5,11 +5,13 @@ import com.zxdc.utils.library.bean.CheckCode;
 import com.zxdc.utils.library.bean.ConstractDetails;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
+import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
+import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
@@ -23,12 +25,16 @@ import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
+import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
+import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -52,11 +58,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 登录
      */
-    public static void login(String username, String pwd, final NetWorkCallBack netWorkCallBack) {
-        Map<String ,String> map=new HashMap<>();
-        map.put("username",username);
-        map.put("pwd",pwd);
-        Http.getRetrofit().create(HttpApi.class).login(map).enqueue(new Callback<UserInfo>() {
+    public static void login(LoginP loginP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).login(loginP).enqueue(new Callback<UserInfo>() {
             public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
                 netWorkCallBack.onSuccess(response.body());
             }
@@ -189,7 +192,7 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取客户列表
      */
-    public static void getCustomerList(String prop1, int userId,final NetWorkCallBack netWorkCallBack) {
+    public static void getCustomerList(String prop1, String userId,final NetWorkCallBack netWorkCallBack) {
         Http.getRetrofit().create(HttpApi.class).getCustomerList(prop1,userId).enqueue(new Callback<SelectCustomer>() {
             public void onResponse(Call<SelectCustomer> call, Response<SelectCustomer> response) {
                 DialogUtil.closeProgress();
@@ -571,6 +574,125 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<CustomerList> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取客户详情
+     */
+    public static void getCustomerDetails(int id,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomerDetails(id).enqueue(new Callback<CustomerDetails>() {
+            public void onResponse(Call<CustomerDetails> call, Response<CustomerDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<CustomerDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 客户信息-修改私有状态
+     */
+    public static void updateCustomerState(UpdateCustomerStateP updateCustomerStateP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateCustomerState(updateCustomerStateP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 修改客户信息
+     */
+    public static void updateCustomer(AddCustomerP addCustomerP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateCustomer(addCustomerP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 校验客户名称唯一性
+     */
+    public static void checkCustomerName(String customerName, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).checkCustomerName(customerName).enqueue(new Callback<CheckCode>() {
+            public void onResponse(Call<CheckCode> call, Response<CheckCode> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<CheckCode> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取用户列表
+     */
+    public static void getUserList(int deptId,String name,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getUserList(deptId,name,page,limit).enqueue(new Callback<UserList>() {
+            public void onResponse(Call<UserList> call, Response<UserList> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<UserList> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 添加财务报销
+     */
+    public static void addFinancial(AddFinancialP addFinancialP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addFinancial(addFinancialP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取财务列表
+     */
+    public static void getFinancialList(String state,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getFinancialList(state,page,limit).enqueue(new Callback<Financial>() {
+            public void onResponse(Call<Financial> call, Response<Financial> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Financial> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

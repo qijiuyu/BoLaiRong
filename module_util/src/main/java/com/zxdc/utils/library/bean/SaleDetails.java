@@ -6,19 +6,19 @@ public class SaleDetails implements Serializable {
 
     private int id;
     private int outId;
-    private String goodsName;
-    private String brand;
-    private String spec;
+    private String goodsName="";
+    private String brand="";
+    private String spec="";
     private int units;
-    private String unitStr;
+    private String unitStr="";
     private int stockType;
-    private String stockTypeStr;
-    private String batchNo;
+    private String stockTypeStr="";
+    private String batchNo="";
     private int num;
     private double prop1;
     private double prop2;
-    private String createName;
-    private String createDate;
+    private String createName="";
+    private String createDate="";
 
     public int getId() {
         return id;

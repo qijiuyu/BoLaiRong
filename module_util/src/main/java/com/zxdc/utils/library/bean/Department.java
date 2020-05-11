@@ -18,7 +18,7 @@ public class Department extends BaseBean {
     public static class DepartmentBean implements Serializable{
         private int id;
         private int parentId;
-        private String name;
+        private String name="";
         private int createId;
         private int updateId;
 

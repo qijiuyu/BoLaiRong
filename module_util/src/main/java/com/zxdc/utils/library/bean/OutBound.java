@@ -32,14 +32,14 @@ public class OutBound extends BaseBean {
     public static class ListBean implements Serializable{
         private int id;
         private int customerId;
-        private String outDate;
-        private String orderNum;
+        private String outDate="";
+        private String orderNum="";
         private int state;
-        private String createDate;
-        private String customerName;
-        private String contacts;
-        private String phone;
-        private String prop2;
+        private String createDate="";
+        private String customerName="";
+        private String contacts="";
+        private String phone="";
+        private String prop2="";
 
         public int getId() {
             return id;

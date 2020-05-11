@@ -65,13 +65,15 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
-            case R.id.tv_submit:
+             //出库发货
+            case R.id.tv_send:
+                 setClass(SendDeliveryActivity.class);
                 break;
             default:
                 break;

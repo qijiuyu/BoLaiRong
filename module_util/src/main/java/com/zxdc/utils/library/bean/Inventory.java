@@ -32,16 +32,16 @@ public class Inventory extends BaseBean {
         private int id;
         private int goodsId;
         private int sumNum;
-        private String goodsName;
-        private String spec;
-        private String brand;
-        private String units;
-        private String unitStr;
+        private String goodsName="";
+        private String spec="";
+        private String brand="";
+        private String units="";
+        private String unitStr="";
         private int goodsType;
-        private String typeStr;
+        private String typeStr="";
         private int lowerLimit;
         private int upperLimit;
-        private String color;
+        private String color="";
 
         public int getId() {
             return id;

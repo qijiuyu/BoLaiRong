@@ -27,26 +27,26 @@ public class ConstractDetails extends BaseBean {
     public static class DetailsBean implements Serializable{
         private int id;
         private int customerId;//客户id，关联客户表
-        private String customerName;//客户名称
-        private String signedTime;//签订时间
+        private String customerName="";//客户名称
+        private String signedTime="";//签订时间
         private double amount;//订单金额
         private int payType;//支付方式： 1，全款 2，分期
         private int assignerId;//指派人id
-        private String assignerName;//指派人名称
+        private String assignerName="";//指派人名称
         private int createId;//创建人id
         private int updateId;//修改人id
         private int invoice;//是否开票 0，否 1，是
         private int sellers;//售卖公司 1，博徕荣 2，立钻
-        private String createDate;
-        private String updateDate;
-        private String prop2;//合同编码
-        private String prop3;//出库单号
+        private String createDate="";
+        private String updateDate="";
+        private String prop2="";//合同编码
+        private String prop3="";//出库单号
         private int prop4;//发货状态（0：未发货 1：部分发货 2：全部发货）
         private int state;//审核状态（0：未审核 1：通过审核 2：审核未通过）
         private int approvalId;//	审批人id
-        private String approvalName;//审批人名称
-        private String approvalDate;//审批时间
-        private String createName;
+        private String approvalName="";//审批人名称
+        private String approvalDate="";//审批时间
+        private String createName="";
 
         public int getId() {
             return id;

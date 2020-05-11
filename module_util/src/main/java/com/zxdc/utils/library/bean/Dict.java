@@ -17,7 +17,7 @@ public class Dict extends BaseBean {
 
     public static class DictBean implements Serializable{
         private int id;
-        private String name;
+        private String name="";
 
         public int getId() {
             return id;

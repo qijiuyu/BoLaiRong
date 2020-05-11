@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -42,11 +43,11 @@
                 android:gravity="center_vertical"/>
 
             <TextView
-                android:id="@+id/tv_company"
+                android:id="@+id/tv_customer_status"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
-                android:text="客户名称：xxx"
+                android:text="客户状态：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="15sp"
                 android:gravity="center_vertical"/>
@@ -74,6 +75,16 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
                 android:text="手机号：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="15sp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/tv_position"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:text="职位：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="15sp"
                 android:gravity="center_vertical"/>
@@ -233,18 +244,19 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="30dp"/>
 
-            <TextView
-                android:id="@+id/tv_get"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/colorPrimary"
-                android:text="领取"
-                android:textSize="15sp"
-                android:textColor="@android:color/white"
-                android:gravity="center"/>
-
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_get"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="领取"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
 
 </RelativeLayout>

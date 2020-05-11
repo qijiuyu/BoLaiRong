@@ -30,10 +30,10 @@ public class ContractCode extends BaseBean {
     public static class ListBean implements Serializable{
         private int id;
         private int customerId;
-        private String customerName;
-        private String prop2;
+        private String customerName="";
+        private String prop2="";
         private int createId;
-        private String createName;
+        private String createName="";
 
         public int getId() {
             return id;

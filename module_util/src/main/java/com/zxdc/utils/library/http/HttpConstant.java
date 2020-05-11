@@ -71,4 +71,18 @@ public class HttpConstant {
 
     public static final String GET_CUSTOMER="customer/getList";
 
+    public static final String GET_CUSTOMER_DETAILS="customer/getDetail";
+
+    public static final String UPDATE_CUSTOMER_STATE="customer/updateToPrivate";
+
+    public static final String UPDATE_CUSTOMER="customer/update";
+
+    public static final String CHECK_CUSTOMER_NAME="customer/checkNameIsUniq";
+
+    public static final String GET_USER_LIST="user/childList";
+
+    public static final String ADD_FINANCIAL="reimFinance/save";
+
+    public static final String GET_FINANCIAL_LIST="reimFinance/getList";
+
 }

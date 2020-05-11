@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class AddCustomerP implements Serializable {
 
+    private int id;
     private String customerName;
     private int status;
     private int industry;
@@ -22,6 +23,14 @@ public class AddCustomerP implements Serializable {
     private String postAddress;
     private int privateState;
     private String memo;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCustomerName() {
         return customerName;

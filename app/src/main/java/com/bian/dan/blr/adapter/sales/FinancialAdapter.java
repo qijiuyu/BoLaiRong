@@ -1,6 +1,7 @@
 package com.bian.dan.blr.adapter.sales;
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.zxdc.utils.library.bean.Financial;
+import com.zxdc.utils.library.util.Util;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,15 +20,16 @@ import butterknife.ButterKnife;
 public class FinancialAdapter extends BaseAdapter {
 
     private Activity activity;
-
-    public FinancialAdapter(Activity activity) {
+    private List<Financial.ListBean> list;
+    public FinancialAdapter(Activity activity,List<Financial.ListBean> list) {
         super();
         this.activity = activity;
+        this.list=list;
     }
 
     @Override
     public int getCount() {
-        return 10;
+        return list==null ? 0 : list.size();
     }
 
     @Override
@@ -44,6 +50,27 @@ public class FinancialAdapter extends BaseAdapter {
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
+        }
+        Financial.ListBean listBean=list.get(position);
+        holder.tvName.setText(Html.fromHtml("申请人：<font color=\"#000000\">"+listBean.getName()+"</font>"));
+        holder.tvDes.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">"+listBean.getMemo()+"</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">"+ Util.setDouble(listBean.getAmount(),2) +"</font>"));
+        holder.tvTime.setText(listBean.getCreateDate());
+        switch (listBean.getState()){
+            case 0:
+                 holder.tvStatus.setText("未审批");
+                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));
+                 break;
+            case 1:
+                holder.tvStatus.setText("审批通过");
+                holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_70DF5D));
+                break;
+            case 2:
+                holder.tvStatus.setText("审批未通过");
+                holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FF4B4C));
+                break;
+            default:
+                break;
         }
         return view;
     }

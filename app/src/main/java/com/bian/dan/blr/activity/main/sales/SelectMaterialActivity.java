@@ -17,6 +17,7 @@ import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -53,6 +54,7 @@ public class SelectMaterialActivity extends BaseActivity implements MyRefreshLay
         ButterKnife.bind(this);
         initView();
         //加载数据
+        DialogUtil.showProgress(this,"数据加载中");
         reList.startRefresh();
     }
 

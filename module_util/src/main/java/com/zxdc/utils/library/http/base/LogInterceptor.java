@@ -2,20 +2,19 @@ package com.zxdc.utils.library.http.base;
 
 import com.zxdc.utils.library.base.BaseApplication;
 import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.http.HttpApi;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.SPUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import okhttp3.FormBody;
+
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
@@ -91,17 +90,8 @@ public class LogInterceptor implements Interceptor {
      * 添加POST的公共参数
      */
     public Request addPostParameter(Request request) throws IOException {
-        Map<String, String> requstMap = new HashMap<>();
-        if (request.body().contentLength() > 0 && request.body() instanceof FormBody) {
-            FormBody formBody = (FormBody) request.body();
-            //把原来的参数添加到新的构造器，（因为没找到直接添加，所以就new新的）
-            for (int i = 0; i < formBody.size(); i++) {
-                requstMap.put(formBody.name(i), formBody.value(i));
-                LogUtils.e(request.url() + "参数:" + formBody.name(i) + "=" + formBody.value(i));
-            }
-        }
         Request.Builder requestBuilder = request.newBuilder().addHeader("Authorization",SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
-        request = requestBuilder.post(RequestBody.create(MediaType.parse("application/json;charset=utf-8"), SPUtil.gson.toJson(requstMap))).build();
+        request = requestBuilder.post(request.body()).build();
         return request;
     }
 
@@ -148,13 +138,9 @@ public class LogInterceptor implements Interceptor {
      */
     private BaseBean reFreshToken(){
         BaseBean baseBean = null;
-        final String account=SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.ACCOUNT);
-        final String password=SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.PASSWORD);
-        Map<String ,String> map=new HashMap<>();
-        map.put("username",account);
-        map.put("pwd",password);
+        final LoginP loginP= (LoginP) SPUtil.getInstance(BaseApplication.getContext()).getObject(SPUtil.ACCOUNT,LoginP.class);
         try {
-            baseBean=Http.getRetrofitNoInterceptor().create(HttpApi.class).login(map).execute().body();
+            baseBean=Http.getRetrofitNoInterceptor().create(HttpApi.class).login(loginP).execute().body();
         }catch (Exception e){
             e.printStackTrace();
         }

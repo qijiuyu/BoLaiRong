@@ -9,14 +9,13 @@ import android.widget.ImageView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
+import com.bian.dan.blr.activity.main.sales.FinancialActivity;
 import com.bian.dan.blr.activity.main.sales.InventoryListActivity;
 import com.bian.dan.blr.activity.main.sales.LogListActivity;
 import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
-import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
-import com.bian.dan.blr.activity.main.warehouse.WareHouseManagerActivity;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -78,10 +77,10 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_sales_khgl:
                 setClass(CustomerManagerActivity.class);
                 break;
-//           //财务报销
-//            case R.id.tv_sales_cwbx:
-//                setClass(FinancialActivity.class);
-//                break;
+           //财务报销
+            case R.id.tv_sales_cwbx:
+                setClass(FinancialActivity.class);
+                break;
 //            //采购单
 //            case R.id.tv_collect_cgd:
 //                setClass(ProcurementActivity.class);
@@ -94,14 +93,14 @@ public class MainActivity extends BaseActivity {
 //            case R.id.tv_collect_cwbx:
 //                setClass(FinancialActivity.class);
 //                break;
-            //仓库管理
-            case R.id.tv_house_ckgl:
-                setClass(WareHouseManagerActivity.class);
-                break;
-            //手动入库单
-            case R.id.tv_house_sdrkd:
-                setClass(SdEnterActivity.class);
-                break;
+//            //仓库管理
+//            case R.id.tv_house_ckgl:
+//                setClass(WareHouseManagerActivity.class);
+//                break;
+//            //手动入库单
+//            case R.id.tv_house_sdrkd:
+//                setClass(SdEnterActivity.class);
+//                break;
             //销售出库单
             case R.id.tv_house_ckd:
                 setClass(SalesOutBoundActivity.class);

@@ -30,17 +30,17 @@ public class Contract extends BaseBean {
     public static class ListBean implements Serializable{
         private int id;
         private int customerId;//客户id，关联客户表
-        private String customerName;//客户名称
-        private String signedTime;//签订时间
+        private String customerName="";//客户名称
+        private String signedTime="";//签订时间
         private double amount;//订单金额
         private int payType;//支付方式： 1，全款 2，分期
         private int assignerId;//指派人id
-        private String assignerName;//指派人名称
+        private String assignerName="";//指派人名称
         private int invoice;//是否开票 0，否 1，是
         private int sellers;//售卖公司 1，博徕荣 2，立钻
-        private String createDate;
-        private String updateDate;
-        private String prop2;
+        private String createDate="";
+        private String updateDate="";
+        private String prop2="";
 
         public int getId() {
             return id;

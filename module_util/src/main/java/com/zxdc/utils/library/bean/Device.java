@@ -32,16 +32,16 @@ public class Device extends BaseBean {
     public static class ListBean implements Serializable{
         private int id;//设备id
         private int deptId;//部门id
-        private String deptName;//部门名称
+        private String deptName="";//部门名称
         private int equipType;//设备类型id
-        private String equipName;//设备名称
-        private String typeName;//设备类型
-        private String spec;//规格型号
-        private String code;//设备编码
-        private String manufacturers;//生产厂家
-        private String purcTime;//采购时间
+        private String equipName="";//设备名称
+        private String typeName="";//设备类型
+        private String spec="";//规格型号
+        private String code="";//设备编码
+        private String manufacturers="";//生产厂家
+        private String purcTime="";//采购时间
         private double amount;
-        private String memo;
+        private String memo="";
         private int state;//设备状态：1，使用中 2，已出售
 
         public int getId() {

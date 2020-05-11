@@ -32,11 +32,11 @@ public class Log extends BaseBean {
     public static class ListBean implements Serializable{
         private int id;
         private int customerId;
-        private String followResult;
-        private String customerName;
-        private String contacts;
-        private String phone;
-        private String createDate;
+        private String followResult="";
+        private String customerName="";
+        private String contacts="";
+        private String phone="";
+        private String createDate="";
 
         public int getId() {
             return id;

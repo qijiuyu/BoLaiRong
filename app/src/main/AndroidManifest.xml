@@ -68,10 +68,11 @@
         <activity android:name=".activity.main.sales.AddCustomerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.sales.CustomerDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.sales.FinancialActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.main.sales.SelectMaterialActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.main.sales.AddFinancialActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.SelectMaterialActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.AddFinancialActivity"  android:screenOrientation="portrait"  android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.sales.FinancialDetailsActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.main.sales.SelectCustomerActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.sales.SelectCustomerActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.sales.SelectUserActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.procurement.ProcurementActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.procurement.AddProcurementActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.procurement.AddProductActivity3"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
@@ -90,6 +91,7 @@
         <activity android:name=".activity.main.warehouse.SdEnterDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.SalesOutBoundActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".activity.main.warehouse.SalesOutBoundDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.SendDeliveryActivity"  android:screenOrientation="portrait"/>
 
 
         <provider

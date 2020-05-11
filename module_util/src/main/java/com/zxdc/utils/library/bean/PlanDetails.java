@@ -16,17 +16,17 @@ public class PlanDetails extends BaseBean {
 
     public static class DetailsBean implements Serializable{
         private int id;
-        private String planCode;
-        private String deliveryDate;
+        private String planCode="";
+        private String deliveryDate="";
         private int status;
-        private String statusStr;
-        private String approveName;
-        private String approveDate;
-        private String memo;
+        private String statusStr="";
+        private String approveName="";
+        private String approveDate="";
+        private String memo="";
         private int createId;
-        private String createName;
-        private String createDate;
-        private String prop1;
+        private String createName="";
+        private String createDate="";
+        private String prop1="";
         private List<GoodBean> detailList;
         private List<ProgressBean> progressList;
 
@@ -146,13 +146,13 @@ public class PlanDetails extends BaseBean {
 
     public static class GoodBean implements Serializable{
         private int id;
-        private String goodsName;
-        private String spec;
-        private String unitStr;
-        private String brand;
+        private String goodsName="";
+        private String spec="";
+        private String unitStr="";
+        private String brand="";
         private int num;
         private int finishNum;
-        private String memo;
+        private String memo="";
 
         public int getId() {
             return id;
@@ -224,8 +224,8 @@ public class PlanDetails extends BaseBean {
         private int id;
         private int planId;
         private int deptId;
-        private String deptName;
-        private String statusStr;
+        private String deptName="";
+        private String statusStr="";
         private int status;
 
         public int getId() {

@@ -17,14 +17,14 @@ public class Material extends BaseBean {
 
     public static class ListBean implements Serializable{
         private int id;
-        private String name;
-        private String spec;
-        private String brand;
+        private String name="";
+        private String spec="";
+        private String brand="";
         private int units;
-        private String unitStr;
-        private String typeStr;
+        private String unitStr="";
+        private String typeStr="";
         private int type;
-        private String prop1;
+        private String prop1="";
         private double price;
 
         public int getId() {

@@ -12,13 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.sales.SelectCustomerAdapter;
+import com.bian.dan.blr.adapter.sales.SelectUserAdapter;
 import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
-import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -33,9 +32,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 选择客户
+ * 选择用户
  */
-public class SelectCustomerActivity extends BaseActivity implements MyRefreshLayoutListener {
+public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutListener {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -47,18 +46,16 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
     EditText etKey;
     //要搜索的关键字
     private String keys;
-    private List<Customer> listAll = new ArrayList<>();
-    private SelectCustomerAdapter selectCustomerAdapter;
-    /**
-     * type=1(查询非私有的客户)
-     */
-    private int type;
+    //页码
+    private int page=1;
+    private List<UserList.ListBean> listAll=new ArrayList<>();
+    private SelectUserAdapter selectUserAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_customer);
+        setContentView(R.layout.activity_select_user);
         ButterKnife.bind(this);
         initView();
-        //获取设备列表
+        //加载数据
         DialogUtil.showProgress(this,"数据加载中");
         reList.startRefresh();
     }
@@ -68,18 +65,17 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
      * 初始化
      */
     private void initView() {
-        tvHead.setText("选择客户");
-        type=getIntent().getIntExtra("type",0);
+        tvHead.setText("选择用户");
         reList.setMyRefreshLayoutListener(this);
-        selectCustomerAdapter = new SelectCustomerAdapter(this, listAll);
-        listView.setAdapter(selectCustomerAdapter);
+        selectUserAdapter=new SelectUserAdapter(this,listAll);
+        listView.setAdapter(selectUserAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Customer customer=listAll.get(position);
-                Intent intent = new Intent();
-                intent.putExtra("customer", customer);
-                setResult(100, intent);
-                SelectCustomerActivity.this.finish();
+                UserList.ListBean listBean=listAll.get(position);
+                Intent intent=new Intent();
+                intent.putExtra("listBean",listBean);
+                setResult(400,intent);
+                finish();
             }
         });
 
@@ -93,11 +89,12 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
             }
             public void afterTextChanged(Editable s) {
                 keys=s.toString();
-                //获取设备列表
+                //加载数据
                 reList.startRefresh();
             }
         });
     }
+
 
     @OnClick(R.id.lin_back)
     public void onViewClicked() {
@@ -107,42 +104,37 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
 
     @Override
     public void onRefresh(View view) {
+        page=1;
         listAll.clear();
-        getCustomerList();
+        getUserList();
     }
 
     @Override
     public void onLoadMore(View view) {
-        getCustomerList();
+        page++;
+        getUserList();
     }
 
 
     /**
-     * 获取客户列表
+     * 获取用户列表
      */
-    private void getCustomerList() {
-        String userId=null;
-        if(type==0){
-            UserInfo userInfo= MyApplication.getUser();
-            userId=String.valueOf(userInfo.getUser().getUserId());
-        }
-        HttpMethod.getCustomerList(keys,userId, new NetWorkCallBack() {
+    private void getUserList(){
+        final UserInfo userInfo= MyApplication.getUser();
+        HttpMethod.getUserList(userInfo.getUser().getDeptId(), keys, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
-                SelectCustomer customer = (SelectCustomer) object;
-                if (customer == null) {
-                    return;
-                }
-                if (customer.isSussess()) {
-                    List<Customer> list =customer.getCustomer();
+                UserList userList= (UserList) object;
+                if(userList.isSussess()){
+                    List<UserList.ListBean> list=userList.getPage().getRows();
                     listAll.addAll(list);
-                    selectCustomerAdapter.notifyDataSetChanged();
-                    if (list.size() < HttpMethod.limit) {
+                    selectUserAdapter.notifyDataSetChanged();
+                    if(list.size()<HttpMethod.limit){
                         reList.setIsLoadingMoreEnabled(false);
                     }
-                } else {
-                    ToastUtil.showLong(customer.getMsg());
+                }else{
+                    ToastUtil.showLong(userList.getMsg());
                 }
             }
 

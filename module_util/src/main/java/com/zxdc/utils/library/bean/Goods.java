@@ -5,18 +5,18 @@ import java.io.Serializable;
 public class Goods implements Serializable {
 
     private int id;
-    private String name;
-    private String spec;
+    private String name="";
+    private String spec="";
     private int units;
-    private String unitStr;
-    private String brand;
+    private String unitStr="";
+    private String brand="";
     private int type;
-    private String typeStr;
+    private String typeStr="";
     private int num;
-    private String prop1;
-    private String prop2;
-    private String memo;
-    private String prop3;
+    private String prop1="";
+    private String prop2="";
+    private String memo="";
+    private String prop3="";
     public  Goods(){}
 
     public Goods(int id,String name, String spec, String unitStr, String brand, int num, String prop1, String prop2, String memo, String prop3) {

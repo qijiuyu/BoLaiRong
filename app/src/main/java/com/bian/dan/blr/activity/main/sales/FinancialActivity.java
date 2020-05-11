@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.sales;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,8 +15,16 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.DialogSelectAdapter;
 import com.bian.dan.blr.adapter.sales.FinancialAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Financial;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
+import com.zxdc.utils.library.view.MyRefreshLayoutListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +33,7 @@ import butterknife.OnClick;
 /**
  * 财务报销
  */
-public class FinancialActivity extends BaseActivity {
+public class FinancialActivity extends BaseActivity  implements MyRefreshLayoutListener {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -37,11 +46,24 @@ public class FinancialActivity extends BaseActivity {
     @BindView(R.id.re_list)
     MyRefreshLayout reList;
     private FinancialAdapter financialAdapter;
+    //页码
+    private int page=1;
+    private List<Financial.ListBean> listAll=new ArrayList<>();
+    /**
+     *0：未审批
+     *1：审批通过
+     * 2：审批未通过
+     * 3：全部状态
+     */
+    private int state=3;
+    private String[] str=new String[]{"未审批","审批通过","审批未通过","全部状态"};
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_financial);
         ButterKnife.bind(this);
         initView();
+        //加载数据
+        reList.startRefresh();
     }
 
 
@@ -51,11 +73,15 @@ public class FinancialActivity extends BaseActivity {
     private void initView(){
         tvHead.setText("财务报销");
         imgRight.setImageResource(R.mipmap.add);
-        financialAdapter=new FinancialAdapter(this);
+        reList.setMyRefreshLayoutListener(this);
+        financialAdapter=new FinancialAdapter(this,listAll);
         listView.setAdapter(financialAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setClass(FinancialDetailsActivity.class);
+                Financial.ListBean listBean=listAll.get(position);
+                Intent intent=new Intent(activity,FinancialDetailsActivity.class);
+                intent.putExtra("listBean",listBean);
+                startActivity(intent);
             }
         });
     }
@@ -72,7 +98,7 @@ public class FinancialActivity extends BaseActivity {
                 break;
             //添加财务报销
             case R.id.img_right:
-                setClass(AddFinancialActivity.class);
+                setClass(AddFinancialActivity.class,1000);
                  break;
             default:
                 break;
@@ -88,6 +114,68 @@ public class FinancialActivity extends BaseActivity {
         final PopupWindow popupWindow = DialogUtil.showPopWindow(view);
         popupWindow.showAsDropDown(tvStatus);
         ListView listView = view.findViewById(R.id.listView);
-        listView.setAdapter(new DialogSelectAdapter(this));
+        final DialogSelectAdapter dialogSelectAdapter=new DialogSelectAdapter(this,str,state);
+        listView.setAdapter(dialogSelectAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                popupWindow.dismiss();
+                state=position;
+                tvStatus.setText(str[state]);
+                dialogSelectAdapter.onclick(state);
+                //加载数据
+                reList.startRefresh();
+            }
+        });
+    }
+
+
+    @Override
+    public void onRefresh(View view) {
+        page = 1;
+        listAll.clear();
+        getFinancialList();
+    }
+
+    @Override
+    public void onLoadMore(View view) {
+        page++;
+        getFinancialList();
+    }
+
+
+    /**
+     * 获取财务列表
+     */
+    private void getFinancialList(){
+        HttpMethod.getFinancialList(state==3 ? null : String.valueOf(state), page, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                reList.refreshComplete();
+                reList.loadMoreComplete();
+                Financial financial= (Financial) object;
+                if(financial.isSussess()){
+                    List<Financial.ListBean> list=financial.getData().getRows();
+                    listAll.addAll(list);
+                    financialAdapter.notifyDataSetChanged();
+                    if (list.size() < HttpMethod.limit) {
+                        reList.setIsLoadingMoreEnabled(false);
+                    }
+                }else{
+                    ToastUtil.showLong(financial.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==100){
+            //重新刷新列表
+            reList.startRefresh();
+        }
     }
 }

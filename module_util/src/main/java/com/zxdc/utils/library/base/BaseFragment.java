@@ -29,6 +29,12 @@ public class BaseFragment extends Fragment {
         startActivity(intent);
     }
 
+    protected void setClass(Class<?> cls,int resultCode) {
+        Intent intent = new Intent();
+        intent.setClass(mActivity, cls);
+        startActivityForResult(intent,resultCode);
+    }
+
 
     /**
      * 删除handler中的消息

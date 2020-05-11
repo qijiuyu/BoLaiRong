@@ -31,13 +31,13 @@ public class ProductPlan extends BaseBean {
 
     public static class ListBean implements Serializable{
         private int id;
-        private String planCode;
-        private String deliveryDate;
+        private String planCode="";
+        private String deliveryDate="";
         private int status;
-        private String statusStr;
-        private String memo;
+        private String statusStr="";
+        private String memo="";
         private int approveId;
-        private String createDate;
+        private String createDate="";
 
         public int getId() {
             return id;

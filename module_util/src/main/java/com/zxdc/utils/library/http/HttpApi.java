@@ -6,11 +6,13 @@ import com.zxdc.utils.library.bean.CheckCode;
 import com.zxdc.utils.library.bean.ConstractDetails;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
+import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
+import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
@@ -22,20 +24,20 @@ import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
+import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
-
-import java.util.Map;
+import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -43,9 +45,8 @@ import retrofit2.http.Query;
 
 public interface HttpApi {
 
-    @FormUrlEncoded
     @POST(HttpConstant.LOGIN)
-    Call<UserInfo> login(@FieldMap Map<String, String> map);
+    Call<UserInfo> login(@Body LoginP loginP);
 
     @GET(HttpConstant.GET_DEPARTMENT)
     Call<Department> getDepartment();
@@ -60,7 +61,7 @@ public interface HttpApi {
     Call<Device> getDeviceList(@Query("initialism") String initialism, @Query("id") String id, @Query("page") String page,@Query("limit") int limit);
 
     @GET(HttpConstant.GET_CUSTOMER_LIST)
-    Call<SelectCustomer> getCustomerList(@Query("prop1") String prop1, @Query("userId") int userId);
+    Call<SelectCustomer> getCustomerList(@Query("prop1") String prop1, @Query("userId") String userId);
 
     @GET(HttpConstant.GET_OFFICE)
     Call<Office> getOffice(@Query("deptId") int deptId);
@@ -127,5 +128,27 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_CUSTOMER)
     Call<CustomerList> getCustomer(@Query("privateState") int privateState,@Query("privateId")String privateId,@Query("contacts") String contacts, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_CUSTOMER_DETAILS)
+    Call<CustomerDetails> getCustomerDetails(@Query("id") int id);
+
+    @POST(HttpConstant.UPDATE_CUSTOMER_STATE)
+    Call<BaseBean> updateCustomerState(@Body UpdateCustomerStateP updateCustomerStateP);
+
+    @POST(HttpConstant.UPDATE_CUSTOMER)
+    Call<BaseBean> updateCustomer(@Body AddCustomerP addCustomerP);
+
+    @GET(HttpConstant.CHECK_CUSTOMER_NAME)
+    Call<CheckCode> checkCustomerName(@Query("customerName") String customerName);
+
+    @GET(HttpConstant.GET_USER_LIST)
+    Call<UserList> getUserList(@Query("deptId") int deptId, @Query("name") String name, @Query("page") int page, @Query("limit") int limit);
+
+    @PUT(HttpConstant.ADD_FINANCIAL)
+    Call<BaseBean> addFinancial(@Body AddFinancialP addFinancialP);
+
+    @GET(HttpConstant.GET_FINANCIAL_LIST)
+    Call<Financial> getFinancialList(@Query("state") String state, @Query("page") int page, @Query("limit") int limit);
+
 
 }

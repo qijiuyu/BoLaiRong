@@ -5,28 +5,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.zxdc.utils.library.bean.UserList;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-public class DialogSelectAdapter extends BaseAdapter {
+
+public class SelectUserAdapter extends BaseAdapter {
 
     private Activity activity;
-    public int typeIndex;
-    private String[] str;
-    public DialogSelectAdapter(Activity activity,String[] str,int typeIndex) {
+    private List<UserList.ListBean> list;
+    public SelectUserAdapter(Activity activity, List<UserList.ListBean> list) {
         super();
         this.activity = activity;
-        this.str=str;
-        this.typeIndex=typeIndex;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return str.length;
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -42,27 +43,21 @@ public class DialogSelectAdapter extends BaseAdapter {
     ViewHolder holder = null;
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_dialog_select, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_select_customer, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.tvName.setText(str[position]);
-        if(typeIndex==position){
-            holder.imgOk.setVisibility(View.VISIBLE);
-            holder.tvName.setTextColor(activity.getResources().getColor(R.color.color_007AFF));
-        }else{
-            holder.imgOk.setVisibility(View.GONE);
-            holder.tvName.setTextColor(activity.getResources().getColor(android.R.color.black));
-        }
+
+        UserList.ListBean listBean=list.get(position);
+        holder.tvName.setText(listBean.getUsername()+"/"+listBean.getName()+"/"+listBean.getDeptName());
         return view;
     }
 
 
-    static class ViewHolder {
-        @BindView(R.id.img_ok)
-        ImageView imgOk;
+    static
+    class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
 
@@ -70,9 +65,5 @@ public class DialogSelectAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
     }
-
-    public void onclick(int typeIndex){
-        this.typeIndex=typeIndex;
-        notifyDataSetChanged();
-    }
 }
+

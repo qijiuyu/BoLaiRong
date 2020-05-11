@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.sales.AddCustomerPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.ClickTextView;
@@ -45,8 +46,8 @@ public class AddCustomerActivity extends BaseActivity {
     EditText etEmail;
     @BindView(R.id.et_url)
     EditText etUrl;
-    @BindView(R.id.tv_type)
-    TextView tvType;
+    @BindView(R.id.et_type)
+    EditText etType;
     @BindView(R.id.et_account)
     EditText etAccount;
     @BindView(R.id.tv_bank)
@@ -63,12 +64,16 @@ public class AddCustomerActivity extends BaseActivity {
     ClickTextView tvSubmit;
     @BindView(R.id.tv_private)
     TextView tvPrivate;
+    //客户对象
+    private Customer customer;
     private AddCustomerPersenter addCustomerPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_customer);
         ButterKnife.bind(this);
         initView();
+        //展示客户信息--编辑使用
+        showCustomer();
     }
 
 
@@ -78,6 +83,7 @@ public class AddCustomerActivity extends BaseActivity {
     private void initView() {
         addCustomerPersenter=new AddCustomerPersenter(this);
         tvHead.setText("新增客户");
+        customer= (Customer) getIntent().getSerializableExtra("customer");
     }
 
     @OnClick({R.id.lin_back, R.id.tv_industry, R.id.tv_customer_status, R.id.tv_bank,R.id.tv_private, R.id.tv_submit})
@@ -114,7 +120,7 @@ public class AddCustomerActivity extends BaseActivity {
                 String qq=etQq.getText().toString().trim();
                 String email=etEmail.getText().toString().trim();
                 String url=etUrl.getText().toString().trim();
-                String type=tvType.getText().toString().trim();
+                String type=etType.getText().toString().trim();
                 String account=etAccount.getText().toString().trim();
                 String bank=tvBank.getText().toString().trim();
                 String accountName=etAccountName.getText().toString().trim();
@@ -228,11 +234,58 @@ public class AddCustomerActivity extends BaseActivity {
                     addCustomerP.setPrivateState(2);
                 }
                 addCustomerP.setMemo(type);
-                //增加客户
-                addCustomerPersenter.addCustomer(addCustomerP);
+
+                if(customer==null){
+                    //增加客户
+                    addCustomerPersenter.checkCustomerName(1,addCustomerP);
+                }else{
+                    //修改客户
+                    addCustomerP.setId(customer.getId());
+                    if(name.equals(customer.getCustomerName())){
+                        addCustomerPersenter.updateCustomer(addCustomerP);
+                    }else{
+                        addCustomerPersenter.checkCustomerName(2,addCustomerP);
+                    }
+                }
                 break;
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 展示客户信息--编辑使用
+     */
+    private void showCustomer(){
+        if(customer==null){
+            return;
+        }
+        etName.setText(customer.getCustomerName());
+        tvIndustry.setText(customer.getIndustryStr());
+        tvIndustry.setTag(customer.getIndustry());
+        tvCustomerStatus.setText(customer.getStatusName());
+        tvCustomerStatus.setTag(customer.getStatus());
+        etPeople.setText(customer.getContacts());
+        etMobile.setText(customer.getPhone());
+        etPosition.setText(customer.getPosition());
+        etWx.setText(customer.getWechat());
+        etQq.setText(customer.getQq());
+        etEmail.setText(customer.getEmail());
+        etUrl.setText(customer.getUrl());
+        etType.setText(customer.getMemo());
+        etAccount.setText(customer.getCorAccount());
+        tvBank.setText(customer.getOpenBankStr());
+        tvBank.setTag(customer.getOpenBank());
+        etAccountName.setText(customer.getAccName());
+        etEin.setText(customer.getEin());
+        etLandline.setText(customer.getLandline());
+        if(customer.getPrivateState()==1){
+            tvPrivate.setText("私有");
+        }else{
+            tvPrivate.setText("公有");
+        }
+        etAddress.setText(customer.getPostAddress());
+
     }
 }

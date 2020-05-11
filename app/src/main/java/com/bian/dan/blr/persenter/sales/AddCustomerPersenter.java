@@ -12,12 +12,16 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.AddCustomerActivity;
 import com.bian.dan.blr.view.CycleWheelView;
 import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.CheckCode;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
+import com.zxdc.utils.library.eventbus.EventStatus;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -163,11 +167,63 @@ public class AddCustomerPersenter {
 
 
     /**
+     * 校验客户名称唯一性
+     * tyle 1：增加是校验，  2：修改时校验
+     */
+    public void checkCustomerName(final int type,final AddCustomerP addCustomerP){
+        DialogUtil.showProgress(activity,"校验中");
+        HttpMethod.checkCustomerName(addCustomerP.getCustomerName(), new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                CheckCode checkCode= (CheckCode) object;
+                if(checkCode.isSussess() && checkCode.isResult()){
+                    if(type==1){
+                        //增加客户
+                        addCustomer(addCustomerP);
+                    }else{
+                        //修改客户信息
+                        updateCustomer(addCustomerP);
+                    }
+                }else{
+                    ToastUtil.showLong(checkCode.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+
+    /**
      * 增加客户
      */
     public void addCustomer(AddCustomerP addCustomerP){
         DialogUtil.showProgress(activity,"上传中");
         HttpMethod.addCustomer(addCustomerP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean)object;
+                if(baseBean.isSussess()){
+                    EventBus.getDefault().post(EventStatus.REFRESH_CUSTOMER_LIST);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 修改客户信息
+     */
+    public void updateCustomer(final AddCustomerP addCustomerP){
+        DialogUtil.showProgress(activity,"修改中");
+        HttpMethod.updateCustomer(addCustomerP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean)object;
                 if(baseBean.isSussess()){

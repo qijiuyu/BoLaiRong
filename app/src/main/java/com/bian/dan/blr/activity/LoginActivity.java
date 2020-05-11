@@ -15,6 +15,7 @@ import com.bian.dan.blr.R;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.SPUtil;
@@ -97,7 +98,8 @@ public class LoginActivity extends BaseActivity {
                     ToastUtil.showLong("请输入密码");
                     return;
                 }
-                login(userName,pwd);
+                LoginP loginP=new LoginP(userName,pwd);
+                login(loginP);
                 break;
             default:
                 break;
@@ -107,12 +109,10 @@ public class LoginActivity extends BaseActivity {
 
     /**
      * 登录
-     * @param userName
-     * @param pwd
      */
-    private void login(final String userName, final String pwd){
+    private void login(final LoginP loginP){
         DialogUtil.showProgress(this,"登录中");
-        HttpMethod.login(userName, pwd, new NetWorkCallBack() {
+        HttpMethod.login(loginP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 DialogUtil.closeProgress();
                 UserInfo userInfo= (UserInfo) object;
@@ -125,8 +125,7 @@ public class LoginActivity extends BaseActivity {
                     //存储用户信息
                     SPUtil.getInstance(activity).addObject(SPUtil.USER_INFO,userInfo);
                     //存储账号和密码
-                    SPUtil.getInstance(activity).addString(SPUtil.ACCOUNT,userName);
-                    SPUtil.getInstance(activity).addString(SPUtil.PASSWORD,pwd);
+                    SPUtil.getInstance(activity).addObject(SPUtil.ACCOUNT,loginP);
                     setClass(TabActivity.class);
 
                 }else{

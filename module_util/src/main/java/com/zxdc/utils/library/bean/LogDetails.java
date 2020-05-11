@@ -26,9 +26,9 @@ public class LogDetails extends BaseBean{
     public static class DetailsBean implements Serializable{
         private int id;
         private int customerId;
-        private String followResult;
-        private String createDate;
-        private String operater;
+        private String followResult="";
+        private String createDate="";
+        private String operater="";
 
         public int getId() {
             return id;
