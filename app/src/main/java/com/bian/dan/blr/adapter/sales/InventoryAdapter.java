@@ -51,7 +51,7 @@ public class InventoryAdapter extends BaseAdapter {
         }
         Inventory.ListBean listBean=list.get(position);
         holder.tvName.setText(listBean.getGoodsName());
-        holder.tvDes.setText(listBean.getBrand()+"   "+listBean.getSpec());
+        holder.tvDes.setText(listBean.getBrand()+" /"+listBean.getSpec());
         holder.tvInventory.setText(listBean.getTypeStr());
         holder.tvUnit.setText(listBean.getUnitStr());
         holder.tvNum.setText(String.valueOf(listBean.getSumNum()));

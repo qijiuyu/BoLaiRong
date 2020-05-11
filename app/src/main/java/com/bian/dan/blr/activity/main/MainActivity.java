@@ -17,9 +17,9 @@ import com.bian.dan.blr.activity.main.sales.LogListActivity;
 import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
+import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
-import com.bian.dan.blr.activity.main.warehouse.WareHouseManagerActivity;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -99,7 +99,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //仓库管理
             case R.id.tv_house_ckgl:
-                setClass(WareHouseManagerActivity.class);
+                setClass(InventoryDetailsActivity.class);
                 break;
             //手动入库单
             case R.id.tv_house_sdrkd:

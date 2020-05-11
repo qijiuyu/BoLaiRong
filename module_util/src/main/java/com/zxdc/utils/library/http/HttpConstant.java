@@ -89,4 +89,6 @@ public class HttpConstant {
 
     public static final String GET_FINANCIAL_DETAILS="reimFinance/getDetail";
 
+    public static final String GET_INVENTORY_DETAILS="stock/listDetailByGoodsId";
+
 }

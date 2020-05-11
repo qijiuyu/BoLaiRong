@@ -85,6 +85,8 @@ public class Goods implements Serializable {
         this.mobile=mobile;
     }
 
+
+
     public int getId() {
         return id;
     }

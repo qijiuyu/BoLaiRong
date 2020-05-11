@@ -15,6 +15,7 @@ import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Inventory;
+import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -735,4 +736,20 @@ public class HttpMethod extends BaseRequst {
         });
     }
 
+
+    /**
+     * 获取库存明细详情
+     */
+    public static void getInventoryDetails(String goodsId,String type,String stockType,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getInventoryDetails(goodsId,type,stockType,page,limit).enqueue(new Callback<InventoryDetails>() {
+            public void onResponse(Call<InventoryDetails> call, Response<InventoryDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<InventoryDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
 }

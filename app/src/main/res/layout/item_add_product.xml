@@ -101,7 +101,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:text="是否开票：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
 

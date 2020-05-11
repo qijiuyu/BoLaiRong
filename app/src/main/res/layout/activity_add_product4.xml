@@ -259,6 +259,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@null"
+                android:textSize="15sp"
                 android:minLines="4"
                 android:gravity="top" />
 

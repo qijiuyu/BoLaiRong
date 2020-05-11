@@ -16,6 +16,7 @@ import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Inventory;
+import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -157,6 +158,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_FINANCIAL_DETAILS)
     Call<FinancialDetails> getFinancialDetails(@Query("id") int id);
+
+    @GET(HttpConstant.GET_INVENTORY_DETAILS)
+    Call<InventoryDetails> getInventoryDetails(@Query("goodsId") String goodsId,@Query("type") String type,@Query("stockType") String stockType,@Query("page") int page, @Query("limit") int limit);
 
 
 }

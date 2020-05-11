@@ -104,7 +104,7 @@ public class FinancialDetailsActivity extends BaseActivity {
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
                     tvAccount.setText(Html.fromHtml("收款人账号：<font color=\"#000000\">" + detailsBean.getAccount() + "</font>"));
                     tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + detailsBean.getOpenBankStr() + "</font>"));
-                    tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
+                    tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getMobile() + "</font>"));
                     tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
                     //附件
                     gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));

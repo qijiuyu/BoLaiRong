@@ -7,90 +7,97 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.7">
+            android:layout_width="120dp"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:text="xxx"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"/>
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CBN微粉（0001）"
-                    android:textColor="@android:color/black"
-                    android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/tv_des"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:text="7800   WNGA0804"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"/>
 
-                <TextView
-                    android:id="@+id/tv_brand_spce"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="7800    WNGA0029"
-                    android:textSize="14sp"
-                    android:textColor="@color/color_666666"/>
-
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="成品仓库"
-                    android:textSize="14sp"
-                    android:textColor="@color/color_666666"/>
-
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_inventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_des"
+                android:text="成品仓库"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"/>
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_unit"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="片"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:gravity="center"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tv_num"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="5"
-            android:textColor="@color/color_70DF5D"
-            android:textSize="15sp"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="片"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"/>
 
-        <TextView
-            android:id="@+id/tv_top"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="1000"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="50"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"/>
 
-        <TextView
-            android:id="@+id/tv_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="10"
-            android:textColor="@color/colorPrimary"
-            android:textSize="15sp"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1000"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:id="@+id/tv_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="50"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

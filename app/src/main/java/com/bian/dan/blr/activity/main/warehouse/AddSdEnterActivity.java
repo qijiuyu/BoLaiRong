@@ -1,14 +1,20 @@
 package com.bian.dan.blr.activity.main.warehouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.adapter.procurement.AddProductAdapter4;
 import com.bian.dan.blr.persenter.warehouse.AddSdEnterPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.view.MeasureListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +36,9 @@ public class AddSdEnterActivity extends BaseActivity {
     @BindView(R.id.listView)
     MeasureListView listView;
     private AddSdEnterPersenter addSdEnterPersenter;
+    //产品列表
+    private List<Goods> goodList=new ArrayList<>();
+    private AddProductAdapter4 addProductAdapter4;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sdenter);
@@ -45,6 +54,8 @@ public class AddSdEnterActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("新增手动入库单");
         addSdEnterPersenter=new AddSdEnterPersenter(this);
+        addProductAdapter4=new AddProductAdapter4(this,goodList);
+        listView.setAdapter(addProductAdapter4);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_time, R.id.tv_product, R.id.tv_submit})
@@ -65,6 +76,26 @@ public class AddSdEnterActivity extends BaseActivity {
                 setClass(AddProductActivity4.class,200);
                 break;
             case R.id.tv_submit:
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            //回执产品列表
+            case 200:
+                if(data!=null){
+                    Goods goods= (Goods) data.getSerializableExtra("goods");
+                    if(goods!=null){
+                        goodList.add(goods);
+                        addProductAdapter4.notifyDataSetChanged();
+                    }
+                }
                 break;
             default:
                 break;

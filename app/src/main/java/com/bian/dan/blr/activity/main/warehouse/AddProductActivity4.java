@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
+import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.util.Util;
 
 import butterknife.BindView;
@@ -97,7 +99,7 @@ public class AddProductActivity4 extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_spec, R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -107,9 +109,29 @@ public class AddProductActivity4 extends BaseActivity {
             case R.id.tv_name:
                  setClass(SelectMaterialActivity.class,100);
                 break;
-            case R.id.tv_spec:
-                break;
             case R.id.tv_submit:
+                 String name=tvName.getText().toString().trim();
+                 String num=etNum.getText().toString().trim();
+                 String price=etPrice.getText().toString().trim();
+                 String totalMoney=tvMoney.getText().toString().trim();
+                 String remark=etRemark.getText().toString().trim();
+                 if(TextUtils.isEmpty(name)){
+                     ToastUtil.showLong("请选择物料名称");
+                     return;
+                 }
+                if(TextUtils.isEmpty(num)){
+                    ToastUtil.showLong("请输入数量");
+                    return;
+                }
+                if(TextUtils.isEmpty(price)){
+                    ToastUtil.showLong("请输入单价");
+                    return;
+                }
+                 Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),price,totalMoney,remark,null);
+                 Intent intent=new Intent();
+                 intent.putExtra("goods",goods);
+                 setResult(200,intent);
+                 finish();
                 break;
             default:
                 break;
