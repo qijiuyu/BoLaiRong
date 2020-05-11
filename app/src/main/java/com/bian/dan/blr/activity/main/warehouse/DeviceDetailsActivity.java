@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Device;
+import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -59,7 +60,7 @@ public class DeviceDetailsActivity extends BaseActivity {
         Device.ListBean listBean= (Device.ListBean) getIntent().getSerializableExtra("listBean");
         if(listBean!=null){
             //获取设备详情
-            getDeviceDetails(String.valueOf(listBean.getId()));
+            getDeviceDetails(listBean.getId());
         }
     }
 
@@ -77,29 +78,26 @@ public class DeviceDetailsActivity extends BaseActivity {
     /**
      * 获取设备详情
      */
-    private void getDeviceDetails(String id){
+    private void getDeviceDetails(int id){
         DialogUtil.showProgress(this,"数据加载中");
-        HttpMethod.getDeviceList(null, id,null, new NetWorkCallBack() {
+        HttpMethod.getDeviceDetails(id, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 DialogUtil.closeProgress();
-                Device device= (Device) object;
-                if(device==null){
-                    return;
-                }
-                if(device.isSussess() && device.getData()!=null && device.getData().getRows()!=null){
-                    if(device.getData().getRows().size()>0){
-                        Device.ListBean listBean=device.getData().getRows().get(0);
-                        tvDepartment.setText(Html.fromHtml("归属部门：<font color=\"#000000\">"+listBean.getDeptName()+"</font>"));
-                        tvType.setText(Html.fromHtml("设备类型：<font color=\"#000000\">"+listBean.getTypeName()+"</font>"));
-                        tvName.setText(Html.fromHtml("设备名称：<font color=\"#000000\">"+listBean.getEquipName()+"</font>"));
-                        tvSpce.setText(Html.fromHtml("规格型号：<font color=\"#000000\">"+listBean.getSpec()+"</font>"));
-                        tvCode.setText(Html.fromHtml("设备编码：<font color=\"#000000\">"+listBean.getCode()+"</font>"));
-                        tvManufacturer.setText(Html.fromHtml("生产厂家：<font color=\"#000000\">"+listBean.getManufacturers()+"</font>"));
-                        tvTime.setText(Html.fromHtml("采购时间：<font color=\"#000000\">"+listBean.getPurcTime()+"</font>"));
-                        tvMoney.setText(Html.fromHtml("采购金额：<font color=\"#000000\">"+listBean.getAmount()+"</font>"));
+                DeviceDetails deviceDetails= (DeviceDetails) object;
+                if(deviceDetails.isSussess()){
+                    DeviceDetails.DetailsBean detailsBean=deviceDetails.getData();
+                    if(detailsBean!=null){
+                        tvDepartment.setText(Html.fromHtml("归属部门：<font color=\"#000000\">"+detailsBean.getDeptName()+"</font>"));
+                        tvType.setText(Html.fromHtml("设备类型：<font color=\"#000000\">"+detailsBean.getTypeName()+"</font>"));
+                        tvName.setText(Html.fromHtml("设备名称：<font color=\"#000000\">"+detailsBean.getEquipName()+"</font>"));
+                        tvSpce.setText(Html.fromHtml("规格型号：<font color=\"#000000\">"+detailsBean.getSpec()+"</font>"));
+                        tvCode.setText(Html.fromHtml("设备编码：<font color=\"#000000\">"+detailsBean.getCode()+"</font>"));
+                        tvManufacturer.setText(Html.fromHtml("生产厂家：<font color=\"#000000\">"+detailsBean.getManufacturers()+"</font>"));
+                        tvTime.setText(Html.fromHtml("采购时间：<font color=\"#000000\">"+detailsBean.getPurcTime()+"</font>"));
+                        tvMoney.setText(Html.fromHtml("采购金额：<font color=\"#000000\">"+detailsBean.getAmount()+"</font>"));
                     }
                 }else{
-                    ToastUtil.showLong(device.getMsg());
+                    ToastUtil.showLong(deviceDetails.getMsg());
                 }
             }
             public void onFail(Throwable t) {

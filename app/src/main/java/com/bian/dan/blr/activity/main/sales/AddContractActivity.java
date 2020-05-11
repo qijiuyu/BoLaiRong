@@ -258,7 +258,7 @@ public class AddContractActivity extends BaseActivity {
         /**
          * 显示图片
          */
-        imgList.addAll(constractDetails.getFileList());
+        imgList.addAll(detailsBean.getFileList());
         gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
         gridView.setAdapter(gridViewImgAdapter);
     }

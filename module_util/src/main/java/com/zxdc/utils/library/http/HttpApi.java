@@ -10,9 +10,11 @@ import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Device;
+import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Financial;
+import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
@@ -59,6 +61,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_DEVICE_LIST)
     Call<Device> getDeviceList(@Query("initialism") String initialism, @Query("id") String id, @Query("page") String page,@Query("limit") int limit);
+
+    @GET(HttpConstant.GET_DEVICE_DETAILS)
+    Call<DeviceDetails> getDeviceDetails(@Query("id") int id);
 
     @GET(HttpConstant.GET_CUSTOMER_LIST)
     Call<SelectCustomer> getCustomerList(@Query("prop1") String prop1, @Query("userId") String userId);
@@ -149,6 +154,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_FINANCIAL_LIST)
     Call<Financial> getFinancialList(@Query("state") String state, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_FINANCIAL_DETAILS)
+    Call<FinancialDetails> getFinancialDetails(@Query("id") int id);
 
 
 }

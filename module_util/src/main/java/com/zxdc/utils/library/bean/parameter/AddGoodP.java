@@ -6,15 +6,18 @@ public class AddGoodP {
     private int num;
     private String prop1;
     private String prop2;
+    private String prop3;
     private String memo;
 
     public AddGoodP(){}
 
-    public AddGoodP(int goodsId, int num, String prop1, String prop2) {
+    public AddGoodP(int goodsId, int num, String prop1, String prop2,String prop3,String memo) {
         this.goodsId = goodsId;
         this.num = num;
         this.prop1 = prop1;
         this.prop2 = prop2;
+        this.prop3=prop3;
+        this.memo=memo;
     }
 
     public int getGoodsId() {
@@ -55,5 +58,13 @@ public class AddGoodP {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getProp3() {
+        return prop3;
+    }
+
+    public void setProp3(String prop3) {
+        this.prop3 = prop3;
     }
 }

@@ -6,22 +6,12 @@ import java.util.List;
 public class ConstractDetails extends BaseBean {
 
     private DetailsBean contract;
-    private List<FileBean> fileList;
-
     public DetailsBean getContract() {
         return contract;
     }
 
     public void setContract(DetailsBean contract) {
         this.contract = contract;
-    }
-
-    public List<FileBean> getFileList() {
-        return fileList;
-    }
-
-    public void setFileList(List<FileBean> fileList) {
-        this.fileList = fileList;
     }
 
     public static class DetailsBean implements Serializable{
@@ -47,6 +37,7 @@ public class ConstractDetails extends BaseBean {
         private String approvalName="";//审批人名称
         private String approvalDate="";//审批时间
         private String createName="";
+        private List<FileBean> fileList;
 
         public int getId() {
             return id;
@@ -222,6 +213,14 @@ public class ConstractDetails extends BaseBean {
 
         public void setCreateName(String createName) {
             this.createName = createName;
+        }
+
+        public List<FileBean> getFileList() {
+            return fileList;
+        }
+
+        public void setFileList(List<FileBean> fileList) {
+            this.fileList = fileList;
         }
     }
 

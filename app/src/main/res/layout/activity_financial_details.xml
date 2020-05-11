@@ -283,6 +283,12 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"/>
 
+            <ImageView
+                android:id="@+id/img_transfer"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="15dp"/>
+
         </LinearLayout>
 
     </ScrollView>

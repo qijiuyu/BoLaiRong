@@ -62,7 +62,7 @@ public class AddSdEnterActivity extends BaseActivity {
                 break;
             //选择采购列表
             case R.id.tv_product:
-                setClass(AddProductActivity4.class);
+                setClass(AddProductActivity4.class,200);
                 break;
             case R.id.tv_submit:
                 break;

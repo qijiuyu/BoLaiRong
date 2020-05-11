@@ -133,7 +133,7 @@ public class ContractDetailsActivity extends BaseActivity {
                             tvCompany.setText(Html.fromHtml("售卖公司：<font color=\"#000000\">立钻</font>"));
                         }
                         tvOffice.setText(Html.fromHtml("指派内勤：<font color=\"#000000\">" + detailsBean.getAssignerName() + "</font>"));
-                        gridView.setAdapter(new NetGridViewImgAdapter(activity,constractDetails.getFileList()));
+                        gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
                     }
 
                 } else {

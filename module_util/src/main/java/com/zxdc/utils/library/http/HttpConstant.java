@@ -23,6 +23,8 @@ public class HttpConstant {
 
     public static final String GET_DEVICE_LIST="equipment/getList";
 
+    public static final String GET_DEVICE_DETAILS="equipment/getDetail";
+
     public static final String GET_CUSTOMER_LIST="customer/getCustomerByInitialism";
 
     public static final String GET_OFFICE="user";
@@ -84,5 +86,7 @@ public class HttpConstant {
     public static final String ADD_FINANCIAL="reimFinance/save";
 
     public static final String GET_FINANCIAL_LIST="reimFinance/getList";
+
+    public static final String GET_FINANCIAL_DETAILS="reimFinance/getDetail";
 
 }
