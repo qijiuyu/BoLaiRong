@@ -127,6 +127,28 @@
                 android:layout_marginTop="15dp">
             </com.zxdc.utils.library.view.MeasureListView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="备注"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"/>
+
+            <EditText
+                android:id="@+id/et_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@null"
+                android:textSize="15sp"
+                android:minLines="4"
+                android:gravity="top" />
+
+
 
         </LinearLayout>
 

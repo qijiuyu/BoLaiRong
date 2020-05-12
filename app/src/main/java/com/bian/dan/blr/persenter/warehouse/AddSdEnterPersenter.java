@@ -1,9 +1,16 @@
 package com.bian.dan.blr.persenter.warehouse;
 
+import android.content.Intent;
 import android.widget.TextView;
 
 import com.bian.dan.blr.activity.main.warehouse.AddSdEnterActivity;
 import com.bian.dan.blr.view.time.CustomDatePicker;
+import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,5 +42,29 @@ public class AddSdEnterPersenter {
         String now = sdf.format(new Date());
         tvTime.setText(now.split(" ")[0]);
         customDatePicker.show(tvTime.getText().toString());
+    }
+
+
+    /**
+     * 添加手动入库单
+     */
+    public void addSdEnter(AddSdEnterP addSdEnterP){
+        DialogUtil.showProgress(activity,"数据上传中");
+        HttpMethod.addSdEnter(addSdEnterP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean)object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 }

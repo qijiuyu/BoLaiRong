@@ -25,6 +25,7 @@ import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
+import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -34,6 +35,7 @@ import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
@@ -161,6 +163,13 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_INVENTORY_DETAILS)
     Call<InventoryDetails> getInventoryDetails(@Query("goodsId") String goodsId,@Query("type") String type,@Query("stockType") String stockType,@Query("page") int page, @Query("limit") int limit);
+
+    @PUT(HttpConstant.ADD_SD_ENTER)
+    Call<BaseBean> addSdEnter(@Body AddSdEnterP addSdEnterP);
+
+    @GET(HttpConstant.GET_SD_ENTER_LIST)
+    Call<SdEnter> getSdEnterList(@Query("startPurcDate") String startPurcDate,@Query("endPurcDate") String endPurcDate, @Query("page") int page, @Query("limit") int limit);
+
 
 
 }

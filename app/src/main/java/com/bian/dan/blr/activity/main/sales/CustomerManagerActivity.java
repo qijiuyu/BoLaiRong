@@ -63,6 +63,7 @@ public class CustomerManagerActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
+                 finish();
                 break;
             //我的客户
             case R.id.tv_my_customer:

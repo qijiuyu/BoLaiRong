@@ -77,6 +77,7 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
         if(listBean!=null){
             tvKey.setTag(listBean.getId());
             tvKey.setText(listBean.getGoodsName()+"/"+listBean.getBrand()+"/"+listBean.getSpec());
+            imgClear.setVisibility(View.VISIBLE);
         }
         reList.setMyRefreshLayoutListener(this);
         inventoryDetailsListAdapter=new InventoryDetailsListAdapter(this,listAll);

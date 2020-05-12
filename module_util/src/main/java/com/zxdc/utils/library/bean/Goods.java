@@ -41,6 +41,11 @@ public class Goods implements Serializable {
     private String contract;
     //电话
     private String mobile;
+    //仓库类型
+    private int stockType;
+    //商品批号
+    private String batchNo;
+
     public  Goods(){}
 
     public Goods(int id,String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, String isInvoice) {
@@ -65,25 +70,39 @@ public class Goods implements Serializable {
         this.memo = memo;
     }
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String price, String totalMoney, String memo, String address, int payType, String payTime, int companyId, String company, String contract,String mobile) {
+    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int stockType, String batchNo) {
         this.id = id;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
         this.brand = brand;
-        this.typeStr = typeStr;
         this.num = num;
         this.price = price;
         this.totalMoney = totalMoney;
         this.memo = memo;
-        this.address = address;
-        this.payType = payType;
-        this.payTime = payTime;
-        this.companyId = companyId;
-        this.company = company;
-        this.contract = contract;
-        this.mobile=mobile;
+        this.stockType = stockType;
+        this.batchNo = batchNo;
     }
+
+    //    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String price, String totalMoney, String memo, String address, int payType, String payTime, int companyId, String company, String contract,String mobile) {
+//        this.id = id;
+//        this.name = name;
+//        this.spec = spec;
+//        this.unitStr = unitStr;
+//        this.brand = brand;
+//        this.typeStr = typeStr;
+//        this.num = num;
+//        this.price = price;
+//        this.totalMoney = totalMoney;
+//        this.memo = memo;
+//        this.address = address;
+//        this.payType = payType;
+//        this.payTime = payTime;
+//        this.companyId = companyId;
+//        this.company = company;
+//        this.contract = contract;
+//        this.mobile=mobile;
+//    }
 
 
 
@@ -246,5 +265,21 @@ public class Goods implements Serializable {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public int getStockType() {
+        return stockType;
+    }
+
+    public void setStockType(int stockType) {
+        this.stockType = stockType;
+    }
+
+    public String getBatchNo() {
+        return batchNo;
+    }
+
+    public void setBatchNo(String batchNo) {
+        this.batchNo = batchNo;
     }
 }
