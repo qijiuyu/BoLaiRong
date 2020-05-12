@@ -36,7 +36,7 @@ public class OutBoundDetails extends BaseBean {
     public static class GoodList implements Serializable{
         private int id;
         //物料名称
-        private String name="";
+        private String goodsName="";
         //物料型号
         private String spec="";
         private int units;
@@ -66,12 +66,12 @@ public class OutBoundDetails extends BaseBean {
             this.id = id;
         }
 
-        public String getName() {
-            return name;
+        public String getGoodsName() {
+            return goodsName;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
         }
 
         public String getSpec() {

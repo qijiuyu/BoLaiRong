@@ -4,13 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
+
 import com.android.tu.loadingdialog.LoadingDailog;
 import com.zxdc.utils.library.R;
 /**
@@ -76,7 +76,7 @@ public class DialogUtil {
         mPopuwindow.setBackgroundDrawable(cd);
         mPopuwindow.setOutsideTouchable(true);
         mPopuwindow.setFocusable(true);
-        mPopuwindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
+        mPopuwindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         mPopuwindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         //mPopuwindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
         //mPopuwindow.showAsDropDown(view2);

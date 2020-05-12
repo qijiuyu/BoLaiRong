@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <include layout="@layout/head"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/color_f5f5f5"
@@ -21,25 +22,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/search"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
 
-        <EditText
-            android:id="@+id/et_key"
+        <TextView
+            android:id="@+id/tv_key"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="请输入合同编号或客户名称"
+            android:hint="请输入客户名称"
             android:textColor="@android:color/black"
             android:textSize="13sp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="10dp"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:imeOptions="actionSearch"
-            android:singleLine="true"/>
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"/>
 
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/img_clear"
+            android:visibility="gone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/close_text"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
 
     <include layout="@layout/listview"/>
 

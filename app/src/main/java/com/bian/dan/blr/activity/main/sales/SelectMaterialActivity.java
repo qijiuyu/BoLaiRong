@@ -54,7 +54,6 @@ public class SelectMaterialActivity extends BaseActivity implements MyRefreshLay
         ButterKnife.bind(this);
         initView();
         //加载数据
-        DialogUtil.showProgress(this,"数据加载中");
         reList.startRefresh();
     }
 

@@ -1,4 +1,4 @@
-package com.bian.dan.blr.adapter.sales;
+package com.bian.dan.blr.adapter.warehouse;
 
 import android.app.Activity;
 import android.text.Html;
@@ -9,26 +9,30 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.persenter.warehouse.SendDeliveryPersenter;
 import com.zxdc.utils.library.bean.OutBoundDetails;
+import com.zxdc.utils.library.view.MeasureListView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class OutBoundGoodAdapter extends BaseAdapter {
+public class SendDeliveryGoodsAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<OutBoundDetails.GoodList> list;
-    public OutBoundGoodAdapter(Activity activity, List<OutBoundDetails.GoodList> list) {
+    private SendDeliveryPersenter sendDeliveryPersenter;
+    public SendDeliveryGoodsAdapter(Activity activity, List<OutBoundDetails.GoodList> list,SendDeliveryPersenter sendDeliveryPersenter) {
         super();
         this.activity = activity;
-        this.list=list;
+        this.list = list;
+        this.sendDeliveryPersenter=sendDeliveryPersenter;
     }
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -44,31 +48,42 @@ public class OutBoundGoodAdapter extends BaseAdapter {
     ViewHolder holder = null;
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_add_product, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_send_outbound_good, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        OutBoundDetails.GoodList goodList=list.get(position);
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goodList.getGoodsName()+"</font>"));
+        OutBoundDetails.GoodList goodList = list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
         holder.tvBrand.setText(goodList.getBrand());
         holder.tvSpec.setText(goodList.getSpec());
         holder.tvUnit.setText(goodList.getUnitStr());
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">"+goodList.getProp1()+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getProp2()+"</font>"));
-        holder.tvRemark.setText("备注："+goodList.getMemo());
-        if(goodList.getProp3().equals("1")){
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goodList.getProp1() + "</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + goodList.getProp2() + "</font>"));
+        holder.tvRemark.setText("备注：" + goodList.getMemo());
+        if (goodList.getProp3().equals("1")) {
             holder.tvInvoice.setText(Html.fromHtml("是否开票：<font color=\"#000000\">是</font>"));
-        }else{
+        } else {
             holder.tvInvoice.setText(Html.fromHtml("是否开票：<font color=\"#000000\">否</font>"));
         }
+
+        /**
+         * 发货
+         */
+        holder.tvSend.setTag(goodList);
+        holder.tvSend.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                sendDeliveryPersenter.addDialog((OutBoundDetails.GoodList) v.getTag());
+            }
+        });
         return view;
     }
 
 
-    static class ViewHolder {
+    static
+    class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
         @BindView(R.id.tv_brand)
@@ -81,12 +96,16 @@ public class OutBoundGoodAdapter extends BaseAdapter {
         TextView tvNum;
         @BindView(R.id.tv_price)
         TextView tvPrice;
-        @BindView(R.id.tv_monety)
+        @BindView(R.id.tv_money)
         TextView tvMoney;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
         @BindView(R.id.tv_invoice)
         TextView tvInvoice;
+        @BindView(R.id.tv_send)
+        TextView tvSend;
+        @BindView(R.id.listView)
+        MeasureListView listView;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

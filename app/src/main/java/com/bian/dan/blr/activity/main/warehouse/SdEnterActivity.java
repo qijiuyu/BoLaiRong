@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.warehouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -72,7 +73,10 @@ public class SdEnterActivity extends BaseActivity implements MyRefreshLayoutList
         listView.setAdapter(sdEnterAdapter = new SdEnterAdapter(this,listAll));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setClass(SdEnterDetailsActivity.class);
+                SdEnter.ListBean listBean=listAll.get(position);
+                Intent intent=new Intent(activity,SdEnterDetailsActivity.class);
+                intent.putExtra("listBean",listBean);
+                startActivity(intent);
             }
         });
 
@@ -162,7 +166,6 @@ public class SdEnterActivity extends BaseActivity implements MyRefreshLayoutList
                     if(list.size()<HttpMethod.limit){
                         reList.setIsLoadingMoreEnabled(false);
                     }
-
                 }else{
                     ToastUtil.showLong(sdEnter.getMsg());
                 }
@@ -172,5 +175,15 @@ public class SdEnterActivity extends BaseActivity implements MyRefreshLayoutList
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            //获取手动入库列表
+            reList.startRefresh();
+        }
     }
 }

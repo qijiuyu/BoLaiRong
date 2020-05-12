@@ -59,7 +59,6 @@ public class SelectCustomerActivity extends BaseActivity implements MyRefreshLay
         ButterKnife.bind(this);
         initView();
         //获取设备列表
-        DialogUtil.showProgress(this,"数据加载中");
         reList.startRefresh();
     }
 

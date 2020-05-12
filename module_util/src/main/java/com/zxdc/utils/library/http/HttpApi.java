@@ -26,6 +26,7 @@ import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.SdEnter;
+import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -169,6 +170,10 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_SD_ENTER_LIST)
     Call<SdEnter> getSdEnterList(@Query("startPurcDate") String startPurcDate,@Query("endPurcDate") String endPurcDate, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_SD_ENTER_DETAILS)
+    Call<SdEnterDetails> getSdEnterDetails(@Query("id") int id);
+
 
 
 

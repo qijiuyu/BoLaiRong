@@ -95,4 +95,6 @@ public class HttpConstant {
 
     public static final String GET_SD_ENTER_LIST="entrySpecial/list";
 
+    public static final String GET_SD_ENTER_DETAILS="entrySpecial/detail";
+
 }

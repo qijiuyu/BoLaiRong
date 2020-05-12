@@ -1,6 +1,7 @@
 package com.bian.dan.blr.adapter.warehouse;
 
 import android.app.Activity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,22 +9,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.zxdc.utils.library.bean.SdEnterDetails;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddProductAdapter4 extends BaseAdapter {
+public class SdEnterGoodsAdapter extends BaseAdapter {
 
     private Activity activity;
-
-    public AddProductAdapter4(Activity activity) {
+    private List<SdEnterDetails.GoodList> list;
+    public SdEnterGoodsAdapter(Activity activity,List<SdEnterDetails.GoodList> list) {
         super();
         this.activity = activity;
+        this.list=list;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return list==null ? 0 : list.size();
     }
 
     @Override
@@ -45,6 +50,14 @@ public class AddProductAdapter4 extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
+        SdEnterDetails.GoodList goodList=list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goodList.getGoodsName()+"</font>"));
+        holder.tvBrand.setText(goodList.getStockTypeStr());
+        holder.tvSpec.setText(goodList.getSpec());
+        holder.tvUnit.setText(goodList.getUnitsStr());
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
+        holder.tvMonety.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getAmount()+"</font>"));
+        holder.tvRemark.setText("批号："+goodList.getBatchNo());
         return view;
     }
 

@@ -41,16 +41,6 @@
                 android:layout_marginLeft="15dp"/>
 
             <TextView
-                android:id="@+id/tv_enter_code"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:text="入库单号：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
                 android:id="@+id/tv_enter_people"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
@@ -94,8 +84,7 @@
             <com.zxdc.utils.library.view.MeasureListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content">
             </com.zxdc.utils.library.view.MeasureListView>
 
             <View

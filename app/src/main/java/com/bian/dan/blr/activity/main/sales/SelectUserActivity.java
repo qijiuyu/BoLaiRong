@@ -56,7 +56,6 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
         ButterKnife.bind(this);
         initView();
         //加载数据
-        DialogUtil.showProgress(this,"数据加载中");
         reList.startRefresh();
     }
 

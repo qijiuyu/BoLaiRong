@@ -31,11 +31,11 @@ public class SdEnter extends BaseBean {
 
     public static class ListBean implements Serializable{
         private int id;
-        private String memo;
-        private String createName;
-        private String purcName;
-        private String createDate;
-        private String purcDate;
+        private String memo="";
+        private String createName="";
+        private String purcName="";
+        private String createDate="";
+        private String purcDate="";
 
         public int getId() {
             return id;
