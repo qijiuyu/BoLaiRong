@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.financial.AuditFinancialActivity;
+import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundActivity;
+import com.bian.dan.blr.activity.audit.procurement.AuditProcurementActivity;
+import com.bian.dan.blr.activity.audit.production.AuditProductionActivity;
 import com.zxdc.utils.library.base.BaseActivity;
 
 import butterknife.BindView;

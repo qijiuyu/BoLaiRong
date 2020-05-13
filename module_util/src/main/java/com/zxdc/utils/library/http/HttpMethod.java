@@ -472,8 +472,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取生产计划列表
      */
-    public static void getPlanList(String planCode,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getPlanList(planCode,page,limit).enqueue(new Callback<ProductPlan>() {
+    public static void getPlanList(String planCode,String status,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getPlanList(planCode,status,page,limit).enqueue(new Callback<ProductPlan>() {
             public void onResponse(Call<ProductPlan> call, Response<ProductPlan> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

@@ -116,7 +116,7 @@ public interface HttpApi {
     Call<BaseBean> addPlan(@Body AddProductPlanP addProductPlanP);
 
     @GET(HttpConstant.GET_PLAN_LIST)
-    Call<ProductPlan> getPlanList(@Query("planCode") String planCode, @Query("page") int page, @Query("limit") int limit);
+    Call<ProductPlan> getPlanList(@Query("planCode") String planCode,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PLAN_DETAILS)
     Call<PlanDetails> getPlanDetails(@Query("planId") int planId, @Query("deptId") int deptId);

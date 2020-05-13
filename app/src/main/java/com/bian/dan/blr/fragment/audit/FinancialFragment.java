@@ -1,15 +1,18 @@
 package com.bian.dan.blr.fragment.audit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.activity.audit.AuditFinancialActivity;
+import com.bian.dan.blr.activity.audit.financial.AuditFinancialActivity;
+import com.bian.dan.blr.activity.audit.financial.AuditFinancialDetailsActivity;
 import com.bian.dan.blr.adapter.audit.AuditFinancialAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
 import com.zxdc.utils.library.bean.Financial;
@@ -51,6 +54,13 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
         reList.setMyRefreshLayoutListener(this);
         auditFinancialAdapter=new AuditFinancialAdapter(mActivity,listAll);
         listView.setAdapter(auditFinancialAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(mActivity, AuditFinancialDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                mActivity.startActivity(intent);
+            }
+        });
         //获取报销列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
             getFinancialList();

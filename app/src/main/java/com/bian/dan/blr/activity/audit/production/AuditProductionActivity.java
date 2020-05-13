@@ -1,4 +1,4 @@
-package com.bian.dan.blr.activity.audit;
+package com.bian.dan.blr.activity.audit.production;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.fragment.audit.FinancialFragment;
+import com.bian.dan.blr.fragment.audit.ProductionFragment;
 import com.zxdc.utils.library.base.BaseActivity;
 
 import butterknife.BindView;
@@ -18,9 +18,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 审核的报销列表
+ * 审核的生产计划列表
  */
-public class AuditFinancialActivity extends BaseActivity {
+public class AuditProductionActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -44,7 +44,7 @@ public class AuditFinancialActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        tvHead.setText("报销单");
+        tvHead.setText("生产计划");
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -101,7 +101,7 @@ public class AuditFinancialActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new FinancialFragment();
+            return new ProductionFragment();
         }
     }
 

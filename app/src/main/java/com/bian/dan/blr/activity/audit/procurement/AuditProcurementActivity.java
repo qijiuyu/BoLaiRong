@@ -1,4 +1,4 @@
-package com.bian.dan.blr.activity.audit;
+package com.bian.dan.blr.activity.audit.procurement;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

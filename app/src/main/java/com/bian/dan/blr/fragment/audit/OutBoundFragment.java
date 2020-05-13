@@ -1,6 +1,7 @@
 package com.bian.dan.blr.fragment.audit;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.adapter.sales.OutBoundAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.OutBound;
+import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +34,10 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
     Unbinder unbinder;
     //fragment是否可见
     private boolean isVisibleToUser = false;
+    private OutBoundAdapter outBoundAdapter;
     //页码
     private int page = 1;
+    private List<OutBound.ListBean> listAll = new ArrayList<>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -37,16 +48,30 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
         unbinder = ButterKnife.bind(this, view);
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
+        outBoundAdapter = new OutBoundAdapter(mActivity, listAll);
+        listView.setAdapter(outBoundAdapter);
+        //获取出库单列表
+        if(isVisibleToUser && view!=null && listAll.size()==0){
+            getOutBoundList();
+        }
         return view;
     }
+
 
 
     /**
      * 下刷
      * @param view
      */
+    private Handler handler=new Handler();
     public void onRefresh(View view) {
-        page=1;
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                page=1;
+                listAll.clear();
+                getOutBoundList();
+            }
+        },200);
     }
 
     /**
@@ -55,12 +80,44 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
      */
     public void onLoadMore(View view) {
         page++;
+        getOutBoundList();
+    }
+
+
+    /**
+     * 获取出库单列表
+     */
+    private void getOutBoundList() {
+        HttpMethod.getOutBoundList(null, page, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                reList.refreshComplete();
+                reList.loadMoreComplete();
+                OutBound outBound= (OutBound) object;
+                if(outBound.isSussess()){
+                    List<OutBound.ListBean> list=outBound.getData().getRows();
+                    listAll.addAll(list);
+                    outBoundAdapter.notifyDataSetChanged();
+                    if (list.size() < HttpMethod.limit) {
+                        reList.setIsLoadingMoreEnabled(false);
+                    }
+                }else{
+                    ToastUtil.showLong(outBound.getMsg());
+                }
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser = isVisibleToUser;
+        //获取出库单列表
+        if(isVisibleToUser && view!=null && listAll.size()==0){
+            getOutBoundList();
+        }
     }
 
     @Override

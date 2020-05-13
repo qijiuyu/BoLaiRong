@@ -1,6 +1,7 @@
 package com.bian.dan.blr.fragment.audit;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.adapter.sales.ProductPlanAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.ProductPlan;
+import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,8 +34,10 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
     Unbinder unbinder;
     //fragment是否可见
     private boolean isVisibleToUser = false;
+    private ProductPlanAdapter productPlanAdapter;
     //页码
-    private int page = 1;
+    private int page=1;
+    private List<ProductPlan.ListBean> listAll=new ArrayList<>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -37,6 +48,12 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
         unbinder = ButterKnife.bind(this, view);
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
+        productPlanAdapter=new ProductPlanAdapter(mActivity,listAll);
+        listView.setAdapter(productPlanAdapter);
+        //获取生产计划列表
+        if(isVisibleToUser && view!=null && listAll.size()==0){
+            getPlanList();
+        }
         return view;
     }
 
@@ -45,8 +62,15 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
      * 下刷
      * @param view
      */
+    private Handler handler=new Handler();
     public void onRefresh(View view) {
-        page=1;
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                page=1;
+                listAll.clear();
+                getPlanList();
+            }
+        },200);
     }
 
     /**
@@ -55,12 +79,46 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
      */
     public void onLoadMore(View view) {
         page++;
+        getPlanList();
+    }
+
+
+    /**
+     * 获取生产计划列表
+     */
+    private void getPlanList(){
+        HttpMethod.getPlanList(null,null, page, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                reList.refreshComplete();
+                reList.loadMoreComplete();
+                ProductPlan productPlan= (ProductPlan) object;
+                if(productPlan.isSussess()){
+                    List<ProductPlan.ListBean> list=productPlan.getData().getRows();
+                    listAll.addAll(list);
+                    productPlanAdapter.notifyDataSetChanged();
+                    if (list.size() < HttpMethod.limit) {
+                        reList.setIsLoadingMoreEnabled(false);
+                    }
+
+                }else{
+                    ToastUtil.showLong(productPlan.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser = isVisibleToUser;
+        //获取生产计划列表
+        if(isVisibleToUser && view!=null && listAll.size()==0){
+            getPlanList();
+        }
     }
 
     @Override
