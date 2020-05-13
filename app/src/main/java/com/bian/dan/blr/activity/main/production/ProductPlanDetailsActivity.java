@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.production;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -49,8 +50,9 @@ public class ProductPlanDetailsActivity extends BaseActivity {
     TextView tvAuditTime;
     @BindView(R.id.tv_audit_result)
     TextView tvAuditResult;
+    @BindView(R.id.tv_outbound)
+    TextView tvOutBound;
     private ProductPlan.ListBean listBean;
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_plan_details2);
@@ -78,7 +80,9 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 break;
             //出库申请
             case R.id.tv_outbound:
-                setClass(AddOutBoundByProductActivity.class);
+                Intent intent=new Intent(this,AddOutBoundByProductActivity.class);
+                intent.putExtra("listBean",listBean);
+                startActivityForResult(intent,1000);
                 break;
             default:
                 break;
@@ -127,11 +131,26 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApproveDate() + "</font>"));
                 tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStatusStr() + "</font>"));
 
+                /**
+                 * 只有审核通过了，才可以显示“出库申请”按钮
+                 */
+                if(detailsBean.getStatus()==1){
+                    tvOutBound.setVisibility(View.VISIBLE);
+                }
+
             }
 
             public void onFail(Throwable t) {
 
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1000) {
+            //获取生产计划详情
+            getPlanDetails();
+        }
     }
 }

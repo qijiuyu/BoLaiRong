@@ -1,14 +1,17 @@
 package com.bian.dan.blr.fragment.audit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundDetailsActivity;
 import com.bian.dan.blr.adapter.sales.OutBoundAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -50,6 +53,13 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
         reList.setMyRefreshLayoutListener(this);
         outBoundAdapter = new OutBoundAdapter(mActivity, listAll);
         listView.setAdapter(outBoundAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(mActivity, AuditOutBoundDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                mActivity.startActivity(intent);
+            }
+        });
         //获取出库单列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
             getOutBoundList();

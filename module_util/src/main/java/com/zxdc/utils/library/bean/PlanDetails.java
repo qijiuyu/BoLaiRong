@@ -29,6 +29,7 @@ public class PlanDetails extends BaseBean {
         private String prop1="";
         private List<GoodBean> detailList;
         private List<ProgressBean> progressList;
+        private List<OutBoundList> outRequireList;
 
         public int getId() {
             return id;
@@ -140,6 +141,14 @@ public class PlanDetails extends BaseBean {
 
         public void setProgressList(List<ProgressBean> progressList) {
             this.progressList = progressList;
+        }
+
+        public List<OutBoundList> getOutRequireList() {
+            return outRequireList;
+        }
+
+        public void setOutRequireList(List<OutBoundList> outRequireList) {
+            this.outRequireList = outRequireList;
         }
     }
 
@@ -274,6 +283,91 @@ public class PlanDetails extends BaseBean {
 
         public void setStatus(int status) {
             this.status = status;
+        }
+    }
+
+
+    public static class OutBoundList implements Serializable{
+        private int id;
+        private int planId;
+        private int outStatus;
+        private String outStatusStr="";
+        private int entryStatus;
+        private String entryStatusStr="";
+        private String createName="";
+        private String createDate="";
+        private String deptName="";
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getPlanId() {
+            return planId;
+        }
+
+        public void setPlanId(int planId) {
+            this.planId = planId;
+        }
+
+        public int getOutStatus() {
+            return outStatus;
+        }
+
+        public void setOutStatus(int outStatus) {
+            this.outStatus = outStatus;
+        }
+
+        public String getOutStatusStr() {
+            return outStatusStr;
+        }
+
+        public void setOutStatusStr(String outStatusStr) {
+            this.outStatusStr = outStatusStr;
+        }
+
+        public int getEntryStatus() {
+            return entryStatus;
+        }
+
+        public void setEntryStatus(int entryStatus) {
+            this.entryStatus = entryStatus;
+        }
+
+        public String getEntryStatusStr() {
+            return entryStatusStr;
+        }
+
+        public void setEntryStatusStr(String entryStatusStr) {
+            this.entryStatusStr = entryStatusStr;
+        }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
+
+        public String getDeptName() {
+            return deptName;
+        }
+
+        public void setDeptName(String deptName) {
+            this.deptName = deptName;
         }
     }
 

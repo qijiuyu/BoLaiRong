@@ -36,6 +36,7 @@ import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
+import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
@@ -178,6 +179,8 @@ public interface HttpApi {
     @GET(HttpConstant.GET_MATERIAL_INVENTORY)
     Call<MaterialInventory> getMaterialInventory(@Query("prop3") String prop3);
 
+    @PUT(HttpConstant.ADD_OUTBOUND_BYPRODUCT)
+    Call<BaseBean> addOutBoundByProduct(@Body AddOutBoundByProductP addOutBoundByProductP);
 
 
 

@@ -99,4 +99,6 @@ public class HttpConstant {
 
     public static final String GET_MATERIAL_INVENTORY="goods/goodsStockListByName";
 
+    public static final String ADD_OUTBOUND_BYPRODUCT="outRequire/save";
+
 }

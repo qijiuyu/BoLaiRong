@@ -45,6 +45,8 @@ public class Goods implements Serializable {
     private int stockType;
     //商品批号
     private String batchNo;
+    //交付日期
+    private String deliveryTime;
 
     public  Goods(){}
 
@@ -84,26 +86,19 @@ public class Goods implements Serializable {
         this.batchNo = batchNo;
     }
 
-    //    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String price, String totalMoney, String memo, String address, int payType, String payTime, int companyId, String company, String contract,String mobile) {
-//        this.id = id;
-//        this.name = name;
-//        this.spec = spec;
-//        this.unitStr = unitStr;
-//        this.brand = brand;
-//        this.typeStr = typeStr;
-//        this.num = num;
-//        this.price = price;
-//        this.totalMoney = totalMoney;
-//        this.memo = memo;
-//        this.address = address;
-//        this.payType = payType;
-//        this.payTime = payTime;
-//        this.companyId = companyId;
-//        this.company = company;
-//        this.contract = contract;
-//        this.mobile=mobile;
-//    }
 
+    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String deliveryTime,String memo, int stockType, String batchNo) {
+        this.id = id;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.num = num;
+        this.deliveryTime=deliveryTime;
+        this.memo = memo;
+        this.stockType = stockType;
+        this.batchNo = batchNo;
+    }
 
 
     public int getId() {
@@ -281,5 +276,13 @@ public class Goods implements Serializable {
 
     public void setBatchNo(String batchNo) {
         this.batchNo = batchNo;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 }
