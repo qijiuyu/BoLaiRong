@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="17sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:text="审核"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="70dp"
+            android:layout_marginLeft="50dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_ckd"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_rel_border"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/audit_ckd"
+            android:drawablePadding="10dp"
+            android:text="出库单"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_ckd"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_audit_news"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2"
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_scjh"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_rel_border"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/scjh"
+            android:drawablePadding="10dp"
+            android:text="生产计划"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_scjh"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_audit_news"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2"
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_cgd"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_rel_border"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/audit_cgd"
+            android:drawablePadding="10dp"
+            android:text="采购单"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_cgd"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_audit_news"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2"
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_bxd"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_rel_border"
+        android:paddingRight="15dp"
+        android:paddingLeft="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/cwbx"
+            android:drawablePadding="10dp"
+            android:text="报销单"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_bxd"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/bg_audit_news"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2"
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

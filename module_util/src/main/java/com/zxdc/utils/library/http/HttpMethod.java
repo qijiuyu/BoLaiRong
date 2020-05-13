@@ -19,6 +19,7 @@ import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
+import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
@@ -801,6 +802,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<SdEnterDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取物料库存
+     */
+    public static void getMaterialInventory(String prop3,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getMaterialInventory(prop3).enqueue(new Callback<MaterialInventory>() {
+            public void onResponse(Call<MaterialInventory> call, Response<MaterialInventory> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<MaterialInventory> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

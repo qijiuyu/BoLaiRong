@@ -20,6 +20,7 @@ import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
+import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
@@ -173,6 +174,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_SD_ENTER_DETAILS)
     Call<SdEnterDetails> getSdEnterDetails(@Query("id") int id);
+
+    @GET(HttpConstant.GET_MATERIAL_INVENTORY)
+    Call<MaterialInventory> getMaterialInventory(@Query("prop3") String prop3);
 
 
 

@@ -97,4 +97,6 @@ public class HttpConstant {
 
     public static final String GET_SD_ENTER_DETAILS="entrySpecial/detail";
 
+    public static final String GET_MATERIAL_INVENTORY="goods/goodsStockListByName";
+
 }

@@ -92,6 +92,15 @@
         <activity android:name=".activity.main.warehouse.SalesOutBoundDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.SendDeliveryActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.warehouse.InventoryDetailsListActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.ProductionPlanActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.ProductPlanDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.AddOutBoundByProductActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.AddGoodsByProductionActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.production.SelectMaterialInventoryActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.audit.AuditFinancialActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.audit.AuditOutBoundActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.audit.AuditProcurementActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.audit.AuditProductionActivity"  android:screenOrientation="portrait"/>
 
 
         <provider

@@ -128,6 +128,7 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_financial_cwbx:
                 break;
             case R.id.tv_production_scjh:
+                 setClass(com.bian.dan.blr.activity.main.production.ProductionPlanActivity.class);
                 break;
             case R.id.tv_production_ckd:
                 break;
