@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.adapter.production.OutBoundProductAdapter;
 import com.bian.dan.blr.adapter.sales.PlanDetailsGoodAdapter;
 import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
@@ -52,6 +54,8 @@ public class ProductPlanDetailsActivity extends BaseActivity {
     TextView tvAuditResult;
     @BindView(R.id.tv_outbound)
     TextView tvOutBound;
+    @BindView(R.id.list_outbound)
+    MeasureListView listOutBound;
     private ProductPlan.ListBean listBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +122,7 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 PlanDetailsGoodAdapter addProductAdapter = new PlanDetailsGoodAdapter(activity, detailsBean.getDetailList());
                 listView.setAdapter(addProductAdapter);
                 /**
-                 * 计算总数量，总金额
+                 * 计算总数量
                  */
                 int totalNum = 0;
                 for (int i = 0; i < detailsBean.getDetailList().size(); i++) {
@@ -132,12 +136,16 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStatusStr() + "</font>"));
 
                 /**
-                 * 只有审核通过了，才可以显示“出库申请”按钮
+                 * 判断显示出库的产品列表
                  */
-                if(detailsBean.getStatus()==1){
-                    tvOutBound.setVisibility(View.VISIBLE);
-                }
-
+                listOutBound.setAdapter(new OutBoundProductAdapter(activity,detailsBean.getOutRequireList()));
+                listOutBound.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent=new Intent(activity, ProductProgressDetailsActivity.class);
+                        intent.putExtra("planId",listBean.getId());
+                        startActivity(intent);
+                    }
+                });
             }
 
             public void onFail(Throwable t) {

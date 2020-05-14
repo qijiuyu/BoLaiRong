@@ -145,10 +145,10 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
 
 
     /**
-     * 获取生产计划列表
+     * 获取已审核通过的生产计划列表
      */
     private void getPlanList(){
-        HttpMethod.getPlanList(tvKey.getText().toString().trim(),null, page, new NetWorkCallBack() {
+        HttpMethod.getPlanList(tvKey.getText().toString().trim(),"1", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

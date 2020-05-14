@@ -154,7 +154,20 @@
                 android:textSize="14sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <com.zxdc.utils.library.view.MeasureListView
+                android:id="@+id/list_outbound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_f9f9f9"
+                android:divider="@null">
+            </com.zxdc.utils.library.view.MeasureListView>
 
         </LinearLayout>
 
@@ -162,7 +175,6 @@
 
     <com.zxdc.utils.library.view.ClickTextView
         android:id="@+id/tv_outbound"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

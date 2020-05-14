@@ -63,7 +63,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      * 初始化
      */
     private void initView(){
-        tvHead.setText("合同管理");
+        tvHead.setText("生产计划");
         imgRight.setImageResource(R.mipmap.add);
         reList.setMyRefreshLayoutListener(this);
         productPlanAdapter=new ProductPlanAdapter(this,listAll);

@@ -10,19 +10,18 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.zxdc.utils.library.bean.Goods;
+import com.zxdc.utils.library.bean.ProductProgress;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddOutBoundByProductAdapter extends BaseAdapter {
+public class ProductProgressByOutBoundAdapter extends BaseAdapter {
 
     private Activity activity;
-    private List<Goods> list;
-
-    public AddOutBoundByProductAdapter(Activity activity, List<Goods> list) {
+    private List<ProductProgress.OutBoundList> list;
+    public ProductProgressByOutBoundAdapter(Activity activity, List<ProductProgress.OutBoundList> list) {
         super();
         this.activity = activity;
         this.list = list;
@@ -52,25 +51,25 @@ public class AddOutBoundByProductAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        Goods goods = list.get(position);
-        if(!TextUtils.isEmpty(goods.getBatchNo())){
+        ProductProgress.OutBoundList outBoundList= list.get(position);
+        if(!TextUtils.isEmpty(outBoundList.getBatchNo())){
             holder.tvBatchNo.setVisibility(View.VISIBLE);
-            holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + goods.getBatchNo() + "</font>"));
+            holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + outBoundList.getBatchNo() + "</font>"));
         }else{
             holder.tvBatchNo.setVisibility(View.GONE);
         }
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand());
-        holder.tvSpec.setText(goods.getSpec());
-        holder.tvUnit.setText(goods.getUnitStr());
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
-        if(!TextUtils.isEmpty(goods.getDeliveryTime())){
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + outBoundList.getGoodsName() + "</font>"));
+        holder.tvBrand.setText(outBoundList.getBrand());
+        holder.tvSpec.setText(outBoundList.getSpec());
+        holder.tvUnit.setText(outBoundList.getUnitStr());
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + outBoundList.getNum() + "</font>"));
+        if(!TextUtils.isEmpty(outBoundList.getProp2())){
             holder.tvTime.setVisibility(View.VISIBLE);
-            holder.tvTime.setText(Html.fromHtml("日期：<font color=\"#000000\">" + goods.getDeliveryTime() + "</font>"));
+            holder.tvTime.setText(Html.fromHtml("日期：<font color=\"#000000\">" + outBoundList.getProp2() + "</font>"));
         }else{
             holder.tvTime.setVisibility(View.GONE);
         }
-        holder.tvRemark.setText("备注：" + goods.getMemo());
+        holder.tvRemark.setText("备注：" + outBoundList.getMemo());
         return view;
     }
 

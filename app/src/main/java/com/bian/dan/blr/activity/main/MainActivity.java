@@ -134,6 +134,7 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_production_scjh:
                  setClass(com.bian.dan.blr.activity.main.production.ProductionPlanActivity.class);
                 break;
+            //生产--出库单
             case R.id.tv_production_ckd:
                 break;
             case R.id.tv_production_cwbx:

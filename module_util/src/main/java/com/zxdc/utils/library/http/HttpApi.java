@@ -26,6 +26,7 @@ import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
+import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
@@ -181,6 +182,9 @@ public interface HttpApi {
 
     @PUT(HttpConstant.ADD_OUTBOUND_BYPRODUCT)
     Call<BaseBean> addOutBoundByProduct(@Body AddOutBoundByProductP addOutBoundByProductP);
+
+    @GET(HttpConstant.GET_PRODUCT_PROGRESS)
+    Call<ProductProgress> getProductProgress(@Query("planId") int planId, @Query("deptId") int deptId);
 
 
 

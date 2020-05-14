@@ -102,6 +102,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
             //提交
             case R.id.tv_submit:
                 String batchNo=etBatchNo.getText().toString().trim();
+                String num=etNum.getText().toString().trim();
                 String time=tvTime.getText().toString().trim();
                 String remark=etRemark.getText().toString().trim();
                 if (userInfo.getUser().getDeptId()!= 3 && TextUtils.isEmpty(batchNo)) {
@@ -112,11 +113,19 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                     ToastUtil.showLong("请选择物料");
                     return;
                 }
+                if(TextUtils.isEmpty(num)){
+                    ToastUtil.showLong("请输入数量");
+                    return;
+                }
+                if(!TextUtils.isEmpty(num) && Integer.parseInt(num)>listBean.getNum()){
+                    ToastUtil.showLong("数量已超过库存，请重新输入");
+                    return;
+                }
                 if(userInfo.getUser().getDeptId()!= 3 && TextUtils.isEmpty(time)){
                     ToastUtil.showLong("请选择日期");
                     return;
                 }
-                Goods goods=new Goods(listBean.getId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getNum(),time,remark,listBean.getStockType(),batchNo);
+                Goods goods=new Goods(listBean.getId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),time,remark,listBean.getStockType(),batchNo);
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);
                 setResult(200,intent);

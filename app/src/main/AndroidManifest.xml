@@ -108,6 +108,7 @@
         <activity android:name=".activity.audit.outbound.AuditOutBoundDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.audit.procurement.AuditProcurementActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.audit.production.AuditProductionActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.ProductProgressDetailsActivity"  android:screenOrientation="portrait"/>
 
 
         <provider

@@ -88,7 +88,7 @@ public class AddProductPlanActivity extends BaseActivity {
                  String time=tvTime.getText().toString().trim();
                  String remark=etRemark.getText().toString().trim();
                  if(TextUtils.isEmpty(code)){
-                     ToastUtil.showLong("请选择生产计划");
+                     ToastUtil.showLong("请选择合同编号");
                      return;
                  }
                  if(goodsList.size()==0){
@@ -104,7 +104,7 @@ public class AddProductPlanActivity extends BaseActivity {
                     return;
                 }
                 AddProductPlanP addProductPlanP=new AddProductPlanP();
-                addProductPlanP.setPlanCode(code);
+                addProductPlanP.setProp2(code);
                 addProductPlanP.setDeliveryDate(time+" 00:00:00");
                 addProductPlanP.setMemo(remark);
                 List<AddGoodP> list=new ArrayList<>();

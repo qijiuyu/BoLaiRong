@@ -5,19 +5,19 @@ import java.util.List;
 
 public class AddProductPlanP implements Serializable {
 
-    private String planCode;
+    private String prop2;
     private String deliveryDate;
     private String memo;
     private int goodsId;
     private int num;
     private List<AddGoodP> detailList;
 
-    public String getPlanCode() {
-        return planCode;
+    public String getProp2() {
+        return prop2;
     }
 
-    public void setPlanCode(String planCode) {
-        this.planCode = planCode;
+    public void setProp2(String prop2) {
+        this.prop2 = prop2;
     }
 
     public String getDeliveryDate() {

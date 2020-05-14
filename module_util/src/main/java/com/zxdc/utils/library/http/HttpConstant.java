@@ -101,4 +101,6 @@ public class HttpConstant {
 
     public static final String ADD_OUTBOUND_BYPRODUCT="outRequire/save";
 
+    public static final String GET_PRODUCT_PROGRESS="outRequire/detail";
+
 }

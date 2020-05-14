@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="生产计划"
+                    android:text="合同编码"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
