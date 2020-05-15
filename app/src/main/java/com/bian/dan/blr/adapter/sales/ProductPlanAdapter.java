@@ -54,7 +54,7 @@ public class ProductPlanAdapter extends BaseAdapter {
         holder.tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">"+listBean.getPlanCode()+"</font>"));
         holder.tvDeliveryTime.setText(Html.fromHtml("交付日期：<font color=\"#000000\">"+listBean.getDeliveryDate().split(" ")[0]+"</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">"+listBean.getMemo()+"</font>"));
-        holder.tvTime.setText(listBean.getCreateDate());
+        holder.tvTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">"+listBean.getCreateDate()+"</font>"));
         holder.tvStatus.setText(listBean.getStatusStr());
         switch (listBean.getStatus()){
             case 0:

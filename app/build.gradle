@@ -74,4 +74,6 @@ dependencies {
     //极光推送
     compile 'cn.jiguang.sdk:jpush:3.5.6'
     compile 'cn.jiguang.sdk:jcore:2.2.8'
+    //图形
+    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
 }

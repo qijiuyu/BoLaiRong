@@ -109,7 +109,7 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 if (planDetails == null) {
                     return;
                 }
-                PlanDetails.DetailsBean detailsBean = planDetails.getData();
+                final PlanDetails.DetailsBean detailsBean = planDetails.getData();
                 tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                 tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                 tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + detailsBean.getPlanCode() + "</font>"));
@@ -142,7 +142,7 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 listOutBound.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent=new Intent(activity, ProductProgressDetailsActivity.class);
-                        intent.putExtra("planId",listBean.getId());
+                        intent.putExtra("requireId",detailsBean.getOutRequireList().get(position).getId());
                         startActivity(intent);
                     }
                 });

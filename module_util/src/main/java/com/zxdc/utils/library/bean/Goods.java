@@ -47,6 +47,11 @@ public class Goods implements Serializable {
     private String batchNo;
     //交付日期
     private String deliveryTime;
+    //奖励金额
+    private String rewardMoney;
+    //罚款金额
+    private String fineMoney;
+
 
     public  Goods(){}
 
@@ -100,6 +105,21 @@ public class Goods implements Serializable {
         this.batchNo = batchNo;
     }
 
+
+    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney, String fineMoney) {
+        this.id = id;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.typeStr = typeStr;
+        this.num = num;
+        this.memo = memo;
+        this.stockType = stockType;
+        this.batchNo = batchNo;
+        this.rewardMoney = rewardMoney;
+        this.fineMoney = fineMoney;
+    }
 
     public int getId() {
         return id;
@@ -284,5 +304,21 @@ public class Goods implements Serializable {
 
     public void setDeliveryTime(String deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+
+    public String getRewardMoney() {
+        return rewardMoney;
+    }
+
+    public void setRewardMoney(String rewardMoney) {
+        this.rewardMoney = rewardMoney;
+    }
+
+    public String getFineMoney() {
+        return fineMoney;
+    }
+
+    public void setFineMoney(String fineMoney) {
+        this.fineMoney = fineMoney;
     }
 }

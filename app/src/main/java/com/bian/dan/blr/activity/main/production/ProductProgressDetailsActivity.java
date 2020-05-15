@@ -9,10 +9,12 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.production.ProductProgressByOutBoundAdapter;
 import com.bian.dan.blr.application.MyApplication;
+import com.bian.dan.blr.persenter.product.ProductProgressPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -40,8 +42,9 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     MeasureListView listOutbound;
     @BindView(R.id.tv_play)
     ClickTextView tvPlay;
-    //生产计划id
-    private int planId;
+    //出库单id
+    private int requireId;
+    private ProductProgressPersenter productProgressPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outbound_details_by_product);
@@ -57,7 +60,8 @@ public class ProductProgressDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
-        planId=getIntent().getIntExtra("planId",0);
+        productProgressPersenter=new ProductProgressPersenter(this);
+        requireId=getIntent().getIntExtra("requireId",0);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_play})
@@ -66,7 +70,14 @@ public class ProductProgressDetailsActivity extends BaseActivity {
             case R.id.lin_back:
                  finish();
                 break;
+            //确认领取/申请入库
             case R.id.tv_play:
+                final String name=tvPlay.getText().toString().trim();
+                if(name.equals("确认领取")){
+                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId,"1",null));
+                }else if(name.equals("入库申请")){
+                    setClass(PutStorageActivity.class);
+                }
                 break;
             default:
                 break;
@@ -77,10 +88,10 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     /**
      * 根据出库id查询生产出入库、余废料明细
      */
-    private void getProductProgress(){
+    public void getProductProgress(){
         DialogUtil.showProgress(this,"数据加载中");
         UserInfo userInfo= MyApplication.getUser();
-        HttpMethod.getProductProgress(planId, userInfo.getUser().getDeptId(), new NetWorkCallBack() {
+        HttpMethod.getProductProgress(requireId, userInfo.getUser().getDeptId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 ProductProgress productProgress= (ProductProgress) object;
                 if(productProgress.isSussess()){
@@ -99,6 +110,19 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                      * 出库单列表
                      */
                     listOutbound.setAdapter(new ProductProgressByOutBoundAdapter(activity,productBean.getRequireDetailList()));
+
+                    /**
+                     * 按钮状态
+                     * 1：仓库已发放，所以可以领取了
+                     * 2：已经领取成功了，所以接下来就是入库申请了
+                     */
+                    if(productBean.getOutStatus()==1){
+                        tvPlay.setVisibility(View.VISIBLE);
+                        tvPlay.setText("确认领取");
+                    }else if(productBean.getOutStatus()==2){
+                        tvPlay.setVisibility(View.VISIBLE);
+                        tvPlay.setText("入库申请");
+                    }
 
                 }else{
                     ToastUtil.showLong(productProgress.getMsg());

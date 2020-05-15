@@ -9,6 +9,7 @@ import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
+import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
@@ -43,6 +44,7 @@ import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
+import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -118,7 +120,7 @@ public interface HttpApi {
     Call<BaseBean> addPlan(@Body AddProductPlanP addProductPlanP);
 
     @GET(HttpConstant.GET_PLAN_LIST)
-    Call<ProductPlan> getPlanList(@Query("planCode") String planCode,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
+    Call<ProductPlan> getPlanList(@Query("prop2") String prop2,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PLAN_DETAILS)
     Call<PlanDetails> getPlanDetails(@Query("planId") int planId, @Query("deptId") int deptId);
@@ -184,8 +186,13 @@ public interface HttpApi {
     Call<BaseBean> addOutBoundByProduct(@Body AddOutBoundByProductP addOutBoundByProductP);
 
     @GET(HttpConstant.GET_PRODUCT_PROGRESS)
-    Call<ProductProgress> getProductProgress(@Query("planId") int planId, @Query("deptId") int deptId);
+    Call<ProductProgress> getProductProgress(@Query("requireId") int requireId, @Query("deptId") int deptId);
 
+    @POST(HttpConstant.UPDATE_PRODUCT_STATUS)
+    Call<BaseBean> updateProductStatus(@Body UpdateProductP updateProductP);
+
+    @GET(HttpConstant.GET_DEPT_LIST)
+    Call<Dept> getDeptList(@Query("name") String name, @Query("parentId") String parentId);
 
 
 }

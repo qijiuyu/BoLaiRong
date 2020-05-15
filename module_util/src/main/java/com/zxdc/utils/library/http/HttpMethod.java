@@ -8,6 +8,7 @@ import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.Department;
+import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
@@ -44,6 +45,7 @@ import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
+import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -474,8 +476,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取生产计划列表
      */
-    public static void getPlanList(String planCode,String status,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getPlanList(planCode,status,page,limit).enqueue(new Callback<ProductPlan>() {
+    public static void getPlanList(String prop2,String status,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getPlanList(prop2,status,page,limit).enqueue(new Callback<ProductPlan>() {
             public void onResponse(Call<ProductPlan> call, Response<ProductPlan> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -849,13 +851,47 @@ public class HttpMethod extends BaseRequst {
     /**
      * 根据出库id查询生产出入库、余废料明细
      */
-    public static void getProductProgress(int planId,int deptId,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getProductProgress(planId,deptId).enqueue(new Callback<ProductProgress>() {
+    public static void getProductProgress(int requireId,int deptId,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProductProgress(requireId,deptId).enqueue(new Callback<ProductProgress>() {
             public void onResponse(Call<ProductProgress> call, Response<ProductProgress> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<ProductProgress> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 修改出入库状态
+     */
+    public static void updateProductStatus(UpdateProductP updateProductP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateProductStatus(updateProductP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取部门列表
+     */
+    public static void getDeptList(String name,String parentId,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getDeptList(name,parentId).enqueue(new Callback<Dept>() {
+            public void onResponse(Call<Dept> call, Response<Dept> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Dept> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

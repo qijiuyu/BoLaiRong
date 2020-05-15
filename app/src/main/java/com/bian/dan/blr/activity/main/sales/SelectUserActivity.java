@@ -19,7 +19,6 @@ import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -48,6 +47,10 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
     private String keys;
     //页码
     private int page=1;
+    /**
+     * 部门id
+     */
+    private int deptId;
     private List<UserList.ListBean> listAll=new ArrayList<>();
     private SelectUserAdapter selectUserAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +68,11 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
      */
     private void initView() {
         tvHead.setText("选择用户");
+        deptId=getIntent().getIntExtra("deptId",0);
+        if(deptId==0){
+            final UserInfo userInfo= MyApplication.getUser();
+            deptId=userInfo.getUser().getDeptId();
+        }
         reList.setMyRefreshLayoutListener(this);
         selectUserAdapter=new SelectUserAdapter(this,listAll);
         listView.setAdapter(selectUserAdapter);
@@ -119,8 +127,7 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
      * 获取用户列表
      */
     private void getUserList(){
-        final UserInfo userInfo= MyApplication.getUser();
-        HttpMethod.getUserList(userInfo.getUser().getDeptId(), keys, page, new NetWorkCallBack() {
+        HttpMethod.getUserList(deptId, keys, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

@@ -12,12 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.production.SelectMaterialInventoryAdapter;
+import com.bian.dan.blr.adapter.production.SelectDeptAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
-import com.zxdc.utils.library.bean.MaterialInventory;
+import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 
@@ -29,9 +28,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 选择物料库存数据
+ * 选择部门
  */
-public class SelectMaterialInventoryActivity extends BaseActivity {
+public class SelectDeptActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -43,33 +42,38 @@ public class SelectMaterialInventoryActivity extends BaseActivity {
     MyRefreshLayout reList;
     //关键字
     private String keys;
-    private SelectMaterialInventoryAdapter selectMaterialInventoryAdapter;
-    private List<MaterialInventory.ListBean> listAll = new ArrayList<>();
+    /**
+     * 父级部门id
+     */
+    private String parendId;
+    private SelectDeptAdapter selectDeptAdapter;
+    private List<Dept.DeptBean> listAll=new ArrayList<>();
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_material);
+        setContentView(R.layout.activity_select_dept);
         ButterKnife.bind(this);
         initView();
-        //物料库存列表-名称模糊查询
-        DialogUtil.showProgress(this, "数据加载中");
-        getMaterialInventory();
+        //获取部门列表
+        getDeptList();
     }
+
 
 
     /**
      * 初始化
      */
     private void initView() {
-        tvHead.setText("搜索物料库存");
+        tvHead.setText("选择部门");
+        parendId=getIntent().getStringExtra("parendId");
         reList.setIsLoadingMoreEnabled(false);
         reList.setRefreshEnable(false);
-        listView.setAdapter(selectMaterialInventoryAdapter = new SelectMaterialInventoryAdapter(activity, listAll));
+        selectDeptAdapter=new SelectDeptAdapter(this,listAll);
+        listView.setAdapter(selectDeptAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MaterialInventory.ListBean listBean = listAll.get(position);
                 Intent intent = new Intent();
-                intent.putExtra("listBean", listBean);
-                setResult(100, intent);
+                intent.putExtra("deptBean", listAll.get(position));
+                setResult(500, intent);
                 finish();
             }
         });
@@ -86,8 +90,8 @@ public class SelectMaterialInventoryActivity extends BaseActivity {
 
             public void afterTextChanged(Editable s) {
                 keys = s.toString();
-                //加载数据
-                getMaterialInventory();
+                //获取部门列表
+                getDeptList();
             }
         });
     }
@@ -99,18 +103,18 @@ public class SelectMaterialInventoryActivity extends BaseActivity {
 
 
     /**
-     * 物料库存列表-名称模糊查询
+     * 获取部门列表
      */
-    private void getMaterialInventory() {
-        HttpMethod.getMaterialInventory(keys, new NetWorkCallBack() {
+    private void getDeptList(){
+        HttpMethod.getDeptList(keys, parendId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                MaterialInventory materialInventory = (MaterialInventory) object;
-                if (materialInventory.isSussess()) {
+                Dept dept= (Dept) object;
+                if(dept.isSussess()){
                     listAll.clear();
-                    listAll.addAll(materialInventory.getData());
-                    selectMaterialInventoryAdapter.notifyDataSetChanged();
-                } else {
-                    ToastUtil.showLong(materialInventory.getMsg());
+                    listAll.addAll(dept.getPage());
+                    selectDeptAdapter.notifyDataSetChanged();
+                }else{
+                    ToastUtil.showLong(dept.getMsg());
                 }
             }
 

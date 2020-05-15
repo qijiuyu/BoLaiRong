@@ -103,4 +103,8 @@ public class HttpConstant {
 
     public static final String GET_PRODUCT_PROGRESS="outRequire/detail";
 
+    public static final String UPDATE_PRODUCT_STATUS="outRequire/update";
+
+    public static final String GET_DEPT_LIST="dept/list2";
+
 }

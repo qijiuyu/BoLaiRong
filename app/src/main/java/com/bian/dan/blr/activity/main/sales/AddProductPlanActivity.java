@@ -105,7 +105,7 @@ public class AddProductPlanActivity extends BaseActivity {
                 }
                 AddProductPlanP addProductPlanP=new AddProductPlanP();
                 addProductPlanP.setProp2(code);
-                addProductPlanP.setDeliveryDate(time+" 00:00:00");
+                addProductPlanP.setDeliveryDate(time);
                 addProductPlanP.setMemo(remark);
                 List<AddGoodP> list=new ArrayList<>();
                 for (int i=0;i<goodsList.size();i++){

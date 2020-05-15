@@ -59,9 +59,8 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
             holder.tvBatchNo.setVisibility(View.GONE);
         }
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + outBoundList.getGoodsName() + "</font>"));
-        holder.tvBrand.setText(outBoundList.getBrand());
-        holder.tvSpec.setText(outBoundList.getSpec());
-        holder.tvUnit.setText(outBoundList.getUnitStr());
+        holder.tvBrand.setText(outBoundList.getBrand()+"/"+outBoundList.getSpec());
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + outBoundList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + outBoundList.getNum() + "</font>"));
         if(!TextUtils.isEmpty(outBoundList.getProp2())){
             holder.tvTime.setVisibility(View.VISIBLE);
@@ -82,8 +81,6 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
         TextView tvName;
         @BindView(R.id.tv_brand)
         TextView tvBrand;
-        @BindView(R.id.tv_spec)
-        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
