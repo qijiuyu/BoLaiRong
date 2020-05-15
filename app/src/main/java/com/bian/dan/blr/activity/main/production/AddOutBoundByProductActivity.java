@@ -87,6 +87,7 @@ public class AddOutBoundByProductActivity extends BaseActivity {
                     AddOutBoundByProductP.GoodList good=new AddOutBoundByProductP.GoodList(goodList.get(i).getId(),goodList.get(i).getNum(),goodList.get(i).getStockType(),goodList.get(i).getBatchNo(),goodList.get(i).getDeliveryTime(),goodList.get(i).getMemo());
                     list.add(good);
                 }
+                addOutBoundByProductP.setRequireDetailList(list);
                 //生产-申请出库-新增
                 LogUtils.e("+++++++"+ SPUtil.gson.toJson(addOutBoundByProductP));
                 addOutBoundByProduct(addOutBoundByProductP);

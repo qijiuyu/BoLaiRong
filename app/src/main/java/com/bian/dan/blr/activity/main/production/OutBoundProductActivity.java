@@ -17,6 +17,7 @@ import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBoundProduct;
+import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -102,7 +103,9 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
         switch (view.getId()) {
             case R.id.lin_back:
                 break;
+            //选择生成计划
             case R.id.tv_key:
+                setClass(SelectPlanCodeActivity.class,600);
                 break;
             case R.id.img_clear:
                 tvKey.setText(null);
@@ -153,5 +156,18 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==600 && data!=null){
+            ProductPlan.ListBean listBean= (ProductPlan.ListBean) data.getSerializableExtra("listBean");
+            if(listBean!=null){
+                tvKey.setTag(String.valueOf(listBean.getId()));
+                tvKey.setText(listBean.getPlanCode());
+            }
+        }
     }
 }
