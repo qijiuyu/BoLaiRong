@@ -23,48 +23,51 @@
 
             <TextView
                 android:id="@+id/tv_apply_peple"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
                 android:text="申请人：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"/>
+                android:paddingLeft="15dp"/>
 
             <TextView
                 android:id="@+id/tv_apply_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
                 android:text="申请时间：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                android:paddingLeft="15dp"/>
 
             <TextView
                 android:id="@+id/tv_plan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
                 android:text="生产计划：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                android:paddingLeft="15dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/color_f9f9f9"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/color_f9f9f9"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
                 android:text="出库产品列表"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"/>
 
             <com.zxdc.utils.library.view.MeasureListView
@@ -72,6 +75,125 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </com.zxdc.utils.library.view.MeasureListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总计"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_product_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="数量：xx"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_f9f9f9"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
+
+
+            <!-- 发放人信息-->
+            <LinearLayout
+                android:id="@+id/lin_send"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_send_people"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="发放人：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_send_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="发放时间：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_f9f9f9"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+
+            <!-- 领取人信息-->
+            <LinearLayout
+                android:id="@+id/lin_receive"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_receive_people"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="领取人：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_receive_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="领取时间：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_f9f9f9"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
 
 
         </LinearLayout>

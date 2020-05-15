@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -43,9 +44,24 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     MeasureListView listOutbound;
     @BindView(R.id.tv_play)
     ClickTextView tvPlay;
+    @BindView(R.id.tv_product_num)
+    TextView tvProductNum;
+    @BindView(R.id.tv_send_people)
+    TextView tvSendPeople;
+    @BindView(R.id.tv_send_time)
+    TextView tvSendTime;
+    @BindView(R.id.lin_send)
+    LinearLayout linSend;
+    @BindView(R.id.tv_receive_people)
+    TextView tvReceivePeople;
+    @BindView(R.id.tv_receive_time)
+    TextView tvReceiveTime;
+    @BindView(R.id.lin_receive)
+    LinearLayout linReceive;
     //出库单id
     private int requireId;
     private ProductProgressPersenter productProgressPersenter;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outbound_details_by_product);
@@ -61,26 +77,26 @@ public class ProductProgressDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
-        productProgressPersenter=new ProductProgressPersenter(this);
-        requireId=getIntent().getIntExtra("requireId",0);
+        productProgressPersenter = new ProductProgressPersenter(this);
+        requireId = getIntent().getIntExtra("requireId", 0);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_play})
     public void onViewClicked(View view) {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
-                 finish();
+                finish();
                 break;
             //确认领取/申请入库
             case R.id.tv_play:
-                final String name=tvPlay.getText().toString().trim();
-                if(name.equals("确认领取")){
-                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId,"1",null));
-                }else if(name.equals("入库申请")){
-                    intent.setClass(this,PutStorageActivity.class);
-                    intent.putExtra("requireId",requireId);
-                    startActivityForResult(intent,200);
+                final String name = tvPlay.getText().toString().trim();
+                if (name.equals("确认领取")) {
+                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, "1", null));
+                } else if (name.equals("入库申请")) {
+                    intent.setClass(this, PutStorageActivity.class);
+                    intent.putExtra("requireId", requireId);
+                    startActivityForResult(intent, 100);
                 }
                 break;
             default:
@@ -92,18 +108,18 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     /**
      * 根据出库id查询生产出入库、余废料明细
      */
-    public void getProductProgress(){
-        DialogUtil.showProgress(this,"数据加载中");
-        UserInfo userInfo= MyApplication.getUser();
+    public void getProductProgress() {
+        DialogUtil.showProgress(this, "数据加载中");
+        UserInfo userInfo = MyApplication.getUser();
         HttpMethod.getProductProgress(requireId, userInfo.getUser().getDeptId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                ProductProgress productProgress= (ProductProgress) object;
-                if(productProgress.isSussess()){
+                ProductProgress productProgress = (ProductProgress) object;
+                if (productProgress.isSussess()) {
                     /**
                      * 基本信息
                      */
-                    ProductProgress.ProductBean productBean=productProgress.getData();
-                    if(productBean==null){
+                    ProductProgress.ProductBean productBean = productProgress.getData();
+                    if (productBean == null) {
                         return;
                     }
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
@@ -113,22 +129,47 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     /**
                      * 出库单列表
                      */
-                    listOutbound.setAdapter(new ProductProgressByOutBoundAdapter(activity,productBean.getRequireDetailList()));
+                    listOutbound.setAdapter(new ProductProgressByOutBoundAdapter(activity, productBean.getRequireDetailList()));
+                    int totalNum = 0;
+                    for (int i = 0; i < productBean.getRequireDetailList().size(); i++) {
+                        totalNum += productBean.getRequireDetailList().get(i).getNum();
+                    }
+                    tvProductNum.setText("数量：" + totalNum);
+
+                    /**
+                     * 发放人信息
+                     */
+                    if (productBean.getOutStatus() > 0) {
+                        linSend.setVisibility(View.VISIBLE);
+                        tvSendPeople.setText(Html.fromHtml("发放人：<font color=\"#000000\">" + productBean.getUpdateName() + "</font>"));
+                        tvSendTime.setText(Html.fromHtml("发放时间：<font color=\"#000000\">" + productBean.getUpdateDate() + "</font>"));
+                    }
+
+
+                    /**
+                     * 领取人信息
+                     */
+                    if (productBean.getOutStatus()==2) {
+                        linReceive.setVisibility(View.VISIBLE);
+                        tvReceivePeople.setText(Html.fromHtml("领取人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
+                        tvReceiveTime.setText(Html.fromHtml("领取时间：<font color=\"#000000\">" + productBean.getProp5() + "</font>"));
+                    }
+
 
                     /**
                      * 按钮状态
                      * 1：仓库已发放，所以可以领取了
                      * 2：已经领取成功了，所以接下来就是入库申请了
                      */
-                    if(productBean.getOutStatus()==1){
+                    if (productBean.getOutStatus() == 1) {
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("确认领取");
-                    }else if(productBean.getOutStatus()==2){
+                    } else if (productBean.getOutStatus() == 2) {
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("入库申请");
                     }
 
-                }else{
+                } else {
                     ToastUtil.showLong(productProgress.getMsg());
                 }
             }
@@ -137,5 +178,20 @@ public class ProductProgressDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            //申请入库成功后的回执
+            case 100:
+                //刷新数据
+                getProductProgress();
+                break;
+            default:
+                break;
+        }
     }
 }

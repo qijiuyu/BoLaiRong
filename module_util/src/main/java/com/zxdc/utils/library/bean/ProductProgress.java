@@ -27,6 +27,7 @@ public class ProductProgress extends BaseBean {
         private String memo="";
         private String createName="";
         private String createDate="";
+        private String updateName="";
         private String updateDate="";
         private String prop5="";
         private List<OutBoundList> requireDetailList;
@@ -141,6 +142,14 @@ public class ProductProgress extends BaseBean {
 
         public void setRequireDetailList(List<OutBoundList> requireDetailList) {
             this.requireDetailList = requireDetailList;
+        }
+
+        public String getUpdateName() {
+            return updateName;
+        }
+
+        public void setUpdateName(String updateName) {
+            this.updateName = updateName;
         }
     }
 

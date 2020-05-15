@@ -189,6 +189,8 @@ public class PutStorageActivity extends BaseActivity {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    setResult(100,intent);
                     finish();
                 }
                 ToastUtil.showLong(baseBean.getMsg());
