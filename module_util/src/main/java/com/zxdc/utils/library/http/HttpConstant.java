@@ -109,4 +109,6 @@ public class HttpConstant {
 
     public static final String ADD_PUT_STORAGE="outRequire/saveEntryAndOdds";
 
+    public static final String GET_OUTBOUND_PRODUCT_LIST="outRequire/list";
+
 }

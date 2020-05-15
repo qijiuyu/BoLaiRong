@@ -1,6 +1,8 @@
 package com.bian.dan.blr.activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -12,6 +14,8 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.bian.dan.blr.activity.main.MainActivity;
 import com.bian.dan.blr.activity.statistical.StatisticalActivity;
+import com.bian.dan.blr.utils.PermissionCallBack;
+import com.bian.dan.blr.utils.PermissionUtil;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.parameter.LoginP;
@@ -50,6 +54,7 @@ public class TabActivity extends android.app.TabActivity {
     protected long exitTime = 0;
     private List<TextView> tvList = new ArrayList<>();
     private List<ImageView> imgList = new ArrayList<>();
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab);
@@ -57,6 +62,9 @@ public class TabActivity extends android.app.TabActivity {
         initView();
         //刷新token
         refreshToken();
+
+        // android 7.0系统解决拍照的问题
+        PermissionUtil.initPhotoError();
     }
 
 
@@ -139,6 +147,16 @@ public class TabActivity extends android.app.TabActivity {
         });
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //添加权限
+        PermissionUtil.getPermission(this, new PermissionCallBack() {
+            public void onclick() {
+            }
+        });
+    }
 
     /**
      * 连续点击两次返回退出

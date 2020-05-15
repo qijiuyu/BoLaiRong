@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
+import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
 import com.bian.dan.blr.activity.main.sales.FinancialActivity;
@@ -136,6 +137,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //生产--出库单
             case R.id.tv_production_ckd:
+                setClass(OutBoundProductActivity.class);
                 break;
             case R.id.tv_production_cwbx:
                 break;

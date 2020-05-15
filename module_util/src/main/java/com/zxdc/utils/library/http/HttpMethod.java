@@ -25,6 +25,7 @@ import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
+import com.zxdc.utils.library.bean.OutBoundProduct;
 import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
@@ -477,8 +478,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取生产计划列表
      */
-    public static void getPlanList(String prop2,String status,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getPlanList(prop2,status,page,limit).enqueue(new Callback<ProductPlan>() {
+    public static void getPlanList(String planCode,String status,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getPlanList(planCode,status,page,limit).enqueue(new Callback<ProductPlan>() {
             public void onResponse(Call<ProductPlan> call, Response<ProductPlan> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -910,6 +911,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 根据部门id查询出库单列表
+     */
+    public static void getOutBoundProductList(String planId,int deptId,String outStatus,String entryStatus,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getOutBoundProductList(planId,deptId,outStatus,entryStatus,page,limit).enqueue(new Callback<OutBoundProduct>() {
+            public void onResponse(Call<OutBoundProduct> call, Response<OutBoundProduct> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<OutBoundProduct> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

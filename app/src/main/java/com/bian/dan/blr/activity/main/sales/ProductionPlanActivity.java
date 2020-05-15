@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.ProductPlanAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
-import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.http.HttpMethod;
@@ -38,8 +38,8 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
     TextView tvHead;
     @BindView(R.id.img_right)
     ImageView imgRight;
-    @BindView(R.id.tv_key)
-    TextView tvKey;
+    @BindView(R.id.et_key)
+    EditText evKey;
     @BindView(R.id.img_clear)
     ImageView imgClear;
     @BindView(R.id.listView)
@@ -79,7 +79,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
         /**
          * 监听客户名称输入框
          */
-        tvKey.addTextChangedListener(new TextWatcher() {
+        evKey.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -88,7 +88,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
                 if(s.length()>0){
                     imgClear.setVisibility(View.VISIBLE);
                 }else{
-                    tvKey.setTag(null);
+                    evKey.setTag(null);
                     imgClear.setVisibility(View.GONE);
                 }
                 //加载数据
@@ -103,7 +103,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      *
      * @param view
      */
-    @OnClick({R.id.lin_back,R.id.img_right,R.id.tv_key,R.id.img_clear})
+    @OnClick({R.id.lin_back,R.id.img_right,R.id.img_clear})
     public void onViewClicked(View view) {
         Intent intent=new Intent();
         switch (view.getId()) {
@@ -114,13 +114,8 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
             case R.id.img_right:
                 setClass(AddProductPlanActivity.class,1000);
                 break;
-            //选择合同编号
-            case R.id.tv_key:
-                 intent.setClass(this,SelectContractCodeActivity.class);
-                 startActivityForResult(intent,300);
-                 break;
             case R.id.img_clear:
-                 tvKey.setText(null);
+                 evKey.setText(null);
                  break;
             default:
                 break;
@@ -145,7 +140,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      * 获取生产计划列表
      */
     private void getPlanList(){
-        HttpMethod.getPlanList(tvKey.getText().toString().trim(), null,page, new NetWorkCallBack() {
+        HttpMethod.getPlanList(evKey.getText().toString().trim(), null,page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -174,15 +169,6 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode){
-            //选择合同编号回执
-            case 300:
-                if(data!=null){
-                    ContractCode.ListBean listBean= (ContractCode.ListBean) data.getSerializableExtra("listBean");
-                    if(listBean!=null){
-                        tvKey.setText(listBean.getProp2());
-                    }
-                }
-                break;
             //增加成功后，重新刷新列表
             case 1000:
                 //加载数据

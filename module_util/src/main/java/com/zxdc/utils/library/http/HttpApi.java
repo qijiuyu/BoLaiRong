@@ -25,6 +25,7 @@ import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
+import com.zxdc.utils.library.bean.OutBoundProduct;
 import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
@@ -121,7 +122,7 @@ public interface HttpApi {
     Call<BaseBean> addPlan(@Body AddProductPlanP addProductPlanP);
 
     @GET(HttpConstant.GET_PLAN_LIST)
-    Call<ProductPlan> getPlanList(@Query("prop2") String prop2,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
+    Call<ProductPlan> getPlanList(@Query("planCode") String planCode,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PLAN_DETAILS)
     Call<PlanDetails> getPlanDetails(@Query("planId") int planId, @Query("deptId") int deptId);
@@ -197,6 +198,9 @@ public interface HttpApi {
 
     @PUT(HttpConstant.ADD_PUT_STORAGE)
     Call<BaseBean> addPutStorage(@Body AddPutStorageP addPutStorageP);
+
+    @GET(HttpConstant.GET_OUTBOUND_PRODUCT_LIST)
+    Call<OutBoundProduct> getOutBoundProductList(@Query("planId") String planId, @Query("deptId")int deptId,@Query("outStatus")String outStatus,@Query("entryStatus")String entryStatus,@Query("page") int page, @Query("limit") int limit);
 
 
 }
