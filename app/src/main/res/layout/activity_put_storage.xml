@@ -20,17 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
+                android:background="@drawable/bg_rel_border"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="入库产品列表"
+                    android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
@@ -49,27 +50,65 @@
 
             </RelativeLayout>
 
-            <View
+            <LinearLayout
+                android:id="@+id/lin_good"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:background="@color/color_f9f9f9"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <com.zxdc.utils.library.view.MeasureListView
-                android:id="@+id/list_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.zxdc.utils.library.view.MeasureListView>
+                <com.zxdc.utils.library.view.MeasureListView
+                    android:id="@+id/list_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.zxdc.utils.library.view.MeasureListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/color_f9f9f9"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_product_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="数量：xx"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_rel_border"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="入库产品列表"
+                    android:text="余废料详情"
+                    android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
@@ -88,17 +127,53 @@
 
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.7dp"
-                android:background="@color/color_f9f9f9"/>
 
-            <com.zxdc.utils.library.view.MeasureListView
-                android:id="@+id/list_waste"
+            <LinearLayout
+                android:id="@+id/lin_waste"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
-            </com.zxdc.utils.library.view.MeasureListView>
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <com.zxdc.utils.library.view.MeasureListView
+                    android:id="@+id/list_waste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.zxdc.utils.library.view.MeasureListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/color_f9f9f9"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_waste_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="数量：xx"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

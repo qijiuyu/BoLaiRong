@@ -16,6 +16,7 @@ import com.bian.dan.blr.activity.main.sales.SelectUserActivity;
 import com.bian.dan.blr.persenter.product.AddWastePersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Dept;
+import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -141,6 +142,47 @@ public class AddWasteActivity extends BaseActivity {
                 break;
             //提交
             case R.id.tv_submit:
+                String type=tvType.getText().toString().trim();
+                String dept=tvDepart.getText().toString().trim();
+                String peple=tvPeople.getText().toString().trim();
+                String batchNo=etBatchNo.getText().toString().trim();
+                String name=tvName.getText().toString().trim();
+                String stock=tvStock.getText().toString().trim();
+                String stockType=tvStockType.getText().toString().trim();
+                String num=etNum.getText().toString().trim();
+                String remark=etRemark.getText().toString().trim();
+                if(TextUtils.isEmpty(type)){
+                    ToastUtil.showLong("请选择类别");
+                    return;
+                }
+                if(TextUtils.isEmpty(dept)){
+                    ToastUtil.showLong("请选择责任部门");
+                    return;
+                }
+                if(TextUtils.isEmpty(batchNo)){
+                    ToastUtil.showLong("请输入批次");
+                    return;
+                }
+                if(TextUtils.isEmpty(name)){
+                    ToastUtil.showLong("请选择物料名称");
+                    return;
+                }
+                if(TextUtils.isEmpty(stock)){
+                    ToastUtil.showLong("请选择仓库");
+                    return;
+                }
+                if(TextUtils.isEmpty(stockType)){
+                    ToastUtil.showLong("请选择仓库类别");
+                    return;
+                }
+                if(TextUtils.isEmpty(num)){
+                    ToastUtil.showLong("请输入数量");
+                    return;
+                }
+                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag());
+                intent.putExtra("goods",goods);
+                setResult(400,intent);
+                finish();
                 break;
             default:
                 break;

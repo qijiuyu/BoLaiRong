@@ -14,6 +14,10 @@ public class Goods implements Serializable {
     private String unitStr="";
     //规格
     private String brand="";
+    /**
+     * 物料类型
+     * 废料类型
+     */
     private int type;
     //物料类别
     private String typeStr="";
@@ -49,8 +53,20 @@ public class Goods implements Serializable {
     private String deliveryTime;
     //奖励金额
     private String rewardMoney;
+    //奖励说明
+    private String rewardDes;
     //罚款金额
     private String fineMoney;
+    //罚款说明
+    private String fineDes;
+    //责任部门id
+    private int deptId;
+    //部门名称
+    private String deptName;
+    //责任人id
+    private int chargeId;
+    //余废料类别名称
+    private String waste;
 
 
     public  Goods(){}
@@ -106,7 +122,7 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney, String fineMoney) {
+    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney,String rewardDes, String fineMoney,String fineDes) {
         this.id = id;
         this.name = name;
         this.spec = spec;
@@ -118,7 +134,26 @@ public class Goods implements Serializable {
         this.stockType = stockType;
         this.batchNo = batchNo;
         this.rewardMoney = rewardMoney;
+        this.rewardDes=rewardDes;
         this.fineMoney = fineMoney;
+        this.fineDes=fineDes;
+    }
+
+
+    public Goods(int id, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId) {
+        this.id = id;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.type = type;
+        this.waste=waste;
+        this.num = num;
+        this.stockType = stockType;
+        this.batchNo = batchNo;
+        this.deptId = deptId;
+        this.deptName=deptName;
+        this.chargeId = chargeId;
     }
 
     public int getId() {
@@ -320,5 +355,53 @@ public class Goods implements Serializable {
 
     public void setFineMoney(String fineMoney) {
         this.fineMoney = fineMoney;
+    }
+
+    public int getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
+    }
+
+    public int getChargeId() {
+        return chargeId;
+    }
+
+    public void setChargeId(int chargeId) {
+        this.chargeId = chargeId;
+    }
+
+    public String getWaste() {
+        return waste;
+    }
+
+    public void setWaste(String waste) {
+        this.waste = waste;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getRewardDes() {
+        return rewardDes;
+    }
+
+    public void setRewardDes(String rewardDes) {
+        this.rewardDes = rewardDes;
+    }
+
+    public String getFineDes() {
+        return fineDes;
+    }
+
+    public void setFineDes(String fineDes) {
+        this.fineDes = fineDes;
     }
 }

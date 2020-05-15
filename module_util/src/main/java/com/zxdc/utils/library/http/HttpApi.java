@@ -40,6 +40,7 @@ import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
@@ -193,6 +194,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_DEPT_LIST)
     Call<Dept> getDeptList(@Query("name") String name, @Query("parentId") String parentId);
+
+    @PUT(HttpConstant.ADD_PUT_STORAGE)
+    Call<BaseBean> addPutStorage(@Body AddPutStorageP addPutStorageP);
 
 
 }

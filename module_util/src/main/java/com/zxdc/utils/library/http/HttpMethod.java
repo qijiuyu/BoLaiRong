@@ -41,6 +41,7 @@ import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
@@ -892,6 +893,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<Dept> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 申请入库
+     */
+    public static void addPutStorage(AddPutStorageP addPutStorageP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addPutStorage(addPutStorageP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

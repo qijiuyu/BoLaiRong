@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.production;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -66,6 +67,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
 
     @OnClick({R.id.lin_back, R.id.tv_play})
     public void onViewClicked(View view) {
+        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                  finish();
@@ -76,7 +78,9 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                 if(name.equals("确认领取")){
                     productProgressPersenter.updateProductStatus(new UpdateProductP(requireId,"1",null));
                 }else if(name.equals("入库申请")){
-                    setClass(PutStorageActivity.class);
+                    intent.setClass(this,PutStorageActivity.class);
+                    intent.putExtra("requireId",requireId);
+                    startActivityForResult(intent,200);
                 }
                 break;
             default:

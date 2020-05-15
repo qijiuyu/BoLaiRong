@@ -107,4 +107,6 @@ public class HttpConstant {
 
     public static final String GET_DEPT_LIST="dept/list2";
 
+    public static final String ADD_PUT_STORAGE="outRequire/saveEntryAndOdds";
+
 }

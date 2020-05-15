@@ -140,7 +140,7 @@ public class AddStorageProductActivity extends BaseActivity {
 //                    ToastUtil.showLong("罚款说明");
 //                    return;
 //                }
-                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,fineMoney);
+                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);
                  setResult(200,intent);
