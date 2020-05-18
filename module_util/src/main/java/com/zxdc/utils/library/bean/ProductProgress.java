@@ -31,6 +31,8 @@ public class ProductProgress extends BaseBean {
         private String updateDate="";
         private String prop5="";
         private List<OutBoundList> requireDetailList;
+        private List<EntryList> entryDetailList;
+        private List<WasteList> oddsDetailList;
 
         public int getId() {
             return id;
@@ -151,6 +153,22 @@ public class ProductProgress extends BaseBean {
         public void setUpdateName(String updateName) {
             this.updateName = updateName;
         }
+
+        public List<EntryList> getEntryDetailList() {
+            return entryDetailList;
+        }
+
+        public void setEntryDetailList(List<EntryList> entryDetailList) {
+            this.entryDetailList = entryDetailList;
+        }
+
+        public List<WasteList> getOddsDetailList() {
+            return oddsDetailList;
+        }
+
+        public void setOddsDetailList(List<WasteList> oddsDetailList) {
+            this.oddsDetailList = oddsDetailList;
+        }
     }
 
 
@@ -244,6 +262,158 @@ public class ProductProgress extends BaseBean {
 
         public void setProp2(String prop2) {
             this.prop2 = prop2;
+        }
+    }
+
+
+    public static class EntryList implements Serializable{
+        private String goodsName="";
+        private String stockTypeStr="";
+        private String spec="";
+        private String brand="";
+        private String unitStr="";
+        private String goodsTypeStr="";
+        private String batchNo="";
+        private int num;
+        private String memo="";
+
+        public String getGoodsName() {
+            return goodsName;
+        }
+
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
+        }
+
+        public String getStockTypeStr() {
+            return stockTypeStr;
+        }
+
+        public void setStockTypeStr(String stockTypeStr) {
+            this.stockTypeStr = stockTypeStr;
+        }
+
+        public String getSpec() {
+            return spec;
+        }
+
+        public void setSpec(String spec) {
+            this.spec = spec;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public String getUnitStr() {
+            return unitStr;
+        }
+
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
+        }
+
+        public String getGoodsTypeStr() {
+            return goodsTypeStr;
+        }
+
+        public void setGoodsTypeStr(String goodsTypeStr) {
+            this.goodsTypeStr = goodsTypeStr;
+        }
+
+        public String getBatchNo() {
+            return batchNo;
+        }
+
+        public void setBatchNo(String batchNo) {
+            this.batchNo = batchNo;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
+        }
+    }
+
+
+    public static class WasteList implements Serializable{
+        private String goodsName="";
+        private int num;
+        private String typeStr="";
+        private String deptName="";
+        private String chargeName="";
+        private String createDate="";
+        private String memo="";
+
+        public String getGoodsName() {
+            return goodsName;
+        }
+
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public String getTypeStr() {
+            return typeStr;
+        }
+
+        public void setTypeStr(String typeStr) {
+            this.typeStr = typeStr;
+        }
+
+        public String getDeptName() {
+            return deptName;
+        }
+
+        public void setDeptName(String deptName) {
+            this.deptName = deptName;
+        }
+
+        public String getChargeName() {
+            return chargeName;
+        }
+
+        public void setChargeName(String chargeName) {
+            this.chargeName = chargeName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
         }
     }
 }

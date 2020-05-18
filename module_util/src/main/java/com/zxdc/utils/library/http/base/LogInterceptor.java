@@ -76,6 +76,7 @@ public class LogInterceptor implements Interceptor {
      * @return
      */
     public Request addGetParameter(Request request){
+        LogUtils.e("token："+SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         HttpUrl.Builder builder = request.url().newBuilder();
         Request newRequest = request.newBuilder()
                 .addHeader("Authorization",SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN))
@@ -90,6 +91,7 @@ public class LogInterceptor implements Interceptor {
      * 添加POST的公共参数
      */
     public Request addPostParameter(Request request) throws IOException {
+        LogUtils.e("token："+SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         Request.Builder requestBuilder = request.newBuilder().addHeader("Authorization",SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         request = requestBuilder.post(request.body()).build();
         return request;
@@ -109,6 +111,7 @@ public class LogInterceptor implements Interceptor {
 //                LogUtils.e(request.url() + "参数:" + formBody.name(i) + "=" + formBody.value(i));
 //            }
 //        }
+        LogUtils.e("token："+SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         Request.Builder requestBuilder = request.newBuilder().addHeader("Authorization",SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         request = requestBuilder.put(request.body()).build();
         return request;
@@ -121,6 +124,7 @@ public class LogInterceptor implements Interceptor {
      * @return
      */
     public Request addDeleteParameter(Request request) throws IOException {
+        LogUtils.e("token："+SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN));
         HttpUrl.Builder builder = request.url().newBuilder();
         Request newRequest = request.newBuilder()
                 .addHeader("Authorization",SPUtil.getInstance(BaseApplication.getContext()).getString(SPUtil.TOKEN))

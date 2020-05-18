@@ -81,6 +81,7 @@ public class OutBoundProductListAdapter extends BaseAdapter {
             default:
                 break;
         }
+        holder.tvTime.setText(listBean.getCreateDate());
         return view;
     }
 

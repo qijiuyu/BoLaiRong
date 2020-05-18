@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.production.ProductProgressByOutBoundAdapter;
+import com.bian.dan.blr.adapter.production.ProductProgressEntryAdapter;
+import com.bian.dan.blr.adapter.production.ProductProgressWasteAdapter;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.persenter.product.ProductProgressPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
@@ -58,10 +60,29 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     TextView tvReceiveTime;
     @BindView(R.id.lin_receive)
     LinearLayout linReceive;
+    @BindView(R.id.list_entry)
+    MeasureListView listEntry;
+    @BindView(R.id.tv_entry_num)
+    TextView tvEntryNum;
+    @BindView(R.id.lin_entry)
+    LinearLayout linEntry;
+    @BindView(R.id.lin_waste)
+    LinearLayout linWaste;
+    @BindView(R.id.list_waste)
+    MeasureListView listWaste;
+    @BindView(R.id.tv_waste_num)
+    TextView tvWasteNum;
+    @BindView(R.id.tv_entry_people)
+    TextView tvEntryPeople;
+    @BindView(R.id.tv_entry_time)
+    TextView tvEntryTime;
+    @BindView(R.id.tv_entry_status)
+    TextView tvEntryStatus;
+    @BindView(R.id.tv_memo)
+    TextView tvMemo;
     //出库单id
     private int requireId;
     private ProductProgressPersenter productProgressPersenter;
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outbound_details_by_product);
@@ -149,10 +170,41 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     /**
                      * 领取人信息
                      */
-                    if (productBean.getOutStatus()==2) {
+                    if (productBean.getOutStatus() == 2) {
                         linReceive.setVisibility(View.VISIBLE);
                         tvReceivePeople.setText(Html.fromHtml("领取人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
                         tvReceiveTime.setText(Html.fromHtml("领取时间：<font color=\"#000000\">" + productBean.getProp5() + "</font>"));
+                    }
+
+
+                    /**
+                     * 入库产品信息
+                     */
+                    if(productBean.getEntryStatus()==1){
+                        linEntry.setVisibility(View.VISIBLE);
+                        listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
+                        int entryNum = 0;
+                        for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
+                            entryNum += productBean.getEntryDetailList().get(i).getNum();
+                        }
+                        tvEntryNum.setText("数量：" + entryNum);
+
+
+                        /**
+                         * 余废料信息
+                         */
+                        if (productBean.getOddsDetailList() != null && productBean.getOddsDetailList().size() > 0) {
+                            linWaste.setVisibility(View.VISIBLE);
+                            listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList()));
+                            int wasteNum = 0;
+                            for (int i = 0; i < productBean.getOddsDetailList().size(); i++) {
+                                wasteNum += productBean.getOddsDetailList().get(i).getNum();
+                            }
+                            tvWasteNum.setText("数量：" + wasteNum);
+                        }
+
+    //                    tvEntryPeople.setText(Html.fromHtml("入库人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
+
                     }
 
 
@@ -167,6 +219,8 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     } else if (productBean.getOutStatus() == 2) {
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("入库申请");
+                    }else if(productBean.getEntryStatus()==2){
+
                     }
 
                 } else {

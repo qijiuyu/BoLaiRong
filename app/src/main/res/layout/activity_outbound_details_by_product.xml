@@ -196,6 +196,180 @@
             </LinearLayout>
 
 
+            <!-- 入库产品信息-->
+            <LinearLayout
+                android:id="@+id/lin_entry"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="入库产品列表"
+                    android:textColor="@color/color_70DF5D"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="15dp"/>
+
+                <com.zxdc.utils.library.view.MeasureListView
+                    android:id="@+id/list_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </com.zxdc.utils.library.view.MeasureListView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/color_f9f9f9"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_entry_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="数量：xx"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/black"
+                        android:layout_alignParentRight="true"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_f9f9f9"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+
+                <!-- 余废料信息-->
+                <LinearLayout
+                    android:id="@+id/lin_waste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:gravity="center_vertical"
+                        android:text="余废料详情"
+                        android:textColor="@color/color_70DF5D"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="15dp"/>
+
+                    <com.zxdc.utils.library.view.MeasureListView
+                        android:id="@+id/list_waste"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </com.zxdc.utils.library.view.MeasureListView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/color_f9f9f9"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="总计"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_waste_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="数量：xx"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/black"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="@color/color_f9f9f9"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_entry_people"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="入库人：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_entry_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="入库时间：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_entry_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="完成状态：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_tv_border"
+                    android:text="备注：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:paddingLeft="15dp"
+                    android:layout_marginBottom="20dp"/>
+
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
