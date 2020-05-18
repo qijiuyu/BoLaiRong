@@ -76,10 +76,10 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     TextView tvEntryPeople;
     @BindView(R.id.tv_entry_time)
     TextView tvEntryTime;
-    @BindView(R.id.tv_entry_status)
-    TextView tvEntryStatus;
-    @BindView(R.id.tv_memo)
-    TextView tvMemo;
+    @BindView(R.id.tv_confirm_entry)
+    TextView tvConfirmEntry;
+    @BindView(R.id.lin_warehouse)
+    LinearLayout linWareHouse;
     //出库单id
     private int requireId;
     private ProductProgressPersenter productProgressPersenter;
@@ -102,13 +102,17 @@ public class ProductProgressDetailsActivity extends BaseActivity {
         requireId = getIntent().getIntExtra("requireId", 0);
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_play})
+    @OnClick({R.id.lin_back, R.id.tv_confirm_entry,R.id.tv_play})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
+            //组长点击确认入库
+            case R.id.tv_confirm_entry:
+                 productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, null, "1"));
+                 break;
             //确认领取/申请入库
             case R.id.tv_play:
                 final String name = tvPlay.getText().toString().trim();
@@ -180,12 +184,12 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     /**
                      * 入库产品信息
                      */
-                    if(productBean.getEntryStatus()==1){
+                    if(productBean.getEntryDetailList()!=null && productBean.getEntryDetailList().size()>0){
                         linEntry.setVisibility(View.VISIBLE);
                         listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
                         int entryNum = 0;
                         for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
-                            entryNum += productBean.getEntryDetailList().get(i).getNum();
+                             entryNum += productBean.getEntryDetailList().get(i).getNum();
                         }
                         tvEntryNum.setText("数量：" + entryNum);
 
@@ -203,24 +207,37 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                             tvWasteNum.setText("数量：" + wasteNum);
                         }
 
-    //                    tvEntryPeople.setText(Html.fromHtml("入库人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
+                        //还需要再次点击确认入库
+                        if(productBean.getEntryStatus()==0){
+                            tvConfirmEntry.setVisibility(View.VISIBLE);
+                        }else{
+                            tvConfirmEntry.setVisibility(View.GONE);
+                        }
+
+
+                        /**
+                         * 仓库入库信息
+                         */
+                        if(productBean.getEntryStatus()==2){
+                            linWareHouse.setVisibility(View.VISIBLE);
+                            tvEntryPeople.setText(Html.fromHtml("入库人：<font color=\"#000000\">" + productBean.getEntryName() + "</font>"));
+                            tvEntryTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + productBean.getProp2() + "</font>"));
+                        }
 
                     }
 
 
                     /**
-                     * 按钮状态
-                     * 1：仓库已发放，所以可以领取了
-                     * 2：已经领取成功了，所以接下来就是入库申请了
+                     * 底部按钮状态
                      */
-                    if (productBean.getOutStatus() == 1) {
+                    if(productBean.getEntryStatus()>0){   //表示已申请入库了
+                        tvPlay.setVisibility(View.GONE);
+                    }else if (productBean.getOutStatus() == 1) {   //表示仓库已发放了你申请的产品原料
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("确认领取");
-                    } else if (productBean.getOutStatus() == 2) {
+                    } else if (productBean.getOutStatus() == 2) {  //表示已领取了仓库方法的原料
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("入库申请");
-                    }else if(productBean.getEntryStatus()==2){
-
                     }
 
                 } else {

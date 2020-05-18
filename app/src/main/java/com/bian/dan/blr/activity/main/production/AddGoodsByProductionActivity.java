@@ -42,8 +42,8 @@ public class AddGoodsByProductionActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
-    @BindView(R.id.et_batchNo)
-    EditText etBatchNo;
+    @BindView(R.id.tv_batchNo)
+    TextView tvBatchNo;
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_spec)
@@ -56,8 +56,6 @@ public class AddGoodsByProductionActivity extends BaseActivity {
     TextView tvTime;
     @BindView(R.id.et_remark)
     EditText etRemark;
-    @BindView(R.id.rel_batchNo)
-    RelativeLayout relBatchNo;
     @BindView(R.id.rel_time)
     RelativeLayout relTime;
     //用户对象
@@ -76,11 +74,10 @@ public class AddGoodsByProductionActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("添加产品");
         /**
-         * 根据部门id来区分显示数据(配料部-没有批次和日期)
+         * 根据部门id来区分显示数据(配料部-没有日期)
          */
         userInfo = MyApplication.getUser();
         if (userInfo.getUser().getDeptId() == 3) {
-            relBatchNo.setVisibility(View.GONE);
             relTime.setVisibility(View.GONE);
         }
     }
@@ -101,14 +98,9 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                 break;
             //提交
             case R.id.tv_submit:
-                String batchNo=etBatchNo.getText().toString().trim();
                 String num=etNum.getText().toString().trim();
                 String time=tvTime.getText().toString().trim();
                 String remark=etRemark.getText().toString().trim();
-                if (userInfo.getUser().getDeptId()!= 3 && TextUtils.isEmpty(batchNo)) {
-                    ToastUtil.showLong("请输入批次");
-                    return;
-                }
                 if(listBean==null){
                     ToastUtil.showLong("请选择物料");
                     return;
@@ -125,7 +117,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                     ToastUtil.showLong("请选择日期");
                     return;
                 }
-                Goods goods=new Goods(listBean.getId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),time,remark,listBean.getStockType(),batchNo);
+                Goods goods=new Goods(listBean.getGoodsId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),time,remark,listBean.getStockType(),listBean.getBatchNo());
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);
                 setResult(200,intent);
@@ -146,6 +138,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                 return;
             }
             tvName.setText(listBean.getGoodsName());
+            tvBatchNo.setText(listBean.getBatchNo());
             tvSpec.setText(listBean.getBrand()+"/"+listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
             etNum.setText(String.valueOf(listBean.getNum()));

@@ -17,6 +17,7 @@ public class MaterialInventory extends BaseBean {
 
     public static class ListBean implements Serializable{
         private int id;
+        private int goodsId;
         private String goodsName="";
         private String spec="";
         private String brand="";
@@ -33,6 +34,14 @@ public class MaterialInventory extends BaseBean {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public int getGoodsId() {
+            return goodsId;
+        }
+
+        public void setGoodsId(int goodsId) {
+            this.goodsId = goodsId;
         }
 
         public String getGoodsName() {

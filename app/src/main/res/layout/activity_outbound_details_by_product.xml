@@ -271,7 +271,7 @@
                         android:layout_height="35dp"
                         android:gravity="center_vertical"
                         android:text="余废料详情"
-                        android:textColor="@color/color_70DF5D"
+                        android:textColor="@color/color_FE8E2C"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="15dp"/>
@@ -323,6 +323,29 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_confirm_entry"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tv_bottom"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:text="确认入库"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_warehouse"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
                     android:id="@+id/tv_entry_people"
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
@@ -343,30 +366,6 @@
                     android:textColor="@color/color_666666"
                     android:textSize="14sp"
                     android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_entry_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="完成状态：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_memo"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="备注：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"
-                    android:layout_marginBottom="20dp"/>
-
 
             </LinearLayout>
 

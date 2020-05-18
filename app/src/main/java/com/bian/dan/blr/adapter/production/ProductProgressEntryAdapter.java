@@ -23,6 +23,7 @@ public class ProductProgressEntryAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<ProductProgress.EntryList> list;
+
     public ProductProgressEntryAdapter(Activity activity, List<ProductProgress.EntryList> list) {
         super();
         this.activity = activity;
@@ -47,16 +48,18 @@ public class ProductProgressEntryAdapter extends BaseAdapter {
     ViewHolder holder = null;
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_add_product6, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_product_progress_entry, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         ProductProgress.EntryList entryList = list.get(position);
+        holder.tvCreatePeople.setText(Html.fromHtml("申请人：<font color=\"#70DF5D\">" + entryList.getCreateName() + "</font>"));
+        holder.tvCreateTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + entryList.getCreateDate() + "</font>"));
         holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + entryList.getBatchNo() + "</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + entryList.getGoodsName() + "</font>"));
-        holder.tvBrand.setText(entryList.getBrand()+"/"+entryList.getSpec());
+        holder.tvBrand.setText(entryList.getBrand() + "/" + entryList.getSpec());
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + entryList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + entryList.getNum() + "</font>"));
         holder.tvRemark.setText("备注：" + entryList.getMemo());
@@ -66,6 +69,10 @@ public class ProductProgressEntryAdapter extends BaseAdapter {
 
     static
     class ViewHolder {
+        @BindView(R.id.tv_create_people)
+        TextView tvCreatePeople;
+        @BindView(R.id.tv_create_time)
+        TextView tvCreateTime;
         @BindView(R.id.tv_batchNo)
         TextView tvBatchNo;
         @BindView(R.id.tv_name)

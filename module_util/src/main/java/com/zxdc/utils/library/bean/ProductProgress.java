@@ -30,6 +30,8 @@ public class ProductProgress extends BaseBean {
         private String updateName="";
         private String updateDate="";
         private String prop5="";
+        private String entryName="";
+        private String prop2="";
         private List<OutBoundList> requireDetailList;
         private List<EntryList> entryDetailList;
         private List<WasteList> oddsDetailList;
@@ -169,6 +171,22 @@ public class ProductProgress extends BaseBean {
         public void setOddsDetailList(List<WasteList> oddsDetailList) {
             this.oddsDetailList = oddsDetailList;
         }
+
+        public String getEntryName() {
+            return entryName;
+        }
+
+        public void setEntryName(String entryName) {
+            this.entryName = entryName;
+        }
+
+        public String getProp2() {
+            return prop2;
+        }
+
+        public void setProp2(String prop2) {
+            this.prop2 = prop2;
+        }
     }
 
 
@@ -276,6 +294,9 @@ public class ProductProgress extends BaseBean {
         private String batchNo="";
         private int num;
         private String memo="";
+        private String createName="";
+        private String createDate="";
+
 
         public String getGoodsName() {
             return goodsName;
@@ -348,17 +369,38 @@ public class ProductProgress extends BaseBean {
         public void setMemo(String memo) {
             this.memo = memo;
         }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
     }
 
 
     public static class WasteList implements Serializable{
         private String goodsName="";
         private int num;
+        private String batchNo="";
+        private String spec="";
+        private String brand="";
+        private String unitsType="";
         private String typeStr="";
         private String deptName="";
         private String chargeName="";
         private String createDate="";
         private String memo="";
+        private String createName="";
 
         public String getGoodsName() {
             return goodsName;
@@ -414,6 +456,46 @@ public class ProductProgress extends BaseBean {
 
         public void setMemo(String memo) {
             this.memo = memo;
+        }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getBatchNo() {
+            return batchNo;
+        }
+
+        public void setBatchNo(String batchNo) {
+            this.batchNo = batchNo;
+        }
+
+        public String getSpec() {
+            return spec;
+        }
+
+        public void setSpec(String spec) {
+            this.spec = spec;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public String getUnitsType() {
+            return unitsType;
+        }
+
+        public void setUnitsType(String unitsType) {
+            this.unitsType = unitsType;
         }
     }
 }

@@ -45,19 +45,22 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
 
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_add_waste, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_product_progress_waste, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         ProductProgress.WasteList wasteList = list.get(position);
+        holder.tvCreatePeople.setText(Html.fromHtml("申请人：<font color=\"#FE8E2C\">" + wasteList.getCreateName() + "</font>"));
+        holder.tvCreateTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + wasteList.getCreateDate() + "</font>"));
         holder.tvWasteType.setText(Html.fromHtml("类别：<font color=\"#000000\">" + wasteList.getTypeStr() + "</font>"));
         holder.tvDept.setText(Html.fromHtml("部门：<font color=\"#000000\">" + wasteList.getDeptName() + "</font>"));
-//        holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + goods.getBatchNo() + "</font>"));
+        holder.tvPeople.setText(Html.fromHtml("责任人：<font color=\"#FE8E2C\">" + wasteList.getChargeName() + "</font>"));
+        holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + wasteList.getBatchNo() + "</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + wasteList.getGoodsName() + "</font>"));
-//        holder.tvBrand.setText(goods.getBrand() + "/" + goods.getSpec());
-//        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
+        holder.tvBrand.setText(wasteList.getBrand() + "/" + wasteList.getSpec());
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + wasteList.getUnitsType() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + wasteList.getNum() + "</font>"));
         holder.tvRemark.setText("备注：" + wasteList.getMemo());
         return view;
@@ -66,6 +69,10 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
 
     static
     class ViewHolder {
+        @BindView(R.id.tv_create_people)
+        TextView tvCreatePeople;
+        @BindView(R.id.tv_create_time)
+        TextView tvCreateTime;
         @BindView(R.id.tv_waste_type)
         TextView tvWasteType;
         @BindView(R.id.tv_dept)
@@ -82,6 +89,8 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
         TextView tvNum;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
+        @BindView(R.id.tv_people)
+        TextView tvPeople;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
