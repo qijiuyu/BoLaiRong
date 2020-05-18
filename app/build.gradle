@@ -75,6 +75,7 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.5.6'
     compile 'cn.jiguang.sdk:jcore:2.2.8'
     //图形
+    compile 'com.github.razerdp:AnimatedPieView:1.2.0'
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     compile 'com.hjq:xxpermissions:5.5'
 }

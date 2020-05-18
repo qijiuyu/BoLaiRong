@@ -17,6 +17,188 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="财务收支对比"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/tj"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@color/color_FE8E2C"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="收入金额（元）"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="10dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="69789"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_vertical">
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@color/color_47C9FB"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="支出金额（元）"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="10dp"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_spending"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="69789"
+                        android:textSize="15sp"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <lecho.lib.hellocharts.view.PieChartView
+                    android:id="@+id/view_fiscal"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp">
+                </lecho.lib.hellocharts.view.PieChartView>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客户状态统计图"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/tj"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <com.razerdp.widget.animatedpieview.AnimatedPieView
+                    android:id="@+id/view_customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_customer_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="总数量"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销售订单增长趋势"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/chart_zxt"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <lecho.lib.hellocharts.view.LineChartView
+                    android:id="@+id/view_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="15dp">
+                </lecho.lib.hellocharts.view.LineChartView>
+
+
+            </RelativeLayout>
 
         </LinearLayout>
 
