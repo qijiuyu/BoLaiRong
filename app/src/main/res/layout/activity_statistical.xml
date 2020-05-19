@@ -8,6 +8,7 @@
     android:background="@android:color/white">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -192,10 +193,101 @@
                 <lecho.lib.hellocharts.view.LineChartView
                     android:id="@+id/view_order"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="180dp"
                     android:layout_centerInParent="true"
-                    android:layout_margin="15dp">
+                    android:layout_margin="10dp">
                 </lecho.lib.hellocharts.view.LineChartView>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销售金额增长趋势"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/chart_zxt"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <lecho.lib.hellocharts.view.LineChartView
+                    android:id="@+id/view_sales_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp">
+                </lecho.lib.hellocharts.view.LineChartView>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物料使用趋势"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/chart_zxt"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <lecho.lib.hellocharts.view.LineChartView
+                    android:id="@+id/view_material"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp">
+                </lecho.lib.hellocharts.view.LineChartView>
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成品统计"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/chart_zxt"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <lecho.lib.hellocharts.view.ColumnChartView
+                    android:id="@+id/view_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="10dp">
+                </lecho.lib.hellocharts.view.ColumnChartView>
 
 
             </RelativeLayout>
