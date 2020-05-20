@@ -19,8 +19,10 @@ public class SPUtil {
     public final static String TOKEN="TOKEN";
     //用户信息
     public final static String USER_INFO="USER_INFO";
-    //账户信息
+    //当前账户信息
     public final static String ACCOUNT="ACCOUNT";
+    //所有账号信息
+    public final static String ALL_ACCOUNT="ALL_ACCOUNT";
     private static SPUtil sharUtil = null;
     public static Gson gson=new Gson();
     private SPUtil(Context context, String sharname) {

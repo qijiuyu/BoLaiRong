@@ -14,7 +14,6 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.bian.dan.blr.activity.main.MainActivity;
 import com.bian.dan.blr.activity.statistical.StatisticalActivity;
-import com.bian.dan.blr.utils.PermissionCallBack;
 import com.bian.dan.blr.utils.PermissionUtil;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -152,10 +151,10 @@ public class TabActivity extends android.app.TabActivity {
     protected void onResume() {
         super.onResume();
         //添加权限
-        PermissionUtil.getPermission(this, new PermissionCallBack() {
-            public void onclick() {
-            }
-        });
+//        PermissionUtil.getPermission(this, new PermissionCallBack() {
+//            public void onclick() {
+//            }
+//        });
     }
 
     /**

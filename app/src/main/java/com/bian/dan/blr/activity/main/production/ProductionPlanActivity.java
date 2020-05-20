@@ -111,7 +111,6 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      */
     @OnClick({R.id.lin_back,R.id.img_clear})
     public void onViewClicked(View view) {
-        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();

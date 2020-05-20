@@ -1,12 +1,14 @@
 package com.bian.dan.blr.activity.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.LoginActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
@@ -28,6 +30,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.util.SPUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +57,17 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_sccrk, R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gzgl, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
+    @OnClick({R.id.tv_login_out,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_sccrk, R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gzgl, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //退出登录
+            case R.id.tv_login_out:
+                SPUtil.getInstance(this).removeMessage(SPUtil.TOKEN);
+                Intent intent=new Intent(this,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                 break;
             //销售
             //合同管理
             case R.id.tv_sales_htgl:
@@ -139,7 +150,9 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_production_ckd:
                 setClass(OutBoundProductActivity.class);
                 break;
+            //生产--财务
             case R.id.tv_production_cwbx:
+                setClass(FinancialActivity.class);
                 break;
             default:
                 break;

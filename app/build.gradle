@@ -19,7 +19,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : "com.bian.dan.blr",
-                JPUSH_APPKEY : "60201abf09cd4ac1c8ca44e2", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : "f6c07956050de60df140b4a0", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
 
