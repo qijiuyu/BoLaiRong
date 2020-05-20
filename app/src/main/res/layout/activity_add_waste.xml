@@ -331,8 +331,9 @@
                 android:layout_marginRight="15dp"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:hint="输入备注"
-                android:background="@null"
+                android:background="@drawable/bg__four_border"
+                android:padding="10dp"
+                android:hint="请输入"
                 android:minLines="4"
                 android:gravity="top" />
 

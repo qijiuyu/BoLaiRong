@@ -51,6 +51,7 @@ import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
 import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.SPUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 
@@ -145,6 +146,7 @@ public class HttpMethod extends BaseRequst {
             public void onResponse(okhttp3.Call call, okhttp3.Response response){
                 try {
                     String str = response.body().string();
+                    LogUtils.e(str);
                     netWorkCallBack.onSuccess(SPUtil.gson.fromJson(str, Upload.class));
                 } catch (IOException e) {
                     e.printStackTrace();

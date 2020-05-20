@@ -117,7 +117,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
             case R.id.tv_play:
                 final String name = tvPlay.getText().toString().trim();
                 if (name.equals("确认领取")) {
-                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, "1", null));
+                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, "2", null));
                 } else if (name.equals("入库申请")) {
                     intent.setClass(this, PutStorageActivity.class);
                     intent.putExtra("requireId", requireId);

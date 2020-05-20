@@ -4,23 +4,14 @@ import java.io.Serializable;
 
 public class LogDetails extends BaseBean{
 
-    private DetailsBean saleLog;
-    private Customer customer;
+    private DetailsBean data;
 
-    public DetailsBean getSaleLog() {
-        return saleLog;
+    public DetailsBean getData() {
+        return data;
     }
 
-    public void setSaleLog(DetailsBean saleLog) {
-        this.saleLog = saleLog;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setData(DetailsBean data) {
+        this.data = data;
     }
 
     public static class DetailsBean implements Serializable{
@@ -29,6 +20,7 @@ public class LogDetails extends BaseBean{
         private String followResult="";
         private String createDate="";
         private String operater="";
+        private Customer customer;
 
         public int getId() {
             return id;
@@ -68,6 +60,14 @@ public class LogDetails extends BaseBean{
 
         public void setOperater(String operater) {
             this.operater = operater;
+        }
+
+        public Customer getCustomer() {
+            return customer;
+        }
+
+        public void setCustomer(Customer customer) {
+            this.customer = customer;
         }
     }
 }
