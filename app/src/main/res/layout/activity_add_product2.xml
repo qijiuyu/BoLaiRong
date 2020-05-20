@@ -199,8 +199,10 @@
                 android:layout_marginRight="15dp"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:background="@null"
+                android:background="@drawable/bg__four_border"
                 android:minLines="4"
+                android:hint="请输入"
+                android:padding="10dp"
                 android:gravity="top" />
 
             <View

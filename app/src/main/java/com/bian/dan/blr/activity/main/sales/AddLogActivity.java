@@ -53,6 +53,15 @@ public class AddLogActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_log);
         ButterKnife.bind(this);
+        initView();
+    }
+
+
+    /**
+     * 初始化
+     */
+    private void initView() {
+        tvHead.setText("添加日志");
     }
 
     @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_submit})

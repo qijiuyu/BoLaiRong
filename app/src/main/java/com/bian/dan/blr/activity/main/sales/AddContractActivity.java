@@ -168,10 +168,6 @@ public class AddContractActivity extends BaseActivity {
                     ToastUtil.showLong("请选择售卖公司");
                     return;
                 }
-                if(imgList.size()==0){
-                    ToastUtil.showLong("请选择设备图片");
-                    return;
-                }
                 AddContractP addContractP=new AddContractP();
                 addContractP.setProp2(code);
                 addContractP.setCustomerId((int)tvName.getTag());

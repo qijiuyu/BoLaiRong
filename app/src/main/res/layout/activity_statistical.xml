@@ -18,16 +18,60 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="财务收支对比"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:drawableLeft="@mipmap/tj"
-                android:drawablePadding="7dp"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="财务收支对比"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:drawableLeft="@mipmap/tj"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_start_fiscal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="开始日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0.7dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_fiscal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="结束日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -122,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:text="客户状态统计图"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="@android:color/black"
                 android:drawableLeft="@mipmap/tj"
                 android:drawablePadding="7dp"
@@ -170,17 +214,60 @@
 
             </RelativeLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="销售订单增长趋势"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:drawableLeft="@mipmap/chart_zxt"
-                android:drawablePadding="7dp"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="销售订单增长趋势"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:drawableLeft="@mipmap/chart_zxt"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_start_sales_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="开始日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0.7dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_sales_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="结束日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
 
             <RelativeLayout
@@ -195,22 +282,78 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_centerInParent="true"
-                    android:layout_margin="10dp">
+                    android:paddingRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                 </lecho.lib.hellocharts.view.LineChartView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（个）"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"/>
 
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="销售金额增长趋势"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:drawableLeft="@mipmap/chart_zxt"
-                android:drawablePadding="7dp"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="销售金额增长趋势"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:drawableLeft="@mipmap/chart_zxt"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_start_sales_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="开始日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0.7dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_sales_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="结束日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
 
             <RelativeLayout
@@ -225,22 +368,77 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_centerInParent="true"
-                    android:layout_margin="10dp">
+                    android:paddingRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                 </lecho.lib.hellocharts.view.LineChartView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（万元）"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"/>
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="物料使用趋势"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:drawableLeft="@mipmap/chart_zxt"
-                android:drawablePadding="7dp"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="物料使用趋势"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:drawableLeft="@mipmap/chart_zxt"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_start_material"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="开始日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="0.7dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_end_material"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_statistical_time"
+                        android:hint="结束日期"
+                        android:textSize="13sp"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
 
             <RelativeLayout
@@ -255,9 +453,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_centerInParent="true"
-                    android:layout_margin="10dp">
+                    android:paddingRight="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                 </lecho.lib.hellocharts.view.LineChartView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（克）"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"/>
 
             </RelativeLayout>
 
@@ -267,7 +476,7 @@
                 android:layout_height="wrap_content"
                 android:text="成品统计"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="@android:color/black"
                 android:drawableLeft="@mipmap/chart_zxt"
                 android:drawablePadding="7dp"
@@ -289,6 +498,14 @@
                     android:layout_margin="10dp">
                 </lecho.lib.hellocharts.view.ColumnChartView>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="（个）"
+                    android:textColor="@android:color/black"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="5dp"/>
 
             </RelativeLayout>
 

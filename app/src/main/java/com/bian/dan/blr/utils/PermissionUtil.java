@@ -67,7 +67,7 @@ private static AlertDialog.Builder normalDialog;
                         });
                         normalDialog.show();
                     }else {
-                        getPermission(context,permissionCallBack);
+//                        getPermission(context,permissionCallBack);
                     }
                 }
 
@@ -77,7 +77,7 @@ private static AlertDialog.Builder normalDialog;
                         Log.e("tag","获取权限成功");
                         permissionCallBack.onclick();
                     }else {
-                        getPermission(context,permissionCallBack);
+//                        getPermission(context,permissionCallBack);
                     }
                 }
             });

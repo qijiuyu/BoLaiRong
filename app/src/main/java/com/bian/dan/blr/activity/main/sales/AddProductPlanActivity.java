@@ -99,10 +99,6 @@ public class AddProductPlanActivity extends BaseActivity {
                     ToastUtil.showLong("请选择交付日期");
                     return;
                 }
-                if(TextUtils.isEmpty(remark)){
-                    ToastUtil.showLong("请输入备注");
-                    return;
-                }
                 AddProductPlanP addProductPlanP=new AddProductPlanP();
                 addProductPlanP.setProp2(code);
                 addProductPlanP.setDeliveryDate(time);

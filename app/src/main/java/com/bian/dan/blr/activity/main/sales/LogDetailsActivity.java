@@ -89,13 +89,13 @@ public class LogDetailsActivity extends BaseActivity {
             public void onSuccess(Object object) {
                 try {
                     LogDetails logDetails= (LogDetails) object;
-                    LogDetails.DetailsBean detailsBean=logDetails.getSaleLog();
+                    LogDetails.DetailsBean detailsBean=logDetails.getData();
                     if(detailsBean==null){
                         return;
                     }
                     tvPlayName.setText(Html.fromHtml("操作人：<font color=\"#000000\">" + detailsBean.getOperater() + "</font>"));
                     tvPlayTime.setText(Html.fromHtml("操作时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
-                    Customer customer=logDetails.getCustomer();
+                    Customer customer=detailsBean.getCustomer();
                     if(customer==null){
                         return;
                     }

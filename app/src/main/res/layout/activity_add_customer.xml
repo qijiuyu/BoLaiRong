@@ -611,9 +611,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minLines="4"
-                android:background="@null"
+                android:background="@drawable/bg__four_border"
                 android:textColor="@color/color_666666"
                 android:textSize="15sp"
+                android:hint="请输入"
+                android:padding="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="top"/>

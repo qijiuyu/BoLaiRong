@@ -111,7 +111,7 @@ public class ContractDetailsActivity extends BaseActivity {
                 if (constractDetails.isSussess()) {
                     ConstractDetails.DetailsBean detailsBean = constractDetails.getContract();
                     if (detailsBean != null) {
-                        tvEntry.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
+                        tvEntry.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                         tvEntryTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                         tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
