@@ -5,16 +5,16 @@ import java.util.List;
 
 public class AddPutStorageP implements Serializable {
 
-    private int requireId;
+    private int id;
     private List<EntryList> entryDetailList;
     private List<WasteList> oddsDetailList;
 
-    public int getRequireId() {
-        return requireId;
+    public int getId() {
+        return id;
     }
 
-    public void setRequireId(int requireId) {
-        this.requireId = requireId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<EntryList> getEntryDetailList() {

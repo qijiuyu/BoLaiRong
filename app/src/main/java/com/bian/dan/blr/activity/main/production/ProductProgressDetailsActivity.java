@@ -207,8 +207,10 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                             tvWasteNum.setText("数量：" + wasteNum);
                         }
 
-                        //还需要再次点击确认入库
-                        if(productBean.getEntryStatus()==0){
+                        /**
+                         * 只有生产组长才可以最终点击“确认入库”
+                         */
+                        if(productBean.getEntryStatus()==0 && MyApplication.getRoleId()==3){
                             tvConfirmEntry.setVisibility(View.VISIBLE);
                         }else{
                             tvConfirmEntry.setVisibility(View.GONE);
@@ -230,12 +232,12 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     /**
                      * 底部按钮状态
                      */
-                    if(productBean.getEntryStatus()>0){   //表示已申请入库了
+                    if(productBean.getEntryStatus()>0){   //表示生产组长已提交申请入库
                         tvPlay.setVisibility(View.GONE);
-                    }else if (productBean.getOutStatus() == 1) {   //表示仓库已发放了你申请的产品原料
+                    }else if (productBean.getOutStatus() == 1 && MyApplication.getRoleId()==3) {   //表示仓库已发放了你申请的产品原料/并且只有生产组长才可以看到“确认领取”这个按钮
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("确认领取");
-                    } else if (productBean.getOutStatus() == 2) {  //表示已领取了仓库方法的原料
+                    } else if (productBean.getOutStatus() == 2) {  //表示已领取了仓库发放的原料
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("入库申请");
                     }

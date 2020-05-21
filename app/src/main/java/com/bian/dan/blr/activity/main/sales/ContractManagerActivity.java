@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.ConstractManagerAdapter;
+import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.persenter.sales.ContractManagerPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.Customer;
+import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -61,6 +63,8 @@ public class ContractManagerActivity extends BaseActivity implements MyRefreshLa
         setContentView(R.layout.activity_contract_manager);
         ButterKnife.bind(this);
         initView();
+        //设置权限
+        setPermissions();
         //加载数据
         reList.startRefresh();
     }
@@ -122,6 +126,18 @@ public class ContractManagerActivity extends BaseActivity implements MyRefreshLa
                 reList.startRefresh();
             }
         });
+    }
+
+
+    /**
+     * 设置权限
+     */
+    private void setPermissions(){
+        final UserInfo userInfo= MyApplication.getUser();
+        //销售内勤不能录入合同
+        if(userInfo.getUser().getRoleId()==6){
+            imgRight.setVisibility(View.GONE);
+        }
     }
 
 

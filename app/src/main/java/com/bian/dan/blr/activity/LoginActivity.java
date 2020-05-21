@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.MainActivity;
 import com.bian.dan.blr.view.AccountPopWindow;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -173,7 +174,15 @@ public class LoginActivity extends BaseActivity {
                     keyMap.put(loginP.getUsername(),loginP.getPwd());
                     SPUtil.getInstance(activity).addString(SPUtil.ALL_ACCOUNT, SPUtil.gson.toJson(keyMap));
 
-                    setClass(TabActivity.class);
+
+                    /**
+                     * 根据角色跳转到不同的页面
+                     */
+                    if(userInfo.getUser().getRoleId()==1){
+                        setClass(TabActivity.class);
+                    }else{
+                        setClass(MainActivity.class);
+                    }
                     finish();
 
                 }else{

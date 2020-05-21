@@ -42,4 +42,13 @@ public class MyApplication extends BaseApplication {
     public static UserInfo getUser(){
         return (UserInfo) SPUtil.getInstance(getContext()).getObject(SPUtil.USER_INFO,UserInfo.class);
     }
+
+
+    /**
+     * 获取角色id
+     * @return
+     */
+    public static int getRoleId(){
+        return getUser().getUser().getRoleId();
+    }
 }

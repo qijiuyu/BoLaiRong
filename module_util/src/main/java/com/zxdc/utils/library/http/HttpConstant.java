@@ -11,7 +11,7 @@ public class HttpConstant {
 
 //    public static final String IP="http://192.168.3.176:8005/";
 
-    public static final String LOGIN="login";
+    public static final String LOGIN="appLogin";
 
     public static final String GET_DEPARTMENT="dept/list2";
 

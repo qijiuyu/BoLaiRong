@@ -71,12 +71,6 @@ public class CustomerDetailsActivity extends BaseActivity {
     TextView tvLandline;
     @BindView(R.id.tv_address)
     TextView tvAddress;
-    @BindView(R.id.tv_follow)
-    TextView tvFollow;
-    @BindView(R.id.tv_follow_time)
-    TextView tvFollowTime;
-    @BindView(R.id.tv_follow_result)
-    TextView tvFollowResult;
     @BindView(R.id.tv_get)
     TextView tvGet;
     private Customer customer;
@@ -110,7 +104,7 @@ public class CustomerDetailsActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_get})
+    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list,R.id.tv_get})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -122,6 +116,9 @@ public class CustomerDetailsActivity extends BaseActivity {
                 intent.putExtra("customer",customer);
                 startActivityForResult(intent,1000);
                 break;
+           //查看跟进记录
+            case R.id.tv_follow_list:
+                 break;
             //客户信息-修改私有状态
             case R.id.tv_get:
                 updateCustomerState();

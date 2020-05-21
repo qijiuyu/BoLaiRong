@@ -73,6 +73,13 @@ public class ProductPlanDetailsActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("详情");
         listBean = (ProductPlan.ListBean) getIntent().getSerializableExtra("listBean");
+
+        /**
+         * 只有生产组长才可以“申请出库”
+         */
+        if(MyApplication.getRoleId()==3){
+            tvOutBound.setVisibility(View.VISIBLE);
+        }
     }
 
 

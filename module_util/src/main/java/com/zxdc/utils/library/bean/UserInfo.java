@@ -21,6 +21,7 @@ public class UserInfo extends BaseBean {
         private int deptId;
         private String mobile;
         private int status;
+        private int roleId;
 
         public int getUserId() {
             return userId;
@@ -68,6 +69,14 @@ public class UserInfo extends BaseBean {
 
         public void setStatus(int status) {
             this.status = status;
+        }
+
+        public int getRoleId() {
+            return roleId;
+        }
+
+        public void setRoleId(int roleId) {
+            this.roleId = roleId;
         }
     }
 }

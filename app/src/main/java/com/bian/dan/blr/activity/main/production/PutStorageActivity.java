@@ -98,7 +98,7 @@ public class PutStorageActivity extends BaseActivity {
                     return;
                 }
                 AddPutStorageP addPutStorageP=new AddPutStorageP();
-                addPutStorageP.setRequireId(requireId);
+                addPutStorageP.setId(requireId);
                 //遍历添加入库产品
                 List<AddPutStorageP.EntryList> entryList=new ArrayList<>();
                 for (int i=0;i<goodsList.size();i++){

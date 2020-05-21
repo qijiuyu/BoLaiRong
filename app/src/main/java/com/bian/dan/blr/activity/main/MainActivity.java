@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
@@ -23,6 +24,7 @@ import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
+import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -41,6 +43,15 @@ import butterknife.OnClick;
 
 /**
  * 首页
+ * 用户根据role_id区分角色
+ * 1：管理员
+ * 2：销售外勤
+ * 3：生产组长
+ * 4：财务
+ * 5：仓库
+ * 6：销售内勤
+ * 7：生产工人
+ *
  */
 public class MainActivity extends BaseActivity {
 
@@ -48,12 +59,56 @@ public class MainActivity extends BaseActivity {
     Banner banner;
     @BindView(R.id.tv_notice)
     SwitchTextView tvNotice;
+    @BindView(R.id.lin_sales)
+    LinearLayout linSales;
+    @BindView(R.id.lin_warehouse)
+    LinearLayout linWareHouse;
+    @BindView(R.id.lin_financial)
+    LinearLayout linFinancial;
+    @BindView(R.id.lin_product)
+    LinearLayout linProduct;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initView();
         showBanner();
         showNotice();
+    }
+
+
+    /**
+     * 初始化
+     */
+    private void initView(){
+        /**
+         * 通过角色id显示不同的功能
+         */
+        switch (MyApplication.getRoleId()){
+            case 2://销售外勤
+            case 6://销售内勤
+                linWareHouse.setVisibility(View.GONE);
+                linFinancial.setVisibility(View.GONE);
+                linProduct.setVisibility(View.GONE);
+                break;
+            case 4://财务
+                linSales.setVisibility(View.GONE);
+                linWareHouse.setVisibility(View.GONE);
+                linProduct.setVisibility(View.GONE);
+                 break;
+            case 5://仓库
+                linSales.setVisibility(View.GONE);
+                linFinancial.setVisibility(View.GONE);
+                linProduct.setVisibility(View.GONE);
+                break;
+            case 3://生产组长
+            case 7://生产工人
+                linWareHouse.setVisibility(View.GONE);
+                linFinancial.setVisibility(View.GONE);
+                linSales.setVisibility(View.GONE);
+            default:
+                break;
+        }
     }
 
 
