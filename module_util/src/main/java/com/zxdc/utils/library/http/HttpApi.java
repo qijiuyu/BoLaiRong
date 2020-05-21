@@ -202,5 +202,9 @@ public interface HttpApi {
     @GET(HttpConstant.GET_OUTBOUND_PRODUCT_LIST)
     Call<OutBoundProduct> getOutBoundProductList(@Query("planId") String planId, @Query("deptId")int deptId,@Query("outStatus")String outStatus,@Query("entryStatus")String entryStatus,@Query("page") int page, @Query("limit") int limit);
 
+    @GET(HttpConstant.GET_CUSTOMER_FOLLOW)
+    Call<Log> getFollow(@Query("customerId") int customerId, @Query("page") int page, @Query("limit") int limit);
+
+
 
 }

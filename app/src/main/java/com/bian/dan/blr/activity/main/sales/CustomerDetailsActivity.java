@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.application.MyApplication;
+import com.bian.dan.blr.view.CustomerFollow;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.Customer;
@@ -106,18 +107,21 @@ public class CustomerDetailsActivity extends BaseActivity {
 
     @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list,R.id.tv_get})
     public void onViewClicked(View view) {
+        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
             //编辑
             case R.id.tv_right:
-                Intent intent=new Intent(this,AddCustomerActivity.class);
+                intent.setClass(this,AddCustomerActivity.class);
                 intent.putExtra("customer",customer);
                 startActivityForResult(intent,1000);
                 break;
            //查看跟进记录
             case R.id.tv_follow_list:
+                 CustomerFollow customerFollow=new CustomerFollow(this,customer.getId());
+                 customerFollow.show();
                  break;
             //客户信息-修改私有状态
             case R.id.tv_get:

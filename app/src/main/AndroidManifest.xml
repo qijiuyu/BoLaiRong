@@ -117,7 +117,6 @@
         <activity android:name=".activity.main.production.SelectPlanCodeActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
 
 
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"

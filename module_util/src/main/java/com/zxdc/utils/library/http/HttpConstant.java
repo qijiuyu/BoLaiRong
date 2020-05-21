@@ -111,4 +111,6 @@ public class HttpConstant {
 
     public static final String GET_OUTBOUND_PRODUCT_LIST="outRequire/list";
 
+    public static final String GET_CUSTOMER_FOLLOW="saleLog/getList";
+
 }

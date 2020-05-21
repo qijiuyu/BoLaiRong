@@ -37,6 +37,7 @@ public class Log extends BaseBean {
         private String contacts="";
         private String phone="";
         private String createDate="";
+        private String operater="";
 
         public int getId() {
             return id;
@@ -92,6 +93,14 @@ public class Log extends BaseBean {
 
         public void setCreateDate(String createDate) {
             this.createDate = createDate;
+        }
+
+        public String getOperater() {
+            return operater;
+        }
+
+        public void setOperater(String operater) {
+            this.operater = operater;
         }
     }
 }

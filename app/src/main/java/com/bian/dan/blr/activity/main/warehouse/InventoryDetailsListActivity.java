@@ -21,6 +21,7 @@ import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -75,7 +76,7 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
         inventoryPersenter=new InventoryPersenter(this);
         listBean= (Inventory.ListBean) getIntent().getSerializableExtra("listBean");
         if(listBean!=null){
-            tvKey.setTag(listBean.getId());
+            tvKey.setTag(listBean.getGoodsId());
             tvKey.setText(listBean.getGoodsName()+"/"+listBean.getBrand()+"/"+listBean.getSpec());
             imgClear.setVisibility(View.VISIBLE);
         }
@@ -159,6 +160,7 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
         if(!TextUtils.isEmpty(tvList.getText().toString())){
             stockType=tvList.getTag().toString();
         }
+        LogUtils.e(goodId+"++++++++++++++++++"+type+"+++++++++++++++"+stockType);
         HttpMethod.getInventoryDetails(goodId,type ,stockType, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();

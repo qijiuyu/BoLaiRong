@@ -935,4 +935,21 @@ public class HttpMethod extends BaseRequst {
             }
         });
     }
+
+
+    /**
+     * 获取客户跟进列表
+     */
+    public static void getFollow(int customerId,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getFollow(customerId,page,limit).enqueue(new Callback<Log>() {
+            public void onResponse(Call<Log> call, Response<Log> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Log> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
 }

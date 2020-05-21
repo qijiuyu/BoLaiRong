@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -221,26 +220,25 @@
                 android:background="@drawable/tv_bottom"
                 android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:text="跟进记录"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:gravity="center"/>
 
+            <TextView
+                android:id="@+id/tv_get"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorPrimary"
+                android:text="领取"
+                android:textSize="15sp"
+                android:textColor="@android:color/white"
+                android:gravity="center"/>
+
         </LinearLayout>
 
     </ScrollView>
-
-    <TextView
-        android:id="@+id/tv_get"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="领取"
-        android:textSize="15sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"/>
 
 </RelativeLayout>
