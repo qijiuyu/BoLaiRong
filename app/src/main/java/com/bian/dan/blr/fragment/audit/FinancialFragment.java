@@ -98,7 +98,7 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
      * 获取报销列表
      */
     private void getAuditFinancialList(){
-        HttpMethod.getAuditFinancialList(((AuditFinancialActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
+        HttpMethod.getAuditFinancialList(((AuditFinancialActivity)mActivity).pageIndex==0 ? "0" : "1,2", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

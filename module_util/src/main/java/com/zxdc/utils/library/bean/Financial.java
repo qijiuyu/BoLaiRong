@@ -19,6 +19,16 @@ public class Financial extends BaseBean{
 
         private List<ListBean> rows;
 
+        private int total;
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
         public List<ListBean> getRows() {
             return rows;
         }

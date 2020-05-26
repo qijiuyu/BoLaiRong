@@ -99,7 +99,7 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
      * 获取出库单列表
      */
     private void getOutBoundList() {
-        HttpMethod.getOutBoundListByAudit(((AuditOutBoundActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
+        HttpMethod.getOutBoundListByAudit(((AuditOutBoundActivity)mActivity).pageIndex==0 ? "0" : "1,2", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

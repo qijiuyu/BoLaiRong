@@ -94,12 +94,12 @@ public class AuditProductPlanDetailsActivity extends BaseActivity {
                 break;
             //同意
             case R.id.tv_ok:
-                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),"1",null);
                 auditPersenter.showAuditDialog(auditOutBoundP,2);
                 break;
             //驳回
             case R.id.tv_no:
-                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),"2",null);
                 auditPersenter.showAuditDialog(auditOutBoundP,2);
                 break;
             default:

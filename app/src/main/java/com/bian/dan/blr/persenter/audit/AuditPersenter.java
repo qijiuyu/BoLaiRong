@@ -10,9 +10,14 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.google.gson.Gson;
 import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.OutBound;
+import com.zxdc.utils.library.bean.Procurement;
+import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -159,6 +164,97 @@ public class AuditPersenter {
                     activity.finish();
                 }
                 ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+
+    /**
+     * 获取出库单列表
+     */
+    public void getOutBoundList() {
+        HttpMethod.getOutBoundListByAudit("0", 1, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                OutBound outBound= (OutBound) object;
+                if(outBound.isSussess()){
+                    if(activity instanceof AuditActivity){
+                        ((AuditActivity)activity).showNewsNum(1,outBound.getData().getTotal());
+                    }
+                }else{
+                    ToastUtil.showLong(outBound.getMsg());
+                }
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 获取报销列表
+     */
+    public void getAuditFinancialList(){
+        HttpMethod.getAuditFinancialList("0" , 1, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                Financial financial= (Financial) object;
+                if(financial.isSussess()){
+                    if(activity instanceof AuditActivity){
+                        ((AuditActivity)activity).showNewsNum(4,financial.getData().getTotal());
+                    }
+                }else{
+                    ToastUtil.showLong(financial.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 获取审核-采购单
+     */
+    public void getAuditProcurementList() {
+        HttpMethod.getAuditProcurementList("0", 1, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                Procurement procurement= (Procurement) object;
+                if(procurement.isSussess()){
+                    if(activity instanceof AuditActivity){
+                        ((AuditActivity)activity).showNewsNum(3,procurement.getData().getTotal());
+                    }
+                }else{
+                    ToastUtil.showLong(procurement.getMsg());
+                }
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 获取生产计划列表
+     */
+    public void getPlanList(){
+        HttpMethod.getAuditPlan("0", 1, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                ProductPlan productPlan= (ProductPlan) object;
+                if(productPlan.isSussess()){
+                    if(activity instanceof AuditActivity){
+                        ((AuditActivity)activity).showNewsNum(2,productPlan.getData().getTotal());
+                    }
+                }else{
+                    ToastUtil.showLong(productPlan.getMsg());
+                }
             }
 
             public void onFail(Throwable t) {

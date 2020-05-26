@@ -50,12 +50,13 @@
 
         <TextView
             android:id="@+id/tv_ckd"
+            android:visibility="gone"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_audit_news"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2"
+            android:text="0"
             android:textSize="10sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>
@@ -84,12 +85,13 @@
 
         <TextView
             android:id="@+id/tv_scjh"
+            android:visibility="gone"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_audit_news"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2"
+            android:text="0"
             android:textSize="10sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>
@@ -119,12 +121,13 @@
 
         <TextView
             android:id="@+id/tv_cgd"
+            android:visibility="gone"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_audit_news"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2"
+            android:text="0"
             android:textSize="10sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>
@@ -154,12 +157,13 @@
 
         <TextView
             android:id="@+id/tv_bxd"
+            android:visibility="gone"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:background="@drawable/bg_audit_news"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2"
+            android:text="0"
             android:textSize="10sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>

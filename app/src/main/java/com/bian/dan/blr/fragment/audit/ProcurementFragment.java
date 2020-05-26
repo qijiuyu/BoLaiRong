@@ -99,7 +99,7 @@ public class ProcurementFragment extends BaseFragment implements MyRefreshLayout
      * 获取审核-采购单
      */
     private void getAuditProcurementList() {
-        HttpMethod.getAuditProcurementList(((AuditProcurementActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
+        HttpMethod.getAuditProcurementList(((AuditProcurementActivity)mActivity).pageIndex==0 ? "0" : "1,2", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

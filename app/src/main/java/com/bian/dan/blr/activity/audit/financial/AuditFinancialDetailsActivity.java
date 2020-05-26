@@ -93,12 +93,12 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
                 break;
             //同意
             case R.id.tv_ok:
-                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),String.valueOf(detailsBean.getUserId()),1,null);
                 auditPersenter.showAuditDialog(auditOutBoundP,4);
                 break;
             //驳回
             case R.id.tv_no:
-                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),String.valueOf(detailsBean.getUserId()),2,null);
                 auditPersenter.showAuditDialog(auditOutBoundP,4);
                 break;
             default:

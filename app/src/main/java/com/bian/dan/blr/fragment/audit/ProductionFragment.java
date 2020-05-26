@@ -98,7 +98,7 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
      * 获取生产计划列表
      */
     private void getPlanList(){
-        HttpMethod.getAuditPlan(((AuditProductionActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
+        HttpMethod.getAuditPlan(((AuditProductionActivity)mActivity).pageIndex==0 ? "0" : "1,2", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
