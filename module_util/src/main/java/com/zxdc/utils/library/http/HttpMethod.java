@@ -7,6 +7,7 @@ import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
+import com.zxdc.utils.library.bean.CustomerState;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.Device;
@@ -15,6 +16,7 @@ import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
+import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
@@ -34,6 +36,9 @@ import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.StatisticalGoods;
+import com.zxdc.utils.library.bean.StatisticalMaterial;
+import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -1163,4 +1168,88 @@ public class HttpMethod extends BaseRequst {
         });
     }
 
+
+    /**
+     * 获取收支对比
+     */
+    public static void getIncome(String startDate,String endDate,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getIncome(startDate,endDate).enqueue(new Callback<Income>() {
+            public void onResponse(Call<Income> call, Response<Income> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Income> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 客户状态统计
+     */
+    public static void getCustomerState(final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomerState().enqueue(new Callback<CustomerState>() {
+            public void onResponse(Call<CustomerState> call, Response<CustomerState> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<CustomerState> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 销售单数及销售金额统计
+     */
+    public static void getStatistionSales(String endDate,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getStatistionSales(endDate).enqueue(new Callback<StatisticalSales>() {
+            public void onResponse(Call<StatisticalSales> call, Response<StatisticalSales> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<StatisticalSales> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 原料消耗月度统计
+     */
+    public static void getStatisticalMaterial(String endDate,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getStatisticalMaterial(endDate).enqueue(new Callback<StatisticalMaterial>() {
+            public void onResponse(Call<StatisticalMaterial> call, Response<StatisticalMaterial> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<StatisticalMaterial> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 成品统计
+     */
+    public static void getStatisticalGoods(final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getStatisticalGoods().enqueue(new Callback<StatisticalGoods>() {
+            public void onResponse(Call<StatisticalGoods> call, Response<StatisticalGoods> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<StatisticalGoods> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
 }

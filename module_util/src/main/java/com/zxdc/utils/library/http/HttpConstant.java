@@ -129,6 +129,16 @@ public class HttpConstant {
 
     public static final String AUDIT_FINANCIAL="approve/reimFinance";
 
+    public static final String GET_INCOME="bigScreen/getBalanceContrast";
+
+    public static final String GET_CUSTOMER_STATE="bigScreen/customer";
+
+    public static final String GET_STATISTICAL_SALES="bigScreen/saleMonthList";
+
+    public static final String GET_STATISTICAL_MATERIAL="bigScreen/rawMonthList";
+
+    public static final String GET_STATISTICAL_GOODS="bigScreen/statisticsByProductType";
+
 
 
 }

@@ -1,10 +1,20 @@
 package com.bian.dan.blr.persenter.statistical;
 
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.bian.dan.blr.activity.statistical.StatisticalActivity;
 import com.bian.dan.blr.view.time.CustomDatePicker;
+import com.zxdc.utils.library.bean.CustomerState;
+import com.zxdc.utils.library.bean.Income;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.StatisticalGoods;
+import com.zxdc.utils.library.bean.StatisticalMaterial;
+import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.DateUtils;
+import com.zxdc.utils.library.util.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,12 +43,31 @@ public class StatisticalPersenter {
 
     /**
      * 选择时间
-     * @param tvTime
+     * @param type: 1开始日期，  2结束日期
      */
-    public void selectTime(final TextView tvTime){
+    public void selectTime(final TextView tvStart,final TextView tvEnd,final int type){
         CustomDatePicker customDatePicker = new CustomDatePicker(activity, new CustomDatePicker.ResultHandler() {
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTime.setText(time.split(" ")[0]);
+                String timeStr=time.split(" ")[0];
+                final String start=tvStart.getText().toString().trim();
+                final String end=tvEnd.getText().toString().trim();
+                //判断选择的开始日期是否大于结束日期
+                if(type==1){
+                    if(!TextUtils.isEmpty(end) && !DateUtils.judgeTime(timeStr,end)){
+                        ToastUtil.showLong("开始日期不能大于结束日期");
+                        return;
+                    }
+                    tvStart.setText(timeStr);
+                }
+
+                //判断选择的结束日期不能小于开始日期
+                if(type==2){
+                    if(!TextUtils.isEmpty(start) && !DateUtils.judgeTime(start,timeStr)){
+                        ToastUtil.showLong("结束日期不能小于开始日期");
+                        return;
+                    }
+                    tvEnd.setText(timeStr);
+                }
             }
         }, "1920-01-01 00:00", "2050-12-31 23:59");
         customDatePicker.showSpecificTime(false); // 不显示时和分
@@ -46,8 +75,7 @@ public class StatisticalPersenter {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String now = sdf.format(new Date());
-        tvTime.setText(now.split(" ")[0]);
-        customDatePicker.show(tvTime.getText().toString());
+        customDatePicker.show(now.split(" ")[0]);
     }
 
 
@@ -122,4 +150,114 @@ public class StatisticalPersenter {
         lineChartView.setLineChartData(data);
     }
 
+
+    /**
+     * 获取收支对比
+     */
+    public void getIncome(String startDate,String endDate){
+        HttpMethod.getIncome(startDate, endDate, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                Income income= (Income) object;
+                if(income.isSussess()){
+                    //显示财政收支对比
+                    activity.showViewFiscal(income.getData());
+                }else{
+                    ToastUtil.showLong(income.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 获取客户状态统计
+     */
+    public void getCustomerState(){
+        HttpMethod.getCustomerState( new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                CustomerState customerState= (CustomerState) object;
+                if(customerState.isSussess()){
+                    activity.showViewCustomer(customerState.getData());
+                }else{
+                    ToastUtil.showLong(customerState.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 销售单数及销售金额统计
+     */
+    public void getStatistionSales(String endTime){
+        HttpMethod.getStatistionSales(endTime, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                StatisticalSales statisticalSales= (StatisticalSales) object;
+                if(statisticalSales.isSussess()){
+                    //显示销售订单模块
+                    activity.showViewOrder(statisticalSales.getData());
+                    //显示销售金额模块
+                    activity.showViewSalesMoney(statisticalSales.getData());
+                }else{
+                    ToastUtil.showLong(statisticalSales.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 原料消耗月度统计
+     */
+    public void getStatisticalMaterial(String endTime){
+        HttpMethod.getStatisticalMaterial(endTime, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                StatisticalMaterial statisticalMaterial= (StatisticalMaterial) object;
+                if(statisticalMaterial.isSussess()){
+                    //显示物料使用趋势模块
+                    activity.showMaterial(statisticalMaterial.getData());
+                }else{
+                    ToastUtil.showLong(statisticalMaterial.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 成品统计
+     */
+    public void getStatisticalGoods(){
+        HttpMethod.getStatisticalGoods(new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                StatisticalGoods statisticalGoods= (StatisticalGoods) object;
+                if(statisticalGoods.isSussess()){
+                    //显示成品统计
+                    activity.showProduct(statisticalGoods.getData());
+                }else{
+                    ToastUtil.showLong(statisticalGoods.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
 }

@@ -1,6 +1,7 @@
 package com.zxdc.utils.library.util;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class BigDecimalUtil {
 
@@ -139,5 +140,19 @@ public class BigDecimalUtil {
             return false;
         }
         return 0 == b1.compareTo(b2);
+    }
+
+
+    /**
+     * 两个数的百分比%
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public static int percentage(double num1,double num2){
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        numberFormat.setMaximumFractionDigits(0);
+        String result = numberFormat.format(num1 / num2 * 100);
+        return Integer.parseInt(result);
     }
 }

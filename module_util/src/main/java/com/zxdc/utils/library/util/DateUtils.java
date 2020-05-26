@@ -1,6 +1,8 @@
 package com.zxdc.utils.library.util;
 
 import android.text.TextUtils;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -213,6 +215,27 @@ public class DateUtils {
         }
         return "";
 
+    }
+
+
+    /**
+     * 判断两个时间大小
+     * @param start
+     * @param end
+     * @return
+     */
+    public static boolean judgeTime(String start,String end){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dt1 =df.parse(start);
+            Date dt2 =df.parse(end);
+            if (dt1.getTime()<dt2.getTime()) {
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  false;
     }
 
 }

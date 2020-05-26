@@ -8,6 +8,7 @@ import com.zxdc.utils.library.bean.Contract;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.CustomerDetails;
 import com.zxdc.utils.library.bean.CustomerList;
+import com.zxdc.utils.library.bean.CustomerState;
 import com.zxdc.utils.library.bean.Department;
 import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.Device;
@@ -16,6 +17,7 @@ import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
+import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Log;
@@ -34,6 +36,9 @@ import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.StatisticalGoods;
+import com.zxdc.utils.library.bean.StatisticalMaterial;
+import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -246,6 +251,20 @@ public interface HttpApi {
     @POST(HttpConstant.AUDIT_FINANCIAL)
     Call<BaseBean> AuditFinancial(@Body AuditOutBoundP auditOutBoundP);
 
+    @GET(HttpConstant.GET_INCOME)
+    Call<Income> getIncome(@Query("startDate") String startDate,@Query("endDate") String endDate);
+
+    @GET(HttpConstant.GET_CUSTOMER_STATE)
+    Call<CustomerState> getCustomerState();
+
+    @GET(HttpConstant.GET_STATISTICAL_SALES)
+    Call<StatisticalSales> getStatistionSales(@Query("endDate") String endDate);
+
+    @GET(HttpConstant.GET_STATISTICAL_MATERIAL)
+    Call<StatisticalMaterial> getStatisticalMaterial(@Query("endDate") String endDate);
+
+    @GET(HttpConstant.GET_STATISTICAL_GOODS)
+    Call<StatisticalGoods> getStatisticalGoods();
 
 
 }

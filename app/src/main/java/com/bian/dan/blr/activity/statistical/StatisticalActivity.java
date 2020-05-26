@@ -3,6 +3,9 @@ package com.bian.dan.blr.activity.statistical;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -13,11 +16,18 @@ import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.CustomerState;
+import com.zxdc.utils.library.bean.Income;
+import com.zxdc.utils.library.bean.StatisticalGoods;
+import com.zxdc.utils.library.bean.StatisticalMaterial;
+import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.util.BigDecimalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -37,7 +47,7 @@ import lecho.lib.hellocharts.view.PieChartView;
 /**
  * 统计
  */
-public class StatisticalActivity extends BaseActivity {
+public class StatisticalActivity extends BaseActivity implements TextWatcher{
 
     @BindView(R.id.scrollView)
     ScrollView scrollView;
@@ -73,20 +83,31 @@ public class StatisticalActivity extends BaseActivity {
     TextView tvStartMaterial;
     @BindView(R.id.tv_end_material)
     TextView tvEndMaterial;
+    @BindView(R.id.tv_customer_num)
+    TextView tvCustomerNum;
     private StatisticalPersenter statisticalPersenter;
-
+    /**
+     * 1：财务收支对比
+     * 2：销售订单增长趋势
+     * 3：销售金额增长趋势
+     * 4：物料使用趋势
+     */
+    private int selectTime;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_statistical);
-//        ButterKnife.bind(this);
-//        initView();
-//        showViewFiscal();
-//        showViewCustomer();
-//        showViewOrder();
-//        showViewSalesMoney();
-//        showMaterial();
-//        showProduct();
-
+        setContentView(R.layout.activity_statistical);
+        ButterKnife.bind(this);
+        initView();
+        //获取收支对比
+        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
+        //获取客户状态统计
+        statisticalPersenter.getCustomerState();
+        //销售单数及销售金额统计
+        statisticalPersenter.getStatistionSales("2020-05-26");
+        //原料消耗月度统计
+        statisticalPersenter.getStatisticalMaterial("2020-05-26");
+        //成品统计
+        statisticalPersenter.getStatisticalGoods();
     }
 
     /**
@@ -94,6 +115,66 @@ public class StatisticalActivity extends BaseActivity {
      */
     private void initView() {
         statisticalPersenter = new StatisticalPersenter(this);
+        tvStartFiscal.addTextChangedListener(this);
+        tvEndFiscal.addTextChangedListener(this);
+        tvStartSalesOrder.addTextChangedListener(this);
+        tvEndSalesOrder.addTextChangedListener(this);
+        tvStartSalesMoney.addTextChangedListener(this);
+        tvEndSalesMoney.addTextChangedListener(this);
+        tvStartMaterial.addTextChangedListener(this);
+        tvEndMaterial.addTextChangedListener(this);
+    }
+
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String start,end;
+        switch (selectTime){
+            //财务收支对比
+            case 1:
+                 start=tvStartFiscal.getText().toString().trim();
+                 end=tvEndFiscal.getText().toString().trim();
+                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
+                     statisticalPersenter.getIncome(start,end);
+                 }
+                 break;
+            //销售订单增长趋势
+            case 2:
+                 start=tvStartSalesOrder.getText().toString().trim();
+                 end=tvEndSalesOrder.getText().toString().trim();
+                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
+                     showViewOrder(salesBean);
+                 }
+                break;
+            //销售金额增长趋势
+            case 3:
+                 start=tvStartSalesMoney.getText().toString().trim();
+                 end=tvEndSalesMoney.getText().toString().trim();
+                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
+
+                 }
+                break;
+            //物料使用趋势
+            case 4:
+                 start=tvStartMaterial.getText().toString().trim();
+                 end=tvEndMaterial.getText().toString().trim();
+                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
+
+                 }
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -102,32 +183,39 @@ public class StatisticalActivity extends BaseActivity {
         switch (view.getId()) {
             //财务收支对比-开始日期
             case R.id.tv_start_fiscal:
-                statisticalPersenter.selectTime(tvStartFiscal);
+                selectTime=1;
+                statisticalPersenter.selectTime(tvStartFiscal,tvEndFiscal,1);
                 break;
-            //财务收支对比-结束日期
             case R.id.tv_end_fiscal:
-                statisticalPersenter.selectTime(tvEndFiscal);
+                selectTime=1;
+                statisticalPersenter.selectTime(tvStartFiscal,tvEndFiscal,2);
                 break;
             //销售订单增长趋势-开始日期
             case R.id.tv_start_sales_order:
-                statisticalPersenter.selectTime(tvStartSalesOrder);
+                selectTime=2;
+                statisticalPersenter.selectTime(tvStartSalesOrder,tvEndSalesOrder,1);
                 break;
             case R.id.tv_end_sales_order:
-                statisticalPersenter.selectTime(tvEndSalesOrder);
+                selectTime=2;
+                statisticalPersenter.selectTime(tvStartSalesOrder,tvEndSalesOrder,2);
                 break;
             //销售金额增长趋势-开始日期
             case R.id.tv_start_sales_money:
-                statisticalPersenter.selectTime(tvStartSalesMoney);
+                selectTime=3;
+                statisticalPersenter.selectTime(tvStartSalesMoney,tvEndSalesMoney,1);
                 break;
             case R.id.tv_end_sales_money:
-                statisticalPersenter.selectTime(tvEndSalesMoney);
+                selectTime=3;
+                statisticalPersenter.selectTime(tvStartSalesMoney,tvEndSalesMoney,2);
                 break;
             //物料使用趋势-开始日期
             case R.id.tv_start_material:
-                statisticalPersenter.selectTime(tvStartMaterial);
+                selectTime=4;
+                statisticalPersenter.selectTime(tvStartMaterial,tvEndMaterial,1);
                 break;
             case R.id.tv_end_material:
-                statisticalPersenter.selectTime(tvEndMaterial);
+                selectTime=4;
+                statisticalPersenter.selectTime(tvStartMaterial,tvEndMaterial,2);
                 break;
             default:
                 break;
@@ -138,10 +226,19 @@ public class StatisticalActivity extends BaseActivity {
     /**
      * 显示财政收支对比
      */
-    private void showViewFiscal() {
-        List<SliceValue> values = new ArrayList<SliceValue>();
-        SliceValue sliceValue = new SliceValue(70, Color.parseColor("#FE8E2C"));
-        SliceValue sliceValue2 = new SliceValue(30, Color.parseColor("#47C9FB"));
+    public void showViewFiscal(Income.IncomeBean incomeBean) {
+        if(incomeBean==null){
+            return;
+        }
+        //显示支出与收入数据
+        tvIncome.setText(String.valueOf(incomeBean.getIncome()));
+        tvSpending.setText(String.valueOf(incomeBean.getSpending()));
+
+        //计算收入与支出的百分比
+        final int num1=BigDecimalUtil.percentage(incomeBean.getIncome(),incomeBean.getSpending());
+        List<SliceValue> values = new ArrayList<>();
+        SliceValue sliceValue = new SliceValue(num1, Color.parseColor("#FE8E2C"));
+        SliceValue sliceValue2 = new SliceValue(100-num1, Color.parseColor("#47C9FB"));
         values.add(sliceValue);
         values.add(sliceValue2);
         PieChartData data = new PieChartData(values);
@@ -167,14 +264,20 @@ public class StatisticalActivity extends BaseActivity {
     /**
      * 显示客户状态统计
      */
-    private void showViewCustomer() {
+    public void showViewCustomer(CustomerState.StateBean stateBean) {
+        if(stateBean==null){
+            return;
+        }
         AnimatedPieViewConfig config = new AnimatedPieViewConfig();
         List<SimplePieInfo> list = new ArrayList<>();
-        list.add(new SimplePieInfo(30, Color.parseColor("#47C9FB"), "成交客户"));
-        list.add(new SimplePieInfo(20, Color.parseColor("#FE8E2C"), "培养客户"));
-        list.add(new SimplePieInfo(30, Color.parseColor("#007AFF"), "潜在客户"));
-        list.add(new SimplePieInfo(10, Color.parseColor("#FF4B4C"), "理想客户"));
-        list.add(new SimplePieInfo(10, Color.parseColor("#47C9FB"), "优质客户"));
+        list.add(new SimplePieInfo(stateBean.getName1(), Color.parseColor("#FFFF00"), "潜在客户"));
+        list.add(new SimplePieInfo(stateBean.getName2(), Color.parseColor("#F9B552"), "死单客户"));
+        list.add(new SimplePieInfo(stateBean.getName3(), Color.parseColor("#F29EC2"), "渠道客户"));
+        list.add(new SimplePieInfo(stateBean.getName4(), Color.parseColor("#8C98CC"), "流失客户"));
+        list.add(new SimplePieInfo(stateBean.getName5(), Color.parseColor("#1CFEBC"), "意向客户"));
+        list.add(new SimplePieInfo(stateBean.getName6(), Color.parseColor("#04C8FC"), "培养客户"));
+        list.add(new SimplePieInfo(stateBean.getName7(), Color.parseColor("#468DFF"), "成交客户"));
+        list.add(new SimplePieInfo(stateBean.getName8(), Color.parseColor("#12B5B0"), "客户线索"));
         for (int i = 0; i < list.size(); i++) {
             config.addData(list.get(i));
         }
@@ -195,23 +298,34 @@ public class StatisticalActivity extends BaseActivity {
                 .splitAngle(0);// 甜甜圈间隙角度
         viewCustomer.applyConfig(config);
         viewCustomer.start();
+
+        //总数量
+        tvCustomerNum.setText(String.valueOf(stateBean.getName1()+stateBean.getName2()+stateBean.getName3()+stateBean.getName4()+stateBean.getName5()+stateBean.getName6()+stateBean.getName7()+stateBean.getName8()));
     }
 
 
     /**
      * 显示销售订单模块
      */
-    private void showViewOrder() {
-        String[] date = {"2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-08", "2020-09", "2020-10"};//X轴的数据
-        float[] score = {20, 10, 5, 12, 10, 7, 5, 17, 12, 6};//x轴对应的y值
-        statisticalPersenter.setChartLine(date, score, Color.parseColor("#4AC9FB"), Color.parseColor("#DAF5FE"), viewOrder);
+    StatisticalSales.SalesBean salesBean;
+    public void showViewOrder(StatisticalSales.SalesBean salesBean) {
+        if(salesBean==null){
+            return;
+        }
+        this.salesBean=salesBean;
+        //遍历获取要显示的值
+        float[] score =new float[salesBean.getDataList().size()];
+        for (int i=0;i<salesBean.getDataList().size();i++){
+             score[i]=salesBean.getDataList().get(i).getNum();
+        }
+        statisticalPersenter.setChartLine(salesBean.getTimeList(), score, Color.parseColor("#4AC9FB"), Color.parseColor("#DAF5FE"), viewOrder);
         // 下面的这个api控制 滑动
-        Viewport v = new Viewport(viewOrder.getMaximumViewport());
-        v.bottom = 0;
-        v.top = 20;
-        viewOrder.setMaximumViewport(v);
-        v.left = date.length - 7;
-        v.right = date.length - 1;
+        final Viewport v = new Viewport(viewOrder.getMaximumViewport());
+//        v.bottom = 0;
+//        v.top = 20;
+//        viewOrder.setMaximumViewport(v);
+        v.left = score.length - 7;
+        v.right = score.length - 1;
         viewOrder.setCurrentViewport(v);
     }
 
@@ -219,17 +333,23 @@ public class StatisticalActivity extends BaseActivity {
     /**
      * 显示销售金额模块
      */
-    private void showViewSalesMoney() {
-        String[] date = {"2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-059", "2020-09", "2020-10"};//X轴的数据
-        float[] score = {70, 30, 60, 50, 10, 40, 20, 70, 30, 60};//x轴对应的y值
-        statisticalPersenter.setChartLine(date, score, Color.parseColor("#F6B467"), Color.parseColor("#FCEFDF"), viewSalesMoney);
+    public void showViewSalesMoney(StatisticalSales.SalesBean salesBean) {
+        if(salesBean==null){
+            return;
+        }
+        //遍历获取要显示的值
+        float[] score =new float[salesBean.getDataList().size()];
+        for (int i=0;i<salesBean.getDataList().size();i++){
+            score[i]=salesBean.getDataList().get(i).getAmmount();
+        }
+        statisticalPersenter.setChartLine(salesBean.getTimeList(), score, Color.parseColor("#F6B467"), Color.parseColor("#FCEFDF"), viewSalesMoney);
         // 下面的这个api控制 滑动
         Viewport v = new Viewport(viewSalesMoney.getMaximumViewport());
-        v.bottom = 0;
-        v.top = 70;
+//        v.bottom = 0;
+//        v.top = 70;
         viewSalesMoney.setMaximumViewport(v);
-        v.left = date.length - 7;
-        v.right = date.length - 1;
+        v.left = score.length - 7;
+        v.right = score.length - 1;
         viewSalesMoney.setCurrentViewport(v);
     }
 
@@ -237,17 +357,23 @@ public class StatisticalActivity extends BaseActivity {
     /**
      * 显示物料使用趋势模块
      */
-    private void showMaterial() {
-        String[] date = {"2020-01", "2020-02", "2020-03", "2020-04", "2020-05", "2020-06", "2020-07", "2020-059", "2020-09", "2020-10", "2020-11"};//X轴的数据
-        float[] score = {500, 300, 200, 100, 600, 800, 500, 150, 320, 230, 320};//x轴对应的y值
-        statisticalPersenter.setChartLine(date, score, Color.parseColor("#5FDB75"), Color.parseColor("#C9EFC8"), viewMaterial);
+    public void showMaterial(StatisticalMaterial.MaterialBean materialBean) {
+        if(materialBean==null){
+            return;
+        }
+        //遍历获取要显示的值
+        float[] score =new float[materialBean.getDataList().size()];
+        for (int i=0;i<materialBean.getDataList().size();i++){
+            score[i]=materialBean.getDataList().get(i).getTotal();
+        }
+        statisticalPersenter.setChartLine(materialBean.getTimeList(), score, Color.parseColor("#5FDB75"), Color.parseColor("#C9EFC8"), viewMaterial);
         // 下面的这个api控制 滑动
         Viewport v = new Viewport(viewMaterial.getMaximumViewport());
-        v.bottom = 0;
-        v.top = 800;
+//        v.bottom = 0;
+//        v.top = 800;
         viewMaterial.setMaximumViewport(v);
-        v.left = date.length - 7;
-        v.right = date.length - 1;
+        v.left = score.length - 7;
+        v.right = score.length - 1;
         viewMaterial.setCurrentViewport(v);
     }
 
@@ -255,12 +381,15 @@ public class StatisticalActivity extends BaseActivity {
     /**
      * 显示成品统计
      */
-    private void showProduct() {
+    public void showProduct(StatisticalGoods.GoodBean goodBean) {
+        if(goodBean==null){
+            return;
+        }
         List<Column> columns = new ArrayList<>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < 7; ++i) {
-            values = new ArrayList<>();
-            values.add(new SubcolumnValue((float) Math.random() * 50f + 5, Color.parseColor("#04BFF2")));
+        int[] score=new int[]{goodBean.getName1(),goodBean.getName2(),goodBean.getName3(),goodBean.getName4(),goodBean.getName5(),goodBean.getName6(),goodBean.getName7()};
+        for (int i = 0; i < score.length; ++i) {
+            List<SubcolumnValue> values = new ArrayList<>();
+            values.add(new SubcolumnValue((float)score[i], Color.parseColor("#04BFF2")));
             Column column = new Column(values);
             column.setHasLabels(false);
             column.setHasLabelsOnlyForSelected(false);
@@ -271,13 +400,13 @@ public class StatisticalActivity extends BaseActivity {
         //X轴
         //底部标题
         List<String> title = new ArrayList<>();
-        title.add("星期一");
-        title.add("星期二");
-        title.add("星期三");
-        title.add("星期四");
-        title.add("星期五");
-        title.add("星期六");
-        title.add("星期日");
+        title.add("棕色");
+        title.add("黑色");
+        title.add("焊接");
+        title.add("琥珀色");
+        title.add("非标");
+        title.add("低端");
+        title.add("整体聚晶");
         List<AxisValue> axisXValues = new ArrayList<>();
         for (int i = 0; i < title.size(); i++) {
             //设置X轴的柱子所对应的属性名称(底部文字)
@@ -310,12 +439,11 @@ public class StatisticalActivity extends BaseActivity {
 
         // 下面的这个api控制 滑动
         Viewport v = new Viewport(viewProduct.getMaximumViewport());
-        v.bottom = 0;
-        v.top = 70;
+//        v.bottom = 0;
+//        v.top = 70;
         viewProduct.setMaximumViewport(v);
-        v.left = 0;
-        v.right = 9;
+        v.left = score.length - 7;
+        v.right = score.length - 1;
         viewProduct.setCurrentViewport(v);
     }
-
 }
