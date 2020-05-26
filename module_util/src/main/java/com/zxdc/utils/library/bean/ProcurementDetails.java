@@ -94,7 +94,7 @@ public class ProcurementDetails extends BaseBean {
         private String typeName="";
         private String spec="";
         private String unitName="";
-        private String photo="";
+        private String phone="";
         private String address="";
         private String purcName="";
         private String contacts="";
@@ -187,12 +187,12 @@ public class ProcurementDetails extends BaseBean {
             this.unitName = unitName;
         }
 
-        public String getPhoto() {
-            return photo;
+        public String getPhone() {
+            return phone;
         }
 
-        public void setPhoto(String photo) {
-            this.photo = photo;
+        public void setPhone(String phone) {
+            this.phone = phone;
         }
 
         public String getAddress() {

@@ -346,8 +346,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"/>
 
-            <EditText
-                android:id="@+id/et_address"
+            <TextView
+                android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -450,8 +450,10 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
                 android:textColor="@color/color_666666"
+                android:background="@drawable/bg__four_border"
+                android:padding="10dp"
+                android:hint="请输入"
                 android:textSize="14sp"
-                android:background="@null"
                 android:minLines="4"
                 android:gravity="top" />
 

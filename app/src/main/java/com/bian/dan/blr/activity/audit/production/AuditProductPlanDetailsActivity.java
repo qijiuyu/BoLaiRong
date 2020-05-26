@@ -15,7 +15,6 @@ import com.bian.dan.blr.persenter.audit.AuditPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.PlanDetails;
-import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
@@ -61,7 +60,8 @@ public class AuditProductPlanDetailsActivity extends BaseActivity {
     LinearLayout linPlay;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
-    private ProductPlan.ListBean listBean;
+    //详情id
+    private int detailsId;
     //详情对象
     private  PlanDetails.DetailsBean detailsBean;
     private AuditPersenter auditPersenter;
@@ -81,24 +81,26 @@ public class AuditProductPlanDetailsActivity extends BaseActivity {
     private void initView(){
         tvHead.setText("详情");
         auditPersenter=new AuditPersenter(this);
-        listBean= (ProductPlan.ListBean) getIntent().getSerializableExtra("listBean");
+        detailsId=getIntent().getIntExtra("detailsId",0);
     }
 
 
     @OnClick({R.id.lin_back, R.id.tv_ok, R.id.tv_no})
     public void onViewClicked(View view) {
+        AuditOutBoundP auditOutBoundP;
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
             //同意
             case R.id.tv_ok:
-                AuditOutBoundP auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
-                auditPersenter.AuditPlan(auditOutBoundP);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,2);
                 break;
             //驳回
             case R.id.tv_no:
-                auditPersenter.showAuditDialog(detailsBean,2);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,2);
                 break;
             default:
                 break;
@@ -110,12 +112,12 @@ public class AuditProductPlanDetailsActivity extends BaseActivity {
      * 获取生产计划详情
      */
     private void getPlanDetails(){
-        if(listBean==null){
+        if(detailsId==0){
             return;
         }
         DialogUtil.showProgress(this,"数据加载中");
         final UserInfo userInfo= MyApplication.getUser();
-        HttpMethod.getPlanDetails(listBean.getId(), userInfo.getUser().getDeptId(), new NetWorkCallBack() {
+        HttpMethod.getPlanDetails(detailsId, userInfo.getUser().getDeptId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 PlanDetails planDetails= (PlanDetails) object;
                 if(planDetails==null){

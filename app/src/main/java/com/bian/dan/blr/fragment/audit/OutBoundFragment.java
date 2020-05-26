@@ -57,7 +57,7 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditOutBoundDetailsActivity.class);
-                intent.putExtra("listBean",listAll.get(position));
+                intent.putExtra("detailsId",listAll.get(position).getId());
                 startActivityForResult(intent,1000);
             }
         });

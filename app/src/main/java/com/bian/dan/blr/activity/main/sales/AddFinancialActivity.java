@@ -13,6 +13,7 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.GridViewImgAdapter;
 import com.bian.dan.blr.persenter.sales.AddFinancialPersenter;
 import com.bian.dan.blr.utils.SelectPhoto;
+import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
@@ -21,6 +22,7 @@ import com.zxdc.utils.library.bean.FileBean;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.FileList;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyGridView;
 
@@ -120,6 +122,7 @@ public class AddFinancialActivity extends BaseActivity {
                 }
                 addFinancialP.setFileList(list);
                 //添加财务报销
+                LogUtils.e("+++++++++++++"+new Gson().toJson(addFinancialP));
                 financialPersenter.addFinancial(addFinancialP);
                 break;
             default:

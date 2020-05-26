@@ -78,7 +78,7 @@
                     android:gravity="right"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:hint="请选择"
+                    android:hint="请添加"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"
                     android:drawablePadding="7dp"
@@ -91,11 +91,55 @@
                 android:layout_height="0.7dp"
                 android:background="@color/color_f9f9f9"/>
 
-            <com.zxdc.utils.library.view.MeasureListView
-                android:id="@+id/listView"
+            <LinearLayout
+                android:id="@+id/lin_good"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </com.zxdc.utils.library.view.MeasureListView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.zxdc.utils.library.view.MeasureListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.zxdc.utils.library.view.MeasureListView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总计"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_product_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="金额：xx"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_product_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:layout_toLeftOf="@id/tv_product_money"
+                        android:text="数量：xx"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

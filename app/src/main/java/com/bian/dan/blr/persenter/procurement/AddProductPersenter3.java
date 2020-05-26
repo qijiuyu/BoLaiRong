@@ -70,6 +70,7 @@ public class AddProductPersenter3 {
             wheel.setOnWheelItemSelectedListener(new CycleWheelView.WheelItemSelectedListener() {
                 public void onItemSelected(int position, String label) {
                     textView.setText(label);
+                    textView.setTag(position+1);
                 }
             });
 

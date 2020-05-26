@@ -14,6 +14,7 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.bian.dan.blr.persenter.procurement.AddProductPersenter3;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -50,8 +51,8 @@ public class AddProductActivity3 extends BaseActivity {
     TextView tvContact;
     @BindView(R.id.tv_mobile)
     TextView tvMobile;
-    @BindView(R.id.et_address)
-    EditText etAddress;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
     @BindView(R.id.tv_pay_type)
     TextView tvPayType;
     @BindView(R.id.tv_pay_time)
@@ -142,9 +143,9 @@ public class AddProductActivity3 extends BaseActivity {
                 String price=etPrice.getText().toString().trim();
                 String money=tvTotalMoney.getText().toString().trim();
                 String remark=etRemark.getText().toString().trim();
-                String peyType=tvPayType.getText().toString().trim();
+                String payType=tvPayType.getText().toString().trim();
                 String payTime=tvPayTime.getText().toString().trim();
-                String supplier=tvSupplierName.getText().toString().trim();
+                String supplierName=tvSupplierName.getText().toString().trim();
                 if(TextUtils.isEmpty(name)){
                     ToastUtil.showLong("请选择物料名称");
                     return;
@@ -157,11 +158,11 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请输入单价");
                     return;
                 }
-                if(TextUtils.isEmpty(supplier)){
+                if(TextUtils.isEmpty(supplierName)){
                     ToastUtil.showLong("请选择供应商");
                     return;
                 }
-                if(TextUtils.isEmpty(peyType)){
+                if(TextUtils.isEmpty(payType)){
                     ToastUtil.showLong("请选择付款方式");
                     return;
                 }
@@ -169,10 +170,11 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请选择付款时间");
                     return;
                 }
-                if(TextUtils.isEmpty(remark)){
-                    ToastUtil.showLong("请输入备注");
-                    return;
-                }
+                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),price,money,remark,supplier.getId(),supplier.getSupplierName(),supplier.getContacts(),supplier.getPhone(),supplier.getSupplierAddress(),(int)tvPayType.getTag(),payTime);
+                Intent intent=new Intent();
+                intent.putExtra("goods",goods);
+                setResult(200,intent);
+                finish();
                 break;
             default:
                 break;
@@ -181,6 +183,7 @@ public class AddProductActivity3 extends BaseActivity {
 
 
     private Material.ListBean listBean;//物料对象
+    private SupplierName.ListBean supplier;//供应商对象
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==100 && data!=null){
@@ -195,12 +198,14 @@ public class AddProductActivity3 extends BaseActivity {
             etPrice.setText(Util.setDouble(listBean.getPrice(),2));
         }
         if(resultCode==500 && data!=null){
-            SupplierName.ListBean listBean= (SupplierName.ListBean) data.getSerializableExtra("listBean");
-            if(listBean==null){
+            supplier= (SupplierName.ListBean) data.getSerializableExtra("listBean");
+            if(supplier==null){
                 return;
             }
-            tvSupplierName.setText(listBean.getSupplierName());
-            tvSupplierName.setTag(listBean.getId());
+            tvSupplierName.setText(supplier.getSupplierName());
+            tvContact.setText(supplier.getContacts());
+            tvMobile.setText(supplier.getPhone());
+            tvAddress.setText(supplier.getSupplierAddress());
         }
     }
 }

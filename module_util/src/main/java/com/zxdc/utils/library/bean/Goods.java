@@ -69,6 +69,8 @@ public class Goods implements Serializable {
     private String waste;
 
 
+
+
     public  Goods(){}
 
     public Goods(int id,String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, String isInvoice) {
@@ -154,6 +156,26 @@ public class Goods implements Serializable {
         this.deptId = deptId;
         this.deptName=deptName;
         this.chargeId = chargeId;
+    }
+
+
+    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int companyId,String company, String contract, String mobile,String address,int payType, String payTime) {
+        this.id = id;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.num = num;
+        this.price = price;
+        this.totalMoney = totalMoney;
+        this.memo = memo;
+        this.address = address;
+        this.payType = payType;
+        this.payTime = payTime;
+        this.companyId=companyId;
+        this.company = company;
+        this.contract = contract;
+        this.mobile = mobile;
     }
 
     public int getId() {

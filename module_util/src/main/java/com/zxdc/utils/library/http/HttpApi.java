@@ -43,6 +43,7 @@ import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
+import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
@@ -222,12 +223,29 @@ public interface HttpApi {
     Call<BaseBean> AuditPlan(@Body AuditOutBoundP auditOutBoundP);
 
     @GET(HttpConstant.GET_PROCUREMENT_LIST)
-    Call<Procurement> getProcurementList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
+    Call<Procurement> getAuditProcurementList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_PROCUREMENT_LIST)
+    Call<Procurement> getProcurementList(@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_DETAILS)
     Call<ProcurementDetails> getProcurementDetails(@Query("purcId") int purcId);
 
     @GET(HttpConstant.GET_SUPPLIER_BY_NAME)
     Call<SupplierName> getSupplierNameByName(@Query("prop1") String prop1);
+
+    @PUT(HttpConstant.ADD_PROCUREMENT)
+    Call<BaseBean> AddProcurement(@Body AddProcurementP addProcurementP);
+
+    @POST(HttpConstant.AUDIT_PROCUREMENT)
+    Call<BaseBean> AuditProcurement(@Body AuditOutBoundP auditOutBoundP);
+
+    @GET(HttpConstant.GET_FINANCIAL_LIST)
+    Call<Financial> getAuditFinancialList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
+
+    @POST(HttpConstant.AUDIT_FINANCIAL)
+    Call<BaseBean> AuditFinancial(@Body AuditOutBoundP auditOutBoundP);
+
+
 
 }

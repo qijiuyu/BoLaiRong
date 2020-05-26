@@ -44,6 +44,7 @@ import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
+import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
@@ -1029,8 +1030,25 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取审核-采购单
      */
-    public static void getProcurementList(String statusStr,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getProcurementList(statusStr,page,limit).enqueue(new Callback<Procurement>() {
+    public static void getAuditProcurementList(String statusStr,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getAuditProcurementList(statusStr,page,limit).enqueue(new Callback<Procurement>() {
+            public void onResponse(Call<Procurement> call, Response<Procurement> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Procurement> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取采购单列表
+     */
+    public static void getProcurementList(int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementList(page,limit).enqueue(new Callback<Procurement>() {
             public void onResponse(Call<Procurement> call, Response<Procurement> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -1071,6 +1089,74 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<SupplierName> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 新增采购单
+     */
+    public static void AddProcurement(AddProcurementP addProcurementP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AddProcurement(addProcurementP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 审核-采购单
+     */
+    public static void AuditProcurement(AuditOutBoundP auditOutBoundP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AuditProcurement(auditOutBoundP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取审核-财务列表
+     */
+    public static void getAuditFinancialList(String stateStr,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getAuditFinancialList(stateStr,page,limit).enqueue(new Callback<Financial>() {
+            public void onResponse(Call<Financial> call, Response<Financial> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Financial> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 审核-财务
+     */
+    public static void AuditFinancial(AuditOutBoundP auditOutBoundP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AuditFinancial(auditOutBoundP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

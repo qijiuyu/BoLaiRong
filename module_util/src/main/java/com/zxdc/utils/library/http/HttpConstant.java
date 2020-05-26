@@ -123,6 +123,12 @@ public class HttpConstant {
 
     public static final String GET_SUPPLIER_BY_NAME="supplier/getSupplierByInitialism";
 
+    public static final String ADD_PROCUREMENT="purchase/save";
+
+    public static final String AUDIT_PROCUREMENT="approve/purchase";
+
+    public static final String AUDIT_FINANCIAL="approve/reimFinance";
+
 
 
 }

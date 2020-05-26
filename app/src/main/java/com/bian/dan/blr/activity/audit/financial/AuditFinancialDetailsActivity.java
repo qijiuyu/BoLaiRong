@@ -5,15 +5,16 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.NetGridViewImgAdapter;
 import com.bian.dan.blr.persenter.audit.AuditPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
-import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -55,7 +56,14 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
     TextView tvAuditRemark;
     @BindView(R.id.lin_audit)
     LinearLayout linAudit;
-    private  Financial.ListBean listBean;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    @BindView(R.id.linPlay)
+    LinearLayout linPlay;
+    //详情id
+    private int detailsId;
+    //详情对象
+    private FinancialDetails.DetailsBean detailsBean;
     private AuditPersenter auditPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,22 +80,26 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("报销单详情");
-        auditPersenter=new AuditPersenter(this);
-        listBean= (Financial.ListBean) getIntent().getSerializableExtra("listBean");
+        auditPersenter = new AuditPersenter(this);
+        detailsId = getIntent().getIntExtra("detailsId", 0);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_ok, R.id.tv_no})
     public void onViewClicked(View view) {
+        AuditOutBoundP auditOutBoundP;
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
             //同意
             case R.id.tv_ok:
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,4);
                 break;
             //驳回
             case R.id.tv_no:
-                auditPersenter.showAuditDialog(null,4);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,4);
                 break;
             default:
                 break;
@@ -98,29 +110,39 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
     /**
      * 获取财务报销详情
      */
-    private void getFinancialDetails(){
-        if(listBean==null){
+    private void getFinancialDetails() {
+        if (detailsId == 0) {
             return;
         }
-        DialogUtil.showProgress(this,"数据加载中");
-        HttpMethod.getFinancialDetails(listBean.getId(), new NetWorkCallBack() {
+        DialogUtil.showProgress(this, "数据加载中");
+        HttpMethod.getFinancialDetails(detailsId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                FinancialDetails financialDetails= (FinancialDetails) object;
-                if(financialDetails.isSussess()){
-                    FinancialDetails.DetailsBean detailsBean=financialDetails.getData();
+                FinancialDetails financialDetails = (FinancialDetails) object;
+                if (financialDetails.isSussess()) {
+                    detailsBean = financialDetails.getData();
                     tvCreatePeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                     tvCreateTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
                     tvAccount.setText(Html.fromHtml("收款人账号：<font color=\"#000000\">" + detailsBean.getAccount() + "</font>"));
                     tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + detailsBean.getOpenBankStr() + "</font>"));
                     tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getMobile() + "</font>"));
+                    tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
                     tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
                     //附件
-                    gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
+                    gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
                     tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
                     tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
                     tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStateStr() + "</font>"));
-                }else{
+                    tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4() + "</font>"));
+
+                    /**
+                     * 底部按钮
+                     */
+                    if(detailsBean.getState()>0){
+                        linPlay.setVisibility(View.GONE);
+                    }
+                    scrollView.scrollTo(0,0);
+                } else {
                     ToastUtil.showLong(financialDetails.getMsg());
                 }
             }

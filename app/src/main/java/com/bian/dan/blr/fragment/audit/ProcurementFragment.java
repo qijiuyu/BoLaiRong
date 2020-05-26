@@ -57,13 +57,13 @@ public class ProcurementFragment extends BaseFragment implements MyRefreshLayout
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditProcurementDetailsActivity.class);
-                intent.putExtra("listBean",listAll.get(position));
+                intent.putExtra("detailsId",listAll.get(position).getId());
                 startActivityForResult(intent,1000);
             }
         });
         //获取审核-采购单
         if(isVisibleToUser && view!=null && listAll.size()==0){
-            getProcurementList();
+            getAuditProcurementList();
         }
         return view;
     }
@@ -80,7 +80,7 @@ public class ProcurementFragment extends BaseFragment implements MyRefreshLayout
             public void run() {
                 page=1;
                 listAll.clear();
-                getProcurementList();
+                getAuditProcurementList();
             }
         },200);
     }
@@ -91,15 +91,15 @@ public class ProcurementFragment extends BaseFragment implements MyRefreshLayout
      */
     public void onLoadMore(View view) {
         page++;
-        getProcurementList();
+        getAuditProcurementList();
     }
 
 
     /**
      * 获取审核-采购单
      */
-    private void getProcurementList() {
-        HttpMethod.getProcurementList(((AuditProcurementActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
+    private void getAuditProcurementList() {
+        HttpMethod.getAuditProcurementList(((AuditProcurementActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -136,7 +136,7 @@ public class ProcurementFragment extends BaseFragment implements MyRefreshLayout
         this.isVisibleToUser = isVisibleToUser;
         //获取审核-采购单
         if(isVisibleToUser && view!=null && listAll.size()==0){
-            getProcurementList();
+            getAuditProcurementList();
         }
     }
 

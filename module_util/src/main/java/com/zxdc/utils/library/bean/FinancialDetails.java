@@ -35,6 +35,8 @@ public class FinancialDetails extends BaseBean {
         private String prop3="";
         private String prop5="";
         private String mobile="";
+        private int createId;
+        private String prop4="";
         private List<FileBean> fileList;
 
         public int getId() {
@@ -195,6 +197,22 @@ public class FinancialDetails extends BaseBean {
 
         public void setMobile(String mobile) {
             this.mobile = mobile;
+        }
+
+        public int getCreateId() {
+            return createId;
+        }
+
+        public void setCreateId(int createId) {
+            this.createId = createId;
+        }
+
+        public String getProp4() {
+            return prop4;
+        }
+
+        public void setProp4(String prop4) {
+            this.prop4 = prop4;
         }
     }
 }

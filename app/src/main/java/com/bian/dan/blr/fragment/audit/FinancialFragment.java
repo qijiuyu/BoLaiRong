@@ -57,13 +57,13 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditFinancialDetailsActivity.class);
-                intent.putExtra("listBean",listAll.get(position));
-                mActivity.startActivity(intent);
+                intent.putExtra("detailsId",listAll.get(position).getId());
+                startActivityForResult(intent,1000);
             }
         });
         //获取报销列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
-            getFinancialList();
+            getAuditFinancialList();
         }
         return view;
     }
@@ -79,7 +79,7 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
             public void run() {
                 page=1;
                 listAll.clear();
-                getFinancialList();
+                getAuditFinancialList();
             }
         },200);
     }
@@ -90,16 +90,15 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
      */
     public void onLoadMore(View view) {
         page++;
-        getFinancialList();
+        getAuditFinancialList();
     }
 
 
     /**
      * 获取报销列表
      */
-    private void getFinancialList(){
-        int state=((AuditFinancialActivity)mActivity).pageIndex;
-        HttpMethod.getFinancialList(String.valueOf(state), page, new NetWorkCallBack() {
+    private void getAuditFinancialList(){
+        HttpMethod.getAuditFinancialList(((AuditFinancialActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -122,13 +121,22 @@ public class FinancialFragment extends BaseFragment implements MyRefreshLayoutLi
         });
     }
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            reList.startRefresh();
+        }
+    }
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser = isVisibleToUser;
         //获取报销列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
-            getFinancialList();
+            getAuditFinancialList();
         }
     }
 

@@ -1,9 +1,16 @@
 package com.bian.dan.blr.persenter.procurement;
 
+import android.content.Intent;
 import android.widget.TextView;
 
 import com.bian.dan.blr.activity.main.procurement.AddProcurementActivity;
 import com.bian.dan.blr.view.time.CustomDatePicker;
+import com.zxdc.utils.library.bean.BaseBean;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.parameter.AddProcurementP;
+import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.ToastUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,5 +41,30 @@ public class AddProcurementPersenter {
         String now = sdf.format(new Date());
         tvTime.setText(now.split(" ")[0]);
         customDatePicker.show(tvTime.getText().toString());
+    }
+
+
+    /**
+     * 新增采购单
+     */
+    public void AddProcurement(AddProcurementP addProcurementP){
+        DialogUtil.showProgress(activity,"数据提交中");
+        HttpMethod.AddProcurement(addProcurementP, new NetWorkCallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            @Override
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 }

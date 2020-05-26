@@ -20,7 +20,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="物料：xxx"
+                android:text="物料名称：xxx"
                 android:textSize="14sp"
                 android:textColor="@color/color_666666"/>
 
@@ -29,15 +29,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7800"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="20dp"/>
-
-            <TextView
-                android:id="@+id/tv_spec"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WNGA0029"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_marginLeft="20dp"/>
@@ -71,68 +62,61 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="单价：20.0"
+            android:text="单价：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="20dp"/>
 
         <TextView
-            android:id="@+id/tv_monety"
+            android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="金额：20.0"
+            android:text="金额：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp">
-
-            <TextView
-                android:id="@+id/tv_supplier_company"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="供应商名称：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
-
-            <TextView
-                android:id="@+id/tv_supplier_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="王经理"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
-
-            <TextView
-                android:id="@+id/tv_mobile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="15099338872"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
-
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tv_address"
+            android:id="@+id/tv_supplier_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:text="地址：xxx"
+            android:text="供应商名称：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
 
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="王经理   15000000000"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="20dp"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="地址：xxx"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="7dp">
 
             <TextView
@@ -147,21 +131,22 @@
                 android:id="@+id/tv_pay_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:text="付款时间：xxx"
                 android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="20dp"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_remark"
+            android:id="@+id/tv_memo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="备注：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
+
 
     </LinearLayout>
 

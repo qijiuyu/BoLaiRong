@@ -57,7 +57,7 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditProductPlanDetailsActivity.class);
-                intent.putExtra("listBean",listAll.get(position));
+                intent.putExtra("detailsId",listAll.get(position).getId());
                 startActivityForResult(intent,1000);
             }
         });

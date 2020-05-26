@@ -13,7 +13,6 @@ import com.bian.dan.blr.adapter.sales.OutBoundGoodAdapter;
 import com.bian.dan.blr.persenter.audit.AuditPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
@@ -78,7 +77,8 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
     @BindView(R.id.lin_play)
     LinearLayout linPlay;
     private AuditPersenter auditPersenter;
-    private OutBound.ListBean listBean;
+    //详情id
+    private int detailsId;
     //详情对象
     private OutBoundDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,23 +97,25 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("出库单详情");
         auditPersenter = new AuditPersenter(this);
-        listBean= (OutBound.ListBean) getIntent().getSerializableExtra("listBean");
+        detailsId=getIntent().getIntExtra("detailsId",0);
     }
 
     @OnClick({R.id.lin_back, R.id.tv_ok, R.id.tv_no})
     public void onViewClicked(View view) {
+        AuditOutBoundP auditOutBoundP;
         switch (view.getId()) {
             case R.id.lin_back:
                  finish();
                 break;
             //同意
             case R.id.tv_ok:
-                AuditOutBoundP auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
-                auditPersenter.AuditOutBound(auditOutBoundP);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,1);
                 break;
             //驳回
             case R.id.tv_no:
-                auditPersenter.showAuditDialog(detailsBean,1);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,1);
                 break;
             default:
                 break;
@@ -125,11 +127,11 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
      * 查询出库单详情
      */
     private void getOutBoundDetails(){
-        if(listBean==null){
+        if(detailsId==0){
             return;
         }
         DialogUtil.showProgress(this,"数据加载中");
-        HttpMethod.getOutBoundDetails(listBean.getId(), new NetWorkCallBack() {
+        HttpMethod.getOutBoundDetails(detailsId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 try{
                     OutBoundDetails outBoundDetails= (OutBoundDetails) object;
@@ -188,7 +190,7 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             auditResult="未通过";
                         }
                         tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
-                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#FF4B4C\">" + detailsBean.getProp4()+ "</font>"));
+                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
 
 
                         /**

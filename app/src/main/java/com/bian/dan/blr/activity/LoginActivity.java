@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.MainActivity;
+import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.AccountPopWindow;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -50,7 +51,12 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(!TextUtils.isEmpty(SPUtil.getInstance(activity).getString(SPUtil.TOKEN))){
-            setClass(TabActivity.class);
+            if(MyApplication.getRoleId()==1){
+                setClass(TabActivity.class);
+            }else{
+                setClass(MainActivity.class);
+            }
+            finish();
             return;
         }
         setContentView(R.layout.activity_login);

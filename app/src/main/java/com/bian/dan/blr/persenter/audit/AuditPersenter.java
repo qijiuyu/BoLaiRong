@@ -13,8 +13,6 @@ import com.bian.dan.blr.R;
 import com.google.gson.Gson;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.OutBoundDetails;
-import com.zxdc.utils.library.bean.PlanDetails;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -34,30 +32,35 @@ public class AuditPersenter {
      * 显示驳回弹框
      * type:1出库单，  2生产计划，  3采购单，  4报销单
      */
-    public void showAuditDialog(final Object object,final int type){
+    public void showAuditDialog(final AuditOutBoundP auditOutBoundP,final int type){
         View view= LayoutInflater.from(activity).inflate(R.layout.dialog_audit,null);
-        PopupWindow popupWindow= DialogUtil.showPopWindow(view);
+        final PopupWindow popupWindow= DialogUtil.showPopWindow(view);
         popupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
         final EditText etRemark=view.findViewById(R.id.et_remark);
         view.findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String remark=etRemark.getText().toString().trim();
-                if(TextUtils.isEmpty(remark)){
-                    ToastUtil.showLong("请输入驳回备注");
+                if(auditOutBoundP.getState()==2 && TextUtils.isEmpty(remark)){
+                    ToastUtil.showLong("请输入审核意见");
                     return;
                 }
-                AuditOutBoundP auditOutBoundP=null;
+                popupWindow.dismiss();
+                auditOutBoundP.setProp4(remark);
                 switch (type){
                     case 1:
-                         OutBoundDetails.DetailsBean detailsBean= (OutBoundDetails.DetailsBean) object;
-                         auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,remark);
                          AuditOutBound(auditOutBoundP);
                          break;
                     case 2:
-                         PlanDetails.DetailsBean planDetails= (PlanDetails.DetailsBean) object;
-                         auditOutBoundP=new AuditOutBoundP(planDetails.getId(),planDetails.getCreateId(),1,remark);
                          AuditPlan(auditOutBoundP);
                          break;
+                    case 3:
+                         AuditProcurement(auditOutBoundP);
+                         break;
+                    case 4:
+                        AuditFinancial(auditOutBoundP);
+                        break;
+                    default:
+                        break;
                 }
             }
         });
@@ -70,6 +73,7 @@ public class AuditPersenter {
      */
     public void AuditOutBound(final AuditOutBoundP auditOutBoundP){
         DialogUtil.showProgress(activity,"数据提交中");
+        LogUtils.e(new Gson().toJson(auditOutBoundP)+"+++++++++++++++++++");
         HttpMethod.AuditOutBound(auditOutBoundP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;
@@ -96,6 +100,57 @@ public class AuditPersenter {
         DialogUtil.showProgress(activity,"数据提交中");
         LogUtils.e(new Gson().toJson(auditOutBoundP)+"+++++++++++++++++++");
         HttpMethod.AuditPlan(auditOutBoundP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+
+    /**
+     * 采购单审核
+     * @param auditOutBoundP
+     */
+    public void AuditProcurement(final AuditOutBoundP auditOutBoundP){
+        DialogUtil.showProgress(activity,"数据提交中");
+        LogUtils.e(new Gson().toJson(auditOutBoundP)+"+++++++++++++++++++");
+        HttpMethod.AuditProcurement(auditOutBoundP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 财务审核
+     * @param auditOutBoundP
+     */
+    public void AuditFinancial(final AuditOutBoundP auditOutBoundP){
+        DialogUtil.showProgress(activity,"数据提交中");
+        LogUtils.e(new Gson().toJson(auditOutBoundP)+"+++++++++++++++++++");
+        HttpMethod.AuditFinancial(auditOutBoundP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
