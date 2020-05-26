@@ -15,6 +15,7 @@ import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.bian.dan.blr.persenter.procurement.AddProductPersenter3;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Material;
+import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.util.Util;
 
@@ -124,6 +125,7 @@ public class AddProductActivity3 extends BaseActivity {
                 break;
             //供应商名称
             case R.id.tv_supplier_name:
+                setClass(SelectSupplierActivity.class,500);
                 break;
             //付款方式
             case R.id.tv_pay_type:
@@ -191,6 +193,14 @@ public class AddProductActivity3 extends BaseActivity {
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
             etPrice.setText(Util.setDouble(listBean.getPrice(),2));
+        }
+        if(resultCode==500 && data!=null){
+            SupplierName.ListBean listBean= (SupplierName.ListBean) data.getSerializableExtra("listBean");
+            if(listBean==null){
+                return;
+            }
+            tvSupplierName.setText(listBean.getSupplierName());
+            tvSupplierName.setTag(listBean.getId());
         }
     }
 }

@@ -1,14 +1,18 @@
 package com.bian.dan.blr.fragment.audit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.production.AuditProductPlanDetailsActivity;
+import com.bian.dan.blr.activity.audit.production.AuditProductionActivity;
 import com.bian.dan.blr.adapter.sales.ProductPlanAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -50,6 +54,13 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
         reList.setMyRefreshLayoutListener(this);
         productPlanAdapter=new ProductPlanAdapter(mActivity,listAll);
         listView.setAdapter(productPlanAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(mActivity, AuditProductPlanDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                startActivityForResult(intent,1000);
+            }
+        });
         //获取生产计划列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
             getPlanList();
@@ -87,7 +98,7 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
      * 获取生产计划列表
      */
     private void getPlanList(){
-        HttpMethod.getPlanList(null,null, page, new NetWorkCallBack() {
+        HttpMethod.getAuditPlan(((AuditProductionActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -109,6 +120,15 @@ public class ProductionFragment extends BaseFragment implements MyRefreshLayoutL
 
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            reList.startRefresh();
+        }
     }
 
     @Override

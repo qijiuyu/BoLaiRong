@@ -300,6 +300,7 @@ public class OutBoundDetails extends BaseBean {
         public void setCreateDate(String createDate) {
             this.createDate = createDate;
         }
+
     }
 
     public static class DetailsBean implements Serializable{
@@ -331,6 +332,7 @@ public class OutBoundDetails extends BaseBean {
         private String approveName="";
         private String postAddress="";
         private String prop5="";
+        private String prop4="";
 
         public int getId() {
             return id;
@@ -554,6 +556,14 @@ public class OutBoundDetails extends BaseBean {
 
         public void setProp5(String prop5) {
             this.prop5 = prop5;
+        }
+
+        public String getProp4() {
+            return prop4;
+        }
+
+        public void setProp4(String prop4) {
+            this.prop4 = prop4;
         }
     }
 

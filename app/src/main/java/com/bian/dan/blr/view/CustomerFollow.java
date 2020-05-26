@@ -55,6 +55,14 @@ public class CustomerFollow extends Dialog implements MyRefreshLayoutListener {
         initView();
         //加载数据
         reList.startRefresh();
+
+        //点击空白处关闭
+        findViewById(R.id.rel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
     }
 
     public CustomerFollow(Activity context, int customerId) {

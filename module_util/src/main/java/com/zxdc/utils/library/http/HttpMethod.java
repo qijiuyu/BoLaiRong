@@ -27,11 +27,14 @@ import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.OutBoundProduct;
 import com.zxdc.utils.library.bean.PlanDetails;
+import com.zxdc.utils.library.bean.Procurement;
+import com.zxdc.utils.library.bean.ProcurementDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -44,6 +47,7 @@ import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
@@ -952,4 +956,125 @@ public class HttpMethod extends BaseRequst {
             }
         });
     }
+
+
+    /**
+     * 获取需要审核的出库单列表
+     */
+    public static void getOutBoundListByAudit(String stateStr,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getOutBoundListByAudit(stateStr,page,limit).enqueue(new Callback<OutBound>() {
+            public void onResponse(Call<OutBound> call, Response<OutBound> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<OutBound> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 审核-出库单
+     */
+    public static void AuditOutBound(AuditOutBoundP auditOutBoundP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AuditOutBound(auditOutBoundP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取审核-生产计划
+     */
+    public static void getAuditPlan(String statusStr,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getAuditPlan(statusStr,page,limit).enqueue(new Callback<ProductPlan>() {
+            public void onResponse(Call<ProductPlan> call, Response<ProductPlan> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<ProductPlan> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 审核-生产计划
+     */
+    public static void AuditPlan(AuditOutBoundP auditOutBoundP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AuditPlan(auditOutBoundP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取审核-采购单
+     */
+    public static void getProcurementList(String statusStr,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementList(statusStr,page,limit).enqueue(new Callback<Procurement>() {
+            public void onResponse(Call<Procurement> call, Response<Procurement> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Procurement> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取采购单详情
+     */
+    public static void getProcurementDetails(int purcId,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementDetails(purcId).enqueue(new Callback<ProcurementDetails>() {
+            public void onResponse(Call<ProcurementDetails> call, Response<ProcurementDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<ProcurementDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+
+    /**
+     * 根据首字母 获取供应商列表
+     */
+    public static void getSupplierNameByName(String prop1,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSupplierNameByName(prop1).enqueue(new Callback<SupplierName>() {
+            public void onResponse(Call<SupplierName> call, Response<SupplierName> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<SupplierName> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
 }

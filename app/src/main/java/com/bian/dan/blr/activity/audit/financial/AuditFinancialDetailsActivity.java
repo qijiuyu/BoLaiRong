@@ -87,7 +87,7 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
                 break;
             //驳回
             case R.id.tv_no:
-                auditPersenter.showAuditDialog();
+                auditPersenter.showAuditDialog(null,4);
                 break;
             default:
                 break;

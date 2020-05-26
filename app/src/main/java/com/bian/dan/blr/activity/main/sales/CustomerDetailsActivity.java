@@ -142,37 +142,38 @@ public class CustomerDetailsActivity extends BaseActivity {
         DialogUtil.showProgress(this, "数据加载中");
         HttpMethod.getCustomerDetails(customer.getId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                CustomerDetails customerDetails = (CustomerDetails) object;
-                if (customerDetails.isSussess()) {
-                    Customer customer = customerDetails.getCustomer();
-                    if (customer == null) {
-                        return;
+                try {
+                    CustomerDetails customerDetails = (CustomerDetails) object;
+                    if (customerDetails.isSussess()) {
+                        Customer customer = customerDetails.getCustomer();
+                        if (customer == null) {
+                            return;
+                        }
+                        tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
+                        tvIndustry.setText(Html.fromHtml("所属行业：<font color=\"#000000\">" + customer.getIndustryStr() + "</font>"));
+                        tvCustomerStatus.setText(Html.fromHtml("客户状态：<font color=\"#000000\">" + customer.getStatusName() + "</font>"));
+                        tvPeople.setText(Html.fromHtml("联系人：<font color=\"#000000\">" + customer.getContacts() + "</font>"));
+                        tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + customer.getPhone() + "</font>"));
+                        tvPostion.setText(Html.fromHtml("职位：<font color=\"#000000\">" + customer.getPosition() + "</font>"));
+                        tvWx.setText(Html.fromHtml("微信号：<font color=\"#000000\">" + customer.getWechat() + "</font>"));
+                        tvQq.setText(Html.fromHtml("QQ号：<font color=\"#000000\">" + customer.getQq() + "</font>"));
+                        tvEmail.setText(Html.fromHtml("邮箱：<font color=\"#000000\">" + customer.getEmail() + "</font>"));
+                        tvUrl.setText(Html.fromHtml("网址：<font color=\"#000000\">" + customer.getUrl() + "</font>"));
+                        tvProcurementType.setText(Html.fromHtml("采购种类：<font color=\"#000000\">" + customer.getMemo() + "</font>"));
+                        tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + customer.getCorAccount() + "</font>"));
+                        tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + customer.getOpenBankStr() + "</font>"));
+                        tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
+                        tvAccountName.setText(Html.fromHtml("户名：<font color=\"#000000\">" + customer.getAccName() + "</font>"));
+                        tvEin.setText(Html.fromHtml("税号：<font color=\"#000000\">" + customer.getEin() + "</font>"));
+                        tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
+
+                        tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
+
+                    } else {
+                        ToastUtil.showLong(customerDetails.getMsg());
                     }
-                    tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-                    tvIndustry.setText(Html.fromHtml("所属行业：<font color=\"#000000\">" + customer.getIndustryStr() + "</font>"));
-                    tvCustomerStatus.setText(Html.fromHtml("客户状态：<font color=\"#000000\">" + customer.getStatusName() + "</font>"));
-                    tvPeople.setText(Html.fromHtml("联系人：<font color=\"#000000\">" + customer.getContacts() + "</font>"));
-                    tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + customer.getPhone() + "</font>"));
-                    tvPostion.setText(Html.fromHtml("职位：<font color=\"#000000\">" + customer.getPosition() + "</font>"));
-                    tvWx.setText(Html.fromHtml("微信号：<font color=\"#000000\">" + customer.getWechat() + "</font>"));
-                    tvQq.setText(Html.fromHtml("QQ号：<font color=\"#000000\">" + customer.getQq() + "</font>"));
-                    tvEmail.setText(Html.fromHtml("邮箱：<font color=\"#000000\">" + customer.getEmail() + "</font>"));
-                    tvUrl.setText(Html.fromHtml("网址：<font color=\"#000000\">" + customer.getUrl() + "</font>"));
-                    tvProcurementType.setText(Html.fromHtml("采购种类：<font color=\"#000000\">" + customer.getMemo() + "</font>"));
-                    tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + customer.getCorAccount() + "</font>"));
-                    tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + customer.getOpenBankStr() + "</font>"));
-                    tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-                    tvAccountName.setText(Html.fromHtml("户名：<font color=\"#000000\">" + customer.getAccName() + "</font>"));
-                    tvEin.setText(Html.fromHtml("税号：<font color=\"#000000\">" + customer.getEin() + "</font>"));
-                    tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
-
-                    tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
-//                    tvFollow.setText(Html.fromHtml("跟进人：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-//                    tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-//                    tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-
-                } else {
-                    ToastUtil.showLong(customerDetails.getMsg());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

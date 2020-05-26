@@ -3,6 +3,7 @@ package com.bian.dan.blr.activity.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -32,14 +33,19 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.SPUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 首页
@@ -74,6 +80,8 @@ public class MainActivity extends BaseActivity {
         initView();
         showBanner();
         showNotice();
+        //设置推送
+        setPush();
     }
 
 
@@ -257,5 +265,41 @@ public class MainActivity extends BaseActivity {
         list.add("疫情期间，请大家多注意，谢谢");
         tvNotice.startPlay(list);
     }
+
+
+    /**
+     * 设置推送
+     */
+    private void setPush() {
+        final UserInfo userInfo=MyApplication.getUser();
+        if (userInfo == null) {
+            return;
+        }
+        //设置极光推送的别名
+        JPushInterface.setAliasAndTags(getApplicationContext(), String.valueOf(userInfo.getUser().getUserId()), null, mAliasCallback);
+    }
+
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        public void gotResult(int code, String alias, Set<String> tags) {
+            switch (code) {
+                //设置别名成功
+                case 0:
+                    LogUtils.e("推送设置成功");
+                    break;
+                //设置别名失败
+                case 6002:
+                    LogUtils.e("推送设置失败");
+                    new Handler().postDelayed(new Runnable() {
+                        public void run() {
+                            setPush();
+                        }
+                    }, 30000);
+                    break;
+                default:
+            }
+        }
+    };
+
 
 }

@@ -27,11 +27,14 @@ import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.OutBoundProduct;
 import com.zxdc.utils.library.bean.PlanDetails;
+import com.zxdc.utils.library.bean.Procurement;
+import com.zxdc.utils.library.bean.ProcurementDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
@@ -43,6 +46,7 @@ import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
@@ -115,6 +119,9 @@ public interface HttpApi {
     @GET(HttpConstant.GET_OUTBOUND_LIST)
     Call<OutBound> getOutBoundList(@Query("customerId") String customerId, @Query("page") int page, @Query("limit") int limit);
 
+    @GET(HttpConstant.GET_OUTBOUND_LIST)
+    Call<OutBound> getOutBoundListByAudit(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
+
     @GET(HttpConstant.GET_OUTBOUND_DETAILS)
     Call<OutBoundDetails> getOutBoundDetails(@Query("id") int id);
 
@@ -123,6 +130,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_PLAN_LIST)
     Call<ProductPlan> getPlanList(@Query("planCode") String planCode,@Query("status")String status, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_PLAN_LIST)
+    Call<ProductPlan> getAuditPlan(@Query("statusStr") String statusStr,@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PLAN_DETAILS)
     Call<PlanDetails> getPlanDetails(@Query("planId") int planId, @Query("deptId") int deptId);
@@ -205,6 +215,19 @@ public interface HttpApi {
     @GET(HttpConstant.GET_CUSTOMER_FOLLOW)
     Call<Log> getFollow(@Query("customerId") int customerId, @Query("page") int page, @Query("limit") int limit);
 
+    @POST(HttpConstant.AUDIT_OUTBOUND)
+    Call<BaseBean> AuditOutBound(@Body AuditOutBoundP auditOutBoundP);
 
+    @POST(HttpConstant.AUDIT_PLAN)
+    Call<BaseBean> AuditPlan(@Body AuditOutBoundP auditOutBoundP);
+
+    @GET(HttpConstant.GET_PROCUREMENT_LIST)
+    Call<Procurement> getProcurementList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.GET_PROCUREMENT_DETAILS)
+    Call<ProcurementDetails> getProcurementDetails(@Query("purcId") int purcId);
+
+    @GET(HttpConstant.GET_SUPPLIER_BY_NAME)
+    Call<SupplierName> getSupplierNameByName(@Query("prop1") String prop1);
 
 }

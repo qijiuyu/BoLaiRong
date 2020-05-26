@@ -113,4 +113,16 @@ public class HttpConstant {
 
     public static final String GET_CUSTOMER_FOLLOW="saleLog/getList";
 
+    public static final String AUDIT_OUTBOUND="approve/outOrder";
+
+    public static final String AUDIT_PLAN="approve/planPd";
+
+    public static final String GET_PROCUREMENT_LIST="purchase/getList";
+
+    public static final String GET_PROCUREMENT_DETAILS="purchase/getDetail";
+
+    public static final String GET_SUPPLIER_BY_NAME="supplier/getSupplierByInitialism";
+
+
+
 }

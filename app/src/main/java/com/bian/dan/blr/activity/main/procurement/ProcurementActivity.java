@@ -48,7 +48,7 @@ public class ProcurementActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("采购单");
         imgRight.setImageResource(R.mipmap.add);
-        procurementAdapter=new ProcurementAdapter(this);
+        procurementAdapter=new ProcurementAdapter(this,null);
         listView.setAdapter(procurementAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

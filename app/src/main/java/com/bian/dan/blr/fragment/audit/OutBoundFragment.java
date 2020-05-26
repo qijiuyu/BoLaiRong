@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundActivity;
 import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundDetailsActivity;
 import com.bian.dan.blr.adapter.sales.OutBoundAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
@@ -57,7 +58,7 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditOutBoundDetailsActivity.class);
                 intent.putExtra("listBean",listAll.get(position));
-                mActivity.startActivity(intent);
+                startActivityForResult(intent,1000);
             }
         });
         //获取出库单列表
@@ -98,7 +99,7 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
      * 获取出库单列表
      */
     private void getOutBoundList() {
-        HttpMethod.getOutBoundList(null, page, new NetWorkCallBack() {
+        HttpMethod.getOutBoundListByAudit(((AuditOutBoundActivity)mActivity).pageIndex==0 ? "0,2" : "1", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -118,6 +119,15 @@ public class OutBoundFragment extends BaseFragment implements MyRefreshLayoutLis
 
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            reList.startRefresh();
+        }
     }
 
     @Override

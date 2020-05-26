@@ -15,6 +15,7 @@ import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
+import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.BigDecimalUtil;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -74,8 +75,12 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
     LinearLayout linAudit;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.lin_play)
+    LinearLayout linPlay;
     private AuditPersenter auditPersenter;
     private OutBound.ListBean listBean;
+    //详情对象
+    private OutBoundDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audit_outbound_details);
@@ -103,10 +108,12 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                 break;
             //同意
             case R.id.tv_ok:
+                AuditOutBoundP auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditPersenter.AuditOutBound(auditOutBoundP);
                 break;
             //驳回
             case R.id.tv_no:
-                auditPersenter.showAuditDialog();
+                auditPersenter.showAuditDialog(detailsBean,1);
                 break;
             default:
                 break;
@@ -127,7 +134,7 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                 try{
                     OutBoundDetails outBoundDetails= (OutBoundDetails) object;
                     if(outBoundDetails.isSussess()){
-                        OutBoundDetails.DetailsBean detailsBean=outBoundDetails.getOutOrder();
+                        detailsBean=outBoundDetails.getOutOrder();
                         if(detailsBean==null){
                             return;
                         }
@@ -166,6 +173,10 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                         tvProductNum.setText("数量："+totalNum);
                         tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
 
+
+                        /**
+                         * 审核信息
+                         */
                         tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
                         String auditResult=null;
@@ -177,6 +188,15 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             auditResult="未通过";
                         }
                         tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
+                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#FF4B4C\">" + detailsBean.getProp4()+ "</font>"));
+
+
+                        /**
+                         * 底部按钮
+                         */
+                        if(detailsBean.getState()>0){
+                            linPlay.setVisibility(View.GONE);
+                        }
                         scrollView.scrollTo(0,0);
                     }else{
                         ToastUtil.showLong(outBoundDetails.getMsg());
