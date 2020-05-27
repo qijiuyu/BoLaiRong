@@ -17,6 +17,7 @@ public class ProductProgress extends BaseBean {
 
     public static class ProductBean implements Serializable{
         private int id;
+        private int planId;
         private String planCode="";
         private int deptId;
         private String deptName="";
@@ -42,6 +43,14 @@ public class ProductProgress extends BaseBean {
 
         public void setId(int id) {
             this.id = id;
+        }
+
+        public int getPlanId() {
+            return planId;
+        }
+
+        public void setPlanId(int planId) {
+            this.planId = planId;
         }
 
         public String getPlanCode() {

@@ -45,7 +45,7 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
     ViewHolder holder = null;
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_add_product5, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_add_outbound_by_product, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {

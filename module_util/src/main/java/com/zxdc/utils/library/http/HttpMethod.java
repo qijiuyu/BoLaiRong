@@ -39,6 +39,8 @@ import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.bean.Supplier;
+import com.zxdc.utils.library.bean.SupplierDetails;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -53,7 +55,9 @@ import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
+import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
@@ -1252,4 +1256,108 @@ public class HttpMethod extends BaseRequst {
             }
         });
     }
+
+
+    /**
+     * 校验供应商名称唯一性
+     */
+    public static void checkSupplierName(String supplierName,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).checkSupplierName(supplierName).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 新增供应商
+     */
+    public static void addSupplier(AddSupplierP addSupplierP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addSupplier(addSupplierP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 查询供应商列表
+     */
+    public static void getSupplierList(String id,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSupplierList(id,page,limit).enqueue(new Callback<Supplier>() {
+            public void onResponse(Call<Supplier> call, Response<Supplier> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Supplier> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 供应商明细
+     */
+    public static void getSupplierDetails(int id,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSupplierDetails(id).enqueue(new Callback<SupplierDetails>() {
+            public void onResponse(Call<SupplierDetails> call, Response<SupplierDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<SupplierDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 修改明细物料单价
+     */
+    public static void editSupplierPrice(EditSupplierGoodsP editSupplierGoods, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).editSupplierPrice(editSupplierGoods).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 删除供应商明细
+     */
+    public static void deleteSupplierGoods(int id, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).deleteSupplierGoods(id).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
 }

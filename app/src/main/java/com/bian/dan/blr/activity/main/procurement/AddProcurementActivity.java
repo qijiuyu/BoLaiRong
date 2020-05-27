@@ -97,7 +97,7 @@ public class AddProcurementActivity extends BaseActivity {
                      Goods goods=goodsList.get(i);
                      AddProcurementP.GoodsList goodsList=new AddProcurementP.GoodsList();
                      goodsList.setSupplierId(goods.getCompanyId());
-                     goodsList.setGoodsId(goods.getId());
+                     goodsList.setGoodsId(goods.getGoodId());
                      goodsList.setNum(goods.getNum());
                      goodsList.setUnitPrice(Double.parseDouble(goods.getPrice()));
                      goodsList.setAmount(Double.parseDouble(goods.getTotalMoney()));

@@ -129,6 +129,9 @@ public class MainActivity extends BaseActivity {
                 Intent intent=new Intent(this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+
+                //停止推送
+                JPushInterface.stopPush(this);
                 finish();
                  break;
             //销售
@@ -271,6 +274,9 @@ public class MainActivity extends BaseActivity {
      * 设置推送
      */
     private void setPush() {
+        //恢复推送
+        JPushInterface.resumePush(this);
+
         final UserInfo userInfo=MyApplication.getUser();
         if (userInfo == null) {
             return;

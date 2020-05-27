@@ -108,7 +108,7 @@ public class AddSdEnterActivity extends BaseActivity {
                 List<AddSdEnterP.DetailsList> list=new ArrayList<>();
                 for (int i=0;i<goodList.size();i++){
                     AddSdEnterP.DetailsList detailsList=new AddSdEnterP.DetailsList();
-                    detailsList.setGoodsId(goodList.get(i).getId());
+                    detailsList.setGoodsId(goodList.get(i).getGoodId());
                     detailsList.setStockType(goodList.get(i).getStockType());
                     detailsList.setBatchNo(goodList.get(i).getBatchNo());
                     detailsList.setPrice(goodList.get(i).getPrice());

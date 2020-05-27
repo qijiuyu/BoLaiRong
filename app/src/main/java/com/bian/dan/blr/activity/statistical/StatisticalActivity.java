@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -95,19 +94,19 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     private int selectTime;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statistical);
-        ButterKnife.bind(this);
-        initView();
-        //获取收支对比
-        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
-        //获取客户状态统计
-        statisticalPersenter.getCustomerState();
-        //销售单数及销售金额统计
-        statisticalPersenter.getStatistionSales("2020-05-26");
-        //原料消耗月度统计
-        statisticalPersenter.getStatisticalMaterial("2020-05-26");
-        //成品统计
-        statisticalPersenter.getStatisticalGoods();
+//        setContentView(R.layout.activity_statistical);
+//        ButterKnife.bind(this);
+//        initView();
+//        //获取收支对比
+//        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
+//        //获取客户状态统计
+//        statisticalPersenter.getCustomerState();
+//        //销售单数及销售金额统计
+//        statisticalPersenter.getStatistionSales("2020-05-26");
+//        //原料消耗月度统计
+//        statisticalPersenter.getStatisticalMaterial("2020-05-26");
+//        //成品统计
+//        statisticalPersenter.getStatisticalGoods();
     }
 
     /**

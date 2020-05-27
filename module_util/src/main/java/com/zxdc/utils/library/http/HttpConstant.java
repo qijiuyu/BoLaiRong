@@ -140,5 +140,4 @@ public class HttpConstant {
     public static final String GET_STATISTICAL_GOODS="bigScreen/statisticsByProductType";
 
 
-
 }

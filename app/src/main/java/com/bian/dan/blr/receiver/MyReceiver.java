@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.bian.dan.blr.activity.audit.financial.AuditFinancialDetailsActivity;
 import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundDetailsActivity;
 import com.bian.dan.blr.activity.audit.production.AuditProductPlanDetailsActivity;
 import com.zxdc.utils.library.util.LogUtils;
@@ -57,8 +58,10 @@ public class MyReceiver extends BroadcastReceiver {
 						gotoIntent.setClass(context, AuditOutBoundDetailsActivity.class);
 						 break;
 					case "2":
+						gotoIntent.setClass(context, AuditFinancialDetailsActivity.class);
 						break;
 					case "3":
+						gotoIntent.setClass(context, AuditOutBoundDetailsActivity.class);
 						break;
 					case "4":
 						gotoIntent.setClass(context, AuditProductPlanDetailsActivity.class);

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.sales.AddProductPersenter;
+import com.bian.dan.blr.view.DecimalDigitsInputFilter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
@@ -63,6 +65,8 @@ public class AddProductActivity extends BaseActivity {
     private void initView(){
         addProductPersenter=new AddProductPersenter(this);
         tvHead.setText("添加产品");
+        //显示小数点只能输入两位
+        etPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2), new InputFilter.LengthFilter(8)});
 
         /**
          * 监听数量输入框

@@ -106,7 +106,7 @@ public class AddProductPlanActivity extends BaseActivity {
                 List<AddGoodP> list=new ArrayList<>();
                 for (int i=0;i<goodsList.size();i++){
                      AddGoodP addGoodP=new AddGoodP();
-                     addGoodP.setGoodsId(goodsList.get(i).getId());
+                     addGoodP.setGoodsId(goodsList.get(i).getGoodId());
                      addGoodP.setNum(goodsList.get(i).getNum());
                      addGoodP.setMemo(goodsList.get(i).getMemo());
                      list.add(addGoodP);

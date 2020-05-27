@@ -118,7 +118,7 @@
         <activity android:name=".activity.audit.production.AuditProductPlanDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.audit.procurement.AuditProcurementDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.procurement.SelectSupplierActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
-
+        <activity android:name=".activity.main.procurement.AddProductActivity5"  android:screenOrientation="portrait"/>
 
 
 

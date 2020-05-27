@@ -109,7 +109,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
-                if(!TextUtils.isEmpty(num) && Integer.parseInt(num)>listBean.getNum()){
+                if(Integer.parseInt(num)>listBean.getNum()){
                     ToastUtil.showLong("数量已超过库存，请重新输入");
                     return;
                 }
@@ -139,7 +139,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
             }
             tvName.setText(listBean.getGoodsName());
             tvBatchNo.setText(listBean.getBatchNo());
-            tvSpec.setText(listBean.getBrand()+"/"+listBean.getSpec());
+            tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
             etNum.setText(String.valueOf(listBean.getNum()));
         }

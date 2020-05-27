@@ -51,7 +51,7 @@ public class SelectMaterialInventoryAdapter extends BaseAdapter {
         }
 
         MaterialInventory.ListBean listBean=list.get(position);
-        holder.tvName.setText(listBean.getGoodsName()+"/"+listBean.getBrand()+"/"+listBean.getSpec());
+        holder.tvName.setText(listBean.getGoodsName()+"/"+listBean.getBrand()+"/"+listBean.getSpec()+"  "+listBean.getBatchNo()+"  "+listBean.getStockTypeStr()+"  "+listBean.getNum());
         holder.tvName.setTag(listBean);
         return view;
     }

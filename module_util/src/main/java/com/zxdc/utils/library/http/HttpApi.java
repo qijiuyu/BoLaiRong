@@ -39,6 +39,8 @@ import com.zxdc.utils.library.bean.SelectCustomer;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.bean.Supplier;
+import com.zxdc.utils.library.bean.SupplierDetails;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -52,7 +54,9 @@ import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
+import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
@@ -265,6 +269,24 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_STATISTICAL_GOODS)
     Call<StatisticalGoods> getStatisticalGoods();
+
+    @GET(HttpConstant.IP+"supplier/checkNameIsUniq")
+    Call<BaseBean> checkSupplierName(@Query("supplierName") String supplierName);
+
+    @PUT(HttpConstant.IP+"supplier/save")
+    Call<BaseBean> addSupplier(@Body AddSupplierP addSupplierP);
+
+    @GET(HttpConstant.IP+"supplier/getList")
+    Call<Supplier> getSupplierList(@Query("id") String id, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.IP+"supplier/getDetailById")
+    Call<SupplierDetails> getSupplierDetails(@Query("id") int id);
+
+    @POST(HttpConstant.IP+"supplier/updateDetail")
+    Call<BaseBean> editSupplierPrice(@Body EditSupplierGoodsP editSupplierGoods);
+
+    @DELETE(HttpConstant.IP+"supplier/deleteDetail")
+    Call<BaseBean> deleteSupplierGoods(@Query("id") int id);
 
 
 }

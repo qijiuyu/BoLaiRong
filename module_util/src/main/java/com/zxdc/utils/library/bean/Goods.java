@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Goods implements Serializable {
 
     private int id;
+
+    private int goodId;
     //物料名称
     private String name="";
     //物料型号
@@ -73,8 +75,8 @@ public class Goods implements Serializable {
 
     public  Goods(){}
 
-    public Goods(int id,String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, String isInvoice) {
-        this.id=id;
+    public Goods(int goodId,String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, String isInvoice) {
+        this.goodId=goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -87,7 +89,7 @@ public class Goods implements Serializable {
     }
 
     public Goods(int id, String name, String spec, String brand, int num, String memo) {
-        this.id = id;
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.brand = brand;
@@ -95,8 +97,8 @@ public class Goods implements Serializable {
         this.memo = memo;
     }
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int stockType, String batchNo) {
-        this.id = id;
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int stockType, String batchNo) {
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -110,8 +112,8 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String deliveryTime,String memo, int stockType, String batchNo) {
-        this.id = id;
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, String deliveryTime,String memo, int stockType, String batchNo) {
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -124,8 +126,8 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney,String rewardDes, String fineMoney,String fineDes) {
-        this.id = id;
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney,String rewardDes, String fineMoney,String fineDes) {
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -142,8 +144,8 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId) {
-        this.id = id;
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId) {
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -159,8 +161,8 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int id, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int companyId,String company, String contract, String mobile,String address,int payType, String payTime) {
-        this.id = id;
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, String price, String totalMoney, String memo, int companyId,String company, String contract, String mobile,String address,int payType, String payTime) {
+        this.goodId = goodId;
         this.name = name;
         this.spec = spec;
         this.unitStr = unitStr;
@@ -184,6 +186,14 @@ public class Goods implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getGoodId() {
+        return goodId;
+    }
+
+    public void setGoodId(int goodId) {
+        this.goodId = goodId;
     }
 
     public String getName() {

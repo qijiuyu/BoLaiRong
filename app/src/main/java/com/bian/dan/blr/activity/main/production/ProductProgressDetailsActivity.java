@@ -82,6 +82,8 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     LinearLayout linWareHouse;
     //出库单id
     private int requireId;
+    //详情对象
+    private ProductProgress.ProductBean productBean;
     private ProductProgressPersenter productProgressPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,13 +113,13 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                 break;
             //组长点击确认入库
             case R.id.tv_confirm_entry:
-                 productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, null, "1"));
+                 productProgressPersenter.updateProductStatus(new UpdateProductP(requireId,productBean.getPlanId(),productBean.getDeptId(), null, "1"));
                  break;
             //确认领取/申请入库
             case R.id.tv_play:
                 final String name = tvPlay.getText().toString().trim();
                 if (name.equals("确认领取")) {
-                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId, "2", null));
+                    productProgressPersenter.updateProductStatus(new UpdateProductP(requireId,productBean.getPlanId(),productBean.getDeptId(), "2", null));
                 } else if (name.equals("入库申请")) {
                     intent.setClass(this, PutStorageActivity.class);
                     intent.putExtra("requireId", requireId);
@@ -143,7 +145,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                     /**
                      * 基本信息
                      */
-                    ProductProgress.ProductBean productBean = productProgress.getData();
+                    productBean = productProgress.getData();
                     if (productBean == null) {
                         return;
                     }

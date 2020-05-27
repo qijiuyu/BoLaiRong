@@ -30,7 +30,12 @@ public class ProcurementDetails extends BaseBean {
         private String purcDate="";
         private String purcOrder="";
         private String createDate="";
+        private int createId;
         private int state;
+        private String approveName="";
+        private String prop2="";
+        private String prop5="";
+        private String stateStr="";
 
         public int getId() {
             return id;
@@ -78,6 +83,46 @@ public class ProcurementDetails extends BaseBean {
 
         public void setState(int state) {
             this.state = state;
+        }
+
+        public int getCreateId() {
+            return createId;
+        }
+
+        public void setCreateId(int createId) {
+            this.createId = createId;
+        }
+
+        public String getApproveName() {
+            return approveName;
+        }
+
+        public void setApproveName(String approveName) {
+            this.approveName = approveName;
+        }
+
+        public String getProp2() {
+            return prop2;
+        }
+
+        public void setProp2(String prop2) {
+            this.prop2 = prop2;
+        }
+
+        public String getProp5() {
+            return prop5;
+        }
+
+        public void setProp5(String prop5) {
+            this.prop5 = prop5;
+        }
+
+        public String getStateStr() {
+            return stateStr;
+        }
+
+        public void setStateStr(String stateStr) {
+            this.stateStr = stateStr;
         }
     }
 

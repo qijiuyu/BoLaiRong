@@ -88,13 +88,13 @@ public class AuditProcurementDetailsActivity extends BaseActivity {
                 break;
             //同意
             case R.id.tv_ok:
-//                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
-//                auditPersenter.showAuditDialog(auditOutBoundP,3);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),1,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,3);
                 break;
             //驳回
             case R.id.tv_no:
-//                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
-//                auditPersenter.showAuditDialog(auditOutBoundP,3);
+                auditOutBoundP=new AuditOutBoundP(detailsBean.getId(),detailsBean.getCreateId(),2,null);
+                auditPersenter.showAuditDialog(auditOutBoundP,3);
                 break;
             default:
                 break;
@@ -145,7 +145,10 @@ public class AuditProcurementDetailsActivity extends BaseActivity {
                     /**
                      * 审核信息
                      */
-                    tvAudit.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getCreateDate()+ "</font>"));
+                    tvAudit.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName()+ "</font>"));
+                    tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5()+ "</font>"));
+                    tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + detailsBean.getStateStr()+ "</font>"));
+                    tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp2()+ "</font>"));
 
                     /**
                      * 底部按钮

@@ -1,4 +1,4 @@
-package com.bian.dan.blr.adapter.production;
+package com.bian.dan.blr.adapter.procurement;
 
 import android.app.Activity;
 import android.text.Html;
@@ -9,19 +9,19 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.zxdc.utils.library.bean.Goods;
+import com.zxdc.utils.library.bean.SupplierDetails;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PutStorageByProductAdapter extends BaseAdapter {
+public class SupplierDetails_Product_Adapter extends BaseAdapter {
 
     private Activity activity;
-    private List<Goods> list;
+    private List<SupplierDetails.GoodList> list;
 
-    public PutStorageByProductAdapter(Activity activity, List<Goods> list) {
+    public SupplierDetails_Product_Adapter(Activity activity, List<SupplierDetails.GoodList> list) {
         super();
         this.activity = activity;
         this.list = list;
@@ -43,37 +43,38 @@ public class PutStorageByProductAdapter extends BaseAdapter {
     }
 
     ViewHolder holder = null;
+
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_put_storage_by_product, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_add_product5, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        Goods goods = list.get(position);
-        holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + goods.getBatchNo() + "</font>"));
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand()+"/"+goods.getSpec());
-        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
-        holder.tvRemark.setText("备注：" + goods.getMemo());
+        SupplierDetails.GoodList goodList = list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
+        holder.tvBrand.setText(goodList.getBrand());
+        holder.tvSpec.setText(goodList.getSpec());
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitStr() + "</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goodList.getProp1() + "</font>"));
+        holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
         return view;
     }
 
 
     static
     class ViewHolder {
-        @BindView(R.id.tv_batchNo)
-        TextView tvBatchNo;
         @BindView(R.id.tv_name)
         TextView tvName;
         @BindView(R.id.tv_brand)
         TextView tvBrand;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
-        @BindView(R.id.tv_num)
-        TextView tvNum;
+        @BindView(R.id.tv_price)
+        TextView tvPrice;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 

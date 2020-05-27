@@ -145,7 +145,7 @@ public class AddOutBoundActivity extends BaseActivity {
                 List<AddGoodP> list=new ArrayList<>();
                 for (int i=0;i<goodList.size();i++){
                      Goods goods=goodList.get(i);
-                     AddGoodP addGoodP=new AddGoodP(goods.getId(),goods.getNum(),goods.getPrice(),goods.getTotalMoney(),goods.getIsInvoice(),goods.getMemo());
+                     AddGoodP addGoodP=new AddGoodP(goods.getGoodId(),goods.getNum(),goods.getPrice(),goods.getTotalMoney(),goods.getIsInvoice(),goods.getMemo());
                      list.add(addGoodP);
                 }
                 outBoundP.setOutOrderDetailList(list);

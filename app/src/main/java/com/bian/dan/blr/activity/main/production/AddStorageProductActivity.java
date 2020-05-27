@@ -159,7 +159,7 @@ public class AddStorageProductActivity extends BaseActivity {
             listBean= (Material.ListBean) data.getSerializableExtra("listBean");
             if(listBean!=null){
                 tvName.setText(listBean.getName());
-                tvSpec.setText(listBean.getBrand()+"/"+listBean.getSpec());
+                tvSpec.setText(listBean.getSpec());
                 tvUnit.setText(listBean.getUnitStr());
             }
         }

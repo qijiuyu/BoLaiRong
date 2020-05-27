@@ -103,7 +103,7 @@ public class PutStorageActivity extends BaseActivity {
                 List<AddPutStorageP.EntryList> entryList=new ArrayList<>();
                 for (int i=0;i<goodsList.size();i++){
                     AddPutStorageP.EntryList entry=new AddPutStorageP.EntryList();
-                    entry.setGoodsId(goodsList.get(i).getId());
+                    entry.setGoodsId(goodsList.get(i).getGoodId());
                     entry.setNum(goodsList.get(i).getNum());
                     entry.setStockType(goodsList.get(i).getStockType());
                     entry.setBatchNo(goodsList.get(i).getBatchNo());
@@ -119,7 +119,7 @@ public class PutStorageActivity extends BaseActivity {
                 List<AddPutStorageP.WasteList> oddList=new ArrayList<>();
                 for (int i=0;i<wasteList.size();i++){
                     AddPutStorageP.WasteList waste=new AddPutStorageP.WasteList();
-                    waste.setGoodsId(wasteList.get(i).getId());
+                    waste.setGoodsId(wasteList.get(i).getGoodId());
                     waste.setNum(wasteList.get(i).getNum());
                     waste.setStockType(wasteList.get(i).getStockType());
                     waste.setBatchNo(wasteList.get(i).getBatchNo());

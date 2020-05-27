@@ -84,7 +84,7 @@ public class AddOutBoundByProductActivity extends BaseActivity {
                 //产品列表
                 List<AddOutBoundByProductP.GoodList> list=new ArrayList<>();
                 for (int i=0;i<goodList.size();i++){
-                    AddOutBoundByProductP.GoodList good=new AddOutBoundByProductP.GoodList(goodList.get(i).getId(),goodList.get(i).getNum(),goodList.get(i).getStockType(),goodList.get(i).getBatchNo(),goodList.get(i).getDeliveryTime(),goodList.get(i).getMemo());
+                    AddOutBoundByProductP.GoodList good=new AddOutBoundByProductP.GoodList(goodList.get(i).getGoodId(),goodList.get(i).getNum(),goodList.get(i).getStockType(),goodList.get(i).getBatchNo(),goodList.get(i).getDeliveryTime(),goodList.get(i).getMemo());
                     list.add(good);
                 }
                 addOutBoundByProductP.setRequireDetailList(list);
