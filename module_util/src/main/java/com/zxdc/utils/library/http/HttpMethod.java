@@ -56,6 +56,7 @@ import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AddSupplierMaterialP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
@@ -1294,6 +1295,23 @@ public class HttpMethod extends BaseRequst {
 
 
     /**
+     * 编辑供应商基本信息
+     */
+    public static void UpdateSupplier(AddSupplierP addSupplierP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).UpdateSupplier(addSupplierP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
      * 查询供应商列表
      */
     public static void getSupplierList(String id,int page,final NetWorkCallBack netWorkCallBack) {
@@ -1371,6 +1389,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<SupplierMaterial> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 新增供应商物料明细
+     */
+    public static void AddSupplierMaterial(AddSupplierMaterialP addSupplierMaterialP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AddSupplierMaterial(addSupplierMaterialP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

@@ -128,12 +128,27 @@ public class AddSupplierActivity extends BaseActivity {
                 addSupplierP.setMemo(memo);
                 List<AddSupplierP.GoodList> list=new ArrayList<>();
                 for (int i=0;i<goodsList.size();i++){
-                     AddSupplierP.GoodList good=new AddSupplierP.GoodList(goodsList.get(i).getGoodId(),goodsList.get(i).getMemo(),goodsList.get(i).getPrice());
-                     list.add(good);
+                     if(goodsList.get(i).getId()==0){
+                         AddSupplierP.GoodList good=new AddSupplierP.GoodList(goodsList.get(i).getGoodId(),goodsList.get(i).getMemo(),goodsList.get(i).getPrice());
+                         list.add(good);
+                     }
                 }
                 addSupplierP.setSupplierDetailList(list);
+
+                //新增
+                if(detailsBean==null) {
+                    addSupplierPersenter.checkSupplierName(addSupplierP);
+                }
+                //编辑
+                if(detailsBean!=null){
+                    addSupplierP.setId(detailsBean.getId());
+                    if(detailsBean.getSupplierName().equals(supplierName)){
+                        addSupplierPersenter.UpdateSupplier(addSupplierP);
+                    }else{
+                        addSupplierPersenter.checkSupplierName(addSupplierP);
+                    }
+                }
                 LogUtils.e("+++++++++"+new Gson().toJson(addSupplierP));
-                addSupplierPersenter.checkSupplierName(addSupplierP);
                 break;
             default:
                 break;
@@ -177,6 +192,7 @@ public class AddSupplierActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==200 && data!=null){
             Goods goods= (Goods) data.getSerializableExtra("goods");
+            LogUtils.e(goods.getId()+"+++++++++++++++++++");
             if(goods!=null){
                 if(goods.getId()==0){
                     goodsList.add(goods);

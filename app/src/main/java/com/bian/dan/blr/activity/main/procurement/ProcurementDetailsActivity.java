@@ -66,7 +66,6 @@ public class ProcurementDetailsActivity extends BaseActivity {
     @BindView(R.id.lin_entry)
     LinearLayout linEntry;
     private Procurement.ListBean listBean;
-    private Procurement_Details_EntryGood_Adapter procuDetailsEnterAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurement_details);

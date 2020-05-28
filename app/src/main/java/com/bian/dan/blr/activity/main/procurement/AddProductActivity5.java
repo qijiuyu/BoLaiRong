@@ -99,7 +99,7 @@ public class AddProductActivity5 extends BaseActivity {
      */
     private void gotoIntent(Goods goods){
         Intent intent=new Intent();
-        intent.putExtra("goods",editGood);
+        intent.putExtra("goods",goods);
         setResult(200,intent);
         finish();
     }

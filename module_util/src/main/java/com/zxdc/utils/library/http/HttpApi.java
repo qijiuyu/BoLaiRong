@@ -55,6 +55,7 @@ import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
+import com.zxdc.utils.library.bean.parameter.AddSupplierMaterialP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
@@ -277,6 +278,9 @@ public interface HttpApi {
     @PUT(HttpConstant.IP+"supplier/save")
     Call<BaseBean> addSupplier(@Body AddSupplierP addSupplierP);
 
+    @POST(HttpConstant.IP+"supplier/update")
+    Call<BaseBean> UpdateSupplier(@Body AddSupplierP addSupplierP);
+
     @GET(HttpConstant.IP+"supplier/getList")
     Call<Supplier> getSupplierList(@Query("id") String id, @Query("page") int page, @Query("limit") int limit);
 
@@ -291,6 +295,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"supplier/goodsListByName")
     Call<SupplierMaterial> getSupplierDetails(@Query("prop3") String prop3);
+
+    @PUT(HttpConstant.IP+"supplier/saveDetailList")
+    Call<BaseBean> AddSupplierMaterial(@Body AddSupplierMaterialP addSupplierMaterialP);
 
 
 }

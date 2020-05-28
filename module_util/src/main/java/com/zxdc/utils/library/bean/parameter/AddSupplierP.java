@@ -5,6 +5,7 @@ import java.util.List;
 
 public class AddSupplierP implements Serializable {
 
+    private int id;
     private String supplierName;
     private int industry;
     private String contacts;
@@ -12,6 +13,14 @@ public class AddSupplierP implements Serializable {
     private String supplierAddress;
     private String memo;
     private List<GoodList> supplierDetailList;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getSupplierName() {
         return supplierName;

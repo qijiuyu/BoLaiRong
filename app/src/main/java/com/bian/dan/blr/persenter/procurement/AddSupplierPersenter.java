@@ -11,14 +11,17 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.procurement.AddSupplierActivity;
 import com.bian.dan.blr.view.CycleWheelView;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.parameter.AddSupplierMaterialP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -121,8 +124,13 @@ public class AddSupplierPersenter {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
-                    //新增供应商
-                    addSupplier(addSupplierP);
+                    if(addSupplierP.getId()==0){
+                        //新增供应商
+                        addSupplier(addSupplierP);
+                    }else{
+                        //编辑供应商
+                        UpdateSupplier(addSupplierP);
+                    }
                 }else{
                     ToastUtil.showLong(baseBean.getMsg());
                 }
@@ -147,6 +155,35 @@ public class AddSupplierPersenter {
                 if(baseBean.isSussess()){
                     activity.setResult(1000,new Intent());
                     activity.finish();
+                }else{
+                    ToastUtil.showLong(baseBean.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 编辑供应商基本信息
+     */
+    public void UpdateSupplier(final AddSupplierP addSupplierP){
+        DialogUtil.showProgress(activity,"数据提交中");
+        HttpMethod.UpdateSupplier(addSupplierP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+
+                    if(addSupplierP.getSupplierDetailList().size()>0){
+                        //新增供应商物料明细
+                        AddSupplierMaterial(addSupplierP);
+                    }else{
+                        activity.setResult(1000,new Intent());
+                        activity.finish();
+                    }
                 }else{
                     ToastUtil.showLong(baseBean.getMsg());
                 }
@@ -202,5 +239,34 @@ public class AddSupplierPersenter {
             }
         });
     }
+
+
+
+    /**
+     * 新增供应商物料明细
+     */
+    public void AddSupplierMaterial(AddSupplierP addSupplierP){
+        AddSupplierMaterialP addSupplierMaterialP=new AddSupplierMaterialP();
+        addSupplierMaterialP.setId(addSupplierP.getId());
+        addSupplierMaterialP.setSupplierDetailList(addSupplierP.getSupplierDetailList());
+        LogUtils.e("++++++++++++++"+new Gson().toJson(addSupplierMaterialP));
+
+        HttpMethod.AddSupplierMaterial(addSupplierMaterialP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+                    activity.setResult(1000,new Intent());
+                    activity.finish();
+                }else{
+                    ToastUtil.showLong(baseBean.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
 
 }
