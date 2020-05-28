@@ -215,35 +215,44 @@
                 android:background="@color/color_f9f9f9"
                 android:layout_marginTop="15dp"/>
 
-            <TextView
-                android:id="@+id/tv_audit_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/lin_audit"
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="审核：xxx"
-                android:textColor="@color/color_666666"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_audit_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="审核时间：xxx"
-                android:textColor="@color/color_666666"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/tv_audit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审核：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"/>
 
-            <TextView
-                android:id="@+id/tv_audit_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="审核结果：xxx"
-                android:textColor="@color/color_666666"
-                android:textSize="14sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/tv_audit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审核时间：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审核结果：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/lin_out"

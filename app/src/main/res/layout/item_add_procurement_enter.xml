@@ -113,26 +113,39 @@
             android:layout_height="match_parent"
             android:background="@color/color_666666"/>
 
-        <com.zxdc.utils.library.view.MeasureListView
-            android:id="@+id/list_pc"
+        <TextView
+            android:id="@+id/tv_batchNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:divider="@color/color_666666"
-            android:dividerHeight="0.5dp"/>
+            android:gravity="center_horizontal"
+            android:text="1"
+            android:textSize="13sp"
+            android:textColor="@android:color/black"/>
 
         <View
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
             android:background="@color/color_666666"/>
 
-        <com.zxdc.utils.library.view.MeasureListView
-            android:id="@+id/list_num"
+        <TextView
+            android:id="@+id/tv_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
-            android:divider="@color/color_666666"
-            android:dividerHeight="0.5dp"/>
+            android:gravity="center_horizontal"
+            android:text="1"
+            android:textSize="13sp"
+            android:textColor="@android:color/black"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_666666"/>
 
     </LinearLayout>
 

@@ -41,6 +41,7 @@ import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.bean.Supplier;
 import com.zxdc.utils.library.bean.SupplierDetails;
+import com.zxdc.utils.library.bean.SupplierMaterial;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
@@ -287,6 +288,9 @@ public interface HttpApi {
 
     @DELETE(HttpConstant.IP+"supplier/deleteDetail")
     Call<BaseBean> deleteSupplierGoods(@Query("id") int id);
+
+    @GET(HttpConstant.IP+"supplier/goodsListByName")
+    Call<SupplierMaterial> getSupplierDetails(@Query("prop3") String prop3);
 
 
 }

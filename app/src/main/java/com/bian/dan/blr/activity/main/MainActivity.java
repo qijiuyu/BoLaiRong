@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
-import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
@@ -169,7 +168,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //供应商管理
             case R.id.tv_collect_gysgl:
-                setClass(SupplierListActivity.class);
+//                setClass(SupplierListActivity.class);
                 break;
             //财务报销
             case R.id.tv_collect_cwbx:

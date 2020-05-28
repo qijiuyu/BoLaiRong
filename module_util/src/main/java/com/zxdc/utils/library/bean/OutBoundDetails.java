@@ -316,6 +316,7 @@ public class OutBoundDetails extends BaseBean {
         private double addAmount;
         private String orderNum="";
         private int state;
+        private String stateStr;
         private String memo="";
         private int createId;
         private int updateId;
@@ -564,6 +565,14 @@ public class OutBoundDetails extends BaseBean {
 
         public void setProp4(String prop4) {
             this.prop4 = prop4;
+        }
+
+        public String getStateStr() {
+            return stateStr;
+        }
+
+        public void setStateStr(String stateStr) {
+            this.stateStr = stateStr;
         }
     }
 

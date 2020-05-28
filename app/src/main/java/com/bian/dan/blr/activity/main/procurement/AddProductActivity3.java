@@ -12,13 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.bian.dan.blr.persenter.procurement.AddProductPersenter3;
 import com.bian.dan.blr.view.DecimalDigitsInputFilter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
-import com.zxdc.utils.library.bean.Material;
-import com.zxdc.utils.library.bean.SupplierName;
+import com.zxdc.utils.library.bean.SupplierMaterial;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.util.Util;
 
@@ -118,19 +116,15 @@ public class AddProductActivity3 extends BaseActivity {
         });
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_supplier_name, R.id.tv_pay_type, R.id.tv_pay_time, R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_pay_type, R.id.tv_pay_time, R.id.tv_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
-            //物料名称
+            //供应商物料名称
             case R.id.tv_name:
-                 setClass(SelectMaterialActivity.class,100);
-                break;
-            //供应商名称
-            case R.id.tv_supplier_name:
-                setClass(SelectSupplierActivity.class,500);
+                 setClass(SelectSupplierMaterialActivity.class,500);
                 break;
             //付款方式
             case R.id.tv_pay_type:
@@ -149,7 +143,6 @@ public class AddProductActivity3 extends BaseActivity {
                 String remark=etRemark.getText().toString().trim();
                 String payType=tvPayType.getText().toString().trim();
                 String payTime=tvPayTime.getText().toString().trim();
-                String supplierName=tvSupplierName.getText().toString().trim();
                 if(TextUtils.isEmpty(name)){
                     ToastUtil.showLong("请选择物料名称");
                     return;
@@ -162,10 +155,6 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请输入单价");
                     return;
                 }
-                if(TextUtils.isEmpty(supplierName)){
-                    ToastUtil.showLong("请选择供应商");
-                    return;
-                }
                 if(TextUtils.isEmpty(payType)){
                     ToastUtil.showLong("请选择付款方式");
                     return;
@@ -174,7 +163,7 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请选择付款时间");
                     return;
                 }
-                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),price,money,remark,supplier.getId(),supplier.getSupplierName(),supplier.getContacts(),supplier.getPhone(),supplier.getSupplierAddress(),(int)tvPayType.getTag(),payTime);
+                Goods goods=new Goods(materialBean.getGoodsId(),materialBean.getGoodsName(),materialBean.getSpec(),materialBean.getUnitStr(),"",Integer.parseInt(num),price,money,remark,materialBean.getSupplierId(),materialBean.getSupplierName(),materialBean.getContacts(),materialBean.getPhone(),materialBean.getSupplierAddress(),(int)tvPayType.getTag(),payTime);
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);
                 setResult(200,intent);
@@ -186,30 +175,23 @@ public class AddProductActivity3 extends BaseActivity {
     }
 
 
-    private Material.ListBean listBean;//物料对象
-    private SupplierName.ListBean supplier;//供应商对象
+    private SupplierMaterial.MaterialBean materialBean;//供应商物料对象
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==100 && data!=null){
-            listBean= (Material.ListBean) data.getSerializableExtra("listBean");
-            if(listBean==null){
-                return;
-            }
-            tvName.setText(listBean.getName());
-            tvType.setText(listBean.getTypeStr());
-            tvSpec.setText(listBean.getSpec());
-            tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(Util.setDouble(listBean.getPrice(),2));
-        }
         if(resultCode==500 && data!=null){
-            supplier= (SupplierName.ListBean) data.getSerializableExtra("listBean");
-            if(supplier==null){
+            materialBean= (SupplierMaterial.MaterialBean) data.getSerializableExtra("materialBean");
+            if(materialBean==null){
                 return;
             }
-            tvSupplierName.setText(supplier.getSupplierName());
-            tvContact.setText(supplier.getContacts());
-            tvMobile.setText(supplier.getPhone());
-            tvAddress.setText(supplier.getSupplierAddress());
+            tvName.setText(materialBean.getGoodsName());
+            tvType.setText(materialBean.getTypeStr());
+            tvSpec.setText(materialBean.getSpec());
+            tvUnit.setText(materialBean.getUnitStr());
+            etPrice.setText(materialBean.getProp1());
+            tvSupplierName.setText(materialBean.getSupplierName());
+            tvContact.setText(materialBean.getContacts());
+            tvMobile.setText(materialBean.getPhone());
+            tvAddress.setText(materialBean.getSupplierAddress());
         }
     }
 }

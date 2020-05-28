@@ -106,7 +106,7 @@ public class AddProcurementActivity extends BaseActivity {
                      goodsList.setMemo(goods.getMemo());
                     list.add(goodsList);
                 }
-                addProcurementP.setEntryDetailList(list);
+                addProcurementP.setPurchaseDetailList(list);
                 LogUtils.e("+++++++++++"+new Gson().toJson(addProcurementP));
                 //新增采购单
                 addProcurementPersenter.AddProcurement(addProcurementP);

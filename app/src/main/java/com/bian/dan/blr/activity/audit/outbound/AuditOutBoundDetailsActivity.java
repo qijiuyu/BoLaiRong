@@ -179,18 +179,21 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                         /**
                          * 审核信息
                          */
-                        tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
-                        tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                        String auditResult=null;
-                        if(detailsBean.getState()==0){
-                            auditResult="未审核";
-                        }else if(detailsBean.getState()==1){
-                            auditResult="通过";
-                        }else{
-                            auditResult="未通过";
+                        if(detailsBean.getState()>0){
+                            linAudit.setVisibility(View.VISIBLE);
+                            tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
+                            tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
+                            String auditResult=null;
+                            if(detailsBean.getState()==0){
+                                auditResult="未审核";
+                            }else if(detailsBean.getState()==1){
+                                auditResult="通过";
+                            }else{
+                                auditResult="未通过";
+                            }
+                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
+                            tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
                         }
-                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
-                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
 
 
                         /**

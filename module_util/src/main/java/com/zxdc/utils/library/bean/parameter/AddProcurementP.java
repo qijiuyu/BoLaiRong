@@ -7,7 +7,7 @@ public class AddProcurementP implements Serializable {
 
     private String purcDate;
     private String purcOrder;
-    private List<GoodsList> entryDetailList;
+    private List<GoodsList> purchaseDetailList;
 
     public String getPurcDate() {
         return purcDate;
@@ -25,12 +25,12 @@ public class AddProcurementP implements Serializable {
         this.purcOrder = purcOrder;
     }
 
-    public List<GoodsList> getEntryDetailList() {
-        return entryDetailList;
+    public List<GoodsList> getPurchaseDetailList() {
+        return purchaseDetailList;
     }
 
-    public void setEntryDetailList(List<GoodsList> entryDetailList) {
-        this.entryDetailList = entryDetailList;
+    public void setPurchaseDetailList(List<GoodsList> purchaseDetailList) {
+        this.purchaseDetailList = purchaseDetailList;
     }
 
     public static class GoodsList implements Serializable{

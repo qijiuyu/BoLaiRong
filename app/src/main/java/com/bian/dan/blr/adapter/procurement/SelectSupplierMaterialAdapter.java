@@ -8,25 +8,26 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.sales.OutBoundDetailsAdapter2;
-import com.zxdc.utils.library.view.MeasureListView;
+import com.zxdc.utils.library.bean.SupplierMaterial;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProcuDetailsEnterAdapter extends BaseAdapter {
+public class SelectSupplierMaterialAdapter extends BaseAdapter {
 
     private Activity activity;
-    private OutBoundDetailsAdapter2 outBoundDetailsAdapter2;
-
-    public ProcuDetailsEnterAdapter(Activity activity) {
+    private List<SupplierMaterial.MaterialBean> list;
+    public SelectSupplierMaterialAdapter(Activity activity, List<SupplierMaterial.MaterialBean> list) {
         super();
         this.activity = activity;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -40,21 +41,17 @@ public class ProcuDetailsEnterAdapter extends BaseAdapter {
     }
 
     ViewHolder holder = null;
-
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(activity).inflate(R.layout.item_add_procurement_enter, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_select_customer, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
 
-        outBoundDetailsAdapter2 = new OutBoundDetailsAdapter2(activity, 0);
-        holder.listPc.setAdapter(outBoundDetailsAdapter2);
-
-        outBoundDetailsAdapter2 = new OutBoundDetailsAdapter2(activity, 1);
-        holder.listNum.setAdapter(outBoundDetailsAdapter2);
+        SupplierMaterial.MaterialBean materialBean=list.get(position);
+        holder.tvName.setText(materialBean.getSupplierName()+" / "+materialBean.getGoodsName()+" / "+materialBean.getSpec()+" / "+materialBean.getProp1());
         return view;
     }
 
@@ -63,20 +60,6 @@ public class ProcuDetailsEnterAdapter extends BaseAdapter {
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_spce)
-        TextView tvSpce;
-        @BindView(R.id.tv_unit)
-        TextView tvUnit;
-        @BindView(R.id.tv_type)
-        TextView tvType;
-        @BindView(R.id.tv_yes_num)
-        TextView tvYesNum;
-        @BindView(R.id.tv_no_num)
-        TextView tvNoNum;
-        @BindView(R.id.list_pc)
-        MeasureListView listPc;
-        @BindView(R.id.list_num)
-        MeasureListView listNum;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

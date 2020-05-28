@@ -3,12 +3,13 @@ package com.bian.dan.blr.activity.main.procurement;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.audit.AuditProcurementGoodsAdapter;
-import com.bian.dan.blr.adapter.procurement.AddProductAdapter3;
-import com.bian.dan.blr.adapter.procurement.ProcuDetailsEnterAdapter;
+import com.bian.dan.blr.adapter.procurement.Procurement_Details_EntryGood_Adapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Procurement;
@@ -50,17 +51,22 @@ public class ProcurementDetailsActivity extends BaseActivity {
     TextView tvAuditTime;
     @BindView(R.id.tv_audit_result)
     TextView tvAuditResult;
+    @BindView(R.id.tv_audit_remark)
+    TextView tvAuditRemark;
     @BindView(R.id.tv_enter)
     TextView tvEnter;
     @BindView(R.id.tv_enter_time)
     TextView tvEnterTime;
-    @BindView(R.id.list_outbound)
-    MeasureListView listOutbound;
+    @BindView(R.id.list_entry)
+    MeasureListView listEntry;
     @BindView(R.id.tv_remark)
     TextView tvRemark;
+    @BindView(R.id.lin_audit)
+    LinearLayout linAudit;
+    @BindView(R.id.lin_entry)
+    LinearLayout linEntry;
     private Procurement.ListBean listBean;
-    private AddProductAdapter3 addProductAdapter3;
-    private ProcuDetailsEnterAdapter procuDetailsEnterAdapter;
+    private Procurement_Details_EntryGood_Adapter procuDetailsEnterAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurement_details);
@@ -82,10 +88,6 @@ public class ProcurementDetailsActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("详情");
         listBean= (Procurement.ListBean) getIntent().getSerializableExtra("listBean");
-
-        procuDetailsEnterAdapter=new ProcuDetailsEnterAdapter(this);
-        listOutbound.setAdapter(procuDetailsEnterAdapter);
-
     }
 
 
@@ -102,7 +104,7 @@ public class ProcurementDetailsActivity extends BaseActivity {
             public void onSuccess(Object object) {
                 ProcurementDetails procurementDetails= (ProcurementDetails) object;
                 if(procurementDetails.isSussess()){
-                    ProcurementDetails.DetailsBean detailsBean=procurementDetails.getPurchase();
+                    ProcurementDetails.DetailsBean detailsBean=procurementDetails.getData();
                     if(detailsBean==null){
                         return;
                     }
@@ -114,19 +116,44 @@ public class ProcurementDetailsActivity extends BaseActivity {
                     /**
                      * 产品列表
                      */
-                    listView.setAdapter(new AuditProcurementGoodsAdapter(activity,procurementDetails.getPurchaseDetailList()));
+                    listView.setAdapter(new AuditProcurementGoodsAdapter(activity,detailsBean.getPurchaseDetailList()));
                     /**
                      * 计算总数量，总金额
                      */
                     int totalNum=0;
                     double totalMoney=0;
-                    for (int i=0;i<procurementDetails.getPurchaseDetailList().size();i++){
-                        final ProcurementDetails.GoodList goodList=procurementDetails.getPurchaseDetailList().get(i);
+                    for (int i=0;i<detailsBean.getPurchaseDetailList().size();i++){
+                        final ProcurementDetails.GoodList goodList=detailsBean.getPurchaseDetailList().get(i);
                         totalNum=totalNum+goodList.getNum();
                         totalMoney= BigDecimalUtil.add(totalMoney,goodList.getAmount());
                     }
                     tvProductNum.setText("数量："+totalNum);
                     tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
+
+
+                    /**
+                     * 审核信息
+                     */
+                    if(detailsBean.getState()>0){
+                        linAudit.setVisibility(View.VISIBLE);
+                        tvAudit.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName()+ "</font>"));
+                        tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5()+ "</font>"));
+                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#000000\">" + detailsBean.getStateStr()+ "</font>"));
+                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
+                    }
+
+
+                    /**
+                     * 入库信息
+                     */
+                    if(detailsBean.getEntryDetailList()!=null && detailsBean.getEntryDetailList().size()>0){
+                        linEntry.setVisibility(View.VISIBLE);
+                        ProcurementDetails.EntryList entryList=detailsBean.getEntryDetailList().get(0);
+                        tvEnter.setText(Html.fromHtml("入库：<font color=\"#000000\">" + entryList.getCreateName()+ "</font>"));
+                        tvEnterTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + entryList.getCreateDate()+ "</font>"));
+                        listEntry.setAdapter(new Procurement_Details_EntryGood_Adapter(activity,detailsBean.getEntryDetailList()));
+
+                    }
 
 
                 }else{

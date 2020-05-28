@@ -12,10 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.procurement.SelectSupplierAdapter;
+import com.bian.dan.blr.adapter.procurement.SelectSupplierMaterialAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.SupplierName;
+import com.zxdc.utils.library.bean.SupplierMaterial;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -31,7 +31,7 @@ import butterknife.OnClick;
 /**
  * 选择供应商
  */
-public class SelectSupplierActivity extends BaseActivity implements MyRefreshLayoutListener {
+public class SelectSupplierMaterialActivity extends BaseActivity implements MyRefreshLayoutListener {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -45,8 +45,8 @@ public class SelectSupplierActivity extends BaseActivity implements MyRefreshLay
     private String keys;
     //页码
     private int page=1;
-    private List<SupplierName.ListBean> listAll=new ArrayList<>();
-    private SelectSupplierAdapter selectSupplierAdapter;
+    private List<SupplierMaterial.MaterialBean> listAll=new ArrayList<>();
+    private SelectSupplierMaterialAdapter selectSupplierMaterialAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_contract_codel);
@@ -61,16 +61,15 @@ public class SelectSupplierActivity extends BaseActivity implements MyRefreshLay
      * 初始化
      */
     private void initView() {
-        tvHead.setText("选择供应商");
+        tvHead.setText("选择供应商物料");
         reList.setMyRefreshLayoutListener(this);
         reList.setIsLoadingMoreEnabled(false);
-        selectSupplierAdapter=new SelectSupplierAdapter(this,listAll);
-        listView.setAdapter(selectSupplierAdapter);
+        selectSupplierMaterialAdapter=new SelectSupplierMaterialAdapter(this,listAll);
+        listView.setAdapter(selectSupplierMaterialAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SupplierName.ListBean listBean=listAll.get(position);
                 Intent intent=new Intent();
-                intent.putExtra("listBean",listBean);
+                intent.putExtra("materialBean",listAll.get(position));
                 setResult(500,intent);
                 finish();
             }
@@ -103,31 +102,31 @@ public class SelectSupplierActivity extends BaseActivity implements MyRefreshLay
     public void onRefresh(View view) {
         page=1;
         listAll.clear();
-        getSupplierNameByName();
+        getSupplierDetails();
     }
 
     @Override
     public void onLoadMore(View view) {
         page++;
-        getSupplierNameByName();
+        getSupplierDetails();
     }
 
 
     /**
-     * 根据首字母 获取供应商列表
+     * 根据首字母查询供应商物料信息
      */
-    public void getSupplierNameByName(){
-        HttpMethod.getSupplierNameByName(keys, new NetWorkCallBack() {
+    public void getSupplierDetails(){
+        HttpMethod.getSupplierDetails(keys, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
-                SupplierName supplierName= (SupplierName) object;
-                if(supplierName.isSussess()){
-                    List<SupplierName.ListBean> list=supplierName.getDataList();
+                SupplierMaterial supplierMaterial= (SupplierMaterial) object;
+                if(supplierMaterial.isSussess()){
+                    List<SupplierMaterial.MaterialBean> list=supplierMaterial.getData();
                     listAll.addAll(list);
-                    selectSupplierAdapter.notifyDataSetChanged();
+                    selectSupplierMaterialAdapter.notifyDataSetChanged();
                 }else{
-                    ToastUtil.showLong(supplierName.getMsg());
+                    ToastUtil.showLong(supplierMaterial.getMsg());
                 }
             }
 

@@ -127,210 +127,237 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/color_f9f9f9"/>
 
-            <TextView
-                android:id="@+id/tv_audit"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:text="审核：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
-                android:id="@+id/tv_audit_time"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:text="审核时间：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
-                android:id="@+id/tv_audit_result"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:text="审核结果：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/color_f9f9f9"/>
-
-            <TextView
-                android:id="@+id/tv_enter"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:text="入库：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
-                android:id="@+id/tv_enter_time"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:text="入库时间：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center_vertical"
-                android:text="入库列表"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
-
             <LinearLayout
+                android:id="@+id/lin_audit"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:gravity="center_vertical"
-                android:background="@color/color_f5f5f5">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="物料名称"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
+                    android:id="@+id/tv_audit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="审核：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="审核时间：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="审核结果：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="审核意见：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
 
                 <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="规格/型号"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="单位"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="到货类型"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="到货数量"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="未货数量"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="批次"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
-
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_666666"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="数量"
-                    android:textColor="@android:color/black"
-                    android:textSize="13sp"
-                    android:gravity="center"/>
+                    android:layout_height="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/color_f9f9f9"/>
 
             </LinearLayout>
 
-            <com.zxdc.utils.library.view.MeasureListView
-                android:id="@+id/list_outbound"
+            <LinearLayout
+                android:id="@+id/lin_entry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:divider="@null">
-            </com.zxdc.utils.library.view.MeasureListView>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_remark"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_vertical"
-                android:text="审核结果：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="15dp"/>
+                <TextView
+                    android:id="@+id/tv_enter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:text="入库：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_enter_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="入库时间：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:text="入库列表"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/color_f5f5f5">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="物料名称"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="规格/型号"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="单位"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="到货类型"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="到货数量"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未货数量"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="批次"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_666666"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="数量"
+                        android:textColor="@android:color/black"
+                        android:textSize="13sp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <com.zxdc.utils.library.view.MeasureListView
+                    android:id="@+id/list_entry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:divider="@null">
+                </com.zxdc.utils.library.view.MeasureListView>
+
+                <TextView
+                    android:id="@+id/tv_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:text="审核结果：xxx"
+                    android:textSize="14sp"
+                    android:textColor="@color/color_666666"
+                    android:layout_marginLeft="15dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

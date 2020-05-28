@@ -5,23 +5,14 @@ import java.util.List;
 
 public class ProcurementDetails extends BaseBean {
 
-    private DetailsBean purchase;
-    private List<GoodList> purchaseDetailList;
+    private DetailsBean data;
 
-    public DetailsBean getPurchase() {
-        return purchase;
+    public DetailsBean getData() {
+        return data;
     }
 
-    public void setPurchase(DetailsBean purchase) {
-        this.purchase = purchase;
-    }
-
-    public List<GoodList> getPurchaseDetailList() {
-        return purchaseDetailList;
-    }
-
-    public void setPurchaseDetailList(List<GoodList> purchaseDetailList) {
-        this.purchaseDetailList = purchaseDetailList;
+    public void setData(DetailsBean data) {
+        this.data = data;
     }
 
     public static class DetailsBean implements Serializable{
@@ -33,9 +24,11 @@ public class ProcurementDetails extends BaseBean {
         private int createId;
         private int state;
         private String approveName="";
-        private String prop2="";
+        private String prop4="";
         private String prop5="";
         private String stateStr="";
+        private List<GoodList> purchaseDetailList;
+        private List<EntryList> entryDetailList;
 
         public int getId() {
             return id;
@@ -101,12 +94,12 @@ public class ProcurementDetails extends BaseBean {
             this.approveName = approveName;
         }
 
-        public String getProp2() {
-            return prop2;
+        public String getProp4() {
+            return prop4;
         }
 
-        public void setProp2(String prop2) {
-            this.prop2 = prop2;
+        public void setProp4(String prop4) {
+            this.prop4 = prop4;
         }
 
         public String getProp5() {
@@ -123,6 +116,22 @@ public class ProcurementDetails extends BaseBean {
 
         public void setStateStr(String stateStr) {
             this.stateStr = stateStr;
+        }
+
+        public List<GoodList> getPurchaseDetailList() {
+            return purchaseDetailList;
+        }
+
+        public void setPurchaseDetailList(List<GoodList> purchaseDetailList) {
+            this.purchaseDetailList = purchaseDetailList;
+        }
+
+        public List<EntryList> getEntryDetailList() {
+            return entryDetailList;
+        }
+
+        public void setEntryDetailList(List<EntryList> entryDetailList) {
+            this.entryDetailList = entryDetailList;
         }
     }
 
@@ -262,6 +271,91 @@ public class ProcurementDetails extends BaseBean {
 
         public void setContacts(String contacts) {
             this.contacts = contacts;
+        }
+    }
+
+
+    public static class EntryList implements Serializable{
+        private String goodsName="";
+        private String batchNo="";
+        private int num;
+        private String arriveTypeStr="";
+        private String stockTypeStr="";
+        private String goodsTypeStr="";
+        private String createName="";
+        private String createDate="";
+        private String memo="";
+
+        public String getGoodsName() {
+            return goodsName;
+        }
+
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
+        }
+
+        public String getBatchNo() {
+            return batchNo;
+        }
+
+        public void setBatchNo(String batchNo) {
+            this.batchNo = batchNo;
+        }
+
+        public int getNum() {
+            return num;
+        }
+
+        public void setNum(int num) {
+            this.num = num;
+        }
+
+        public String getArriveTypeStr() {
+            return arriveTypeStr;
+        }
+
+        public void setArriveTypeStr(String arriveTypeStr) {
+            this.arriveTypeStr = arriveTypeStr;
+        }
+
+        public String getStockTypeStr() {
+            return stockTypeStr;
+        }
+
+        public void setStockTypeStr(String stockTypeStr) {
+            this.stockTypeStr = stockTypeStr;
+        }
+
+        public String getGoodsTypeStr() {
+            return goodsTypeStr;
+        }
+
+        public void setGoodsTypeStr(String goodsTypeStr) {
+            this.goodsTypeStr = goodsTypeStr;
+        }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
         }
     }
 }

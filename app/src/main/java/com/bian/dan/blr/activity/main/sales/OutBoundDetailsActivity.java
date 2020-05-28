@@ -63,6 +63,8 @@ public class OutBoundDetailsActivity extends BaseActivity {
     TextView tvProductMoney;
     @BindView(R.id.tv_product_num)
     TextView tvProductNum;
+    @BindView(R.id.lin_audit)
+    LinearLayout linAudit;
     @BindView(R.id.tv_audit_name)
     TextView tvAuditName;
     @BindView(R.id.tv_audit_time)
@@ -159,17 +161,16 @@ public class OutBoundDetailsActivity extends BaseActivity {
                         tvProductNum.setText("数量："+totalNum);
                         tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
 
-                        tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
-                        tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                        String auditResult=null;
-                        if(detailsBean.getState()==0){
-                            auditResult="未审核";
-                        }else if(detailsBean.getState()==1){
-                            auditResult="通过";
-                        }else{
-                            auditResult="未通过";
+
+                        /**
+                         * 审核信息
+                         */
+                        if(detailsBean.getState()>0){
+                            linAudit.setVisibility(View.VISIBLE);
+                            tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
+                            tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
+                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + detailsBean.getStateStr()+ "</font>"));
                         }
-                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
 
 
                         /**

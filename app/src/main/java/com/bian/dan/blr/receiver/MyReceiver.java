@@ -52,7 +52,7 @@ public class MyReceiver extends BroadcastReceiver {
 				final String type= (String) valueMap.get("type");
 				final String fid=(String) valueMap.get("fid");
 				Intent gotoIntent=new Intent();
-				gotoIntent.putExtra("detailsId",fid);
+				gotoIntent.putExtra("detailsId",Integer.parseInt(fid));
 				switch (type){
 					case "1":
 						gotoIntent.setClass(context, AuditOutBoundDetailsActivity.class);

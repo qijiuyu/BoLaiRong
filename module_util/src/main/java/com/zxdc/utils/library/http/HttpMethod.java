@@ -41,6 +41,7 @@ import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.bean.Supplier;
 import com.zxdc.utils.library.bean.SupplierDetails;
+import com.zxdc.utils.library.bean.SupplierMaterial;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -1353,6 +1354,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 根据首字母查询供应商物料信息
+     */
+    public static void getSupplierDetails(String prop3, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSupplierDetails(prop3).enqueue(new Callback<SupplierMaterial>() {
+            public void onResponse(Call<SupplierMaterial> call, Response<SupplierMaterial> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<SupplierMaterial> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }
