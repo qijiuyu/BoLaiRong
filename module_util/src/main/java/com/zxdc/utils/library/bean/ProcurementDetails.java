@@ -137,6 +137,8 @@ public class ProcurementDetails extends BaseBean {
 
 
     public static class GoodList implements Serializable{
+        private int id;
+        private int supplierId;
         private String supplierName="";
         private int num;
         private double unitPrice;
@@ -144,14 +146,40 @@ public class ProcurementDetails extends BaseBean {
         private String memo="";
         private int payType;
         private String payDate="";
-        private String name="";
+        private String goodsName="";
         private String typeName="";
         private String spec="";
-        private String unitName="";
+        private String unitStr="";
         private String phone="";
         private String address="";
         private String purcName="";
         private String contacts="";
+        private int goodsId;
+        private String typeStr="";
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getSupplierId() {
+            return supplierId;
+        }
+
+        public void setSupplierId(int supplierId) {
+            this.supplierId = supplierId;
+        }
+
+        public int getGoodsId() {
+            return goodsId;
+        }
+
+        public void setGoodsId(int goodsId) {
+            this.goodsId = goodsId;
+        }
 
         public String getSupplierName() {
             return supplierName;
@@ -209,12 +237,12 @@ public class ProcurementDetails extends BaseBean {
             this.payDate = payDate;
         }
 
-        public String getName() {
-            return name;
+        public String getGoodsName() {
+            return goodsName;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setGoodsName(String goodsName) {
+            this.goodsName = goodsName;
         }
 
         public String getTypeName() {
@@ -233,12 +261,12 @@ public class ProcurementDetails extends BaseBean {
             this.spec = spec;
         }
 
-        public String getUnitName() {
-            return unitName;
+        public String getUnitStr() {
+            return unitStr;
         }
 
-        public void setUnitName(String unitName) {
-            this.unitName = unitName;
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
         }
 
         public String getPhone() {
@@ -271,6 +299,14 @@ public class ProcurementDetails extends BaseBean {
 
         public void setContacts(String contacts) {
             this.contacts = contacts;
+        }
+
+        public String getTypeStr() {
+            return typeStr;
+        }
+
+        public void setTypeStr(String typeStr) {
+            this.typeStr = typeStr;
         }
     }
 

@@ -360,7 +360,9 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@null"
+                android:background="@drawable/bg__four_border"
+                android:padding="10dp"
+                android:hint="请输入"
                 android:textSize="15sp"
                 android:minLines="4"
                 android:gravity="top" />

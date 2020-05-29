@@ -67,4 +67,29 @@ public class AddProcurementPersenter {
             }
         });
     }
+
+
+    /**
+     * 修改采购单
+     */
+    public void EditProcurement(AddProcurementP addProcurementP){
+        DialogUtil.showProgress(activity,"数据提交中");
+        HttpMethod.EditProcurement(addProcurementP, new NetWorkCallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            @Override
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
 }

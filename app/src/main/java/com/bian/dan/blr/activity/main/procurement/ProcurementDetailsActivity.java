@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.procurement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -31,6 +32,8 @@ public class ProcurementDetailsActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     @BindView(R.id.tv_pro_name)
     TextView tvProName;
     @BindView(R.id.tv_pro_time)
@@ -66,6 +69,8 @@ public class ProcurementDetailsActivity extends BaseActivity {
     @BindView(R.id.lin_entry)
     LinearLayout linEntry;
     private Procurement.ListBean listBean;
+    //详情对象
+    private ProcurementDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurement_details);
@@ -75,17 +80,33 @@ public class ProcurementDetailsActivity extends BaseActivity {
         getProcurementDetails();
     }
 
-    @OnClick(R.id.lin_back)
-    public void onViewClicked() {
-        finish();
-    }
 
+    @OnClick({R.id.lin_back, R.id.tv_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.lin_back:
+                finish();
+                break;
+            //编辑
+            case R.id.tv_right:
+                if(detailsBean==null){
+                    return;
+                }
+                Intent intent=new Intent(this,AddProcurementActivity.class);
+                intent.putExtra("detailsBean",detailsBean);
+                startActivityForResult(intent,1000);
+                break;
+            default:
+                break;
+        }
+    }
 
     /**
      * 初始化
      */
     private void initView() {
         tvHead.setText("详情");
+        tvRight.setText("编辑");
         listBean= (Procurement.ListBean) getIntent().getSerializableExtra("listBean");
     }
 
@@ -103,7 +124,7 @@ public class ProcurementDetailsActivity extends BaseActivity {
             public void onSuccess(Object object) {
                 ProcurementDetails procurementDetails= (ProcurementDetails) object;
                 if(procurementDetails.isSussess()){
-                    ProcurementDetails.DetailsBean detailsBean=procurementDetails.getData();
+                    detailsBean=procurementDetails.getData();
                     if(detailsBean==null){
                         return;
                     }
@@ -165,5 +186,19 @@ public class ProcurementDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            //编辑成功后，重新刷新界面
+            case 1000:
+                getProcurementDetails();
+                break;
+            default:
+                break;
+        }
     }
 }

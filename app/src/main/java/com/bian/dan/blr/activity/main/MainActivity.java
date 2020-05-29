@@ -201,7 +201,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_house_cwbx:
                 break;
+            //工资管理
             case R.id.tv_financial_gzgl:
+//                setClass(WageManagerActivity.class);
                 break;
             case R.id.tv_financial_cwbx:
                 break;

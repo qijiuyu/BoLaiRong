@@ -51,9 +51,9 @@ public class AuditProcurementGoodsAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         ProcurementDetails.GoodList goodList = list.get(position);
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getName() + "</font>"));
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
         holder.tvBrand.setText(goodList.getSpec());
-        holder.tvUnit.setText(goodList.getUnitName());
+        holder.tvUnit.setText(goodList.getUnitStr());
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goodList.getUnitPrice() + "</font>"));
         holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
@@ -66,7 +66,7 @@ public class AuditProcurementGoodsAdapter extends BaseAdapter {
         }else{
             holder.tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">分期</font>"));
         }
-        holder.tvPayTime.setText(Html.fromHtml("付款时间：<font color=\"#000000\">" + goodList.getPayDate() + "</font>"));
+        holder.tvPayTime.setText(Html.fromHtml("付款时间：<font color=\"#000000\">" + goodList.getPayDate().split(" ")[0] + "</font>"));
         holder.tvMemo.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
         return view;
     }

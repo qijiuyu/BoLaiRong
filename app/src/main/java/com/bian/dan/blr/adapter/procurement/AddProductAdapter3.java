@@ -1,14 +1,15 @@
 package com.bian.dan.blr.adapter.procurement;
 
-import android.app.Activity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.procurement.AddProcurementActivity;
 import com.zxdc.utils.library.bean.Goods;
 
 import java.util.List;
@@ -18,17 +19,18 @@ import butterknife.ButterKnife;
 
 public class AddProductAdapter3 extends BaseAdapter {
 
-    private Activity activity;
+    private AddProcurementActivity activity;
     private List<Goods> list;
-    public AddProductAdapter3(Activity activity,List<Goods> list) {
+
+    public AddProductAdapter3(AddProcurementActivity activity, List<Goods> list) {
         super();
         this.activity = activity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -50,7 +52,7 @@ public class AddProductAdapter3 extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        Goods goods=list.get(position);
+        Goods goods = list.get(position);
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
         holder.tvBrand.setText(goods.getSpec());
         holder.tvUnit.setText(goods.getUnitStr());
@@ -59,15 +61,40 @@ public class AddProductAdapter3 extends BaseAdapter {
         holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + goods.getTotalMoney() + "</font>"));
 
         holder.tvSupplierName.setText(Html.fromHtml("供应商名称：<font color=\"#000000\">" + goods.getCompany() + "</font>"));
-        holder.tvContact.setText(goods.getContract()+"   "+goods.getMobile());
+        holder.tvContact.setText(goods.getContract() + "   " + goods.getMobile());
         holder.tvAddress.setText(Html.fromHtml("地址：<font color=\"#000000\">" + goods.getAddress() + "</font>"));
-        if(goods.getPayType()==1){
+        if (goods.getPayType() == 1) {
             holder.tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">全款</font>"));
-        }else{
+        } else {
             holder.tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">分期</font>"));
         }
-        holder.tvPayTime.setText(Html.fromHtml("付款时间：<font color=\"#000000\">" + goods.getPayTime() + "</font>"));
+        holder.tvPayTime.setText(Html.fromHtml("付款时间：<font color=\"#000000\">" + goods.getPayTime().split(" ")[0] + "</font>"));
         holder.tvMemo.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goods.getMemo() + "</font>"));
+
+        /**
+         * 删除
+         */
+        holder.imgDelete.setVisibility(View.VISIBLE);
+        holder.imgDelete.setTag(goods);
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Goods goods= (Goods) v.getTag();
+                list.remove(goods);
+                notifyDataSetChanged();
+            }
+        });
+
+        /**
+         * 编辑
+         */
+        holder.imgEdit.setVisibility(View.VISIBLE);
+        holder.imgEdit.setTag(goods);
+        holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Goods goods= (Goods) v.getTag();
+                activity.gotoEdit(goods);
+            }
+        });
         return view;
     }
 
@@ -98,6 +125,10 @@ public class AddProductAdapter3 extends BaseAdapter {
         TextView tvPayTime;
         @BindView(R.id.tv_memo)
         TextView tvMemo;
+        @BindView(R.id.img_edit)
+        ImageView imgEdit;
+        @BindView(R.id.img_delete)
+        ImageView imgDelete;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

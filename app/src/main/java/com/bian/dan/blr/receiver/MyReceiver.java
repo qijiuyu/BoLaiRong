@@ -8,7 +8,9 @@ import android.text.TextUtils;
 
 import com.bian.dan.blr.activity.audit.financial.AuditFinancialDetailsActivity;
 import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundDetailsActivity;
+import com.bian.dan.blr.activity.audit.procurement.AuditProcurementDetailsActivity;
 import com.bian.dan.blr.activity.audit.production.AuditProductPlanDetailsActivity;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.util.LogUtils;
 
 import org.json.JSONException;
@@ -33,7 +35,7 @@ public class MyReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		try {
 			Bundle bundle = intent.getExtras();
-//			LogUtils.e("[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+			LogUtils.e("[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
 			if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
 				String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
@@ -45,17 +47,18 @@ public class MyReceiver extends BroadcastReceiver {
 			} else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
 
 			} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-				Map<String,Object> valueMap=printBundle(bundle);
+				Map<String,Object> valueMap=printBundle(intent.getExtras());
 				if(valueMap==null){
 					return;
 				}
+				LogUtils.e("++++++++++"+new Gson().toJson(valueMap));
 				final String type= (String) valueMap.get("type");
 				final String fid=(String) valueMap.get("fid");
 				Intent gotoIntent=new Intent();
 				gotoIntent.putExtra("detailsId",Integer.parseInt(fid));
 				switch (type){
 					case "1":
-						gotoIntent.setClass(context, AuditOutBoundDetailsActivity.class);
+						gotoIntent.setClass(context, AuditProcurementDetailsActivity.class);
 						 break;
 					case "2":
 						gotoIntent.setClass(context, AuditFinancialDetailsActivity.class);
@@ -87,9 +90,13 @@ public class MyReceiver extends BroadcastReceiver {
 	// 打印所有的 intent extra 数据
 	private  Map<String,Object> printBundle(Bundle bundle) {
 		Map<String,Object> valueMap=new HashMap<>();
+		StringBuilder sb = new StringBuilder();
 		for (String key : bundle.keySet()) {
 			if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
+
 				valueMap.put("notificationId",bundle.getInt(key));
+				sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
+
 			}else if(key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)){
 
 			} else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
@@ -109,13 +116,18 @@ public class MyReceiver extends BroadcastReceiver {
 						}else if(myKey.equals("type")){
 							valueMap.put("type",json.optString(myKey));
 						}
+
+						sb.append("\nkey:" + key + ", value: [" + myKey + " - " +json.optString(myKey) + "]");
 					}
 				} catch (JSONException e) {
 					LogUtils.e("Get message extra JSON error!");
 				}
 
+			}else{
+				sb.append("\nkey:" + key + ", value:" + bundle.get(key));
 			}
 		}
+		LogUtils.e(sb.toString());
 		return valueMap;
 	}
 	

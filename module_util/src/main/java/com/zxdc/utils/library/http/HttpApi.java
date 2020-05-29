@@ -45,6 +45,7 @@ import com.zxdc.utils.library.bean.SupplierMaterial;
 import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
+import com.zxdc.utils.library.bean.Wage;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
@@ -299,5 +300,10 @@ public interface HttpApi {
     @PUT(HttpConstant.IP+"supplier/saveDetailList")
     Call<BaseBean> AddSupplierMaterial(@Body AddSupplierMaterialP addSupplierMaterialP);
 
+    @GET(HttpConstant.IP+"wage/getList")
+    Call<Wage> getWageList(@Query("userId") String userId,@Query("deptId") String deptId,@Query("month") String month, @Query("page") int page, @Query("limit") int limit);
+
+    @POST(HttpConstant.IP+"purchase/update")
+    Call<BaseBean> EditProcurement(@Body AddProcurementP addProcurementP);
 
 }

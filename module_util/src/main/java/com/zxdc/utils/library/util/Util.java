@@ -11,9 +11,10 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.base.BaseApplication;
 
 import java.math.BigDecimal;
@@ -267,5 +268,14 @@ public class Util extends ClassLoader {
             e.printStackTrace();
         }
         return 0;
+    }
+
+
+    /**
+     * 隐藏键盘
+     */
+    public static void lockKey(Activity activity,EditText et) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
     }
 }

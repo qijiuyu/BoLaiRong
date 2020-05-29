@@ -31,6 +31,15 @@ public class DateUtils {
     public static String getDay(long time) {
         return new SimpleDateFormat("yyyy-MM-dd").format(time);
     }
+
+    /**
+     * 获取当前时间
+     * @return
+     */
+    public static String getNewTime() {
+        return new SimpleDateFormat("yyyy-MM").format(new Date());
+    }
+
     /**
      * 格式到毫秒
      *

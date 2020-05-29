@@ -105,7 +105,7 @@ public class AddBatchNoAdapter extends RecyclerView.Adapter<AddBatchNoAdapter.My
             if(type==1){
                 addBatchno.setBatchNo(content);
             }else{
-                addBatchno.setNum(Integer.parseInt(content));
+                addBatchno.setNum(content);
             }
         }
     };

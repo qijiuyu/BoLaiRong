@@ -54,7 +54,7 @@ public class PlanDetailsGoodAdapter extends BaseAdapter {
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goodBean.getGoodsName()+"</font>"));
         holder.tvBrand.setText(goodBean.getBrand());
         holder.tvSpec.setText(goodBean.getSpec());
-        holder.tvUnit.setText(goodBean.getUnitStr());
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">"+goodBean.getUnitStr()+"</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodBean.getNum()+"</font>"));
         holder.tvRemark.setText("备注："+goodBean.getMemo());
         return view;

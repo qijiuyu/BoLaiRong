@@ -106,13 +106,13 @@
 
         <TextView
             android:id="@+id/tv_send"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
+            android:layout_width="55dp"
+            android:layout_height="25dp"
             android:background="@drawable/btn_bg"
             android:layout_gravity="right"
             android:text="发货"
             android:textColor="@android:color/white"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:gravity="center"/>
 
         <com.zxdc.utils.library.view.MeasureListView

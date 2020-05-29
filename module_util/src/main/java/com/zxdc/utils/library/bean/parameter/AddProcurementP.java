@@ -5,8 +5,27 @@ import java.util.List;
 
 public class AddProcurementP implements Serializable {
 
+    private int id;
     private String purcDate;
     private String purcOrder;
+    private String flag;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
     private List<GoodsList> purchaseDetailList;
 
     public String getPurcDate() {

@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.persenter.warehouse.SendDeliveryPersenter;
+import com.bian.dan.blr.activity.main.warehouse.SendDeliveryActivity;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.view.MeasureListView;
 
@@ -21,13 +21,12 @@ import butterknife.ButterKnife;
 public class SendDeliveryGoodsAdapter extends BaseAdapter {
 
     private Activity activity;
+    //产品列表
     private List<OutBoundDetails.GoodList> list;
-    private SendDeliveryPersenter sendDeliveryPersenter;
-    public SendDeliveryGoodsAdapter(Activity activity, List<OutBoundDetails.GoodList> list,SendDeliveryPersenter sendDeliveryPersenter) {
+    public SendDeliveryGoodsAdapter(Activity activity, List<OutBoundDetails.GoodList> list) {
         super();
         this.activity = activity;
         this.list = list;
-        this.sendDeliveryPersenter=sendDeliveryPersenter;
     }
 
     @Override
@@ -72,12 +71,20 @@ public class SendDeliveryGoodsAdapter extends BaseAdapter {
         /**
          * 发货
          */
-        holder.tvSend.setTag(goodList);
+        holder.tvSend.setTag(goodList.getId());
         holder.tvSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                sendDeliveryPersenter.addDialog((OutBoundDetails.GoodList) v.getTag());
+                if(activity instanceof SendDeliveryActivity){
+                    ((SendDeliveryActivity)activity).sendDeliveryPersenter.addDialog((int) v.getTag());
+                }
             }
         });
+
+
+        /**
+         * 显示批次集合
+         */
+        holder.listView.setAdapter(new ShowBatchNoAdapter(activity,goodList.getId()));
         return view;
     }
 

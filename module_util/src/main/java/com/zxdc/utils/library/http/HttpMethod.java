@@ -46,6 +46,7 @@ import com.zxdc.utils.library.bean.SupplierName;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
+import com.zxdc.utils.library.bean.Wage;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
@@ -1401,6 +1402,41 @@ public class HttpMethod extends BaseRequst {
      */
     public static void AddSupplierMaterial(AddSupplierMaterialP addSupplierMaterialP, final NetWorkCallBack netWorkCallBack) {
         Http.getRetrofit().create(HttpApi.class).AddSupplierMaterial(addSupplierMaterialP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+
+    /**
+     * 工资列表
+     */
+    public static void getWageList(String userId,String deptId,String month,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getWageList(userId,deptId,month,page,limit).enqueue(new Callback<Wage>() {
+            public void onResponse(Call<Wage> call, Response<Wage> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Wage> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 修改采购单
+     */
+    public static void EditProcurement(AddProcurementP addProcurementP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).EditProcurement(addProcurementP).enqueue(new Callback<BaseBean>() {
             public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

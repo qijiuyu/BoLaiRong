@@ -83,6 +83,8 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
     TextView tvOrderCode;
     @BindView(R.id.lin_out)
     LinearLayout linOut;
+    @BindView(R.id.tv_send)
+    TextView tvSend;
     private OutBound.ListBean listBean;
     private  OutBoundDetails outBoundDetails;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -173,17 +175,13 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                         tvProductNum.setText("数量："+totalNum);
                         tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
 
+
+                        /**
+                         * 审核信息
+                         */
                         tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                        String auditResult=null;
-                        if(detailsBean.getState()==0){
-                            auditResult="未审核";
-                        }else if(detailsBean.getState()==1){
-                            auditResult="通过";
-                        }else{
-                            auditResult="未通过";
-                        }
-                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
+                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + detailsBean.getStateStr()+ "</font>"));
 
 
                         /**
@@ -204,6 +202,16 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                         tvLogistics.setText(Html.fromHtml("物流名称：<font color=\"#000000\">" + detailsBean.getExpressTypeStr() + "</font>"));
                         tvOrderCode.setText(Html.fromHtml("物流单号：<font color=\"#000000\">" + detailsBean.getExpressNo() + "</font>"));
                         scrollView.scrollTo(0,0);
+
+
+                        /**
+                         * 底部按钮变更
+                         */
+//                        if(detailsBean.getState()==1 && detailsBean.getStatus()==0){  //已审核同意，并且还没有出库
+//                            tvSend.setVisibility(View.VISIBLE);
+//                        }else{
+//                            tvSend.setVisibility(View.GONE);
+//                        }
                     }else{
                         ToastUtil.showLong(outBoundDetails.getMsg());
                     }

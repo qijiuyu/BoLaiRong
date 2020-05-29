@@ -60,11 +60,15 @@ public class AddProductActivity3 extends BaseActivity {
     @BindView(R.id.et_remark)
     EditText etRemark;
     private AddProductPersenter3 addProductPersenter3;
+    //要编辑的对象
+    private Goods editGoods;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product3);
         ButterKnife.bind(this);
         initView();
+        //显示要编辑的内容
+        showEditData();
     }
 
 
@@ -74,6 +78,7 @@ public class AddProductActivity3 extends BaseActivity {
     private void initView() {
         tvHead.setText("添加产品");
         addProductPersenter3=new AddProductPersenter3(this);
+        editGoods= (Goods) getIntent().getSerializableExtra("goods");
         //显示小数点只能输入两位
         etPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2), new InputFilter.LengthFilter(8)});
 
@@ -163,15 +168,52 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请选择付款时间");
                     return;
                 }
-                Goods goods=new Goods(materialBean.getGoodsId(),materialBean.getGoodsName(),materialBean.getSpec(),materialBean.getUnitStr(),"",Integer.parseInt(num),price,money,remark,materialBean.getSupplierId(),materialBean.getSupplierName(),materialBean.getContacts(),materialBean.getPhone(),materialBean.getSupplierAddress(),(int)tvPayType.getTag(),payTime);
                 Intent intent=new Intent();
-                intent.putExtra("goods",goods);
+                if(materialBean!=null){
+                    Goods goods=new Goods(materialBean.getGoodsId(),materialBean.getGoodsName(),materialBean.getSpec(),materialBean.getUnitStr(),"",Integer.parseInt(num),price,money,remark,materialBean.getSupplierId(),materialBean.getSupplierName(),materialBean.getContacts(),materialBean.getPhone(),materialBean.getSupplierAddress(),(int)tvPayType.getTag(),payTime);
+                    intent.putExtra("goods",goods);
+               }else{
+                    editGoods.setNum(Integer.parseInt(num));
+                    editGoods.setPrice(price);
+                    editGoods.setPayType((int)tvPayType.getTag());
+                    editGoods.setPayTime(payTime);
+                    editGoods.setMemo(remark);
+                    intent.putExtra("goods",editGoods);
+                }
                 setResult(200,intent);
                 finish();
                 break;
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 显示要编辑的内容
+     */
+    private void showEditData(){
+        if(editGoods==null){
+            return;
+        }
+        tvName.setText(editGoods.getName());
+        tvType.setText(editGoods.getTypeStr());
+        tvSpec.setText(editGoods.getSpec());
+        tvUnit.setText(editGoods.getUnitStr());
+        etNum.setText(String.valueOf(editGoods.getNum()));
+        etPrice.setText(editGoods.getPrice());
+        tvSupplierName.setText(editGoods.getCompany());
+        tvContact.setText(editGoods.getContract());
+        tvMobile.setText(editGoods.getMobile());
+        tvAddress.setText(editGoods.getAddress());
+        if(editGoods.getPayType()==1){
+            tvPayType.setText("全款");
+        }else{
+            tvPayType.setText("分期");
+        }
+        tvPayType.setTag(editGoods.getPayType());
+        tvPayTime.setText(editGoods.getPayTime().split(" ")[0]);
+        etRemark.setText(editGoods.getMemo());
     }
 
 
@@ -192,6 +234,7 @@ public class AddProductActivity3 extends BaseActivity {
             tvContact.setText(materialBean.getContacts());
             tvMobile.setText(materialBean.getPhone());
             tvAddress.setText(materialBean.getSupplierAddress());
+            etNum.setText(null);
         }
     }
 }

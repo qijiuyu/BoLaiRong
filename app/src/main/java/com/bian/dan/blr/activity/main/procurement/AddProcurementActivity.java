@@ -15,6 +15,7 @@ import com.bian.dan.blr.persenter.procurement.AddProcurementPersenter;
 import com.google.gson.Gson;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
+import com.zxdc.utils.library.bean.ProcurementDetails;
 import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.util.BigDecimalUtil;
 import com.zxdc.utils.library.util.LogUtils;
@@ -47,12 +48,17 @@ public class AddProcurementActivity extends BaseActivity {
     LinearLayout linGood;
     private AddProcurementPersenter addProcurementPersenter;
     private AddProductAdapter3 addProductAdapter3;
+    //产品列表集合
     private List<Goods> goodsList=new ArrayList<>();
+    //详情对象
+    private ProcurementDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_procurement);
         ButterKnife.bind(this);
         initView();
+        //进入编辑页面，显示数据
+        showEditData();
     }
 
     /**
@@ -61,6 +67,9 @@ public class AddProcurementActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("新增采购单");
         addProcurementPersenter = new AddProcurementPersenter(this);
+        detailsBean= (ProcurementDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
+
+        //产品列表
         addProductAdapter3=new AddProductAdapter3(this,goodsList);
         listView.setAdapter(addProductAdapter3);
     }
@@ -104,12 +113,19 @@ public class AddProcurementActivity extends BaseActivity {
                      goodsList.setPayType(goods.getPayType());
                      goodsList.setPayDate(goods.getPayTime());
                      goodsList.setMemo(goods.getMemo());
-                    list.add(goodsList);
+                     list.add(goodsList);
                 }
                 addProcurementP.setPurchaseDetailList(list);
+                if(detailsBean==null){
+                    //新增采购单
+                    addProcurementPersenter.AddProcurement(addProcurementP);
+                }else{
+                    //修改采购单
+                    addProcurementP.setId(detailsBean.getId());
+                    addProcurementP.setFlag("1");
+                    addProcurementPersenter.EditProcurement(addProcurementP);
+                }
                 LogUtils.e("+++++++++++"+new Gson().toJson(addProcurementP));
-                //新增采购单
-                addProcurementPersenter.AddProcurement(addProcurementP);
                 break;
             default:
                 break;
@@ -117,30 +133,104 @@ public class AddProcurementActivity extends BaseActivity {
     }
 
 
+    /**
+     * 进入编辑页面，显示数据
+     */
+    private void showEditData() {
+        if (detailsBean == null) {
+            return;
+        }
+        tvTime.setText(detailsBean.getPurcDate().split(" ")[0]);
+        //遍历采购物料列表
+        for (int i=0;i<detailsBean.getPurchaseDetailList().size();i++) {
+             ProcurementDetails.GoodList goodList=detailsBean.getPurchaseDetailList().get(i);
+             Goods goods = new Goods();
+             goods.setId(goodList.getId());
+             goods.setGoodId(goodList.getGoodsId());
+             goods.setName(goodList.getGoodsName());
+             goods.setSpec(goodList.getSpec());
+             goods.setUnitStr(goodList.getUnitStr());
+             goods.setTypeStr(goodList.getTypeStr());
+             goods.setNum(goodList.getNum());
+             goods.setPrice(goodList.getUnitPrice()+"");
+             goods.setTotalMoney(goodList.getAmount()+"");
+             goods.setMemo(goodList.getMemo());
+             goods.setAddress(goodList.getAddress());
+             goods.setPayType(goodList.getPayType());
+             goods.setPayTime(goodList.getPayDate());
+             goods.setCompanyId(goodList.getSupplierId());
+             goods.setCompany(goodList.getSupplierName());
+             goods.setContract(goodList.getContacts());
+             goods.setMobile(goodList.getPhone());
+             goodsList.add(goods);
+        }
+        addProductAdapter3.notifyDataSetChanged();
+        //计算总数量，总金额
+        getTotal();
+    }
+
+
+    /**
+     * 进入编辑页面
+     * @param goods:要编辑的对象
+     */
+    private Goods editGoods;
+    public void gotoEdit(Goods goods){
+        this.editGoods=goods;
+        Intent intent=new Intent(this,AddProductActivity3.class);
+        intent.putExtra("goods",editGoods);
+        startActivityForResult(intent,200);
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==200 && data!=null){
-            Goods goods= (Goods) data.getSerializableExtra("goods");
-            if(goods!=null){
+        if(data==null){
+            return;
+        }
+        Goods goods=(Goods) data.getSerializableExtra("goods");
+        if(goods==null){
+            return;
+        }
+        //新增、编辑回执
+        if(resultCode==200){
+            if(editGoods==null){
                 goodsList.add(goods);
-                addProductAdapter3.notifyDataSetChanged();
-                if(goodsList.size()>0){
-                    linGood.setVisibility(View.VISIBLE);
+            }else{
+                for (int i=0;i<goodsList.size();i++){
+                    if(editGoods.equals(goodsList.get(i))){
+                        goodsList.set(i,goods);
+                        break;
+                    }
                 }
             }
-
-            /**
-             * 计算总数量，总金额
-             */
-            int totalNum=0;
-            double totalMoney=0;
-            for (int i=0;i<goodsList.size();i++){
-                totalNum=totalNum+goodsList.get(i).getNum();
-                totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goodsList.get(i).getTotalMoney()));
-            }
-            tvProductNum.setText("数量："+totalNum);
-            tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
         }
+        editGoods=null;
+        //刷新列表
+        addProductAdapter3.notifyDataSetChanged();
+
+        /**
+         * 计算总数量，总金额
+         */
+        getTotal();
+    }
+
+
+    /**
+     * 计算总数量，总金额
+     */
+    private void getTotal(){
+        if(goodsList.size()>0){
+            linGood.setVisibility(View.VISIBLE);
+        }
+        int totalNum=0;
+        double totalMoney=0;
+        for (int i=0;i<goodsList.size();i++){
+            totalNum=totalNum+goodsList.get(i).getNum();
+            totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goodsList.get(i).getTotalMoney()));
+        }
+        tvProductNum.setText("数量："+totalNum);
+        tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
     }
 }

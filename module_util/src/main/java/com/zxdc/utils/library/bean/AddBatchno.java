@@ -5,7 +5,14 @@ import java.io.Serializable;
 public class AddBatchno implements Serializable {
 
     private String batchNo;
-    private int num;
+    private String num;
+
+    public AddBatchno(){}
+
+    public AddBatchno(String batchNo, String num) {
+        this.batchNo = batchNo;
+        this.num = num;
+    }
 
     public String getBatchNo() {
         return batchNo;
@@ -15,11 +22,11 @@ public class AddBatchno implements Serializable {
         this.batchNo = batchNo;
     }
 
-    public int getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(String num) {
         this.num = num;
     }
 }
