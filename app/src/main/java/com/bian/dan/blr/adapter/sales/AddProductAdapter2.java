@@ -54,7 +54,7 @@ public class AddProductAdapter2 extends BaseAdapter {
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goods.getName()+"</font>"));
         holder.tvBrand.setText(goods.getBrand());
         holder.tvSpec.setText(goods.getSpec());
-        holder.tvUnit.setText(goods.getUnitStr());
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">"+goods.getUnitStr()+"</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goods.getNum()+"</font>"));
         holder.tvRemark.setText("备注："+goods.getMemo());
         return view;

@@ -88,7 +88,7 @@ public class Goods implements Serializable {
         this.isInvoice = isInvoice;
     }
 
-    public Goods(int id, String name, String spec, String brand, int num, String memo) {
+    public Goods(int goodId, String name, String spec, String brand, int num, String memo) {
         this.goodId = goodId;
         this.name = name;
         this.spec = spec;

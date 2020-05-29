@@ -11,11 +11,13 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.AddProductAdapter2;
 import com.bian.dan.blr.persenter.sales.AddProductPlanPersenter;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.parameter.AddGoodP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MeasureListView;
 
@@ -113,6 +115,7 @@ public class AddProductPlanActivity extends BaseActivity {
                 }
                 addProductPlanP.setDetailList(list);
                 //添加生产计划
+                LogUtils.e("+++++++++++++"+new Gson().toJson(addProductPlanP));
                 addProductPlanPersenter.addPlan(addProductPlanP);
                 break;
             default:

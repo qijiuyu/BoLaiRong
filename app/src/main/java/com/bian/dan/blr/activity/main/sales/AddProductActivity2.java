@@ -81,10 +81,6 @@ public class AddProductActivity2 extends BaseActivity {
                      ToastUtil.showLong("请输入数量");
                      return;
                  }
-                 if(TextUtils.isEmpty(remark)){
-                     ToastUtil.showLong("请输入备注");
-                     return;
-                 }
                  Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getBrand(),Integer.parseInt(num),remark);
                  intent.putExtra("goods",goods);
                  setResult(200,intent);

@@ -8,8 +8,6 @@ public class AddProductPlanP implements Serializable {
     private String prop2;
     private String deliveryDate;
     private String memo;
-    private int goodsId;
-    private int num;
     private List<AddGoodP> detailList;
 
     public String getProp2() {
@@ -34,22 +32,6 @@ public class AddProductPlanP implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo;
-    }
-
-    public int getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
     }
 
     public List<AddGoodP> getDetailList() {
