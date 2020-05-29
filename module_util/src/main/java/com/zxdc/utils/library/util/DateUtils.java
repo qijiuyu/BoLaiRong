@@ -247,4 +247,16 @@ public class DateUtils {
         return  false;
     }
 
+
+    /**
+     * 获取上一个月的日期
+     * @return
+     */
+    public static String getBeforeMonth(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, -1);    //得到前一个月
+        String time = format.format(c.getTime());
+        return time;
+    }
 }

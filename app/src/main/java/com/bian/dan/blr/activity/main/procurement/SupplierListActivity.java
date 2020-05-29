@@ -106,7 +106,7 @@ public class SupplierListActivity extends BaseActivity implements MyRefreshLayou
                 finish();
                 break;
             case R.id.img_right:
-                setClass(AddSupplierActivity.class);
+                setClass(AddSupplierActivity.class,1000);
                 break;
             //选择供应商
             case R.id.tv_key:

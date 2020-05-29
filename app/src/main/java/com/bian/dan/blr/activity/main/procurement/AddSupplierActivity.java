@@ -16,7 +16,6 @@ import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.SupplierDetails;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
-import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MeasureListView;
@@ -187,32 +186,55 @@ public class AddSupplierActivity extends BaseActivity {
         addProductAdapter5.notifyDataSetChanged();
     }
 
+
+    /**
+     * 进入编辑页面
+     * @param goods:要编辑的对象
+     */
+    private Goods editGoods;
+    public void gotoEdit(Goods goods){
+        this.editGoods=goods;
+        Intent intent=new Intent(this,AddProductActivity5.class);
+        intent.putExtra("goods",editGoods);
+        if(editGoods.getId()!=0){
+            startActivityForResult(intent,300);
+        }else{
+            startActivityForResult(intent,400);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==200 && data!=null){
-            Goods goods= (Goods) data.getSerializableExtra("goods");
-            LogUtils.e(goods.getId()+"+++++++++++++++++++");
-            if(goods!=null){
-                if(goods.getId()==0){
-                    goodsList.add(goods);
-                }else{
-                    for (int i=0;i<goodsList.size();i++){
-                          if(goodsList.get(i).getId()==goods.getId()){
-                              goodsList.get(i).setPrice(goods.getPrice());
-                              break;
-                          }
+        if (data == null) {
+            return;
+        }
+        Goods goods = (Goods) data.getSerializableExtra("goods");
+        if (goods == null) {
+            return;
+        }
+        switch (resultCode) {
+            //新增数据
+            case 200:
+                goodsList.add(goods);
+                addProductAdapter5.notifyDataSetChanged();
+                break;
+            //编辑老数据
+            case 300:
+                addSupplierPersenter.editSupplierPrice(goods);
+                break;
+            //编辑新数据
+            case 400:
+                for (int i = 0; i < goodsList.size(); i++) {
+                    if (editGoods.equals(goodsList.get(i))) {
+                        goodsList.set(i, goods);
+                        break;
                     }
-
-                    //修改明细物料单价
-                    EditSupplierGoodsP editSupplierGoodsP=new EditSupplierGoodsP();
-                    editSupplierGoodsP.setId(goods.getId());
-                    editSupplierGoodsP.setProp1(goods.getPrice());
-                    LogUtils.e("+++++++++"+new Gson().toJson(editSupplierGoodsP));
-                    addSupplierPersenter.editSupplierPrice(editSupplierGoodsP);
                 }
                 addProductAdapter5.notifyDataSetChanged();
-            }
+                break;
+            default:
+                break;
         }
     }
 
@@ -221,6 +243,19 @@ public class AddSupplierActivity extends BaseActivity {
      */
     public void deleteSuccess(Goods goods){
         goodsList.remove(goods);
+        addProductAdapter5.notifyDataSetChanged();
+    }
+
+    /**
+     * 编辑供应物料成功
+     */
+    public void editSuccess(Goods goods){
+        for (int i=0;i<goodsList.size();i++){
+            if(editGoods.equals(goodsList.get(i))){
+                goodsList.set(i,goods);
+                break;
+            }
+        }
         addProductAdapter5.notifyDataSetChanged();
     }
 }

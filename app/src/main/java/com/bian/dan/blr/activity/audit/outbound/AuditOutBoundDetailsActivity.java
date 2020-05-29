@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -183,15 +184,7 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             linAudit.setVisibility(View.VISIBLE);
                             tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                             tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                            String auditResult=null;
-                            if(detailsBean.getState()==0){
-                                auditResult="未审核";
-                            }else if(detailsBean.getState()==1){
-                                auditResult="通过";
-                            }else{
-                                auditResult="未通过";
-                            }
-                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + auditResult+ "</font>"));
+                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#70DF5D\">" + detailsBean.getStateStr()+ "</font>"));
                             tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
                         }
 
@@ -201,6 +194,9 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                          */
                         if(detailsBean.getState()>0){
                             linPlay.setVisibility(View.GONE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                            scrollView.setLayoutParams(layoutParams);
                         }
                         scrollView.scrollTo(0,0);
                     }else{

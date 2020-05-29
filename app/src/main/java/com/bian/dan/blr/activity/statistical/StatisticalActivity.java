@@ -22,11 +22,13 @@ import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.util.BigDecimalUtil;
+import com.zxdc.utils.library.util.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lecho.lib.hellocharts.gesture.ContainerScrollType;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -70,16 +72,10 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     TextView tvStartFiscal;
     @BindView(R.id.tv_end_fiscal)
     TextView tvEndFiscal;
-    @BindView(R.id.tv_start_sales_order)
-    TextView tvStartSalesOrder;
     @BindView(R.id.tv_end_sales_order)
     TextView tvEndSalesOrder;
-    @BindView(R.id.tv_start_sales_money)
-    TextView tvStartSalesMoney;
     @BindView(R.id.tv_end_sales_money)
     TextView tvEndSalesMoney;
-    @BindView(R.id.tv_start_material)
-    TextView tvStartMaterial;
     @BindView(R.id.tv_end_material)
     TextView tvEndMaterial;
     @BindView(R.id.tv_customer_num)
@@ -94,19 +90,21 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     private int selectTime;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_statistical);
-//        ButterKnife.bind(this);
-//        initView();
-//        //获取收支对比
-//        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
-//        //获取客户状态统计
-//        statisticalPersenter.getCustomerState();
-//        //销售单数及销售金额统计
-//        statisticalPersenter.getStatistionSales("2020-05-26");
-//        //原料消耗月度统计
-//        statisticalPersenter.getStatisticalMaterial("2020-05-26");
-//        //成品统计
-//        statisticalPersenter.getStatisticalGoods();
+        setContentView(R.layout.activity_statistical);
+        ButterKnife.bind(this);
+        initView();
+        //获取收支对比
+        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
+        //获取客户状态统计
+        statisticalPersenter.getCustomerState();
+        //销售单数统计
+        statisticalPersenter.getStatistionSales_order(tvEndSalesOrder.getText().toString().trim());
+        //销售金额统计
+        statisticalPersenter.getStatistionSales_money(tvEndSalesMoney.getText().toString().trim());
+        //原料消耗月度统计
+        statisticalPersenter.getStatisticalMaterial(tvEndMaterial.getText().toString().trim());
+        //成品统计
+        statisticalPersenter.getStatisticalGoods();
     }
 
     /**
@@ -114,25 +112,24 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
      */
     private void initView() {
         statisticalPersenter = new StatisticalPersenter(this);
+        tvEndSalesOrder.setText(DateUtils.getBeforeMonth());
+        tvEndSalesMoney.setText(DateUtils.getBeforeMonth());
+        tvEndMaterial.setText(DateUtils.getBeforeMonth());
+
         tvStartFiscal.addTextChangedListener(this);
         tvEndFiscal.addTextChangedListener(this);
-        tvStartSalesOrder.addTextChangedListener(this);
         tvEndSalesOrder.addTextChangedListener(this);
-        tvStartSalesMoney.addTextChangedListener(this);
         tvEndSalesMoney.addTextChangedListener(this);
-        tvStartMaterial.addTextChangedListener(this);
         tvEndMaterial.addTextChangedListener(this);
     }
 
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
     }
 
     @Override
@@ -149,26 +146,23 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
                  break;
             //销售订单增长趋势
             case 2:
-                 start=tvStartSalesOrder.getText().toString().trim();
-                 end=tvEndSalesOrder.getText().toString().trim();
-                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
-                     showViewOrder(salesBean);
+                end=tvEndSalesOrder.getText().toString().trim();
+                 if(!TextUtils.isEmpty(end)){
+                     statisticalPersenter.getStatistionSales_order(end);
                  }
                 break;
             //销售金额增长趋势
             case 3:
-                 start=tvStartSalesMoney.getText().toString().trim();
                  end=tvEndSalesMoney.getText().toString().trim();
-                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
-
+                 if(!TextUtils.isEmpty(end)){
+                     statisticalPersenter.getStatistionSales_money(end);
                  }
                 break;
             //物料使用趋势
             case 4:
-                 start=tvStartMaterial.getText().toString().trim();
                  end=tvEndMaterial.getText().toString().trim();
-                 if(!TextUtils.isEmpty(start) && !TextUtils.isEmpty(end)){
-
+                 if(!TextUtils.isEmpty(end)){
+                     statisticalPersenter.getStatisticalMaterial(end);
                  }
                 break;
             default:
@@ -177,7 +171,7 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     }
 
 
-    @OnClick({R.id.tv_start_fiscal, R.id.tv_end_fiscal,R.id.tv_start_sales_order, R.id.tv_end_sales_order, R.id.tv_start_sales_money, R.id.tv_end_sales_money, R.id.tv_start_material, R.id.tv_end_material})
+    @OnClick({R.id.tv_start_fiscal, R.id.tv_end_fiscal,R.id.tv_end_sales_order, R.id.tv_end_sales_money, R.id.tv_end_material})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //财务收支对比-开始日期
@@ -185,36 +179,25 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
                 selectTime=1;
                 statisticalPersenter.selectTime(tvStartFiscal,tvEndFiscal,1);
                 break;
+            //财务收支对比-结束日期
             case R.id.tv_end_fiscal:
                 selectTime=1;
                 statisticalPersenter.selectTime(tvStartFiscal,tvEndFiscal,2);
                 break;
-            //销售订单增长趋势-开始日期
-            case R.id.tv_start_sales_order:
-                selectTime=2;
-                statisticalPersenter.selectTime(tvStartSalesOrder,tvEndSalesOrder,1);
-                break;
+            //销售订单增长趋势-结束日期
             case R.id.tv_end_sales_order:
                 selectTime=2;
-                statisticalPersenter.selectTime(tvStartSalesOrder,tvEndSalesOrder,2);
+                statisticalPersenter.selectTime(tvEndSalesOrder);
                 break;
-            //销售金额增长趋势-开始日期
-            case R.id.tv_start_sales_money:
-                selectTime=3;
-                statisticalPersenter.selectTime(tvStartSalesMoney,tvEndSalesMoney,1);
-                break;
+            //销售金额增长趋势-结束日期
             case R.id.tv_end_sales_money:
                 selectTime=3;
-                statisticalPersenter.selectTime(tvStartSalesMoney,tvEndSalesMoney,2);
+                statisticalPersenter.selectTime(tvEndSalesMoney);
                 break;
-            //物料使用趋势-开始日期
-            case R.id.tv_start_material:
-                selectTime=4;
-                statisticalPersenter.selectTime(tvStartMaterial,tvEndMaterial,1);
-                break;
+            //物料使用趋势-结束日期
             case R.id.tv_end_material:
                 selectTime=4;
-                statisticalPersenter.selectTime(tvStartMaterial,tvEndMaterial,2);
+                statisticalPersenter.selectTime(tvEndMaterial);
                 break;
             default:
                 break;
@@ -246,7 +229,7 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
 
 
         data.setCenterText1("收入");
-        data.setCenterText2("70%");
+        data.setCenterText2(num1+"%");
 
         data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
                 (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));

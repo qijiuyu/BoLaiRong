@@ -156,6 +156,7 @@ public class ProcurementDetailsActivity extends BaseActivity {
                      */
                     if(detailsBean.getState()>0){
                         linAudit.setVisibility(View.VISIBLE);
+                        tvRight.setVisibility(View.GONE); //审核后就不能再编辑了
                         tvAudit.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName()+ "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5()+ "</font>"));
                         tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#000000\">" + detailsBean.getStateStr()+ "</font>"));
@@ -172,10 +173,7 @@ public class ProcurementDetailsActivity extends BaseActivity {
                         tvEnter.setText(Html.fromHtml("入库：<font color=\"#000000\">" + entryList.getCreateName()+ "</font>"));
                         tvEnterTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + entryList.getCreateDate()+ "</font>"));
                         listEntry.setAdapter(new Procurement_Details_EntryGood_Adapter(activity,detailsBean.getEntryDetailList()));
-
                     }
-
-
                 }else{
                     ToastUtil.showLong(procurementDetails.getMsg());
                 }

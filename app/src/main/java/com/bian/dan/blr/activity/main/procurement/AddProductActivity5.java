@@ -80,10 +80,11 @@ public class AddProductActivity5 extends BaseActivity {
                     return;
                 }
 
-                if(editGood!=null){ //编辑的
+                //新增或编辑
+                if(editGood!=null && listBean==null){
                     editGood.setPrice(price);
                     gotoIntent(editGood);
-                }else{              //新增的
+                }else{
                     Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),0,price,null,memo,null);
                     gotoIntent(goods);
                 }
@@ -100,7 +101,15 @@ public class AddProductActivity5 extends BaseActivity {
     private void gotoIntent(Goods goods){
         Intent intent=new Intent();
         intent.putExtra("goods",goods);
-        setResult(200,intent);
+        if(editGood==null){
+            setResult(200,intent); //新增数据
+        }else if(editGood!=null){
+            if(editGood.getId()!=0){
+                setResult(300,intent);//编辑老数据
+            }else{
+                setResult(400,intent);//编辑新数据
+            }
+        }
         finish();
     }
 
@@ -113,8 +122,11 @@ public class AddProductActivity5 extends BaseActivity {
             return;
         }
         tvName.setText(editGood.getName());
-        tvName.setTextColor(getResources().getColor(R.color.color_999999));
-        tvName.setClickable(false);
+        //如果是修改老数据，则只能修改单价
+        if(editGood.getId()!=0){
+            tvName.setClickable(false);
+            tvName.setTextColor(getResources().getColor(R.color.color_999999));
+        }
         tvSpec.setText(editGood.getSpec());
         tvSpec.setTextColor(getResources().getColor(R.color.color_999999));
         tvUnit.setText(editGood.getUnitStr());
@@ -135,7 +147,7 @@ public class AddProductActivity5 extends BaseActivity {
             tvName.setText(listBean.getName());
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(String.valueOf(listBean.getPrice()));
+            etPrice.setText(null);
         }
     }
 }

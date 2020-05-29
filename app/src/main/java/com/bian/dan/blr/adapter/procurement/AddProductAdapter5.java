@@ -1,7 +1,5 @@
 package com.bian.dan.blr.adapter.procurement;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.activity.main.procurement.AddProductActivity5;
+import com.bian.dan.blr.activity.main.procurement.AddSupplierActivity;
 import com.bian.dan.blr.persenter.procurement.AddSupplierPersenter;
 import com.zxdc.utils.library.bean.Goods;
 
@@ -22,11 +20,11 @@ import butterknife.ButterKnife;
 
 public class AddProductAdapter5 extends BaseAdapter {
 
-    private Activity activity;
+    private AddSupplierActivity activity;
     private List<Goods> list;
     private AddSupplierPersenter addSupplierPersenter;
 
-    public AddProductAdapter5(Activity activity, List<Goods> list,AddSupplierPersenter addSupplierPersenter) {
+    public AddProductAdapter5(AddSupplierActivity activity, List<Goods> list,AddSupplierPersenter addSupplierPersenter) {
         super();
         this.activity = activity;
         this.list = list;
@@ -65,24 +63,16 @@ public class AddProductAdapter5 extends BaseAdapter {
         holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goods.getPrice() + "</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goods.getMemo() + "</font>"));
 
-        if(goods.getId()==0){
-            holder.imgEdit.setVisibility(View.GONE);
-            holder.imgDelete.setVisibility(View.GONE);
-        }else{
-            holder.imgEdit.setVisibility(View.VISIBLE);
-            holder.imgDelete.setVisibility(View.VISIBLE);
-        }
 
         /**
          * 编辑
          */
+        holder.imgEdit.setVisibility(View.VISIBLE);
         holder.imgEdit.setTag(goods);
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Goods goods= (Goods) v.getTag();
-                Intent intent=new Intent(activity, AddProductActivity5.class);
-                intent.putExtra("goods",goods);
-                activity.startActivityForResult(intent,200);
+                activity.gotoEdit(goods);
             }
         });
 
@@ -90,11 +80,17 @@ public class AddProductAdapter5 extends BaseAdapter {
         /**
          * 删除
          */
+        holder.imgDelete.setVisibility(View.VISIBLE);
         holder.imgDelete.setTag(goods);
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Goods goods= (Goods) v.getTag();
-                addSupplierPersenter.deleteSupplierGoods(goods);
+                if(goods.getId()==0){
+                    list.remove(goods);
+                    notifyDataSetChanged();
+                }else{
+                    addSupplierPersenter.deleteSupplierGoods(goods);
+                }
             }
         });
         return view;

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -80,6 +82,8 @@ public class ProductProgressDetailsActivity extends BaseActivity {
     TextView tvConfirmEntry;
     @BindView(R.id.lin_warehouse)
     LinearLayout linWareHouse;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     //出库单id
     private int requireId;
     //详情对象
@@ -236,6 +240,9 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                      */
                     if(productBean.getEntryStatus()>0){   //表示生产组长已提交申请入库
                         tvPlay.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                        scrollView.setLayoutParams(layoutParams);
                     }else if (productBean.getOutStatus() == 1 && MyApplication.getRoleId()==3) {   //表示仓库已发放了你申请的产品原料/并且只有生产组长才可以看到“确认领取”这个按钮
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("确认领取");

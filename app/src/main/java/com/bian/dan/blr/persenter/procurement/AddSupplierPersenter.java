@@ -199,13 +199,19 @@ public class AddSupplierPersenter {
     /**
      * 修改明细物料单价
      */
-    public void editSupplierPrice(EditSupplierGoodsP editSupplierGoods){
+    public void editSupplierPrice(final Goods goods){
+        EditSupplierGoodsP editSupplierGoodsP=new EditSupplierGoodsP();
+        editSupplierGoodsP.setId(goods.getId());
+        editSupplierGoodsP.setProp1(goods.getPrice());
+        LogUtils.e("+++++++++"+new Gson().toJson(editSupplierGoodsP));
+
         DialogUtil.showProgress(activity,"数据提交中");
-        HttpMethod.editSupplierPrice(editSupplierGoods, new NetWorkCallBack() {
+        HttpMethod.editSupplierPrice(editSupplierGoodsP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
-
+                    //编辑供应物料成功
+                    activity.editSuccess(goods);
                 }else{
                     ToastUtil.showLong(baseBean.getMsg());
                 }

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -138,7 +139,7 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
                         linAudit.setVisibility(View.VISIBLE);
                         tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
-                        tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStateStr() + "</font>"));
+                        tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#70DF5D\">" + detailsBean.getStateStr() + "</font>"));
                         tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4() + "</font>"));
                     }
 
@@ -147,6 +148,9 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
                      */
                     if(detailsBean.getState()>0){
                         linPlay.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                        scrollView.setLayoutParams(layoutParams);
                     }
                     scrollView.scrollTo(0,0);
                 } else {

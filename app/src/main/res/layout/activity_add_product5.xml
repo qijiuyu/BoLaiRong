@@ -44,7 +44,7 @@
                     android:layout_alignParentRight="true"
                     android:gravity="right"
                     android:hint="请选择"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:drawablePadding="7dp"
                     android:drawableRight="@mipmap/next"/>
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@android:color/black"
                     android:textSize="15sp"
                     android:drawablePadding="7dp"/>
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@android:color/black"
                     android:textSize="15sp"/>
 
             </RelativeLayout>
@@ -128,7 +128,7 @@
                     android:layout_alignParentRight="true"
                     android:hint="请输入"
                     android:gravity="right"
-                    android:textColor="@color/color_666666"
+                    android:textColor="@android:color/black"
                     android:digits="0987654321."
                     android:textSize="15sp"/>
 
