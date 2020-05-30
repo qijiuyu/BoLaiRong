@@ -115,7 +115,7 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
             case R.id.tv_send:
                 Intent intent=new Intent(this,SendDeliveryActivity.class);
                 intent.putExtra("outBoundDetails",outBoundDetails);
-                startActivity(intent);
+                startActivityForResult(intent,1000);
                 break;
             default:
                 break;
@@ -207,11 +207,11 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                         /**
                          * 底部按钮变更
                          */
-//                        if(detailsBean.getState()==1 && detailsBean.getStatus()==0){  //已审核同意，并且还没有出库
-//                            tvSend.setVisibility(View.VISIBLE);
-//                        }else{
-//                            tvSend.setVisibility(View.GONE);
-//                        }
+                        if(detailsBean.getState()==1 && detailsBean.getStatus()==0){  //已审核同意，并且还没有出库
+                            tvSend.setVisibility(View.VISIBLE);
+                        }else{
+                            tvSend.setVisibility(View.GONE);
+                        }
                     }else{
                         ToastUtil.showLong(outBoundDetails.getMsg());
                     }
@@ -224,5 +224,15 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+             //查询出库单详情
+            getOutBoundDetails();
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.bian.dan.blr.adapter.warehouse;
 
-import android.app.Activity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +19,12 @@ import butterknife.ButterKnife;
 
 public class ShowBatchNoAdapter extends BaseAdapter {
 
-    private Activity activity;
+    private SendDeliveryActivity activity;
     private List<AddBatchno> list;
-    public ShowBatchNoAdapter(Activity activity,int id) {
+    public ShowBatchNoAdapter(SendDeliveryActivity activity,int id) {
         super();
         this.activity = activity;
-        if(activity instanceof SendDeliveryActivity){
-            list=((SendDeliveryActivity)activity).map.get(id);
-        }
+        list=activity.map.get(id);
     }
 
     @Override
@@ -79,9 +76,7 @@ public class ShowBatchNoAdapter extends BaseAdapter {
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AddBatchno addBatchno= (AddBatchno) v.getTag();
-                if(activity instanceof SendDeliveryActivity){
-                    ((SendDeliveryActivity)activity).sendDeliveryPersenter.editDialog(addBatchno);
-                }
+                activity.sendDeliveryPersenter.editDialog(addBatchno);
             }
         });
         return view;

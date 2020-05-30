@@ -35,6 +35,7 @@ public class OutBoundDetails extends BaseBean {
 
     public static class GoodList implements Serializable{
         private int id;
+        private int goodsId;
         //物料名称
         private String goodsName="";
         //物料型号
@@ -57,6 +58,14 @@ public class OutBoundDetails extends BaseBean {
         private String memo="";
         //是否开票
         private String prop3="";
+
+        public int getGoodsId() {
+            return goodsId;
+        }
+
+        public void setGoodsId(int goodsId) {
+            this.goodsId = goodsId;
+        }
 
         public int getId() {
             return id;

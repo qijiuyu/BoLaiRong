@@ -1,6 +1,5 @@
 package com.bian.dan.blr.adapter.warehouse;
 
-import android.app.Activity;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class SendDeliveryGoodsAdapter extends BaseAdapter {
 
-    private Activity activity;
+    private SendDeliveryActivity activity;
     //产品列表
     private List<OutBoundDetails.GoodList> list;
-    public SendDeliveryGoodsAdapter(Activity activity, List<OutBoundDetails.GoodList> list) {
+    public SendDeliveryGoodsAdapter(SendDeliveryActivity activity, List<OutBoundDetails.GoodList> list) {
         super();
         this.activity = activity;
         this.list = list;
@@ -71,12 +70,10 @@ public class SendDeliveryGoodsAdapter extends BaseAdapter {
         /**
          * 发货
          */
-        holder.tvSend.setTag(goodList.getId());
+        holder.tvSend.setTag(goodList);
         holder.tvSend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(activity instanceof SendDeliveryActivity){
-                    ((SendDeliveryActivity)activity).sendDeliveryPersenter.addDialog((int) v.getTag());
-                }
+                activity.sendDeliveryPersenter.addDialog((OutBoundDetails.GoodList) v.getTag());
             }
         });
 

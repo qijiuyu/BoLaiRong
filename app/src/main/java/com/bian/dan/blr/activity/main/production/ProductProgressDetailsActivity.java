@@ -250,7 +250,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                         tvPlay.setVisibility(View.VISIBLE);
                         tvPlay.setText("入库申请");
                     }
-
+                    scrollView.scrollTo(0,0);
                 } else {
                     ToastUtil.showLong(productProgress.getMsg());
                 }

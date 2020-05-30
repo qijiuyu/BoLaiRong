@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -14,10 +15,12 @@ import com.bian.dan.blr.adapter.production.ProductProgressByOutBoundAdapter;
 import com.bian.dan.blr.adapter.production.ProductProgressEntryAdapter;
 import com.bian.dan.blr.adapter.production.ProductProgressWasteAdapter;
 import com.bian.dan.blr.application.MyApplication;
+import com.bian.dan.blr.persenter.warehouse.OutAndEntryPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -83,6 +86,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
     private int requireId;
     //详情对象
     private ProductProgress.ProductBean productBean;
+    private OutAndEntryPersenter outAndEntryPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_out_and_entry_details);
@@ -98,6 +102,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
+        outAndEntryPersenter=new OutAndEntryPersenter(this);
         requireId = getIntent().getIntExtra("requireId", 0);
     }
 
@@ -108,6 +113,12 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                  finish();
                 break;
             case R.id.tv_play:
+                final String name = tvPlay.getText().toString().trim();
+                if (name.equals("发放物料")) {
+                    outAndEntryPersenter.updateProductStatus(new UpdateProductP(requireId,productBean.getPlanId(),productBean.getDeptId(), "1", null));
+                }else{
+
+                }
                 break;
             default:
                 break;
@@ -125,13 +136,13 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
             public void onSuccess(Object object) {
                 ProductProgress productProgress = (ProductProgress) object;
                 if (productProgress.isSussess()) {
-                    /**
-                     * 基本信息
-                     */
                     productBean = productProgress.getData();
                     if (productBean == null) {
                         return;
                     }
+                    /**
+                     * 基本信息
+                     */
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
                     tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + productBean.getCreateDate() + "</font>"));
                     tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + productBean.getPlanCode() + "</font>"));
@@ -169,7 +180,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                     /**
                      * 入库产品信息
                      */
-                    if(productBean.getEntryDetailList()!=null && productBean.getEntryDetailList().size()>0){
+                    if(productBean.getEntryDetailList().size()>0){
                         linEntry.setVisibility(View.VISIBLE);
                         listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
                         int entryNum = 0;
@@ -203,6 +214,22 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                         }
 
                     }
+
+
+                    /**
+                     * 底部按钮
+                     */
+                    if(productBean.getEntryStatus()==2){  //已入库，按钮就可以隐藏了
+                        tvPlay.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                        scrollView.setLayoutParams(layoutParams);
+                    }else if(productBean.getOutStatus()==0){
+                        tvPlay.setText("发放物料");
+                    }else if(productBean.getOutStatus()==1){
+                        tvPlay.setText("确认入库");
+                    }
+                    scrollView.scrollTo(0,0);
                 } else {
                     ToastUtil.showLong(productProgress.getMsg());
                 }

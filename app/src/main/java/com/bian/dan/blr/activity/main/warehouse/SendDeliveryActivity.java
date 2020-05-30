@@ -1,26 +1,21 @@
 package com.bian.dan.blr.activity.main.warehouse;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.warehouse.SendDeliveryGoodsAdapter;
 import com.bian.dan.blr.persenter.warehouse.SendDeliveryPersenter;
-import com.bian.dan.blr.view.CycleWheelView;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.AddBatchno;
-import com.zxdc.utils.library.bean.Dict;
-import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBoundDetails;
-import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MeasureListView;
 
@@ -52,10 +47,6 @@ public class SendDeliveryActivity extends BaseActivity {
      * 存储各个商品下的批次
      */
     public Map<Integer, List<AddBatchno>> map=new HashMap<>();
-    /**
-     * 物流集合
-     */
-    private List<Dict.DictBean> logisticsList=new ArrayList<>();
     public SendDeliveryPersenter sendDeliveryPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +78,40 @@ public class SendDeliveryActivity extends BaseActivity {
                 break;
             //选择物流
             case R.id.tv_name:
-                selectLogistics();
+                sendDeliveryPersenter.selectLogistics(tvName);
                 break;
             case R.id.tv_submit:
+                 String name=tvName.getText().toString().trim();
+                 String code=etCode.getText().toString().trim();
+                 if(TextUtils.isEmpty(name)){
+                     ToastUtil.showLong("请选择物流");
+                     return;
+                 }
+                if(TextUtils.isEmpty(code)){
+                    ToastUtil.showLong("请输入物流单号");
+                    return;
+                }
+                SalesOutBoundP salesOutBoundP=new SalesOutBoundP();
+                salesOutBoundP.setId(outBoundDetails.getOutOrder().getId());
+                salesOutBoundP.setExpressType((int)tvName.getTag());
+                salesOutBoundP.setExpressNo(code);
+                salesOutBoundP.setStatus(1);
+
+                List<SalesOutBoundP.GoodList> goodList=new ArrayList<>();
+                for(Integer id:map.keySet()){
+                     List<AddBatchno> list=map.get(id);
+                     for (int i=0;i<list.size();i++){
+                         SalesOutBoundP.GoodList good=new SalesOutBoundP.GoodList();
+                         good.setBatchNo(list.get(i).getBatchNo());
+                         good.setGoodsId(list.get(i).getGoodsId());
+                         good.setNum(Integer.parseInt(list.get(i).getNum()));
+                         good.setStockType(list.get(i).getStockType());
+                         goodList.add(good);
+                     }
+                }
+                salesOutBoundP.setSaleDetailList(goodList);
+                LogUtils.e("+++++++++++++"+new Gson().toJson(salesOutBoundP));
+                sendDeliveryPersenter.updateOutOrder(salesOutBoundP);
                 break;
             default:
                 break;
@@ -97,77 +119,6 @@ public class SendDeliveryActivity extends BaseActivity {
     }
 
 
-    /**
-     * 获取物流数据
-     */
-    public void getDict(){
-        DialogUtil.showProgress(activity,"数据加载中");
-        HttpMethod.getDict(10, new NetWorkCallBack() {
-            public void onSuccess(Object object) {
-                Dict dict= (Dict) object;
-                if(dict.isSussess()){
-                    logisticsList.addAll(dict.getList());
-                    //选择物流
-                    selectLogistics();
-                }else{
-                    ToastUtil.showLong(dict.getMsg());
-                }
-            }
 
-            public void onFail(Throwable t) {
-
-            }
-        });
-    }
-
-
-    /**
-     * 选择物流
-     */
-    public void selectLogistics(){
-        if(logisticsList.size()==0){
-            //获取物流数据
-            getDict();
-            return;
-        }
-        View view= LayoutInflater.from(activity).inflate(R.layout.wheel_select,null);
-        final PopupWindow popupWindow= DialogUtil.showPopWindow(view);
-        popupWindow .showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
-        try{
-            CycleWheelView wheel=view.findViewById(R.id.wheel);
-            List<String> list=new ArrayList<>();
-            for (int i=0;i<logisticsList.size();i++){
-                 list.add(logisticsList.get(i).getName());
-            }
-            wheel.setLabels(list);
-            wheel.setSelection(0);
-            wheel.setWheelSize(5);
-            wheel.setCycleEnable(false);
-            wheel.setAlphaGradual(0.5f);
-            wheel.setDivider(Color.parseColor("#abcdef"),1);
-            wheel.setSolid(Color.WHITE,Color.WHITE);
-            wheel.setLabelColor(Color.GRAY);
-            wheel.setLabelSelectColor(Color.BLACK);
-            wheel.setOnWheelItemSelectedListener(new CycleWheelView.WheelItemSelectedListener() {
-                public void onItemSelected(int position, String label) {
-                    tvName.setText(label);
-                    tvName.setTag(logisticsList.get(position).getId());
-                }
-            });
-            view.findViewById(R.id.tv_cancle).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    popupWindow.dismiss();
-                    tvName.setText(null);
-                }
-            });
-            view.findViewById(R.id.tv_confirm).setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    popupWindow.dismiss();
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 }

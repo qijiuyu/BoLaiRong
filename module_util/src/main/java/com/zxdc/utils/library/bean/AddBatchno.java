@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 public class AddBatchno implements Serializable {
 
+    private int goodsId;
+    private int stockType;
     private String batchNo;
     private String num;
 
     public AddBatchno(){}
 
-    public AddBatchno(String batchNo, String num) {
+    public AddBatchno(int goodsId, int stockType, String batchNo, String num) {
+        this.goodsId = goodsId;
+        this.stockType = stockType;
         this.batchNo = batchNo;
         this.num = num;
     }
@@ -28,5 +32,21 @@ public class AddBatchno implements Serializable {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public int getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public int getStockType() {
+        return stockType;
+    }
+
+    public void setStockType(int stockType) {
+        this.stockType = stockType;
     }
 }
