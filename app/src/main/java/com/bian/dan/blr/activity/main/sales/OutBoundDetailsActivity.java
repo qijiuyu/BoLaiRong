@@ -176,7 +176,7 @@ public class OutBoundDetailsActivity extends BaseActivity {
                         /**
                          * 显示出库信息
                          */
-                        if(outBoundDetails.getSaleDetailList()!=null && outBoundDetails.getSaleDetailList().size()>0){
+                        if(outBoundDetails.getSaleDetailList().size()>0){
                             linOut.setVisibility(View.VISIBLE);
                             OutBoundDetails.SaleDetails saleDetails=outBoundDetails.getSaleDetailList().get(0);
                             tvOutboundName.setText(Html.fromHtml("出库人：<font color=\"#000000\">" + saleDetails.getCreateName() + "</font>"));

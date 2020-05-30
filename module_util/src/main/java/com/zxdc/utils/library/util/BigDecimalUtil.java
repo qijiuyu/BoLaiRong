@@ -118,19 +118,15 @@ public class BigDecimalUtil {
      * @param scale
      *            小数点后保留几位
      */
-    public static double round(double v, int scale) throws IllegalAccessException {
-        return div(v, 1, scale);
+    public static double round(double v, int scale){
+        try {
+            return div(v, 1, scale);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
-    /**
-     * 四舍五入
-     *
-     * @param scale
-     *            小数点后保留几位
-     */
-    public static double round(String v, int scale) throws IllegalAccessException {
-        return div(v, "1", scale);
-    }
 
     /**
      * 比较大小

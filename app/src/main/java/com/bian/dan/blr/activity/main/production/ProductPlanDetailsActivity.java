@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -56,6 +58,8 @@ public class ProductPlanDetailsActivity extends BaseActivity {
     TextView tvOutBound;
     @BindView(R.id.list_outbound)
     MeasureListView listOutBound;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     private ProductPlan.ListBean listBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +83,10 @@ public class ProductPlanDetailsActivity extends BaseActivity {
          */
         if(MyApplication.getRoleId()==3){
             tvOutBound.setVisibility(View.VISIBLE);
+        }else{
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+            scrollView.setLayoutParams(layoutParams);
         }
     }
 
@@ -143,7 +151,7 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStatusStr() + "</font>"));
 
                 /**
-                 * 判断显示出库的产品列表
+                 * 已申请了的产品列表
                  */
                 listOutBound.setAdapter(new OutBoundProductAdapter(activity,detailsBean.getOutRequireList()));
                 listOutBound.setOnItemClickListener(new AdapterView.OnItemClickListener() {

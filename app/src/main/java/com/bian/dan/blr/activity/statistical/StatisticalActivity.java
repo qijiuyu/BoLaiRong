@@ -23,8 +23,12 @@ import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
 import com.zxdc.utils.library.util.BigDecimalUtil;
 import com.zxdc.utils.library.util.DateUtils;
+import com.zxdc.utils.library.util.LogUtils;
+import com.zxdc.utils.library.util.Util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -94,7 +98,7 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         ButterKnife.bind(this);
         initView();
         //获取收支对比
-        statisticalPersenter.getIncome("2020-01-01","2020-05-26");
+        statisticalPersenter.getIncome(DateUtils.getYearFirst(),DateUtils.getDay(new Date().getTime()));
         //获取客户状态统计
         statisticalPersenter.getCustomerState();
         //销售单数统计
@@ -112,6 +116,8 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
      */
     private void initView() {
         statisticalPersenter = new StatisticalPersenter(this);
+        tvStartFiscal.setText(DateUtils.getYearFirst());
+        tvEndFiscal.setText(DateUtils.getDay(new Date().getTime()));
         tvEndSalesOrder.setText(DateUtils.getBeforeMonth());
         tvEndSalesMoney.setText(DateUtils.getBeforeMonth());
         tvEndMaterial.setText(DateUtils.getBeforeMonth());
@@ -212,12 +218,21 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         if(incomeBean==null){
             return;
         }
+        //四舍五入保留两位小数
+//        incomeBean.setIncome(Double.parseDouble(Util.setDouble(incomeBean.getIncome(),2)));
+//        incomeBean.setSpending(Double.parseDouble(Util.setDouble(incomeBean.getSpending(),2)));
+
+        BigDecimal bigDecimal = new BigDecimal(incomeBean.getSpending());
+        double bg = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        LogUtils.e(Util.setDouble(incomeBean.getSpending(),2)+"++++++++++++++++++"+bg);
+
         //显示支出与收入数据
         tvIncome.setText(String.valueOf(incomeBean.getIncome()));
         tvSpending.setText(String.valueOf(incomeBean.getSpending()));
 
         //计算收入与支出的百分比
         final int num1=BigDecimalUtil.percentage(incomeBean.getIncome(),incomeBean.getSpending());
+        LogUtils.e(incomeBean.getIncome()+"+++++++++++++"+incomeBean.getSpending()+"++++++++++++"+num1);
         List<SliceValue> values = new ArrayList<>();
         SliceValue sliceValue = new SliceValue(num1, Color.parseColor("#FE8E2C"));
         SliceValue sliceValue2 = new SliceValue(100-num1, Color.parseColor("#47C9FB"));

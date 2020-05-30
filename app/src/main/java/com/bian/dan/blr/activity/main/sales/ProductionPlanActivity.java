@@ -7,12 +7,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.production.SelectPlanCodeActivity;
 import com.bian.dan.blr.adapter.sales.ProductPlanAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -38,8 +38,8 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
     TextView tvHead;
     @BindView(R.id.img_right)
     ImageView imgRight;
-    @BindView(R.id.et_key)
-    EditText evKey;
+    @BindView(R.id.tv_key)
+    TextView tvKey;
     @BindView(R.id.img_clear)
     ImageView imgClear;
     @BindView(R.id.listView)
@@ -79,7 +79,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
         /**
          * 监听客户名称输入框
          */
-        evKey.addTextChangedListener(new TextWatcher() {
+        tvKey.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -88,7 +88,6 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
                 if(s.length()>0){
                     imgClear.setVisibility(View.VISIBLE);
                 }else{
-                    evKey.setTag(null);
                     imgClear.setVisibility(View.GONE);
                 }
                 //加载数据
@@ -103,9 +102,8 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      *
      * @param view
      */
-    @OnClick({R.id.lin_back,R.id.img_right,R.id.img_clear})
+    @OnClick({R.id.lin_back,R.id.img_right,R.id.tv_key,R.id.img_clear})
     public void onViewClicked(View view) {
-        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
@@ -114,8 +112,12 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
             case R.id.img_right:
                 setClass(AddProductPlanActivity.class,1000);
                 break;
+            //选择生成计划
+            case R.id.tv_key:
+                setClass(SelectPlanCodeActivity.class,600);
+                break;
             case R.id.img_clear:
-                 evKey.setText(null);
+                 tvKey.setText(null);
                  break;
             default:
                 break;
@@ -140,7 +142,7 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
      * 获取生产计划列表
      */
     private void getPlanList(){
-        HttpMethod.getPlanList(evKey.getText().toString().trim(), null,page, new NetWorkCallBack() {
+        HttpMethod.getPlanList(tvKey.getText().toString().trim(), null,page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -174,6 +176,15 @@ public class ProductionPlanActivity extends BaseActivity implements MyRefreshLay
                 //加载数据
                 reList.startRefresh();
                 break;
+           //回执生产计划code
+            case 600:
+                 if(data!=null){
+                     ProductPlan.ListBean listBean= (ProductPlan.ListBean) data.getSerializableExtra("listBean");
+                     if(listBean!=null){
+                         tvKey.setText(listBean.getPlanCode());
+                     }
+                 }
+                 break;
             default:
                 break;
         }

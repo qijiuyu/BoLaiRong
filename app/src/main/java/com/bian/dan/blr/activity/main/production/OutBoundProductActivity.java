@@ -89,7 +89,6 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
                 if(s.length()>0){
                     imgClear.setVisibility(View.VISIBLE);
                 }else{
-                    tvKey.setTag(null);
                     imgClear.setVisibility(View.GONE);
                 }
                 //加载数据
@@ -135,7 +134,7 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
      */
     private void getOutBoundProductList(){
         UserInfo userInfo= MyApplication.getUser();
-        HttpMethod.getOutBoundProductList((String) tvKey.getTag(), userInfo.getUser().getDeptId()+"", null, null, page, new NetWorkCallBack() {
+        HttpMethod.getOutBoundProductList(tvKey.getText().toString().trim(), userInfo.getUser().getDeptId()+"", null, null, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -165,7 +164,6 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
         if(resultCode==600 && data!=null){
             ProductPlan.ListBean listBean= (ProductPlan.ListBean) data.getSerializableExtra("listBean");
             if(listBean!=null){
-                tvKey.setTag(String.valueOf(listBean.getId()));
                 tvKey.setText(listBean.getPlanCode());
             }
         }

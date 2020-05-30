@@ -24,8 +24,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"/>
 
-        <EditText
-            android:id="@+id/et_key"
+        <TextView
+            android:id="@+id/tv_key"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -33,7 +33,6 @@
             android:hint="请输入生产计划"
             android:textColor="@android:color/black"
             android:textSize="13sp"
-            android:digits="0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="10dp"/>
 

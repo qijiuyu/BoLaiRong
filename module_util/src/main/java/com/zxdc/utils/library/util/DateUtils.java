@@ -285,4 +285,19 @@ public class DateUtils {
         }
         return false;
     }
+
+
+    /**
+     * 获取今年第一天日期
+     * @return
+     */
+    public static String getYearFirst() {
+        Calendar currCal = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(Calendar.YEAR, currCal.get(Calendar.YEAR));
+        Date time = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(time);
+    }
 }

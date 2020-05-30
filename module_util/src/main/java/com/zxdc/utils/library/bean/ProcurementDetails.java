@@ -28,7 +28,6 @@ public class ProcurementDetails extends BaseBean {
         private String prop5="";
         private String stateStr="";
         private List<GoodList> purchaseDetailList;
-        private List<EntryList> entryDetailList;
 
         public int getId() {
             return id;
@@ -126,13 +125,6 @@ public class ProcurementDetails extends BaseBean {
             this.purchaseDetailList = purchaseDetailList;
         }
 
-        public List<EntryList> getEntryDetailList() {
-            return entryDetailList;
-        }
-
-        public void setEntryDetailList(List<EntryList> entryDetailList) {
-            this.entryDetailList = entryDetailList;
-        }
     }
 
 
@@ -156,6 +148,16 @@ public class ProcurementDetails extends BaseBean {
         private String contacts="";
         private int goodsId;
         private String typeStr="";
+        private int arriveNum;
+        private List<EntryList> entryDetailList;
+
+        public int getArriveNum() {
+            return arriveNum;
+        }
+
+        public void setArriveNum(int arriveNum) {
+            this.arriveNum = arriveNum;
+        }
 
         public int getId() {
             return id;
@@ -308,27 +310,24 @@ public class ProcurementDetails extends BaseBean {
         public void setTypeStr(String typeStr) {
             this.typeStr = typeStr;
         }
+
+        public List<EntryList> getEntryDetailList() {
+            return entryDetailList;
+        }
+
+        public void setEntryDetailList(List<EntryList> entryDetailList) {
+            this.entryDetailList = entryDetailList;
+        }
     }
 
 
     public static class EntryList implements Serializable{
-        private String goodsName="";
         private String batchNo="";
         private int num;
-        private String arriveTypeStr="";
         private String stockTypeStr="";
         private String goodsTypeStr="";
         private String createName="";
         private String createDate="";
-        private String memo="";
-
-        public String getGoodsName() {
-            return goodsName;
-        }
-
-        public void setGoodsName(String goodsName) {
-            this.goodsName = goodsName;
-        }
 
         public String getBatchNo() {
             return batchNo;
@@ -344,14 +343,6 @@ public class ProcurementDetails extends BaseBean {
 
         public void setNum(int num) {
             this.num = num;
-        }
-
-        public String getArriveTypeStr() {
-            return arriveTypeStr;
-        }
-
-        public void setArriveTypeStr(String arriveTypeStr) {
-            this.arriveTypeStr = arriveTypeStr;
         }
 
         public String getStockTypeStr() {
@@ -386,12 +377,6 @@ public class ProcurementDetails extends BaseBean {
             this.createDate = createDate;
         }
 
-        public String getMemo() {
-            return memo;
-        }
-
-        public void setMemo(String memo) {
-            this.memo = memo;
-        }
     }
+
 }

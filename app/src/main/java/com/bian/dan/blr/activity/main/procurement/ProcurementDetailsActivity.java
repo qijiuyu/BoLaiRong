@@ -56,14 +56,8 @@ public class ProcurementDetailsActivity extends BaseActivity {
     TextView tvAuditResult;
     @BindView(R.id.tv_audit_remark)
     TextView tvAuditRemark;
-    @BindView(R.id.tv_enter)
-    TextView tvEnter;
-    @BindView(R.id.tv_enter_time)
-    TextView tvEnterTime;
     @BindView(R.id.list_entry)
     MeasureListView listEntry;
-    @BindView(R.id.tv_remark)
-    TextView tvRemark;
     @BindView(R.id.lin_audit)
     LinearLayout linAudit;
     @BindView(R.id.lin_entry)
@@ -167,12 +161,10 @@ public class ProcurementDetailsActivity extends BaseActivity {
                     /**
                      * 入库信息
                      */
-                    if(detailsBean.getEntryDetailList()!=null && detailsBean.getEntryDetailList().size()>0){
+                    ProcurementDetails.GoodList goodList=detailsBean.getPurchaseDetailList().get(0);
+                    if(goodList.getEntryDetailList().size()>0){
                         linEntry.setVisibility(View.VISIBLE);
-                        ProcurementDetails.EntryList entryList=detailsBean.getEntryDetailList().get(0);
-                        tvEnter.setText(Html.fromHtml("入库：<font color=\"#000000\">" + entryList.getCreateName()+ "</font>"));
-                        tvEnterTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + entryList.getCreateDate()+ "</font>"));
-                        listEntry.setAdapter(new Procurement_Details_EntryGood_Adapter(activity,detailsBean.getEntryDetailList()));
+                        listEntry.setAdapter(new Procurement_Details_EntryGood_Adapter(activity,detailsBean.getPurchaseDetailList()));
                     }
                 }else{
                     ToastUtil.showLong(procurementDetails.getMsg());

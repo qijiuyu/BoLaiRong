@@ -1076,8 +1076,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取采购单详情
      */
-    public static void getProcurementDetails(int purcId,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getProcurementDetails(purcId).enqueue(new Callback<ProcurementDetails>() {
+    public static void getProcurementDetails(int id,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementDetails(id).enqueue(new Callback<ProcurementDetails>() {
             public void onResponse(Call<ProcurementDetails> call, Response<ProcurementDetails> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

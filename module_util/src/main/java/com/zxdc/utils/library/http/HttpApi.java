@@ -241,7 +241,7 @@ public interface HttpApi {
     Call<Procurement> getProcurementList(@Query("purcOrder") String purcOrder,@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_DETAILS)
-    Call<ProcurementDetails> getProcurementDetails(@Query("purcId") int purcId);
+    Call<ProcurementDetails> getProcurementDetails(@Query("id") int id);
 
     @GET(HttpConstant.GET_SUPPLIER_BY_NAME)
     Call<SupplierName> getSupplierNameByName(@Query("prop1") String prop1);
