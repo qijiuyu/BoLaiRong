@@ -139,7 +139,7 @@ public class AddOutBoundActivity extends BaseActivity {
                 }else{
                     outBoundP.setPayType(2);
                 }
-                outBoundP.setReceivableDate(time+" 00:00:00");
+                outBoundP.setReceivableDate(time);
                 outBoundP.setUnpaidAmount(Double.parseDouble(noMoney));
                 outBoundP.setAddAmount(Double.parseDouble(yesMoney));
                 List<AddGoodP> list=new ArrayList<>();

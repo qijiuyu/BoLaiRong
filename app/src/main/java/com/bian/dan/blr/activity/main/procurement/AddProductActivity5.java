@@ -147,7 +147,7 @@ public class AddProductActivity5 extends BaseActivity {
             tvName.setText(listBean.getName());
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(null);
+            etPrice.setText(String.valueOf(listBean.getPrice()));
         }
     }
 }

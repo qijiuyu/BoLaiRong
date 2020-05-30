@@ -171,7 +171,7 @@ public class AddContractActivity extends BaseActivity {
                 AddContractP addContractP=new AddContractP();
                 addContractP.setProp2(code);
                 addContractP.setCustomerId((int)tvName.getTag());
-                addContractP.setSignedTime(signTime+" 00:00:00");
+                addContractP.setSignedTime(signTime);
                 addContractP.setAmount(Double.parseDouble(money));
                 if(!TextUtils.isEmpty(office)){
                     addContractP.setAssignerId((int)tvOffice.getTag());

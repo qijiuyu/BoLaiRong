@@ -181,7 +181,7 @@ public interface HttpApi {
     Call<CheckCode> checkCustomerName(@Query("customerName") String customerName);
 
     @GET(HttpConstant.GET_USER_LIST)
-    Call<UserList> getUserList(@Query("deptId") int deptId, @Query("name") String name, @Query("page") int page, @Query("limit") int limit);
+    Call<UserList> getUserList(@Query("deptId") String deptId, @Query("name") String name, @Query("page") int page, @Query("limit") int limit);
 
     @PUT(HttpConstant.ADD_FINANCIAL)
     Call<BaseBean> addFinancial(@Body AddFinancialP addFinancialP);
@@ -223,7 +223,7 @@ public interface HttpApi {
     Call<BaseBean> addPutStorage(@Body AddPutStorageP addPutStorageP);
 
     @GET(HttpConstant.GET_OUTBOUND_PRODUCT_LIST)
-    Call<OutBoundProduct> getOutBoundProductList(@Query("planId") String planId, @Query("deptId")int deptId,@Query("outStatus")String outStatus,@Query("entryStatus")String entryStatus,@Query("page") int page, @Query("limit") int limit);
+    Call<OutBoundProduct> getOutBoundProductList(@Query("planId") String planId, @Query("deptId")String deptId,@Query("outStatus")String outStatus,@Query("entryStatus")String entryStatus,@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_CUSTOMER_FOLLOW)
     Call<Log> getFollow(@Query("customerId") int customerId, @Query("page") int page, @Query("limit") int limit);
@@ -238,7 +238,7 @@ public interface HttpApi {
     Call<Procurement> getAuditProcurementList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_LIST)
-    Call<Procurement> getProcurementList(@Query("page") int page, @Query("limit") int limit);
+    Call<Procurement> getProcurementList(@Query("purcOrder") String purcOrder,@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_DETAILS)
     Call<ProcurementDetails> getProcurementDetails(@Query("purcId") int purcId);

@@ -13,10 +13,8 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.SelectUserAdapter;
-import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -50,7 +48,7 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
     /**
      * 部门id
      */
-    private int deptId;
+    private String deptId;
     private List<UserList.ListBean> listAll=new ArrayList<>();
     private SelectUserAdapter selectUserAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,11 +66,7 @@ public class SelectUserActivity extends BaseActivity implements MyRefreshLayoutL
      */
     private void initView() {
         tvHead.setText("选择用户");
-        deptId=getIntent().getIntExtra("deptId",0);
-        if(deptId==0){
-            final UserInfo userInfo= MyApplication.getUser();
-            deptId=userInfo.getUser().getDeptId();
-        }
+        deptId=getIntent().getStringExtra("deptId");
         reList.setMyRefreshLayoutListener(this);
         selectUserAdapter=new SelectUserAdapter(this,listAll);
         listView.setAdapter(selectUserAdapter);

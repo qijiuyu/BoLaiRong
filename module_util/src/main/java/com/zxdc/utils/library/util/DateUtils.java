@@ -3,6 +3,7 @@ package com.zxdc.utils.library.util;
 import android.text.TextUtils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -258,5 +259,30 @@ public class DateUtils {
         c.add(Calendar.MONTH, -1);    //得到前一个月
         String time = format.format(c.getTime());
         return time;
+    }
+
+
+    /**
+     * 判断是否是过去的日期
+     * @return
+     * @return
+     */
+    public static boolean isPastDate(String str){
+        //格式化日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        try {
+            //将字符串转为日期格式，如果此处字符串为非合法日期就会抛出异常。
+            Date pastDate = sdf.parse(str);
+            Date nowDate = new Date();
+            if(str.equals(sdf.format(nowDate))){
+                return false;
+            }
+            if(pastDate.getTime()<nowDate.getTime()){
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

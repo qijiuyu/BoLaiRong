@@ -93,8 +93,7 @@ public class AddOutBoundPersenter {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String now = sdf.format(new Date());
-        tvTime.setText(now.split(" ")[0]);
-        customDatePicker.show(tvTime.getText().toString());
+        customDatePicker.show(now.split(" ")[0]);
     }
 
 

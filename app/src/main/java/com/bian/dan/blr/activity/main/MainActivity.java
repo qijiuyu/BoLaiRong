@@ -23,6 +23,7 @@ import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
+import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
 import com.bian.dan.blr.application.MyApplication;
@@ -120,13 +121,14 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    private Intent intent=new Intent();
     @OnClick({R.id.tv_login_out,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_sccrk, R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gzgl, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //退出登录
             case R.id.tv_login_out:
                 SPUtil.getInstance(this).removeMessage(SPUtil.TOKEN);
-                Intent intent=new Intent(this,LoginActivity.class);
+                intent.setClass(this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
@@ -165,7 +167,9 @@ public class MainActivity extends BaseActivity {
                 break;
             //采购单
             case R.id.tv_collect_cgd:
-                setClass(ProcurementActivity.class);
+                intent.setClass(this,ProcurementActivity.class);
+                intent.putExtra("type",1);
+                startActivity(intent);
                 break;
             //供应商管理
             case R.id.tv_collect_gysgl:
@@ -175,6 +179,10 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_collect_cwbx:
                 setClass(FinancialActivity.class);
                 break;
+
+
+
+
             //仓库管理
             case R.id.tv_house_ckgl:
                 setClass(InventoryDetailsActivity.class);
@@ -187,9 +195,15 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_house_ckd:
                 setClass(SalesOutBoundActivity.class);
                 break;
+           //采购入库单
             case R.id.tv_house_cgrkd:
+                intent.setClass(this,ProcurementActivity.class);
+                intent.putExtra("type",2);
+                startActivity(intent);
                 break;
+            //生产出入库
             case R.id.tv_house_sccrk:
+                setClass(OutAndEntryActivity.class);
                 break;
             case R.id.tv_house_qlb:
                 break;

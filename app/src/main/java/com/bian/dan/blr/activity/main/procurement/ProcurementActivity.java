@@ -3,13 +3,17 @@ package com.bian.dan.blr.activity.main.procurement;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.warehouse.ProcurementDetailsActivity2;
 import com.bian.dan.blr.adapter.procurement.ProcurementAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -39,12 +43,17 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
     ListView listView;
     @BindView(R.id.re_list)
     MyRefreshLayout reList;
-    @BindView(R.id.tv_key)
-    TextView tvKey;
+    @BindView(R.id.et_key)
+    EditText etKey;
     @BindView(R.id.img_clear)
     ImageView imgClear;
     //页码
     private int page = 1;
+    /**
+     * 1：采购模块进入
+     * 2：仓库模块进入
+     */
+    private int type;
     private ProcurementAdapter procurementAdapter;
     private List<Procurement.ListBean> listAll=new ArrayList<>();
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,20 +71,51 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
      */
     private void initView() {
         tvHead.setText("采购单");
-        imgRight.setImageResource(R.mipmap.add);
+        type=getIntent().getIntExtra("type",0);
+        if(type==1){
+            imgRight.setImageResource(R.mipmap.add);
+        }
         reList.setMyRefreshLayoutListener(this);
         procurementAdapter=new ProcurementAdapter(this,listAll);
         listView.setAdapter(procurementAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(activity,ProcurementDetailsActivity.class);
+                Intent intent=new Intent();
+                if(type==1){
+                    intent.setClass(activity,ProcurementDetailsActivity.class);
+                }else{
+                    intent.setClass(activity, ProcurementDetailsActivity2.class);
+                }
                 intent.putExtra("listBean",listAll.get(position));
                 startActivity(intent);
             }
         });
+
+
+        /**
+         * 监听输入框
+         */
+        etKey.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0){
+                    imgClear.setVisibility(View.VISIBLE);
+                }else{
+                    imgClear.setVisibility(View.GONE);
+                }
+                //加载数据
+                reList.startRefresh();
+            }
+        });
     }
 
-    @OnClick({R.id.lin_back, R.id.img_right})
+    @OnClick({R.id.lin_back, R.id.img_right,R.id.img_clear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -84,6 +124,9 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
             case R.id.img_right:
                 setClass(AddProcurementActivity.class,1000);
                 break;
+            case R.id.img_clear:
+                 etKey.setText(null);
+                 break;
             default:
                 break;
         }
@@ -108,7 +151,7 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
      * 获取采购单列表
      */
     private void getProcurementList(){
-        HttpMethod.getProcurementList(page, new NetWorkCallBack() {
+        HttpMethod.getProcurementList(etKey.getText().toString().trim(),page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

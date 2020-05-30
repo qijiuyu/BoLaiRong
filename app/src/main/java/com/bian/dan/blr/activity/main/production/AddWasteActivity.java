@@ -121,7 +121,7 @@ public class AddWasteActivity extends BaseActivity {
                     return;
                 }
                 intent.setClass(this, SelectUserActivity.class);
-                intent.putExtra("deptId",(int)tvDepart.getTag());
+                intent.putExtra("deptId",tvDepart.getTag().toString());
                 startActivityForResult(intent,400);
                 break;
             //选择物料

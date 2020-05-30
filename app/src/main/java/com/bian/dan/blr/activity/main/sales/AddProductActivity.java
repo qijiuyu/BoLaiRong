@@ -151,10 +151,10 @@ public class AddProductActivity extends BaseActivity {
                     ToastUtil.showLong("请输入单价");
                     return;
                 }
-                if(TextUtils.isEmpty(remark)){
-                    ToastUtil.showLong("请输入备注");
-                    return;
-                }
+//                if(TextUtils.isEmpty(remark)){
+//                    ToastUtil.showLong("请输入备注");
+//                    return;
+//                }
                 if(TextUtils.isEmpty(invoice)){
                     ToastUtil.showLong("是否开票");
                     return;

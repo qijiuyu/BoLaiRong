@@ -51,7 +51,7 @@ public class SelectUserAdapter extends BaseAdapter {
         }
 
         UserList.ListBean listBean=list.get(position);
-        holder.tvName.setText(listBean.getUsername()+"/"+listBean.getName()+"/"+listBean.getDeptName());
+        holder.tvName.setText(listBean.getName());
         return view;
     }
 

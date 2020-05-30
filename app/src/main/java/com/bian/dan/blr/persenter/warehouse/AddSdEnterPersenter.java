@@ -9,6 +9,7 @@ import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.http.HttpMethod;
+import com.zxdc.utils.library.util.DateUtils;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 
@@ -32,7 +33,12 @@ public class AddSdEnterPersenter {
     public void selectTime(final TextView tvTime){
         CustomDatePicker customDatePicker = new CustomDatePicker(activity, new CustomDatePicker.ResultHandler() {
             public void handle(String time) { // 回调接口，获得选中的时间
-                tvTime.setText(time.split(" ")[0]);
+                final String strTime=time.split(" ")[0];
+                if(DateUtils.isPastDate(strTime)){
+                    ToastUtil.showLong("采购日期不能小于当前日期");
+                    return;
+                }
+                tvTime.setText(strTime);
             }
         }, "1920-01-01 00:00", "2050-12-31 23:59");
         customDatePicker.showSpecificTime(false); // 不显示时和分
@@ -40,8 +46,7 @@ public class AddSdEnterPersenter {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
         String now = sdf.format(new Date());
-        tvTime.setText(now.split(" ")[0]);
-        customDatePicker.show(tvTime.getText().toString());
+        customDatePicker.show(now.split(" ")[0]);
     }
 
 

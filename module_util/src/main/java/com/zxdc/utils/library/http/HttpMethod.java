@@ -701,7 +701,7 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取用户列表
      */
-    public static void getUserList(int deptId,String name,int page,final NetWorkCallBack netWorkCallBack) {
+    public static void getUserList(String deptId,String name,int page,final NetWorkCallBack netWorkCallBack) {
         Http.getRetrofit().create(HttpApi.class).getUserList(deptId,name,page,limit).enqueue(new Callback<UserList>() {
             public void onResponse(Call<UserList> call, Response<UserList> response) {
                 DialogUtil.closeProgress();
@@ -940,7 +940,7 @@ public class HttpMethod extends BaseRequst {
     /**
      * 根据部门id查询出库单列表
      */
-    public static void getOutBoundProductList(String planId,int deptId,String outStatus,String entryStatus,int page,final NetWorkCallBack netWorkCallBack) {
+    public static void getOutBoundProductList(String planId,String deptId,String outStatus,String entryStatus,int page,final NetWorkCallBack netWorkCallBack) {
         Http.getRetrofit().create(HttpApi.class).getOutBoundProductList(planId,deptId,outStatus,entryStatus,page,limit).enqueue(new Callback<OutBoundProduct>() {
             public void onResponse(Call<OutBoundProduct> call, Response<OutBoundProduct> response) {
                 DialogUtil.closeProgress();
@@ -1059,8 +1059,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取采购单列表
      */
-    public static void getProcurementList(int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getProcurementList(page,limit).enqueue(new Callback<Procurement>() {
+    public static void getProcurementList(String purcOrder,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementList(purcOrder,page,limit).enqueue(new Callback<Procurement>() {
             public void onResponse(Call<Procurement> call, Response<Procurement> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

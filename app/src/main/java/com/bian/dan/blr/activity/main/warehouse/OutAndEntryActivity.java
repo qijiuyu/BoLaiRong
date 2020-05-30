@@ -1,4 +1,4 @@
-package com.bian.dan.blr.activity.main.production;
+package com.bian.dan.blr.activity.main.warehouse;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.production.OutBoundProductListAdapter;
-import com.bian.dan.blr.application.MyApplication;
+import com.bian.dan.blr.activity.main.production.SelectPlanCodeActivity;
+import com.bian.dan.blr.adapter.warehouse.OutAndEntryAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBoundProduct;
 import com.zxdc.utils.library.bean.ProductPlan;
-import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -32,9 +31,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 出库单列表
+ * 出入库列表
  */
-public class OutBoundProductActivity extends BaseActivity  implements MyRefreshLayoutListener {
+public class OutAndEntryActivity extends BaseActivity  implements MyRefreshLayoutListener {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -49,10 +48,10 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
     //页码
     private int page=1;
     private List<OutBoundProduct.ListBean> listAll=new ArrayList<>();
-    private OutBoundProductListAdapter outBoundProductListAdapter;
+    private OutAndEntryAdapter outAndEntryAdapter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_outbound_product);
+        setContentView(R.layout.activity_out_and_entry);
         ButterKnife.bind(this);
         initView();
         //加载数据
@@ -64,18 +63,17 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
      * 初始化
      */
     private void initView() {
-        tvHead.setText("出库单");
+        tvHead.setText("生产出入库");
         reList.setMyRefreshLayoutListener(this);
-        outBoundProductListAdapter=new OutBoundProductListAdapter(this,listAll);
-        listView.setAdapter(outBoundProductListAdapter);
+        outAndEntryAdapter = new OutAndEntryAdapter(this, listAll);
+        listView.setAdapter(outAndEntryAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(activity,ProductProgressDetailsActivity.class);
+                Intent intent=new Intent(activity, OutAndEntry_DetailsActivity.class);
                 intent.putExtra("requireId",listAll.get(position).getId());
                 startActivity(intent);
             }
         });
-
 
         /**
          * 监听输入框
@@ -97,6 +95,7 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
             }
         });
     }
+
 
     @OnClick({R.id.lin_back, R.id.tv_key, R.id.img_clear})
     public void onViewClicked(View view) {
@@ -134,8 +133,7 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
      * 根据部门id查询出库单列表
      */
     private void getOutBoundProductList(){
-        UserInfo userInfo= MyApplication.getUser();
-        HttpMethod.getOutBoundProductList((String) tvKey.getTag(), userInfo.getUser().getDeptId()+"", null, null, page, new NetWorkCallBack() {
+        HttpMethod.getOutBoundProductList((String) tvKey.getTag(), null, null, null, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -143,7 +141,7 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
                 if(outBoundProduct.isSussess()){
                     List<OutBoundProduct.ListBean> list=outBoundProduct.getData().getRows();
                     listAll.addAll(list);
-                    outBoundProductListAdapter.notifyDataSetChanged();
+                    outAndEntryAdapter.notifyDataSetChanged();
                     if (list.size() < HttpMethod.limit) {
                         reList.setIsLoadingMoreEnabled(false);
                     }
