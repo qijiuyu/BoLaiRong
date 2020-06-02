@@ -29,6 +29,7 @@ public class DeviceDetails extends BaseBean {
         private double amount;
         private String memo="";
         private int state;//设备状态：1，使用中 2，已出售
+        private String initialism="";
         private List<FileBean> fileList;
 
         public int getId() {
@@ -141,6 +142,14 @@ public class DeviceDetails extends BaseBean {
 
         public void setFileList(List<FileBean> fileList) {
             this.fileList = fileList;
+        }
+
+        public String getInitialism() {
+            return initialism;
+        }
+
+        public void setInitialism(String initialism) {
+            this.initialism = initialism;
         }
     }
 }

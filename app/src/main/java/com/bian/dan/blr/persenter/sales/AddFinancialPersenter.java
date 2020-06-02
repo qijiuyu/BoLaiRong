@@ -17,11 +17,13 @@ import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddFinancialPersenter {
@@ -93,11 +95,85 @@ public class AddFinancialPersenter {
 
 
     /**
+     * 删除文件
+     */
+    public void deleteFile(String id){
+        DialogUtil.showProgress(activity,"图片删除中");
+        HttpMethod.deleteFile(id, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 编辑文件时上传图片
+     */
+    public void uploadByFileAndTypeAndFid(final int pid, final List<LocalMedia> imgList){
+        List<String> uploadList=new ArrayList<>();
+        for (int i=0;i<imgList.size();i++){
+            final String imgPath=imgList.get(i).getCompressPath();
+            if(!imgPath.startsWith("http://")){
+                uploadList.add(imgPath);
+            }
+        }
+        DialogUtil.showProgress(activity,"图片上传中");
+        for (int i=0;i<uploadList.size();i++){
+            final File file=new File(uploadList.get(i));
+            HttpMethod.uploadByFileAndTypeAndFid(file.getName(), file, "2", String.valueOf(pid), new NetWorkCallBack() {
+                public void onSuccess(Object object) {
+                    DialogUtil.closeProgress();
+                    Upload upload= (Upload) object;
+                    if(upload.isSussess()){
+                        activity.uploadSuccess(upload.getResPath(),upload.getId());
+                    }else{
+                        ToastUtil.showLong(upload.getMsg());
+                    }
+                }
+                public void onFail(Throwable t) {
+
+                }
+            });
+        }
+
+    }
+
+
+
+    /**
      * 添加财务报销
      */
     public void addFinancial(AddFinancialP addFinancialP){
         DialogUtil.showProgress(activity,"上传中");
         HttpMethod.addFinancial(addFinancialP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean)object;
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 修改财务报销
+     */
+    public void updateFinancial(UpdateFinancial transferP){
+        DialogUtil.showProgress(activity,"修改中");
+        HttpMethod.updateFinancial(transferP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean)object;
                 if(baseBean.isSussess()){

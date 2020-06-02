@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.procurement.AddProductPersenter3;
-import com.bian.dan.blr.view.DecimalDigitsInputFilter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.SupplierMaterial;
@@ -79,8 +78,8 @@ public class AddProductActivity3 extends BaseActivity {
         tvHead.setText("添加产品");
         addProductPersenter3=new AddProductPersenter3(this);
         editGoods= (Goods) getIntent().getSerializableExtra("goods");
-        //显示小数点只能输入两位
-        etPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2), new InputFilter.LengthFilter(8)});
+        //限制小数点前后
+        etPrice.addTextChangedListener(new MyWatcher(7,2));
 
         /**
          * 监听数量输入框

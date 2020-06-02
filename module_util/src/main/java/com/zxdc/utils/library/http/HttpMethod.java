@@ -64,7 +64,7 @@ import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
-import com.zxdc.utils.library.bean.parameter.TransferP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.base.BaseRequst;
@@ -1472,8 +1472,25 @@ public class HttpMethod extends BaseRequst {
     /**
      * 修改财务报销
      */
-    public static void addTransferP(TransferP transferP, final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).addTransferP(transferP).enqueue(new Callback<BaseBean>() {
+    public static void updateFinancial(UpdateFinancial transferP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateFinancial(transferP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 修改设备
+     */
+    public static void updateDevice(AddDeviceP addDeviceP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateDevice(addDeviceP).enqueue(new Callback<BaseBean>() {
             public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

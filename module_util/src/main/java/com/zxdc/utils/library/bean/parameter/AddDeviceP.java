@@ -4,6 +4,7 @@ import java.util.List;
 
 public class AddDeviceP {
 
+    private int id;
     private String equipName;
     private String spec;
     private int equipType;
@@ -12,7 +13,16 @@ public class AddDeviceP {
     private double amount;
     private int deptId;
     private String purcTime;
+    private int flag;
     private List<FileList> fileList;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEquipName() {
         return equipName;
@@ -84,5 +94,13 @@ public class AddDeviceP {
 
     public void setFileList(List<FileList> fileList) {
         this.fileList = fileList;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

@@ -20,7 +20,7 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.FinancialDetails;
-import com.zxdc.utils.library.bean.parameter.TransferP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 
@@ -95,14 +95,15 @@ public class TransferActivity extends BaseActivity {
                     ToastUtil.showLong("请选择转账时间");
                     return;
                 }
-                TransferP transferP=new TransferP();
+                UpdateFinancial transferP=new UpdateFinancial();
                 transferP.setId(detailsBean.getId());
+                transferP.setState(detailsBean.getState());
                 transferP.setProp1(MyApplication.getUser().getUser().getUserId());
                 transferP.setProp2(money);
                 transferP.setProp3(transferImg);
                 transferP.setProp5(time);
                 LogUtils.e("+++++++++++"+new Gson().toJson(transferP));
-                transferPersenter.addTransferP(transferP);
+                transferPersenter.updateFinancial(transferP);
                 break;
             default:
                 break;

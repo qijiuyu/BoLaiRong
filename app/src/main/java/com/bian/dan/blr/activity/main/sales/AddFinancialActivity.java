@@ -13,15 +13,18 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.GridViewImgAdapter;
 import com.bian.dan.blr.persenter.sales.AddFinancialPersenter;
 import com.bian.dan.blr.utils.SelectPhoto;
+import com.bian.dan.blr.view.MyWatcher;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.FileBean;
+import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.FileList;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyGridView;
@@ -59,11 +62,15 @@ public class AddFinancialActivity extends BaseActivity {
     private List<FileBean> imgList=new ArrayList<>();
     private GridViewImgAdapter gridViewImgAdapter;
     private AddFinancialPersenter financialPersenter;
+    //要编辑的对象
+    private FinancialDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_financial);
         ButterKnife.bind(this);
         initView();
+        //编辑前显示对应的数据
+        showData();
     }
 
 
@@ -73,6 +80,11 @@ public class AddFinancialActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("新增报销单");
         financialPersenter=new AddFinancialPersenter(this);
+        detailsBean= (FinancialDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
+        //限制小数点前后
+        etMoney.addTextChangedListener(new MyWatcher(7,2));
+
+        //图片列表
         gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
         gridView.setAdapter(gridViewImgAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -114,16 +126,29 @@ public class AddFinancialActivity extends BaseActivity {
                 addFinancialP.setUserId((int)tvName.getTag());
                 addFinancialP.setAmount(Double.parseDouble(money));
                 addFinancialP.setMemo(remark);
-                List<FileList> list=new ArrayList<>();
-                for (int i = 0; i < imgList.size(); i++) {
-                    FileList fileList=new FileList();
-                    fileList.setUrl(imgList.get(i).getUrl());
-                    list.add(fileList);
+
+                if(detailsBean==null){
+                    List<FileList> list=new ArrayList<>();
+                    for (int i = 0; i < imgList.size(); i++) {
+                        FileList fileList=new FileList();
+                        fileList.setUrl(imgList.get(i).getUrl());
+                        list.add(fileList);
+                    }
+                    addFinancialP.setFileList(list);
                 }
-                addFinancialP.setFileList(list);
-                //添加财务报销
-                LogUtils.e("+++++++++++++"+new Gson().toJson(addFinancialP));
-                financialPersenter.addFinancial(addFinancialP);
+
+                if(detailsBean==null){
+                    financialPersenter.addFinancial(addFinancialP);
+                    LogUtils.e("+++++++++++++"+new Gson().toJson(addFinancialP));
+                }else{
+                    UpdateFinancial updateFinancial=new UpdateFinancial();
+                    updateFinancial.setId(detailsBean.getId());
+                    updateFinancial.setState(0);
+                    updateFinancial.setAmount(Double.parseDouble(money));
+                    updateFinancial.setMemo(remark);
+                    financialPersenter.updateFinancial(updateFinancial);
+                    LogUtils.e("+++++++++++++"+new Gson().toJson(addFinancialP));
+                }
                 break;
             default:
                 break;
@@ -144,16 +169,26 @@ public class AddFinancialActivity extends BaseActivity {
                         LocalMedia localMedia=new LocalMedia();
                         localMedia.setCompressPath(SelectPhoto.pai);
                         list.add(localMedia);
-                        //上传图片
-                        financialPersenter.uploadFile(list);
+                        if(detailsBean==null){
+                            //增加-上传图片
+                            financialPersenter.uploadFile(list);
+                        }else{
+                            //编辑-上传图片
+                            financialPersenter.uploadByFileAndTypeAndFid(detailsBean.getId(),list);
+                        }
                     }
                 }
                 break;
             //返回相册选择图片
             case PictureConfig.CHOOSE_REQUEST:
                 List<LocalMedia> list= PictureSelector.obtainMultipleResult(data);
-                //上传图片
-                financialPersenter.uploadFile(list);
+                if(detailsBean==null){
+                    //增加-上传图片
+                    financialPersenter.uploadFile(list);
+                }else{
+                    //编辑-上传图片
+                    financialPersenter.uploadByFileAndTypeAndFid(detailsBean.getId(),list);
+                }
                 break;
             //返回用户信息
             case 400:
@@ -173,6 +208,44 @@ public class AddFinancialActivity extends BaseActivity {
                 break;
         }
     }
+
+
+    /**
+     * 编辑前显示对应的数据
+     */
+    private void showData(){
+        if(detailsBean==null){
+            return;
+        }
+        //禁止修改申请人
+        tvName.setEnabled(false);
+        tvName.setText(detailsBean.getName());
+        tvName.setTextColor(getResources().getColor(R.color.color_999999));
+        tvName.setTag(detailsBean.getUserId());
+        tvAccount.setText(detailsBean.getAccount());
+        tvAccount.setTextColor(getResources().getColor(R.color.color_999999));
+        tvBank.setText(detailsBean.getOpenBankStr());
+        tvBank.setTextColor(getResources().getColor(R.color.color_999999));
+        tvMobile.setText(detailsBean.getMobile());
+        tvMobile.setTextColor(getResources().getColor(R.color.color_999999));
+        etMoney.setText(detailsBean.getAmount()+"");
+        etRemark.setText(detailsBean.getMemo());
+        /**
+         * 显示图片
+         */
+        imgList.addAll(detailsBean.getFileList());
+        gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
+        gridView.setAdapter(gridViewImgAdapter);
+    }
+
+
+    /**
+     * 编辑的时候删除图片
+     */
+    public void deleteImg(FileBean fileBean){
+        financialPersenter.deleteFile(String.valueOf(fileBean.getId()));
+    }
+
 
     /**
      * 图片上传成功

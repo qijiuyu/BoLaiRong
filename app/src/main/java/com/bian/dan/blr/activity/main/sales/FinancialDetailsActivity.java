@@ -1,5 +1,6 @@
 package com.bian.dan.blr.activity.main.sales;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -71,7 +72,11 @@ public class FinancialDetailsActivity extends BaseActivity {
     LinearLayout linTransfer;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
-    private  Financial.ListBean listBean;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
+    private Financial.ListBean listBean;
+    //详情对象
+    private FinancialDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_financial_details);
@@ -85,30 +90,46 @@ public class FinancialDetailsActivity extends BaseActivity {
     /**
      * 初始化
      */
-    private void initView(){
+    private void initView() {
         tvHead.setText("详情");
-        listBean= (Financial.ListBean) getIntent().getSerializableExtra("listBean");
+        tvRight.setText("编辑");
+        listBean = (Financial.ListBean) getIntent().getSerializableExtra("listBean");
     }
 
-    @OnClick(R.id.lin_back)
-    public void onViewClicked() {
-        finish();
+
+    @OnClick({R.id.lin_back, R.id.tv_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.lin_back:
+                 finish();
+                break;
+            case R.id.tv_right:
+                if(detailsBean==null){
+                    return;
+                }
+                Intent intent=new Intent(this,AddFinancialActivity.class);
+                intent.putExtra("detailsBean",detailsBean);
+                startActivityForResult(intent,100);
+                break;
+            default:
+                break;
+        }
     }
 
 
     /**
      * 获取财务详情
      */
-    private void getFinancialDetails(){
-        if(listBean==null){
+    private void getFinancialDetails() {
+        if (listBean == null) {
             return;
         }
-        DialogUtil.showProgress(this,"数据加载中");
+        DialogUtil.showProgress(this, "数据加载中");
         HttpMethod.getFinancialDetails(listBean.getId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                FinancialDetails financialDetails= (FinancialDetails) object;
-                if(financialDetails.isSussess()){
-                    FinancialDetails.DetailsBean detailsBean=financialDetails.getData();
+                FinancialDetails financialDetails = (FinancialDetails) object;
+                if (financialDetails.isSussess()) {
+                    detailsBean = financialDetails.getData();
                     tvCreatePeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                     tvCreateTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
@@ -118,15 +139,16 @@ public class FinancialDetailsActivity extends BaseActivity {
                     tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
                     tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
                     //附件
-                    gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
+                    gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
                     /**
                      * 审核信息
                      */
                     if (detailsBean.getState() > 0) {
+                        tvRight.setVisibility(View.GONE);  //已审核之后，就不能编辑了
                         linAudit.setVisibility(View.VISIBLE);
                         tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
-                        switch (listBean.getState()){
+                        switch (listBean.getState()) {
                             case 0:
                                 tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#FE8E2C\">" + detailsBean.getStateStr() + "</font>"));
                                 break;
@@ -151,8 +173,8 @@ public class FinancialDetailsActivity extends BaseActivity {
                         tvTransferMoney.setText(Html.fromHtml("转账金额：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         Glide.with(activity).load(detailsBean.getProp3()).into(imgTransfer);
                     }
-                    scrollView.scrollTo(0,0);
-                }else{
+                    scrollView.scrollTo(0, 0);
+                } else {
                     ToastUtil.showLong(financialDetails.getMsg());
                 }
             }
@@ -161,5 +183,15 @@ public class FinancialDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            //获取财务详情
+            getFinancialDetails();
+        }
     }
 }

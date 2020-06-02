@@ -63,7 +63,7 @@ import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
-import com.zxdc.utils.library.bean.parameter.TransferP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 
@@ -312,6 +312,10 @@ public interface HttpApi {
     Call<BaseBean> updateOutOrder(@Body SalesOutBoundP salesOutBoundP);
 
     @POST(HttpConstant.IP+"reimFinance/update")
-    Call<BaseBean> addTransferP(@Body TransferP transferP);
+    Call<BaseBean> updateFinancial(@Body UpdateFinancial transferP);
+
+    @POST(HttpConstant.IP+"equipment/update")
+    Call<BaseBean> updateDevice(@Body AddDeviceP addDeviceP);
+
 
 }

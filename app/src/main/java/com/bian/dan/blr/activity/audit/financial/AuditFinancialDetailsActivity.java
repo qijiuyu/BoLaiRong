@@ -118,43 +118,47 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
         DialogUtil.showProgress(this, "数据加载中");
         HttpMethod.getFinancialDetails(detailsId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                FinancialDetails financialDetails = (FinancialDetails) object;
-                if (financialDetails.isSussess()) {
-                    detailsBean = financialDetails.getData();
-                    tvCreatePeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
-                    tvCreateTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
-                    tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
-                    tvAccount.setText(Html.fromHtml("收款人账号：<font color=\"#000000\">" + detailsBean.getAccount() + "</font>"));
-                    tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + detailsBean.getOpenBankStr() + "</font>"));
-                    tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getMobile() + "</font>"));
-                    tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
-                    tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
-                    //附件
-                    gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
+                try {
+                    FinancialDetails financialDetails = (FinancialDetails) object;
+                    if (financialDetails.isSussess()) {
+                        detailsBean = financialDetails.getData();
+                        tvCreatePeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
+                        tvCreateTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
+                        tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
+                        tvAccount.setText(Html.fromHtml("收款人账号：<font color=\"#000000\">" + detailsBean.getAccount() + "</font>"));
+                        tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + detailsBean.getOpenBankStr() + "</font>"));
+                        tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getMobile() + "</font>"));
+                        tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
+                        tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
+                        //附件
+                        gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
 
-                    /**
-                     * 审核信息
-                     */
-                    if(detailsBean.getState()>0){
-                        linAudit.setVisibility(View.VISIBLE);
-                        tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
-                        tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
-                        tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#70DF5D\">" + detailsBean.getStateStr() + "</font>"));
-                        tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4() + "</font>"));
-                    }
+                        /**
+                         * 审核信息
+                         */
+                        if(detailsBean.getState()>0){
+                            linAudit.setVisibility(View.VISIBLE);
+                            tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
+                            tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
+                            tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#70DF5D\">" + detailsBean.getStateStr() + "</font>"));
+                            tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4() + "</font>"));
+                        }
 
-                    /**
-                     * 底部按钮
-                     */
-                    if(detailsBean.getState()>0){
-                        linPlay.setVisibility(View.GONE);
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
-                        scrollView.setLayoutParams(layoutParams);
+                        /**
+                         * 底部按钮
+                         */
+                        if(detailsBean.getState()>0){
+                            linPlay.setVisibility(View.GONE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                            scrollView.setLayoutParams(layoutParams);
+                        }
+                        scrollView.scrollTo(0,0);
+                    } else {
+                        ToastUtil.showLong(financialDetails.getMsg());
                     }
-                    scrollView.scrollTo(0,0);
-                } else {
-                    ToastUtil.showLong(financialDetails.getMsg());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

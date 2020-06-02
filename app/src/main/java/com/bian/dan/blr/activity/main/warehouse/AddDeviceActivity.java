@@ -13,13 +13,16 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.GridViewImgAdapter;
 import com.bian.dan.blr.persenter.warehouse.AddDevicePersenter;
 import com.bian.dan.blr.utils.SelectPhoto;
+import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.FileBean;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.FileList;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyGridView;
 
@@ -57,11 +60,15 @@ public class AddDeviceActivity extends BaseActivity {
     private List<FileBean> imgList=new ArrayList<>();
     private GridViewImgAdapter gridViewImgAdapter;
     private AddDevicePersenter addDevicePersenter;
+    //要编辑的对象
+    private DeviceDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_device);
         ButterKnife.bind(this);
         initView();
+        //编辑前显示对应的数据
+        showData();
     }
 
 
@@ -69,8 +76,11 @@ public class AddDeviceActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        addDevicePersenter=new AddDevicePersenter(this);
         tvHead.setText("新增设备");
+        addDevicePersenter=new AddDevicePersenter(this);
+        detailsBean= (DeviceDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
+
+        //图片列表
         gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
         gridView.setAdapter(gridViewImgAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -155,20 +165,68 @@ public class AddDeviceActivity extends BaseActivity {
                 addDeviceP.setAmount(Double.parseDouble(money));
                 addDeviceP.setDeptId((int)tvDepartment.getTag());
                 addDeviceP.setPurcTime(time);
-                List<FileList> list=new ArrayList<>();
-                for (int i = 0; i < imgList.size(); i++) {
-                     FileList fileList=new FileList();
-                     fileList.setUrl(imgList.get(i).getUrl());
-                     list.add(fileList);
+
+                //解析要提交的图片链接
+                if(detailsBean==null){
+                    List<FileList> list=new ArrayList<>();
+                    for (int i = 0; i < imgList.size(); i++) {
+                        FileList fileList=new FileList();
+                        fileList.setUrl(imgList.get(i).getUrl());
+                        list.add(fileList);
+                    }
+                    addDeviceP.setFileList(list);
                 }
-                addDeviceP.setFileList(list);
-                addDevicePersenter.addDevice(addDeviceP);
+
+                if(detailsBean==null){ //新增
+                    addDevicePersenter.addDevice(addDeviceP);
+                }else{                 //编辑
+                    addDeviceP.setId(detailsBean.getId());
+                    if(!detailsBean.getEquipName().equals(name) || !detailsBean.getSpec().equals(spec) || !detailsBean.getCode().equals(code)){
+                        addDeviceP.setFlag(1);
+                    }
+                    addDevicePersenter.updateDevice(addDeviceP);
+                }
+                LogUtils.e("+++++++++++++++"+new Gson().toJson(addDeviceP));
                 break;
             default:
                 break;
         }
     }
 
+
+
+    /**
+     * 编辑前显示对应的数据
+     */
+    private void showData(){
+        if(detailsBean==null){
+            return;
+        }
+        tvDepartment.setText(detailsBean.getDeptName());
+        tvDepartment.setTag(detailsBean.getDeptId());
+        tvType.setText(detailsBean.getTypeName());
+        tvType.setTag(detailsBean.getEquipType());
+        etName.setText(detailsBean.getEquipName());
+        etSpec.setText(detailsBean.getSpec());
+        etCode.setText(detailsBean.getCode());
+        etManufacturer.setText(detailsBean.getManufacturers());
+        tvTime.setText(detailsBean.getPurcTime());
+        etMoney.setText(detailsBean.getAmount()+"");
+        /**
+         * 显示图片
+         */
+        imgList.addAll(detailsBean.getFileList());
+        gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
+        gridView.setAdapter(gridViewImgAdapter);
+    }
+
+
+    /**
+     * 编辑的时候删除图片
+     */
+    public void deleteImg(FileBean fileBean){
+        addDevicePersenter.deleteFile(String.valueOf(fileBean.getId()));
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -183,16 +241,26 @@ public class AddDeviceActivity extends BaseActivity {
                         LocalMedia localMedia=new LocalMedia();
                         localMedia.setCompressPath(SelectPhoto.pai);
                         list.add(localMedia);
-                        //上传图片
-                        addDevicePersenter.uploadFile(list);
+                        if(detailsBean==null){
+                            //增加设备-上传图片
+                            addDevicePersenter.uploadFile(list);
+                        }else{
+                            //编辑设备-上传图片
+                            addDevicePersenter.uploadByFileAndTypeAndFid(detailsBean.getId(),list);
+                        }
                     }
                 }
                 break;
             //返回相册选择图片
             case PictureConfig.CHOOSE_REQUEST:
                 List<LocalMedia> list= PictureSelector.obtainMultipleResult(data);
-                //上传图片
-                addDevicePersenter.uploadFile(list);
+                if(detailsBean==null){
+                    //增加设备-上传图片
+                    addDevicePersenter.uploadFile(list);
+                }else{
+                    //编辑设备-上传图片
+                    addDevicePersenter.uploadByFileAndTypeAndFid(detailsBean.getId(),list);
+                }
                 break;
             default:
                 break;

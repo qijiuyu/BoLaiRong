@@ -250,11 +250,88 @@ public class AddDevicePersenter {
 
 
     /**
+     * 删除文件
+     */
+    public void deleteFile(String id){
+        DialogUtil.showProgress(activity,"图片删除中");
+        HttpMethod.deleteFile(id, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                BaseBean baseBean= (BaseBean) object;
+                ToastUtil.showLong(baseBean.getMsg());
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 编辑文件时上传图片
+     */
+    public void uploadByFileAndTypeAndFid(final int pid, final List<LocalMedia> imgList){
+        List<String> uploadList=new ArrayList<>();
+        for (int i=0;i<imgList.size();i++){
+            final String imgPath=imgList.get(i).getCompressPath();
+            if(!imgPath.startsWith("http://")){
+                uploadList.add(imgPath);
+            }
+        }
+        DialogUtil.showProgress(activity,"图片上传中");
+        for (int i=0;i<uploadList.size();i++){
+            final File file=new File(uploadList.get(i));
+            HttpMethod.uploadByFileAndTypeAndFid(file.getName(), file, "3", String.valueOf(pid), new NetWorkCallBack() {
+                public void onSuccess(Object object) {
+                    DialogUtil.closeProgress();
+                    Upload upload= (Upload) object;
+                    if(upload.isSussess()){
+                        activity.uploadSuccess(upload.getResPath(),upload.getId());
+                    }else{
+                        ToastUtil.showLong(upload.getMsg());
+                    }
+                }
+                public void onFail(Throwable t) {
+
+                }
+            });
+        }
+
+    }
+
+
+    /**
      * 添加设备
      */
     public void  addDevice(AddDeviceP addDeviceP){
         DialogUtil.showProgress(activity,"数据上传中");
         HttpMethod.addDevice(addDeviceP, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                DialogUtil.closeProgress();
+                BaseBean baseBean= (BaseBean)object;
+                if(baseBean==null){
+                    return;
+                }
+                if(baseBean.isSussess()){
+                    Intent intent=new Intent();
+                    activity.setResult(1000,intent);
+                    activity.finish();
+                }
+                ToastUtil.showLong(baseBean.getMsg());
+
+            }
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 修改设备
+     */
+    public void updateDevice(AddDeviceP addDeviceP){
+        DialogUtil.showProgress(activity,"修改中");
+        HttpMethod.updateDevice(addDeviceP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 DialogUtil.closeProgress();
                 BaseBean baseBean= (BaseBean)object;

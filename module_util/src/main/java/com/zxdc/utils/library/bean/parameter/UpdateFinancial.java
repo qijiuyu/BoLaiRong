@@ -2,9 +2,12 @@ package com.zxdc.utils.library.bean.parameter;
 
 import java.io.Serializable;
 
-public class TransferP implements Serializable {
+public class UpdateFinancial implements Serializable {
 
     private int id;
+    private double amount;
+    private int state;
+    private String memo;
     private int prop1;
     private String prop2;
     private String prop3;
@@ -16,6 +19,30 @@ public class TransferP implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 
     public int getProp1() {

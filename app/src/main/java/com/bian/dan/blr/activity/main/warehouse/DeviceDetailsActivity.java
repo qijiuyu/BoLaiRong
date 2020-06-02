@@ -1,11 +1,14 @@
 package com.bian.dan.blr.activity.main.warehouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
+
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.adapter.sales.NetGridViewImgAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceDetails;
@@ -14,6 +17,7 @@ import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyGridView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,11 +48,17 @@ public class DeviceDetailsActivity extends BaseActivity {
     MyGridView gridView;
     @BindView(R.id.tv_right)
     TextView tvRight;
+    //列表对象
+    private Device.ListBean listBean;
+    //详情对象
+    private DeviceDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_details);
         ButterKnife.bind(this);
         initView();
+        //获取设备详情
+        getDeviceDetails();
     }
 
 
@@ -57,19 +67,26 @@ public class DeviceDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("设备管理");
-        Device.ListBean listBean= (Device.ListBean) getIntent().getSerializableExtra("listBean");
-        if(listBean!=null){
-            //获取设备详情
-            getDeviceDetails(listBean.getId());
-        }
+        tvRight.setText("编辑");
+        listBean= (Device.ListBean) getIntent().getSerializableExtra("listBean");
     }
 
     @OnClick({R.id.lin_back, R.id.tv_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
+                 finish();
                 break;
+            //编辑
             case R.id.tv_right:
+                 if(detailsBean==null){
+                     return;
+                 }
+                 Intent intent=new Intent(this,AddDeviceActivity.class);
+                 intent.putExtra("detailsBean",detailsBean);
+                 startActivityForResult(intent,100);
+                break;
+            default:
                 break;
         }
     }
@@ -78,14 +95,16 @@ public class DeviceDetailsActivity extends BaseActivity {
     /**
      * 获取设备详情
      */
-    private void getDeviceDetails(int id){
+    private void getDeviceDetails(){
+        if(listBean==null){
+            return;
+        }
         DialogUtil.showProgress(this,"数据加载中");
-        HttpMethod.getDeviceDetails(id, new NetWorkCallBack() {
+        HttpMethod.getDeviceDetails(listBean.getId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                DialogUtil.closeProgress();
                 DeviceDetails deviceDetails= (DeviceDetails) object;
                 if(deviceDetails.isSussess()){
-                    DeviceDetails.DetailsBean detailsBean=deviceDetails.getData();
+                    detailsBean=deviceDetails.getData();
                     if(detailsBean!=null){
                         tvDepartment.setText(Html.fromHtml("归属部门：<font color=\"#000000\">"+detailsBean.getDeptName()+"</font>"));
                         tvType.setText(Html.fromHtml("设备类型：<font color=\"#000000\">"+detailsBean.getTypeName()+"</font>"));
@@ -95,6 +114,7 @@ public class DeviceDetailsActivity extends BaseActivity {
                         tvManufacturer.setText(Html.fromHtml("生产厂家：<font color=\"#000000\">"+detailsBean.getManufacturers()+"</font>"));
                         tvTime.setText(Html.fromHtml("采购时间：<font color=\"#000000\">"+detailsBean.getPurcTime()+"</font>"));
                         tvMoney.setText(Html.fromHtml("采购金额：<font color=\"#000000\">"+detailsBean.getAmount()+"</font>"));
+                        gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
                     }
                 }else{
                     ToastUtil.showLong(deviceDetails.getMsg());
@@ -104,5 +124,15 @@ public class DeviceDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            //获取设备详情
+            getDeviceDetails();
+        }
     }
 }

@@ -139,13 +139,14 @@
                     android:id="@+id/et_spec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:background="@null"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="15dp"
+                    android:background="@null"
+                    android:gravity="right"
                     android:hint="请输入规格型号"
                     android:textColor="@color/color_666666"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
 
             </RelativeLayout>
 
@@ -179,7 +180,8 @@
                     android:gravity="right"
                     android:hint="请输入设备编码"
                     android:textColor="@color/color_666666"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:digits="0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
 
             </RelativeLayout>
 

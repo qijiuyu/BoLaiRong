@@ -18,7 +18,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Upload;
-import com.zxdc.utils.library.bean.parameter.TransferP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -123,9 +123,9 @@ public class TransferPersenter {
     /**
      * 修改财务报销
      */
-    public void addTransferP(TransferP transferP){
+    public void updateFinancial(UpdateFinancial transferP){
         DialogUtil.showProgress(activity,"转账中");
-        HttpMethod.addTransferP(transferP, new NetWorkCallBack() {
+        HttpMethod.updateFinancial(transferP, new NetWorkCallBack() {
             @Override
             public void onSuccess(Object object) {
                 BaseBean baseBean= (BaseBean) object;

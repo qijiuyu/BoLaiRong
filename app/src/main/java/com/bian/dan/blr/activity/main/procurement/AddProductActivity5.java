@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
-import com.bian.dan.blr.view.DecimalDigitsInputFilter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;

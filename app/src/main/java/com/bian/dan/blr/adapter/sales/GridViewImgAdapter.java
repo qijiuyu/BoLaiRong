@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.AddContractActivity;
+import com.bian.dan.blr.activity.main.sales.AddFinancialActivity;
+import com.bian.dan.blr.activity.main.warehouse.AddDeviceActivity;
 import com.bumptech.glide.Glide;
 import com.zxdc.utils.library.bean.FileBean;
 
@@ -72,6 +74,12 @@ public class GridViewImgAdapter extends BaseAdapter {
                     if(fileBean.getId()!=-1){
                         if(context instanceof AddContractActivity){
                             ((AddContractActivity)context).deleteImg(fileBean);
+                        }
+                        if(context instanceof AddDeviceActivity){
+                            ((AddDeviceActivity)context).deleteImg(fileBean);
+                        }
+                        if(context instanceof AddFinancialActivity){
+                            ((AddFinancialActivity)context).deleteImg(fileBean);
                         }
                     }
                 }
