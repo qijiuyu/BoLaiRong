@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -74,6 +76,8 @@ public class CustomerDetailsActivity extends BaseActivity {
     TextView tvAddress;
     @BindView(R.id.tv_get)
     TextView tvGet;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     private Customer customer;
     /**
      * 1：私有
@@ -102,6 +106,9 @@ public class CustomerDetailsActivity extends BaseActivity {
             tvRight.setVisibility(View.GONE);
         }else{
             tvGet.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+            scrollView.setLayoutParams(layoutParams);
         }
     }
 
@@ -168,7 +175,7 @@ public class CustomerDetailsActivity extends BaseActivity {
                         tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
 
                         tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
-
+                        scrollView.scrollTo(0,0);
                     } else {
                         ToastUtil.showLong(customerDetails.getMsg());
                     }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -86,7 +87,8 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
     @BindView(R.id.tv_send)
     TextView tvSend;
     private OutBound.ListBean listBean;
-    private  OutBoundDetails outBoundDetails;
+    //详情对象
+    private OutBoundDetails outBoundDetails;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_outbound_details);
@@ -201,7 +203,6 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                          */
                         tvLogistics.setText(Html.fromHtml("物流名称：<font color=\"#000000\">" + detailsBean.getExpressTypeStr() + "</font>"));
                         tvOrderCode.setText(Html.fromHtml("物流单号：<font color=\"#000000\">" + detailsBean.getExpressNo() + "</font>"));
-                        scrollView.scrollTo(0,0);
 
 
                         /**
@@ -211,7 +212,11 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                             tvSend.setVisibility(View.VISIBLE);
                         }else{
                             tvSend.setVisibility(View.GONE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                            scrollView.setLayoutParams(layoutParams);
                         }
+                        scrollView.scrollTo(0,0);
                     }else{
                         ToastUtil.showLong(outBoundDetails.getMsg());
                     }

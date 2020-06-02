@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.financial.FinancialDetailsActivity2;
 import com.bian.dan.blr.adapter.sales.DialogSelectAdapter;
 import com.bian.dan.blr.adapter.sales.FinancialAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
@@ -57,6 +58,11 @@ public class FinancialActivity extends BaseActivity  implements MyRefreshLayoutL
      */
     private int state=3;
     private String[] str=new String[]{"未审批","审批通过","审批未通过","全部状态"};
+    /**
+     * 0：其他模块进入
+     * 1：财务模块进入
+     */
+    private int type;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_financial);
@@ -73,13 +79,19 @@ public class FinancialActivity extends BaseActivity  implements MyRefreshLayoutL
     private void initView(){
         tvHead.setText("财务报销");
         imgRight.setImageResource(R.mipmap.add);
+        type=getIntent().getIntExtra("type",0);
         reList.setMyRefreshLayoutListener(this);
         financialAdapter=new FinancialAdapter(this,listAll);
         listView.setAdapter(financialAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Financial.ListBean listBean=listAll.get(position);
-                Intent intent=new Intent(activity,FinancialDetailsActivity.class);
+                Intent intent=new Intent();
+                if(type==0){
+                    intent.setClass(activity,FinancialDetailsActivity.class);
+                }else{
+                    intent.setClass(activity, FinancialDetailsActivity2.class);
+                }
                 intent.putExtra("listBean",listBean);
                 startActivity(intent);
             }

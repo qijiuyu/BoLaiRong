@@ -63,6 +63,11 @@ android {
             dirs 'libs'   // aar目录
         }
     }
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
 }
 
 dependencies {
@@ -70,11 +75,6 @@ dependencies {
     compile project(':module_util')
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
-    //微信
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.3.4'
-    //侧滑菜单
-    compile 'com.github.anzaizai:EasySwipeMenuLayout:1.1.4'
-    compile "com.android.support:cardview-v7:" + BUILDTOLLS_VERSION
     //图片选择器
     compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
     compile 'com.yarolegovich:discrete-scrollview:1.4.9'
@@ -83,7 +83,9 @@ dependencies {
     compile 'cn.jiguang.sdk:jcore:2.2.8'
     //图形
     compile 'com.github.razerdp:AnimatedPieView:1.2.0'
-//    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    compile(name:'hellocharts-library-release', ext:'aar')
+    //    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    compile(name: 'hellocharts-library-release', ext: 'aar')
     compile 'com.hjq:xxpermissions:5.5'
+    compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.android.support:multidex:1.0.0'
 }

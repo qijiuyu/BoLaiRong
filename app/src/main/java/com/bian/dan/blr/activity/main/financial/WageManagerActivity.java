@@ -149,7 +149,7 @@ public class WageManagerActivity extends BaseActivity {
                 EventBus.getDefault().post(new EventBusType(EventStatus.SELECT_WAGE_TIME));
             }
         }, "1920-01-01 00:00", "2050-12-31 23:59");
-        customDatePicker.showSpecificTime(false); // 不显示时和分
+        customDatePicker.showYearAndMonth(); // 只显示年月
         customDatePicker.setIsLoop(true); // 不允许循环滚动
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);

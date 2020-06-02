@@ -6,41 +6,56 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginBottom="10dp">
 
-        <EditText
-            android:id="@+id/et_batchNo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:inputType="number"
-            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:hint="批次号"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
-            android:background="@drawable/bg__four_border"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginRight="70dp">
 
-        <EditText
-            android:id="@+id/et_num"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:digits="0987654321"
-            android:hint="数量"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
-            android:background="@drawable/bg__four_border"
-            android:layout_marginLeft="10dp"/>
+            <EditText
+                android:id="@+id/et_batchNo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="批次号"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg__four_border"
+                android:layout_marginRight="10dp"/>
 
+            <EditText
+                android:id="@+id/et_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:digits="0987654321"
+                android:hint="数量"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/bg__four_border"
+                android:layout_marginLeft="10dp"/>
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_play"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/add_batchno"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -59,7 +59,7 @@ public class CustomDatePicker {
     private int startYear, startMonth, startDay, startHour, startMinute, endYear, endMonth, endDay, endHour, endMinute;
     private boolean spanYear, spanMon, spanDay, spanHour, spanMin;
     private Calendar selectedCalender, startCalendar, endCalendar;
-    private TextView tv_cancle, tv_select, hour_text, minute_text;
+    private TextView tv_cancle, tv_select, day_text,hour_text, minute_text;
 
     public CustomDatePicker(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         if (isValidDate(startDate, "yyyy-MM-dd HH:mm") && isValidDate(endDate, "yyyy-MM-dd HH:mm")) {
@@ -106,6 +106,7 @@ public class CustomDatePicker {
         minute_pv = (DatePickerView) datePickerDialog.findViewById(R.id.minute_pv);
         tv_cancle = (TextView) datePickerDialog.findViewById(R.id.tv_cancle);
         tv_select = (TextView) datePickerDialog.findViewById(R.id.tv_select);
+        day_text = (TextView) datePickerDialog.findViewById(R.id.day_text);
         hour_text = (TextView) datePickerDialog.findViewById(R.id.hour_text);
         minute_text = (TextView) datePickerDialog.findViewById(R.id.minute_text);
 
@@ -514,6 +515,18 @@ public class CustomDatePicker {
                 minute_text.setVisibility(View.GONE);
             }
         }
+    }
+
+    /**
+     * 只显示年月
+     */
+    public void showYearAndMonth(){
+        day_pv.setVisibility(View.GONE);
+        day_text.setVisibility(View.GONE);
+        hour_pv.setVisibility(View.GONE);
+        hour_text.setVisibility(View.GONE);
+        minute_pv.setVisibility(View.GONE);
+        minute_text.setVisibility(View.GONE);
     }
 
     /**

@@ -1,5 +1,10 @@
 package com.bian.dan.blr.application;
 
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
+import com.baidu.mapapi.CoordType;
+import com.baidu.mapapi.SDKInitializer;
 import com.zxdc.utils.library.base.BaseApplication;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.util.ActivitysLifecycle;
@@ -18,12 +23,32 @@ public class MyApplication extends BaseApplication {
         //开启小强
         CockroachUtil.install();
 
+        //初始化百度地图
+        initMap();
+
         //初始化消息推送
         initPush();
 
         //管理Activity
         registerActivityLifecycleCallbacks(ActivitysLifecycle.getInstance());
     }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
+    /**
+     * 初始化百度地图
+     */
+    private void initMap(){
+        //初始化地图
+        SDKInitializer.initialize(getApplicationContext());
+        SDKInitializer.setCoordType(CoordType.BD09LL);
+    }
+
 
     /**
      * 初始化消息推送

@@ -1,5 +1,6 @@
-package com.bian.dan.blr.activity.main.sales;
+package com.bian.dan.blr.activity.main.financial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -7,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ import butterknife.OnClick;
 /**
  * 财务报销详情
  */
-public class FinancialDetailsActivity extends BaseActivity {
+public class FinancialDetailsActivity2 extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -69,12 +71,16 @@ public class FinancialDetailsActivity extends BaseActivity {
     LinearLayout linAudit;
     @BindView(R.id.lin_transfer)
     LinearLayout linTransfer;
+    @BindView(R.id.tv_confirm)
+    TextView tvConfirm;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
-    private  Financial.ListBean listBean;
+    private Financial.ListBean listBean;
+    //详情对象
+    private FinancialDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_financial_details);
+        setContentView(R.layout.activity_financial_details2);
         ButterKnife.bind(this);
         initView();
         //获取财务详情
@@ -85,30 +91,46 @@ public class FinancialDetailsActivity extends BaseActivity {
     /**
      * 初始化
      */
-    private void initView(){
+    private void initView() {
         tvHead.setText("详情");
-        listBean= (Financial.ListBean) getIntent().getSerializableExtra("listBean");
+        listBean = (Financial.ListBean) getIntent().getSerializableExtra("listBean");
     }
 
-    @OnClick(R.id.lin_back)
-    public void onViewClicked() {
-        finish();
+
+    @OnClick({R.id.lin_back, R.id.tv_confirm})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.lin_back:
+                finish();
+                break;
+            //确认转账
+            case R.id.tv_confirm:
+                Intent intent=new Intent(this,TransferActivity.class);
+                intent.putExtra("detailsBean",detailsBean);
+                startActivityForResult(intent,1000);
+                break;
+            default:
+                break;
+        }
     }
 
 
     /**
      * 获取财务详情
      */
-    private void getFinancialDetails(){
-        if(listBean==null){
+    private void getFinancialDetails() {
+        if (listBean == null) {
             return;
         }
-        DialogUtil.showProgress(this,"数据加载中");
+        DialogUtil.showProgress(this, "数据加载中");
         HttpMethod.getFinancialDetails(listBean.getId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                FinancialDetails financialDetails= (FinancialDetails) object;
-                if(financialDetails.isSussess()){
-                    FinancialDetails.DetailsBean detailsBean=financialDetails.getData();
+                FinancialDetails financialDetails = (FinancialDetails) object;
+                if (financialDetails.isSussess()) {
+                    detailsBean = financialDetails.getData();
+                    if(detailsBean==null){
+                        return;
+                    }
                     tvCreatePeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                     tvCreateTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                     tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getName() + "</font>"));
@@ -118,7 +140,8 @@ public class FinancialDetailsActivity extends BaseActivity {
                     tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
                     tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
                     //附件
-                    gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
+                    gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
+
                     /**
                      * 审核信息
                      */
@@ -151,8 +174,26 @@ public class FinancialDetailsActivity extends BaseActivity {
                         tvTransferMoney.setText(Html.fromHtml("转账金额：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         Glide.with(activity).load(detailsBean.getProp3()).into(imgTransfer);
                     }
+
+                    /**
+                     * 底部按钮
+                     */
+                    //没审核，或者审核不通过，都不显示转账按钮
+                    if (detailsBean.getState() == 0 || detailsBean.getState() == 2) {
+                        tvConfirm.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                        scrollView.setLayoutParams(layoutParams);
+                    }
+                    //已经转账了，也隐藏底部按钮
+                    if (!TextUtils.isEmpty(detailsBean.getFinanceName())) {
+                        tvConfirm.setVisibility(View.GONE);
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                        scrollView.setLayoutParams(layoutParams);
+                    }
                     scrollView.scrollTo(0,0);
-                }else{
+                } else {
                     ToastUtil.showLong(financialDetails.getMsg());
                 }
             }
@@ -161,5 +202,15 @@ public class FinancialDetailsActivity extends BaseActivity {
 
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1000){
+            //获取财务详情
+            getFinancialDetails();
+        }
     }
 }

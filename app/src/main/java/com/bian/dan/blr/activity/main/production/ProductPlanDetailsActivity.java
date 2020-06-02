@@ -146,6 +146,9 @@ public class ProductPlanDetailsActivity extends BaseActivity {
                 }
                 tvProductNum.setText("数量：" + totalNum);
 
+                /**
+                 * 审核信息
+                 */
                 tvAuditName.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                 tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApproveDate() + "</font>"));
                 tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStatusStr() + "</font>"));

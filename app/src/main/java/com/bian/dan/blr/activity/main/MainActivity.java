@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
+import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
@@ -26,6 +27,7 @@ import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
 import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
+import com.bian.dan.blr.activity.statistical.MapActivity;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
@@ -215,11 +217,18 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.tv_house_cwbx:
                 break;
+
+
+
             //工资管理
             case R.id.tv_financial_gzgl:
-//                setClass(WageManagerActivity.class);
+                setClass(WageManagerActivity.class);
                 break;
+           //财务报销
             case R.id.tv_financial_cwbx:
+                intent.setClass(this,FinancialActivity.class);
+                intent.putExtra("type",1);
+                startActivity(intent);
                 break;
 
 
@@ -234,7 +243,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //生产--财务
             case R.id.tv_production_cwbx:
-                setClass(FinancialActivity.class);
+                setClass(MapActivity.class);
                 break;
             default:
                 break;

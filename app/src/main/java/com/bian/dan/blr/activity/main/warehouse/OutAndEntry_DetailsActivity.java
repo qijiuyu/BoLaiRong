@@ -219,15 +219,15 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                     /**
                      * 底部按钮
                      */
-                    if(productBean.getEntryStatus()==2){  //已入库，按钮就可以隐藏了
+                    if(productBean.getOutStatus()==0){
+                        tvPlay.setText("发放物料");
+                    }else if(productBean.getOutStatus()==1){
+                        tvPlay.setText("确认入库");
+                    }else if(productBean.getEntryStatus()==2){  //已入库，按钮就可以隐藏了
                         tvPlay.setVisibility(View.GONE);
                         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
                         layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
                         scrollView.setLayoutParams(layoutParams);
-                    }else if(productBean.getOutStatus()==0){
-                        tvPlay.setText("发放物料");
-                    }else if(productBean.getOutStatus()==1){
-                        tvPlay.setText("确认入库");
                     }
                     scrollView.scrollTo(0,0);
                 } else {

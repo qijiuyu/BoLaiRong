@@ -121,4 +121,48 @@ public class Wage extends BaseBean {
             this.month = month;
         }
     }
+
+
+    public static String str="{\n" +
+            "    \"msg\": \"操作成功\",\n" +
+            "    \"code\": 0,\n" +
+            "    \"data\": {\n" +
+            "        \"total\": 2,\n" +
+            "        \"rows\": [\n" +
+            "            {\n" +
+            "                \"id\": 62,\n" +
+            "                \"userId\": 2,\n" +
+            "\t\t\t    \"userName\": \"张学友\",\n" +
+            "                \"totalNum\": 900,\n" +
+            "                \"rejectNum\": 0,\n" +
+            "                \"pieceWage\": 2700,\n" +
+            "                \"cutWages\": 0,\n" +
+            "                \"memo\": \"测试数据\",\n" +
+            "                \"createId\": 1,\n" +
+            "                \"updateId\": 1,\n" +
+            "                \"createDate\": \"2020-04-03 11:27:25\",\n" +
+            "                \"updateDate\": \"2020-04-03 11:27:25\",\n" +
+            "                \"deptName\": \"生产-配料\",\n" +
+            "                \"deptId\": 3,\n" +
+            "                \"month\": \"2020-03\"\n" +
+            "            },\n" +
+            "            {\n" +
+            "                \"id\": 63,\n" +
+            "                \"userId\": 11,\n" +
+            "\t\t\t    \"userName\": \"张学友\",\n" +
+            "                \"totalNum\": 800,\n" +
+            "                \"rejectNum\": 0,\n" +
+            "                \"pieceWage\": 2400,\n" +
+            "                \"memo\": \"测试数据\",\n" +
+            "                \"createId\": 1,\n" +
+            "                \"updateId\": 1,\n" +
+            "                \"createDate\": \"2020-04-03 14:26:09\",\n" +
+            "                \"updateDate\": \"2020-04-03 14:26:09\",\n" +
+            "                \"deptName\": \"生产-配料\",\n" +
+            "                \"deptId\": 3,\n" +
+            "                \"month\": \"2020-03\"\n" +
+            "            }\n" +
+            "        ]\n" +
+            "    }\n" +
+            "}";
 }

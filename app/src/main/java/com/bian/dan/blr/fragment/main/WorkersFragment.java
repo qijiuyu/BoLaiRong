@@ -136,7 +136,7 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
      * 工资列表
      */
     private void getWageList(){
-        HttpMethod.getWageList(null, "3,5", ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
+        HttpMethod.getWageList(null, "2", ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
             @Override
             public void onSuccess(Object object) {
                 reList.refreshComplete();

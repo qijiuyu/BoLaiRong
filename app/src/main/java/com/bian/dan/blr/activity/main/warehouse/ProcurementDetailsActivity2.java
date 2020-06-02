@@ -100,7 +100,11 @@ public class ProcurementDetailsActivity2 extends BaseActivity {
             case R.id.lin_back:
                 finish();
                 break;
+            //确认收货
             case R.id.tv_confirm:
+                Intent intent=new Intent(this,Confirm_Procurement_EntryActivity.class);
+                intent.putExtra("detailsBean",detailsBean);
+                startActivityForResult(intent,1000);
                 break;
             default:
                 break;
@@ -170,15 +174,21 @@ public class ProcurementDetailsActivity2 extends BaseActivity {
                         tvEnter.setText(Html.fromHtml("入库：<font color=\"#000000\">" + entryList.getCreateName()+ "</font>"));
                         tvEnterTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + entryList.getCreateDate()+ "</font>"));
                         listEntry.setAdapter(new Procurement_Details_EntryGood_Adapter(activity,detailsBean.getPurchaseDetailList()));
+                    }
 
 
-                        //隐藏底部按钮
+                    /**
+                     * 底部按钮--审核通过后，以及还没有入库时才可以显示该按钮
+                     */
+                    if (detailsBean.getState() > 0 && goodList.getEntryDetailList().size()==0) {
+                        tvConfirm.setVisibility(View.VISIBLE);
+                    }else{
                         tvConfirm.setVisibility(View.GONE);
                         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
                         layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
                         scrollView.setLayoutParams(layoutParams);
-                        scrollView.scrollTo(0,0);
                     }
+                    scrollView.scrollTo(0,0);
                 } else {
                     ToastUtil.showLong(procurementDetails.getMsg());
                 }

@@ -124,6 +124,10 @@
         <activity android:name=".activity.main.warehouse.ProcurementDetailsActivity2"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.OutAndEntryActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.warehouse.OutAndEntry_DetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.financial.FinancialDetailsActivity2"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.financial.TransferActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.warehouse.Confirm_Procurement_EntryActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.statistical.MapActivity"  android:screenOrientation="portrait"/>
 
 
         <provider
@@ -136,7 +140,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <!-- 极光推送的配置-->zz
+        <!-- 极光推送的配置-->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
@@ -231,6 +235,22 @@
                 <category android:name="com.bian.dan.blr" />
             </intent-filter>
         </receiver>
+
+
+        <!-- 百度地图的appkey-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="3HRiMqbXvHC8EYtDb7attecToAIMD4Ac" />
+
+        <!-- 百度地图服务 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" />
+            </intent-filter>
+        </service>
 
     </application>
 
