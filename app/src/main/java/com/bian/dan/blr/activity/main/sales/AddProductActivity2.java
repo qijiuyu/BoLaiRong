@@ -81,7 +81,11 @@ public class AddProductActivity2 extends BaseActivity {
                      ToastUtil.showLong("请输入数量");
                      return;
                  }
-                 Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getBrand(),Integer.parseInt(num),remark);
+                 if(Integer.parseInt(num)==0){
+                     ToastUtil.showLong("数量不能为0");
+                     return;
+                 }
+                 Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getBrand(),listBean.getUnitStr(),Integer.parseInt(num),remark);
                  intent.putExtra("goods",goods);
                  setResult(200,intent);
                  finish();

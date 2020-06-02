@@ -157,6 +157,7 @@
                     android:gravity="right"
                     android:textColor="@color/color_666666"
                     android:digits="0987654321"
+                    android:inputType="number"
                     android:textSize="15sp"/>
 
             </RelativeLayout>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.AddProductAdapter;
 import com.bian.dan.blr.persenter.sales.AddOutBoundPersenter;
+import com.bian.dan.blr.view.MyWatcher;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.Goods;
@@ -71,6 +72,10 @@ public class AddOutBoundActivity extends BaseActivity {
         tvHead.setText("新增出库单");
         addProductAdapter=new AddProductAdapter(this,goodList);
         listView.setAdapter(addProductAdapter);
+
+        //设置小数点前后的限制
+        etNoMoney.addTextChangedListener(new MyWatcher(7,2));
+        etYesMoney.addTextChangedListener(new MyWatcher(7,2));
     }
 
 

@@ -124,22 +124,10 @@ public class AddStorageProductActivity extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
-//                if(TextUtils.isEmpty(rewardMoney)){
-//                    ToastUtil.showLong("请输入奖励金额");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(rewardDes)){
-//                    ToastUtil.showLong("奖励说明");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(fineMoney)){
-//                    ToastUtil.showLong("罚款金额");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(fineDes)){
-//                    ToastUtil.showLong("罚款说明");
-//                    return;
-//                }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能为0");
+                    return;
+                }
                 Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);

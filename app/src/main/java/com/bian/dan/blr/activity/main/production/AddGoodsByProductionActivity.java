@@ -113,6 +113,10 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                     ToastUtil.showLong("数量已超过库存，请重新输入");
                     return;
                 }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能是0");
+                    return;
+                }
                 if(userInfo.getUser().getDeptId()!= 3 && TextUtils.isEmpty(time)){
                     ToastUtil.showLong("请选择日期");
                     return;

@@ -146,14 +146,18 @@ public class AddProductActivity extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能为0");
+                    return;
+                }
                 if(TextUtils.isEmpty(price)){
                     ToastUtil.showLong("请输入单价");
                     return;
                 }
-//                if(TextUtils.isEmpty(remark)){
-//                    ToastUtil.showLong("请输入备注");
-//                    return;
-//                }
+                if(Double.parseDouble(price)==0){
+                    ToastUtil.showLong("单价不能为0");
+                    return;
+                }
                 if(TextUtils.isEmpty(invoice)){
                     ToastUtil.showLong("是否开票");
                     return;
@@ -185,7 +189,7 @@ public class AddProductActivity extends BaseActivity {
             tvBrand.setText(listBean.getBrand());
             tvSpace.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(Util.setDouble(listBean.getPrice(),2));
+            etPrice.setText(listBean.getProp1());
         }
     }
 }

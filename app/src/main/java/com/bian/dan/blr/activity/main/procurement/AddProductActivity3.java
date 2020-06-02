@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.procurement.AddProductPersenter3;
+import com.bian.dan.blr.view.MyWatcher;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.SupplierMaterial;
@@ -155,8 +155,16 @@ public class AddProductActivity3 extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能为0");
+                    return;
+                }
                 if(TextUtils.isEmpty(price)){
                     ToastUtil.showLong("请输入单价");
+                    return;
+                }
+                if(Double.parseDouble(price)==0){
+                    ToastUtil.showLong("单价不能为0");
                     return;
                 }
                 if(TextUtils.isEmpty(payType)){

@@ -44,11 +44,20 @@ public class OutBound extends BaseBean {
         private String outDate="";
         private String orderNum="";
         private int state;
+        private String stateStr="";
         private String createDate="";
         private String customerName="";
         private String contacts="";
         private String phone="";
         private String prop2="";
+
+        public String getStateStr() {
+            return stateStr;
+        }
+
+        public void setStateStr(String stateStr) {
+            this.stateStr = stateStr;
+        }
 
         public int getId() {
             return id;

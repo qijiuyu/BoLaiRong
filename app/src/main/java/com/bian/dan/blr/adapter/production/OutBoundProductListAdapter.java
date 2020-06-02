@@ -57,26 +57,26 @@ public class OutBoundProductListAdapter extends BaseAdapter {
         holder.tvName.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + listBean.getCreateName() + "</font>"));
         switch (listBean.getOutStatus()){
             case 0:
-                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#FE8E2C\">未发放</font>"));
+                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#FE8E2C\">"+listBean.getOutStatusStr()+"</font>"));
                  break;
             case 1:
-                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#70DF5D\">已发放</font>"));
+                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#70DF5D\">"+listBean.getOutStatusStr()+"</font>"));
                 break;
             case 2:
-                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#70DF5D\">已领取</font>"));
+                holder.tvOutStatus.setText(Html.fromHtml("出库状态：<font color=\"#70DF5D\">"+listBean.getOutStatusStr()+"</font>"));
                 break;
             default:
                 break;
         }
         switch (listBean.getEntryStatus()){
             case 0:
-                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#FE8E2C\">未申请</font>"));
+                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#FE8E2C\">"+listBean.getEntryStatusStr()+"</font>"));
                 break;
             case 1:
-                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#FE8E2C\">未入库</font>"));
+                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#FE8E2C\">"+listBean.getEntryStatusStr()+"</font>"));
                 break;
             case 2:
-                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#70DF5D\">已入库</font>"));
+                holder.tvPutStatus.setText(Html.fromHtml("入库状态：<font color=\"#70DF5D\">"+listBean.getEntryStatusStr()+"</font>"));
                 break;
             default:
                 break;

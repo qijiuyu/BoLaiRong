@@ -164,6 +164,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
+                    android:digits="0987654321"
+                    android:inputType="number"
                     android:background="@null"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
@@ -203,7 +205,8 @@
                     android:hint="请输入"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"
-                    android:digits=".0123456789"/>
+                    android:digits=".0987654321"
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
@@ -333,7 +336,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:hint="请输入"
-                    android:digits="0987654321"
+                    android:digits="0987654321abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"/>
 
@@ -357,9 +360,7 @@
                 android:id="@+id/et_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_margin="15dp"
                 android:background="@drawable/bg__four_border"
                 android:padding="10dp"
                 android:hint="请输入"

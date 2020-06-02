@@ -18,7 +18,6 @@ import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -106,7 +105,7 @@ public class LogListActivity extends BaseActivity implements MyRefreshLayoutList
      *
      * @param view
      */
-    @OnClick({R.id.lin_back,R.id.img_right})
+    @OnClick({R.id.lin_back,R.id.tv_key,R.id.img_right})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:

@@ -107,16 +107,19 @@ public class ContractDetailsActivity extends BaseActivity {
         DialogUtil.showProgress(this, "数据加载中");
         HttpMethod.getConstractDetails(String.valueOf(listBean.getId()), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                constractDetails = (ConstractDetails) object;
-                if (constractDetails.isSussess()) {
-                    ConstractDetails.DetailsBean detailsBean = constractDetails.getContract();
-                    if (detailsBean != null) {
+                try {
+                    constractDetails = (ConstractDetails) object;
+                    if (constractDetails.isSussess()) {
+                        ConstractDetails.DetailsBean detailsBean = constractDetails.getContract();
+                        if(detailsBean==null){
+                            return;
+                        }
                         tvEntry.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
                         tvEntryTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                         tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
                         tvSignTime.setText(Html.fromHtml("签订时间：<font color=\"#000000\">" + detailsBean.getSignedTime() + "</font>"));
-                        tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
+                        tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#FF4B4C\">" + detailsBean.getAmount() + "</font>"));
                         if (detailsBean.getPayType() == 1) {
                             tvPayType.setText(Html.fromHtml("支付方式：<font color=\"#000000\">全款</font>"));
                         } else {
@@ -133,11 +136,16 @@ public class ContractDetailsActivity extends BaseActivity {
                             tvCompany.setText(Html.fromHtml("售卖公司：<font color=\"#000000\">立钻</font>"));
                         }
                         tvOffice.setText(Html.fromHtml("指派内勤：<font color=\"#000000\">" + detailsBean.getAssignerName() + "</font>"));
-                        gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
-                    }
 
-                } else {
-                    ToastUtil.showLong(constractDetails.getMsg());
+                        /**
+                         * 图片列表
+                         */
+                        gridView.setAdapter(new NetGridViewImgAdapter(activity,detailsBean.getFileList()));
+                    } else {
+                        ToastUtil.showLong(constractDetails.getMsg());
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

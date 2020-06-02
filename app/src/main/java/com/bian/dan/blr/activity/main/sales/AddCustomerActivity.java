@@ -9,10 +9,13 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.sales.AddCustomerPersenter;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
+import com.zxdc.utils.library.util.Util;
 import com.zxdc.utils.library.view.ClickTextView;
 
 import butterknife.BindView;
@@ -81,8 +84,8 @@ public class AddCustomerActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        addCustomerPersenter=new AddCustomerPersenter(this);
         tvHead.setText("新增客户");
+        addCustomerPersenter=new AddCustomerPersenter(this);
         customer= (Customer) getIntent().getSerializableExtra("customer");
     }
 
@@ -127,19 +130,11 @@ public class AddCustomerActivity extends BaseActivity {
                 String ein=etEin.getText().toString().trim();
                 String landLine=etLandline.getText().toString().trim();
                 String address=etAddress.getText().toString().trim();
-                String privateStr=tvPrivate.toString().trim();
+                String privateStr=tvPrivate.getText().toString().trim();
                 if(TextUtils.isEmpty(name)){
                     ToastUtil.showLong("请输入客户名称");
                     return;
                 }
-//                if(TextUtils.isEmpty(industry)){
-//                    ToastUtil.showLong("请选择所属行业");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(customerStatus)){
-//                    ToastUtil.showLong("请选择客户状态");
-//                    return;
-//                }
                 if(TextUtils.isEmpty(people)){
                     ToastUtil.showLong("请输入联系人");
                     return;
@@ -152,57 +147,12 @@ public class AddCustomerActivity extends BaseActivity {
                     ToastUtil.showLong("请输入正确的手机号");
                     return;
                 }
-//                if(TextUtils.isEmpty(position)){
-//                    ToastUtil.showLong("请输入职位");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(wx)){
-//                    ToastUtil.showLong("请输入微信号");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(qq)){
-//                    ToastUtil.showLong("请输入QQ号");
-//                    return;
-//                }
-                if(!TextUtils.isEmpty(email) && !email.contains("@")){
+                if(!TextUtils.isEmpty(email) && !Util.isEmail(email)){
                     ToastUtil.showLong("请输入正确的邮箱");
                     return;
                 }
-
-//                if(TextUtils.isEmpty(url)){
-//                    ToastUtil.showLong("请输入网址");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(type)){
-//                    ToastUtil.showLong("请输入采购种类");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(account)){
-//                    ToastUtil.showLong("请输入对公账号");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(bank)){
-//                    ToastUtil.showLong("请选择开户行");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(accountName)){
-//                    ToastUtil.showLong("请输入户名");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(ein)){
-//                    ToastUtil.showLong("请输入税号");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(landLine)){
-//                    ToastUtil.showLong("请输入座机号");
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(address)){
-//                    ToastUtil.showLong("请输入收件地址");
-//                    return;
-//                }
                 if(TextUtils.isEmpty(privateStr)){
-                    ToastUtil.showLong("请输入私有状态");
+                    ToastUtil.showLong("请选择私有状态");
                     return;
                 }
                 AddCustomerP addCustomerP=new AddCustomerP();
@@ -247,6 +197,7 @@ public class AddCustomerActivity extends BaseActivity {
                         addCustomerPersenter.checkCustomerName(2,addCustomerP);
                     }
                 }
+                LogUtils.e("++++++++++++"+new Gson().toJson(addCustomerP));
                 break;
             default:
                 break;

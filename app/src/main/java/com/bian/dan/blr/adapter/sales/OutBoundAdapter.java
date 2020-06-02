@@ -55,18 +55,16 @@ public class OutBoundAdapter extends BaseAdapter {
         holder.tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">"+listBean.getCustomerName()+"</font>"));
         holder.tvPeople.setText(Html.fromHtml("联系人：<font color=\"#000000\">"+listBean.getContacts()+"</font>"));
         holder.tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">"+listBean.getPhone()+"</font>"));
+        holder.tvStatus.setText(listBean.getStateStr());
         holder.tvTime.setText(listBean.getCreateDate());
         switch (listBean.getState()){
             case 0:
-                 holder.tvStatus.setText("未审核");
                  holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));
                  break;
             case 1:
-                 holder.tvStatus.setText("通过");
                  holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_70DF5D));
                  break;
             case 2:
-                 holder.tvStatus.setText("未通过");
                  holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FF4B4C));
                  break;
              default:

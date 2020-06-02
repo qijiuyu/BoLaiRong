@@ -168,6 +168,7 @@
                     android:layout_alignParentRight="true"
                     android:gravity="right"
                     android:digits="0987654321"
+                    android:inputType="number"
                     android:hint="请输入"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"/>
@@ -198,6 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:digits=".0987654321"
+                    android:inputType="number"
                     android:background="@null"
                     android:gravity="right"
                     android:layout_centerVertical="true"

@@ -25,7 +25,6 @@ public class Material extends BaseBean {
         private String typeStr="";
         private int type;
         private String prop1="";
-        private double price;
 
         public int getId() {
             return id;
@@ -97,14 +96,6 @@ public class Material extends BaseBean {
 
         public void setProp1(String prop1) {
             this.prop1 = prop1;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public void setPrice(double price) {
-            this.price = price;
         }
 
     }

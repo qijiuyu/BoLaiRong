@@ -56,17 +56,15 @@ public class FinancialAdapter extends BaseAdapter {
         holder.tvDes.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">"+listBean.getMemo()+"</font>"));
         holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">"+ Util.setDouble(listBean.getAmount(),2) +"</font>"));
         holder.tvTime.setText(listBean.getCreateDate());
+        holder.tvStatus.setText(listBean.getStateStr());
         switch (listBean.getState()){
             case 0:
-                 holder.tvStatus.setText("未审批");
                  holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));
                  break;
             case 1:
-                holder.tvStatus.setText("审批通过");
                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_70DF5D));
                 break;
             case 2:
-                holder.tvStatus.setText("审批未通过");
                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FF4B4C));
                 break;
             default:

@@ -177,7 +177,8 @@
                     android:hint="请输入"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"
-                    android:digits="0123456789."/>
+                    android:digits="0123456789."
+                    android:inputType="number"/>
 
             </RelativeLayout>
 
@@ -211,7 +212,8 @@
                     android:hint="请输入"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"
-                    android:digits="0123456789."/>
+                    android:digits="0123456789."
+                    android:inputType="number"/>
 
             </RelativeLayout>
 

@@ -2,7 +2,6 @@ package com.bian.dan.blr.adapter.procurement;
 
 import android.app.Activity;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,21 +54,17 @@ public class ProcurementAdapter extends BaseAdapter {
         Procurement.ListBean listBean=list.get(position);
         holder.tvCode.setText(Html.fromHtml("采购单号：<font color=\"#000000\">"+listBean.getPurcOrder()+"</font>"));
         holder.tvName.setText(Html.fromHtml("采购员：<font color=\"#000000\">"+listBean.getPurcName()+"</font>"));
-        if(!TextUtils.isEmpty(listBean.getPurcDate())){
-            holder.tvTime.setText(Html.fromHtml("采购日期：<font color=\"#000000\">"+listBean.getPurcDate().split(" ")[0]+"</font>"));
-        }
+        holder.tvTime.setText(Html.fromHtml("采购日期：<font color=\"#000000\">"+listBean.getPurcDate()+"</font>"));
         holder.tvTime2.setText(listBean.getCreateDate());
+        holder.tvStatus.setText(listBean.getStateStr());
         switch (listBean.getState()){
             case 0:
-                holder.tvStatus.setText("未审核");
                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));
                 break;
             case 1:
-                holder.tvStatus.setText("通过");
                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_70DF5D));
                 break;
             case 2:
-                holder.tvStatus.setText("未通过");
                 holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FF4B4C));
                 break;
             default:

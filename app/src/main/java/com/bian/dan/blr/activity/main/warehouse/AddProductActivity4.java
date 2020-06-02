@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.bian.dan.blr.persenter.warehouse.AddProductPersenter4;
+import com.bian.dan.blr.view.MyWatcher;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
@@ -68,8 +68,9 @@ public class AddProductActivity4 extends BaseActivity {
     private void initView() {
         tvHead.setText("添加产品");
         addProductPersenter4 = new AddProductPersenter4(this);
-        //显示小数点只能输入两位
-        etPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2), new InputFilter.LengthFilter(8)});
+        //限制小数点前后
+        etPrice.addTextChangedListener(new MyWatcher(7,2));
+
         /**
          * 监听数量输入框
          */
@@ -153,8 +154,16 @@ public class AddProductActivity4 extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能为0");
+                    return;
+                }
                 if (TextUtils.isEmpty(price)) {
                     ToastUtil.showLong("请输入单价");
+                    return;
+                }
+                if(Double.parseDouble(price)==0){
+                    ToastUtil.showLong("单价不能为0");
                     return;
                 }
                 if (TextUtils.isEmpty(warehouse)) {
@@ -190,7 +199,7 @@ public class AddProductActivity4 extends BaseActivity {
             tvType.setText(listBean.getTypeStr());
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(Util.setDouble(listBean.getPrice(), 2));
+            etPrice.setText(listBean.getProp1());
         }
     }
 

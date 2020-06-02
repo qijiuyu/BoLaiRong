@@ -90,42 +90,60 @@ public class ProductPlanDetailsActivity extends BaseActivity {
         final UserInfo userInfo= MyApplication.getUser();
         HttpMethod.getPlanDetails(listBean.getId(), userInfo.getUser().getDeptId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                PlanDetails planDetails= (PlanDetails) object;
-                if(planDetails==null){
-                    return;
+                try {
+                    PlanDetails planDetails= (PlanDetails) object;
+                    PlanDetails.DetailsBean detailsBean=planDetails.getData();
+                    if(detailsBean==null){
+                        return;
+                    }
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(activity);//LinearLayout默认VERTICAL排列
+                    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);//将排列方式设为水平
+                    listProgress.setLayoutManager(layoutManager);
+                    listProgress.setAdapter(new PlanProgressAdapter(activity,detailsBean.getProgressList()));
+
+
+                    tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
+                    tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
+                    tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + detailsBean.getPlanCode() + "</font>"));
+                    tvDeliveryTime.setText(Html.fromHtml("交付日期：<font color=\"#000000\">" + detailsBean.getDeliveryDate() + "</font>"));
+                    tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
+
+                    /**
+                     * 产品列表
+                     */
+                    PlanDetailsGoodAdapter addProductAdapter=new PlanDetailsGoodAdapter(activity,detailsBean.getDetailList());
+                    listView.setAdapter(addProductAdapter);
+                    /**
+                     * 计算总数量，总金额
+                     */
+                    int totalNum=0;
+                    for (int i=0;i<detailsBean.getDetailList().size();i++){
+                        final PlanDetails.GoodBean goodBean=detailsBean.getDetailList().get(i);
+                        totalNum=totalNum+goodBean.getNum();
+                    }
+                    tvProductNum.setText("数量："+totalNum);
+
+                    /**
+                     * 审核信息
+                     */
+                    tvAuditName.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
+                    tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApproveDate() + "</font>"));
+                    switch (detailsBean.getStatus()){
+                        case 0:
+                            tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#FE8E2C\">" + detailsBean.getStatusStr() + "</font>"));
+                            break;
+                        case 1:
+                            tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#70DF5D\">" + detailsBean.getStatusStr() + "</font>"));
+                            break;
+                        case 2:
+                            tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#FF4B4C\">" + detailsBean.getStatusStr() + "</font>"));
+                            break;
+                        default:
+                            break;
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-                PlanDetails.DetailsBean detailsBean=planDetails.getData();
-                LinearLayoutManager layoutManager = new LinearLayoutManager(activity);//LinearLayout默认VERTICAL排列
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);//将排列方式设为水平
-                listProgress.setLayoutManager(layoutManager);
-                listProgress.setAdapter(new PlanProgressAdapter(activity,detailsBean.getProgressList()));
-
-
-                tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
-                tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
-                tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + detailsBean.getPlanCode() + "</font>"));
-                tvDeliveryTime.setText(Html.fromHtml("交付日期：<font color=\"#000000\">" + detailsBean.getDeliveryDate().split(" ")[0] + "</font>"));
-                tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
-
-                /**
-                 * 产品列表
-                 */
-                PlanDetailsGoodAdapter addProductAdapter=new PlanDetailsGoodAdapter(activity,detailsBean.getDetailList());
-                listView.setAdapter(addProductAdapter);
-                /**
-                 * 计算总数量，总金额
-                 */
-                int totalNum=0;
-                for (int i=0;i<detailsBean.getDetailList().size();i++){
-                     final PlanDetails.GoodBean goodBean=detailsBean.getDetailList().get(i);
-                     totalNum=totalNum+goodBean.getNum();
-                }
-                tvProductNum.setText("数量："+totalNum);
-
-                tvAuditName.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
-                tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApproveDate() + "</font>"));
-                tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStatusStr() + "</font>"));
-
             }
             public void onFail(Throwable t) {
 

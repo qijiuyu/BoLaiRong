@@ -144,115 +144,119 @@ public class ProductProgressDetailsActivity extends BaseActivity {
         UserInfo userInfo = MyApplication.getUser();
         HttpMethod.getProductProgress(requireId, userInfo.getUser().getDeptId(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                ProductProgress productProgress = (ProductProgress) object;
-                if (productProgress.isSussess()) {
-                    /**
-                     * 基本信息
-                     */
-                    productBean = productProgress.getData();
-                    if (productBean == null) {
-                        return;
-                    }
-                    tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
-                    tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + productBean.getCreateDate() + "</font>"));
-                    tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + productBean.getPlanCode() + "</font>"));
-
-                    /**
-                     * 出库单列表
-                     */
-                    listOutbound.setAdapter(new ProductProgressByOutBoundAdapter(activity, productBean.getRequireDetailList()));
-                    int totalNum = 0;
-                    for (int i = 0; i < productBean.getRequireDetailList().size(); i++) {
-                        totalNum += productBean.getRequireDetailList().get(i).getNum();
-                    }
-                    tvProductNum.setText("数量：" + totalNum);
-
-                    /**
-                     * 发放人信息
-                     */
-                    if (productBean.getOutStatus() > 0) {
-                        linSend.setVisibility(View.VISIBLE);
-                        tvSendPeople.setText(Html.fromHtml("发放人：<font color=\"#000000\">" + productBean.getUpdateName() + "</font>"));
-                        tvSendTime.setText(Html.fromHtml("发放时间：<font color=\"#000000\">" + productBean.getUpdateDate() + "</font>"));
-                    }
-
-
-                    /**
-                     * 领取人信息
-                     */
-                    if (productBean.getOutStatus() == 2) {
-                        linReceive.setVisibility(View.VISIBLE);
-                        tvReceivePeople.setText(Html.fromHtml("领取人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
-                        tvReceiveTime.setText(Html.fromHtml("领取时间：<font color=\"#000000\">" + productBean.getProp5() + "</font>"));
-                    }
-
-
-                    /**
-                     * 入库产品信息
-                     */
-                    if(productBean.getEntryDetailList()!=null && productBean.getEntryDetailList().size()>0){
-                        linEntry.setVisibility(View.VISIBLE);
-                        listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
-                        int entryNum = 0;
-                        for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
-                             entryNum += productBean.getEntryDetailList().get(i).getNum();
+                try {
+                    ProductProgress productProgress = (ProductProgress) object;
+                    if (productProgress.isSussess()) {
+                        /**
+                         * 基本信息
+                         */
+                        productBean = productProgress.getData();
+                        if (productBean == null) {
+                            return;
                         }
-                        tvEntryNum.setText("数量：" + entryNum);
+                        tvApplyPeple.setText(Html.fromHtml("申请人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
+                        tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + productBean.getCreateDate() + "</font>"));
+                        tvPlan.setText(Html.fromHtml("生产计划：<font color=\"#000000\">" + productBean.getPlanCode() + "</font>"));
+
+                        /**
+                         * 出库单列表
+                         */
+                        listOutbound.setAdapter(new ProductProgressByOutBoundAdapter(activity, productBean.getRequireDetailList()));
+                        int totalNum = 0;
+                        for (int i = 0; i < productBean.getRequireDetailList().size(); i++) {
+                            totalNum += productBean.getRequireDetailList().get(i).getNum();
+                        }
+                        tvProductNum.setText("数量：" + totalNum);
+
+                        /**
+                         * 发放人信息
+                         */
+                        if (productBean.getOutStatus() > 0) {
+                            linSend.setVisibility(View.VISIBLE);
+                            tvSendPeople.setText(Html.fromHtml("发放人：<font color=\"#000000\">" + productBean.getUpdateName() + "</font>"));
+                            tvSendTime.setText(Html.fromHtml("发放时间：<font color=\"#000000\">" + productBean.getUpdateDate() + "</font>"));
+                        }
 
 
                         /**
-                         * 余废料信息
+                         * 领取人信息
                          */
-                        if (productBean.getOddsDetailList() != null && productBean.getOddsDetailList().size() > 0) {
-                            linWaste.setVisibility(View.VISIBLE);
-                            listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList()));
-                            int wasteNum = 0;
-                            for (int i = 0; i < productBean.getOddsDetailList().size(); i++) {
-                                wasteNum += productBean.getOddsDetailList().get(i).getNum();
+                        if (productBean.getOutStatus() == 2) {
+                            linReceive.setVisibility(View.VISIBLE);
+                            tvReceivePeople.setText(Html.fromHtml("领取人：<font color=\"#000000\">" + productBean.getCreateName() + "</font>"));
+                            tvReceiveTime.setText(Html.fromHtml("领取时间：<font color=\"#000000\">" + productBean.getProp5() + "</font>"));
+                        }
+
+
+                        /**
+                         * 入库产品信息
+                         */
+                        if(productBean.getEntryDetailList()!=null && productBean.getEntryDetailList().size()>0){
+                            linEntry.setVisibility(View.VISIBLE);
+                            listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
+                            int entryNum = 0;
+                            for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
+                                entryNum += productBean.getEntryDetailList().get(i).getNum();
                             }
-                            tvWasteNum.setText("数量：" + wasteNum);
+                            tvEntryNum.setText("数量：" + entryNum);
+
+
+                            /**
+                             * 余废料信息
+                             */
+                            if (productBean.getOddsDetailList() != null && productBean.getOddsDetailList().size() > 0) {
+                                linWaste.setVisibility(View.VISIBLE);
+                                listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList()));
+                                int wasteNum = 0;
+                                for (int i = 0; i < productBean.getOddsDetailList().size(); i++) {
+                                    wasteNum += productBean.getOddsDetailList().get(i).getNum();
+                                }
+                                tvWasteNum.setText("数量：" + wasteNum);
+                            }
+
+                            /**
+                             * 只有生产组长才可以最终点击“确认入库”
+                             */
+                            if(productBean.getEntryStatus()==0 && MyApplication.getRoleId()==3){
+                                tvConfirmEntry.setVisibility(View.VISIBLE);
+                            }else{
+                                tvConfirmEntry.setVisibility(View.GONE);
+                            }
+
+
+                            /**
+                             * 仓库入库信息
+                             */
+                            if(productBean.getEntryStatus()==2){
+                                linWareHouse.setVisibility(View.VISIBLE);
+                                tvEntryPeople.setText(Html.fromHtml("入库人：<font color=\"#000000\">" + productBean.getEntryName() + "</font>"));
+                                tvEntryTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + productBean.getProp2() + "</font>"));
+                            }
+
                         }
+
 
                         /**
-                         * 只有生产组长才可以最终点击“确认入库”
+                         * 底部按钮状态
                          */
-                        if(productBean.getEntryStatus()==0 && MyApplication.getRoleId()==3){
-                            tvConfirmEntry.setVisibility(View.VISIBLE);
-                        }else{
-                            tvConfirmEntry.setVisibility(View.GONE);
+                        if(productBean.getEntryStatus()>0){   //表示生产组长已提交申请入库
+                            tvPlay.setVisibility(View.GONE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+                            scrollView.setLayoutParams(layoutParams);
+                        }else if (productBean.getOutStatus() == 1 && MyApplication.getRoleId()==3) {   //表示仓库已发放了你申请的产品原料/并且只有生产组长才可以看到“确认领取”这个按钮
+                            tvPlay.setVisibility(View.VISIBLE);
+                            tvPlay.setText("确认领取");
+                        } else if (productBean.getOutStatus() == 2) {  //表示已领取了仓库发放的原料
+                            tvPlay.setVisibility(View.VISIBLE);
+                            tvPlay.setText("入库申请");
                         }
-
-
-                        /**
-                         * 仓库入库信息
-                         */
-                        if(productBean.getEntryStatus()==2){
-                            linWareHouse.setVisibility(View.VISIBLE);
-                            tvEntryPeople.setText(Html.fromHtml("入库人：<font color=\"#000000\">" + productBean.getEntryName() + "</font>"));
-                            tvEntryTime.setText(Html.fromHtml("入库时间：<font color=\"#000000\">" + productBean.getProp2() + "</font>"));
-                        }
-
+                        scrollView.scrollTo(0,0);
+                    } else {
+                        ToastUtil.showLong(productProgress.getMsg());
                     }
-
-
-                    /**
-                     * 底部按钮状态
-                     */
-                    if(productBean.getEntryStatus()>0){   //表示生产组长已提交申请入库
-                        tvPlay.setVisibility(View.GONE);
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
-                        scrollView.setLayoutParams(layoutParams);
-                    }else if (productBean.getOutStatus() == 1 && MyApplication.getRoleId()==3) {   //表示仓库已发放了你申请的产品原料/并且只有生产组长才可以看到“确认领取”这个按钮
-                        tvPlay.setVisibility(View.VISIBLE);
-                        tvPlay.setText("确认领取");
-                    } else if (productBean.getOutStatus() == 2) {  //表示已领取了仓库发放的原料
-                        tvPlay.setVisibility(View.VISIBLE);
-                        tvPlay.setText("入库申请");
-                    }
-                    scrollView.scrollTo(0,0);
-                } else {
-                    ToastUtil.showLong(productProgress.getMsg());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

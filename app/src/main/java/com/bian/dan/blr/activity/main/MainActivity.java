@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,8 +38,11 @@ import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.util.ActivitysLifecycle;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.SPUtil;
+import com.zxdc.utils.library.util.ToastUtil;
+import com.zxdc.utils.library.util.error.CockroachUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -332,5 +336,27 @@ public class MainActivity extends BaseActivity {
         }
     };
 
+
+    // 按两次退出
+    protected long exitTime = 0;
+    /**
+     * 连续点击两次返回退出
+     * @param event
+     * @return
+     */
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                ToastUtil.showLong("再按一次退出程序!");
+                exitTime = System.currentTimeMillis();
+            } else {
+                //关闭小强
+                CockroachUtil.clear();
+                ActivitysLifecycle.getInstance().exit();
+            }
+            return false;
+        }
+        return super.dispatchKeyEvent(event);
+    }
 
 }

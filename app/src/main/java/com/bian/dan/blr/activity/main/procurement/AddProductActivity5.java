@@ -3,7 +3,6 @@ package com.bian.dan.blr.activity.main.procurement;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
+import com.bian.dan.blr.view.MyWatcher;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
@@ -52,8 +52,8 @@ public class AddProductActivity5 extends BaseActivity {
     private void initView() {
         tvHead.setText("添加物料");
         editGood= (Goods) getIntent().getSerializableExtra("goods");
-        //显示小数点只能输入两位
-        etPrice.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(2), new InputFilter.LengthFilter(8)});
+        //限制小数点前后
+        etPrice.addTextChangedListener(new MyWatcher(7,2));
     }
 
     @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_submit})
@@ -76,6 +76,10 @@ public class AddProductActivity5 extends BaseActivity {
                 }
                 if(TextUtils.isEmpty(price)){
                     ToastUtil.showLong("请输入价格");
+                    return;
+                }
+                if(Double.parseDouble(price)==0){
+                    ToastUtil.showLong("价格不能为0");
                     return;
                 }
 
@@ -146,7 +150,7 @@ public class AddProductActivity5 extends BaseActivity {
             tvName.setText(listBean.getName());
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
-            etPrice.setText(String.valueOf(listBean.getPrice()));
+            etPrice.setText(listBean.getProp1());
         }
     }
 }

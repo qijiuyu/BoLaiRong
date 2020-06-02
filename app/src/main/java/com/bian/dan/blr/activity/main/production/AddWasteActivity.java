@@ -179,6 +179,10 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("请输入数量");
                     return;
                 }
+                if(Integer.parseInt(num)==0){
+                    ToastUtil.showLong("数量不能为0");
+                    return;
+                }
                 Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag());
                 intent.putExtra("goods",goods);
                 setResult(400,intent);
