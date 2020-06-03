@@ -60,7 +60,7 @@ public class AddOutBoundByProductAdapter extends BaseAdapter {
             holder.tvBatchNo.setVisibility(View.GONE);
         }
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand()+"/"+goods.getSpec());
+        holder.tvSpec.setText(goods.getBrand()+"/"+goods.getSpec());
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
         if(!TextUtils.isEmpty(goods.getDeliveryTime())){
@@ -80,8 +80,8 @@ public class AddOutBoundByProductAdapter extends BaseAdapter {
         TextView tvBatchNo;
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)

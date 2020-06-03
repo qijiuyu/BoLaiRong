@@ -72,6 +72,8 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
     TextView tvAuditTime;
     @BindView(R.id.tv_audit_result)
     TextView tvAuditResult;
+    @BindView(R.id.tv_audit_memo)
+    TextView tvAuditMemo;
     @BindView(R.id.tv_outbound_name)
     TextView tvOutboundName;
     @BindView(R.id.tv_outbound_time)
@@ -183,7 +185,8 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                          */
                         tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#FF4B4C\">" + detailsBean.getStateStr()+ "</font>"));
+                        tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#000000\">" + detailsBean.getStateStr()+ "</font>"));
+                        tvAuditMemo.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
 
 
                         /**

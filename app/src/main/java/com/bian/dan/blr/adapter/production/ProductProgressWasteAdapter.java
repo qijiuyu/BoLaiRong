@@ -56,7 +56,7 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
         holder.tvCreateTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + wasteList.getCreateDate() + "</font>"));
         holder.tvWasteType.setText(Html.fromHtml("类别：<font color=\"#000000\">" + wasteList.getTypeStr() + "</font>"));
         holder.tvDept.setText(Html.fromHtml("部门：<font color=\"#000000\">" + wasteList.getDeptName() + "</font>"));
-        holder.tvPeople.setText(Html.fromHtml("责任人：<font color=\"#FE8E2C\">" + wasteList.getChargeName() + "</font>"));
+        holder.tvPeople.setText(Html.fromHtml("责任人：<font color=\"#000000\">" + wasteList.getChargeName() + "</font>"));
         holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + wasteList.getBatchNo() + "</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + wasteList.getGoodsName() + "</font>"));
         holder.tvBrand.setText(wasteList.getBrand() + "/" + wasteList.getSpec());

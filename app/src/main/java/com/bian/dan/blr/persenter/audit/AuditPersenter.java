@@ -84,7 +84,7 @@ public class AuditPersenter {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
                     Intent intent=new Intent();
-                    intent.putExtra("outboundId",auditOutBoundP.getId());
+                    activity.setResult(1000,intent);
                     activity.finish();
                 }
                 ToastUtil.showLong(baseBean.getMsg());

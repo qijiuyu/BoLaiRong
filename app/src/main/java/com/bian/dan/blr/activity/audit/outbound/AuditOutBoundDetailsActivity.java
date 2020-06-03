@@ -184,7 +184,7 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             linAudit.setVisibility(View.VISIBLE);
                             tvAuditName.setText(Html.fromHtml("审核：<font color=\"#000000\">" + detailsBean.getApproveName() + "</font>"));
                             tvAuditTime.setText(Html.fromHtml("审核时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#70DF5D\">" + detailsBean.getStateStr()+ "</font>"));
+                            tvAuditResult.setText(Html.fromHtml("审核结果：<font color=\"#000000\">" + detailsBean.getStateStr()+ "</font>"));
                             tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4()+ "</font>"));
                         }
 
