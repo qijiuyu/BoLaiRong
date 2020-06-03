@@ -25,6 +25,7 @@ import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
+import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
 import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
@@ -211,7 +212,9 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_house_sccrk:
                 setClass(OutAndEntryActivity.class);
                 break;
+            //请领表
             case R.id.tv_house_qlb:
+                setClass(LedTableActivity.class);
                 break;
             case R.id.tv_house_smsqb:
                 break;

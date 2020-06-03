@@ -1,7 +1,5 @@
 package com.zxdc.utils.library.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 public class Income extends BaseBean {
@@ -17,17 +15,15 @@ public class Income extends BaseBean {
     }
 
     public static class IncomeBean implements Serializable{
-        @SerializedName("支出金额")
-        private double Spending;
-        @SerializedName("收入金额")
+        private double paid;
         private double income;
 
-        public double getSpending() {
-            return Spending;
+        public double getPaid() {
+            return paid;
         }
 
-        public void setSpending(double spending) {
-            Spending = spending;
+        public void setPaid(double paid) {
+            this.paid = paid;
         }
 
         public double getIncome() {

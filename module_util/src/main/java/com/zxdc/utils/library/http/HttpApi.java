@@ -20,6 +20,7 @@ import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
+import com.zxdc.utils.library.bean.LedTable;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -316,6 +317,9 @@ public interface HttpApi {
 
     @POST(HttpConstant.IP+"equipment/update")
     Call<BaseBean> updateDevice(@Body AddDeviceP addDeviceP);
+
+    @GET(HttpConstant.IP+"outPartRequire/list")
+    Call<LedTable> getLedTable(@Query("deptId") String deptId, @Query("page") int page, @Query("limit") int limit);
 
 
 }

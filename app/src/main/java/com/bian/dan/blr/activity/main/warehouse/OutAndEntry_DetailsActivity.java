@@ -124,6 +124,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                 break;
             //确认入库
             case R.id.tv_ok:
+                outAndEntryPersenter.showConfirmEntry();
                  break;
             //拒绝入库
             case R.id.tv_no:
@@ -225,16 +226,24 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                         }
 
 
+                        scrollView.scrollTo(0, 0);
                         /**
                          * 底部按钮
                          */
                         if (productBean.getOutStatus() == 0) {  //未发放物料，所以显示发放物料的按钮
                             tvSendMaterial.setVisibility(View.VISIBLE);
                             linPlay.setVisibility(View.GONE);
+                            return;
                         }
-                        if (productBean.getOutStatus() == 1) {   //已发放物料了，所以显示确认入库按钮
+                        if(productBean.getOutStatus()>0 && productBean.getEntryStatus()==0){    //已发放物料了，并且生产那边还没有申请入库
+                            tvSendMaterial.setVisibility(View.GONE);
+                            linPlay.setVisibility(View.GONE);
+                            return;
+                        }
+                        if (productBean.getEntryStatus() == 1) {   //已申请入库
                             tvSendMaterial.setVisibility(View.GONE);
                             linPlay.setVisibility(View.VISIBLE);
+                            return;
                         }
                         if (productBean.getEntryStatus() == 2) {  //已入库，按钮就可以隐藏了
                             tvSendMaterial.setVisibility(View.GONE);
@@ -243,7 +252,6 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                             layoutParams.bottomMargin = 5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
                             scrollView.setLayoutParams(layoutParams);
                         }
-                        scrollView.scrollTo(0, 0);
                     } else {
                         ToastUtil.showLong(productProgress.getMsg());
                     }

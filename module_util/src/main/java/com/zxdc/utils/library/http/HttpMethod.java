@@ -19,6 +19,7 @@ import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
+import com.zxdc.utils.library.bean.LedTable;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -64,8 +65,8 @@ import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
-import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
+import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
@@ -1496,6 +1497,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 查询请领表
+     */
+    public static void getLedTable(String deptId,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getLedTable(deptId,page,limit).enqueue(new Callback<LedTable>() {
+            public void onResponse(Call<LedTable> call, Response<LedTable> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<LedTable> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }
