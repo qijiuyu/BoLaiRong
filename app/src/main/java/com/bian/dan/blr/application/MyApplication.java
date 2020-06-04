@@ -1,8 +1,5 @@
 package com.bian.dan.blr.application;
 
-import android.content.Context;
-import android.support.multidex.MultiDex;
-
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.zxdc.utils.library.base.BaseApplication;
@@ -33,12 +30,6 @@ public class MyApplication extends BaseApplication {
         registerActivityLifecycleCallbacks(ActivitysLifecycle.getInstance());
     }
 
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
 
     /**
      * 初始化百度地图

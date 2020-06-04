@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.baidu.mapapi.map.MapView;
 import com.bian.dan.blr.activity.statistical.StatisticalActivity;
 import com.bian.dan.blr.view.time.CustomDatePicker;
+import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.CustomerState;
 import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -16,6 +18,10 @@ import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DateUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,6 +176,45 @@ public class StatisticalPersenter {
     }
 
 
+
+    /**
+     *
+     * 设置个性化地图config文件路径
+     */
+    public void setMapCustomFile() {
+        FileOutputStream out = null;
+        InputStream inputStream = null;
+        String moduleName = null;
+        try {
+            inputStream = activity.getAssets().open("map.json");
+            byte[] b = new byte[inputStream.available()];
+            inputStream.read(b);
+            moduleName = activity.getFilesDir().getAbsolutePath();
+            File f = new File(moduleName + "/map.json");
+            if (f.exists()) {
+                f.delete();
+            }
+            f.createNewFile();
+            out = new FileOutputStream(f);
+            out.write(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        MapView.setCustomMapStylePath(moduleName + "/map.json");
+    }
+
+
     /**
      * 获取收支对比
      */
@@ -185,6 +230,29 @@ public class StatisticalPersenter {
                 }
             }
 
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 获取客户分布
+     */
+    public void getCustomerByStatistical(){
+        HttpMethod.getCustomerByStatistical(new NetWorkCallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                CustomerList customerList= (CustomerList) object;
+                if(customerList.isSussess()){
+                    activity.initMap(customerList.getData().getRows());
+                }else{
+                    ToastUtil.showLong(customerList.getMsg());
+                }
+            }
+
+            @Override
             public void onFail(Throwable t) {
 
             }

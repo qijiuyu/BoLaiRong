@@ -321,5 +321,8 @@ public interface HttpApi {
     @GET(HttpConstant.IP+"outPartRequire/list")
     Call<LedTable> getLedTable(@Query("deptId") String deptId, @Query("page") int page, @Query("limit") int limit);
 
+    @GET(HttpConstant.GET_CUSTOMER)
+    Call<CustomerList> getCustomerByStatistical(@Query("privateState") int privateState);
+
 
 }

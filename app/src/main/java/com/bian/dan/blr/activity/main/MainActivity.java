@@ -29,7 +29,6 @@ import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
 import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
 import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
-import com.bian.dan.blr.activity.statistical.MapActivity;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
@@ -223,6 +222,7 @@ public class MainActivity extends BaseActivity {
                 setClass(DeviceListActivity.class);
                 break;
             case R.id.tv_house_cwbx:
+                setClass(FinancialActivity.class);
                 break;
 
 
@@ -250,7 +250,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //生产--财务
             case R.id.tv_production_cwbx:
-                setClass(MapActivity.class);
+                setClass(FinancialActivity.class);
                 break;
             default:
                 break;

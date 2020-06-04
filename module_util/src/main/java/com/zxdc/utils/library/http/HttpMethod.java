@@ -1520,4 +1520,21 @@ public class HttpMethod extends BaseRequst {
         });
     }
 
+
+    /**
+     * 获取客户列表用户统计
+     */
+    public static void getCustomerByStatistical(final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomerByStatistical(2).enqueue(new Callback<CustomerList>() {
+            public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<CustomerList> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
 }

@@ -127,11 +127,11 @@
         <activity android:name=".activity.main.financial.FinancialDetailsActivity2"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.financial.TransferActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.Confirm_Procurement_EntryActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.statistical.MapActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.LedTableActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.warehouse.AddLedTableActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.AddMaterial_LedTable_Activity"  android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.statistical.MapActivity"  android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

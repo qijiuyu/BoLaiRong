@@ -6,16 +6,26 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.persenter.statistical.StatisticalPersenter;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Customer;
 import com.zxdc.utils.library.bean.CustomerState;
 import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.StatisticalGoods;
@@ -81,6 +91,8 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     TextView tvEndMaterial;
     @BindView(R.id.tv_customer_num)
     TextView tvCustomerNum;
+    @BindView(R.id.mapview)
+    MapView mapView;
     private StatisticalPersenter statisticalPersenter;
     /**
      * 1：财务收支对比
@@ -91,11 +103,17 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
     private int selectTime;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        statisticalPersenter = new StatisticalPersenter(this);
+        //设置个性化地图
+        statisticalPersenter.setMapCustomFile();
+
         setContentView(R.layout.activity_statistical);
         ButterKnife.bind(this);
         initView();
         //获取收支对比
         statisticalPersenter.getIncome(DateUtils.getYearFirst(),DateUtils.getDay(new Date().getTime()));
+        //获取客户分布信息
+        statisticalPersenter.getCustomerByStatistical();
         //获取客户状态统计
         statisticalPersenter.getCustomerState();
         //销售单数统计
@@ -106,13 +124,13 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         statisticalPersenter.getStatisticalMaterial(tvEndMaterial.getText().toString().trim());
         //成品统计
         statisticalPersenter.getStatisticalGoods();
+
     }
 
     /**
      * 初始化
      */
     private void initView() {
-        statisticalPersenter = new StatisticalPersenter(this);
         tvStartFiscal.setText(DateUtils.getYearFirst());
         tvEndFiscal.setText(DateUtils.getDay(new Date().getTime()));
         tvEndSalesOrder.setText(DateUtils.getBeforeMonth());
@@ -243,6 +261,44 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         viewFiscal.startDataAnimation();
         viewFiscal.startDataAnimation(2000);
         viewFiscal.setPieChartData(data);
+    }
+
+
+    /**
+     * 初始化地图
+     */
+    public void initMap(List<Customer> list){
+        //隐藏缩放按钮
+        mapView.showZoomControls(false);
+        BaiduMap baiduMap=mapView.getMap();
+        //设置缩放比例
+        MapStatus.Builder builder = new MapStatus.Builder();
+        builder.zoom(4.5f);
+        baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        //调用静态方法，设置个性化地图样式生效
+        MapView.setMapCustomEnable(true);
+
+        //解决mapview与scrollView的滑动冲突
+        baiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {
+            public void onTouch(MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    scrollView.requestDisallowInterceptTouchEvent(false);
+                }else{
+                    scrollView.requestDisallowInterceptTouchEvent(true);
+                }
+            }
+        });
+
+
+        /**
+         * 根据经纬度显示客户
+         */
+        BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.red_marker);
+        for (int i=0;i<list.size();i++){
+            MarkerOptions op = new MarkerOptions().position(new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude())).icon(bitmap).title("customer").zIndex(i);
+            baiduMap.addOverlay(op);
+        }
+
     }
 
 
@@ -430,5 +486,22 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         v.left = score.length - 7;
         v.right = score.length - 1;
         viewProduct.setCurrentViewport(v);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
     }
 }

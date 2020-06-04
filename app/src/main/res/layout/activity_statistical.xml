@@ -181,6 +181,34 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="客户地区分布"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@android:color/black"
+                android:drawableLeft="@mipmap/map"
+                android:drawablePadding="7dp"
+                android:layout_margin="15dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/main_item_bg">
+
+                <com.baidu.mapapi.map.MapView
+                    android:id="@+id/mapview"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:padding="10dp">
+                </com.baidu.mapapi.map.MapView>
+
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
