@@ -16,6 +16,7 @@ import com.bian.dan.blr.activity.main.production.SelectMaterialInventoryActivity
 import com.bian.dan.blr.activity.main.sales.SelectMaterialActivity;
 import com.bian.dan.blr.persenter.warehouse.AddMaterial_ledTable_P;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -115,6 +116,47 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
                 addMaterial_ledTable_p.getDict((int)tvStock.getTag(),tvStockType);
                 break;
             case R.id.tv_submit:
+                 String receiveType=tvType.getText().toString().trim();
+                 String name=tvName.getText().toString().trim();
+                 String batchNo=etBatchNo.getText().toString().trim();
+                 String stock=tvStock.getText().toString().trim();
+                 String stockType=tvStockType.getText().toString().trim();
+                 String num=etNum.getText().toString().trim();
+                 if(TextUtils.isEmpty(receiveType)){
+                     ToastUtil.showLong("请选择领取形式");
+                     return;
+                 }
+                 if(TextUtils.isEmpty(name)){
+                     ToastUtil.showLong("请选择物料");
+                     return;
+                 }
+                 final int tag=(int)tvType.getTag();
+                 if(tag==2 && TextUtils.isEmpty(batchNo)){
+                     ToastUtil.showLong("请输入批次");
+                     return;
+                 }
+                if(tag==2 && TextUtils.isEmpty(stock)){
+                    ToastUtil.showLong("请选择仓库");
+                    return;
+                }
+                if(tag==2 && TextUtils.isEmpty(stockType)){
+                    ToastUtil.showLong("请选择仓库类型");
+                    return;
+                }
+                if(TextUtils.isEmpty(num)){
+                    ToastUtil.showLong("请输入领取数量/更换数量");
+                    return;
+                }
+                Goods goods;
+                if(listBean!=null){
+                    goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),(int)tvStockType.getTag(),stockType,batchNo,(int)tvType.getTag());
+                }else{
+                    goods=new Goods(inventory.getGoodsId(),inventory.getGoodsName(),inventory.getSpec(),inventory.getUnitStr(),inventory.getBrand(),Integer.parseInt(num),(int)tvStockType.getTag(),stockType,batchNo,(int)tvType.getTag());
+                }
+                Intent intent = new Intent();
+                intent.putExtra("goods", goods);
+                setResult(200, intent);
+                finish();
                 break;
             default:
                 break;
@@ -141,6 +183,7 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
             etBatchNo.setText(inventory.getBatchNo());
             tvStockType.setText(inventory.getStockTypeStr());
             tvStockType.setTag(inventory.getStockType());
+            listBean=null;
         }
         if (requestCode==200 && resultCode == 100) {
             listBean = (Material.ListBean) data.getSerializableExtra("listBean");
@@ -151,6 +194,7 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
             tvSpec.setText(listBean.getSpec());
             tvUnit.setText(listBean.getUnitStr());
             tvMaterialType.setText(listBean.getTypeStr());
+            inventory=null;
         }
     }
 
@@ -173,6 +217,10 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
             tvStockType.setHint(null);
             tvStockType.setText(null);
             tvStockType.setCompoundDrawables(null, null, null,null);
+            if(inventory!=null){
+                tvStockType.setText(inventory.getStockTypeStr());
+                tvStockType.setTag(inventory.getStockType());
+            }
         }else{
             etBatchNo.setEnabled(true);
             etBatchNo.setHint("请输入");

@@ -167,11 +167,11 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("请选择物料名称");
                     return;
                 }
-                if(TextUtils.isEmpty(stock)){
+                if(!type.equals("损耗") && TextUtils.isEmpty(stock)){
                     ToastUtil.showLong("请选择仓库");
                     return;
                 }
-                if(TextUtils.isEmpty(stockType)){
+                if(!type.equals("损耗") && TextUtils.isEmpty(stockType)){
                     ToastUtil.showLong("请选择仓库类别");
                     return;
                 }

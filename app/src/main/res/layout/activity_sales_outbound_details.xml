@@ -341,7 +341,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="规格"
+                        android:text="规格/型号"
                         android:textColor="@android:color/black"
                         android:textSize="12sp"
                         android:gravity="center"/>

@@ -20,6 +20,7 @@ import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.LedTable;
+import com.zxdc.utils.library.bean.LedTableDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -52,6 +53,7 @@ import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
+import com.zxdc.utils.library.bean.parameter.AddLedTableP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProcurementP;
@@ -1531,6 +1533,40 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<CustomerList> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 新增请领表
+     */
+    public static void addLedTable(AddLedTableP addLedTable,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addLedTable(addLedTable).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取请领表详情
+     */
+    public static void getLedTableDetails(int id,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getLedTableDetails(id).enqueue(new Callback<LedTableDetails>() {
+            public void onResponse(Call<LedTableDetails> call, Response<LedTableDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<LedTableDetails> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

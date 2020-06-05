@@ -130,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="规格型号"
+                    android:text="规格/型号"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
@@ -144,7 +144,7 @@
                     android:layout_marginBottom="15dp"
                     android:background="@null"
                     android:gravity="right"
-                    android:hint="请输入规格型号"
+                    android:hint="请输入规格/型号"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp" />
 

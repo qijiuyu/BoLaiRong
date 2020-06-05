@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -82,6 +83,9 @@ public class SelectPlanCodeActivity extends BaseActivity implements MyRefreshLay
                 reList.startRefresh();
             }
         });
+
+        //设置弹出英文键盘
+        etKey.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     }
 
 

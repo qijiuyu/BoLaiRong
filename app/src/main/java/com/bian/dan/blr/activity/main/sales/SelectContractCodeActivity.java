@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,6 @@ import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -90,6 +90,9 @@ public class SelectContractCodeActivity extends BaseActivity implements MyRefres
                 reList.startRefresh();
             }
         });
+
+        //设置弹出英文键盘
+        etKey.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     }
 
     @OnClick(R.id.lin_back)

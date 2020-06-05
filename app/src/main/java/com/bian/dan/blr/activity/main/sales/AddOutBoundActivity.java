@@ -181,8 +181,19 @@ public class AddOutBoundActivity extends BaseActivity {
                  if(data!=null){
                      Goods goods= (Goods) data.getSerializableExtra("goods");
                      if(goods!=null){
-                         goodList.add(goods);
-                         addProductAdapter.notifyDataSetChanged();
+                         boolean isThe=false;
+                         for (int i=0;i<goodList.size();i++){
+                              if(goodList.get(i).getGoodId()==goods.getGoodId()){
+                                  isThe=true;
+                                  break;
+                              }
+                         }
+                         if(isThe){
+                             ToastUtil.showLong("不能重复添加物料");
+                         }else{
+                             goodList.add(goods);
+                             addProductAdapter.notifyDataSetChanged();
+                         }
                      }
                  }
                  break;

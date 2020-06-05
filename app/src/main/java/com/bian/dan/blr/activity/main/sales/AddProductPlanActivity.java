@@ -133,8 +133,19 @@ public class AddProductPlanActivity extends BaseActivity {
                  if(data!=null){
                      Goods goods= (Goods) data.getSerializableExtra("goods");
                      if(goods!=null){
-                         goodsList.add(goods);
-                         addProductAdapter2.notifyDataSetChanged();
+                         boolean isThe=false;
+                         for (int i=0;i<goodsList.size();i++){
+                             if(goodsList.get(i).getGoodId()==goods.getGoodId()){
+                                 isThe=true;
+                                 break;
+                             }
+                         }
+                         if(isThe){
+                             ToastUtil.showLong("不能重复添加物料");
+                         }else{
+                             goodsList.add(goods);
+                             addProductAdapter2.notifyDataSetChanged();
+                         }
                      }
                  }
                  break;

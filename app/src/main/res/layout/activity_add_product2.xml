@@ -95,7 +95,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="规格"
+                    android:text="规格/型号"
                     android:textSize="15sp"
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>

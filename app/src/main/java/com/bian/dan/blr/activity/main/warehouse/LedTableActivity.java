@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,6 +71,13 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
 
         ledTableAdapter=new LedTableAdapter(this,listAll);
         listView.setAdapter(ledTableAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(activity, LedTableDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                startActivity(intent);
+            }
+        });
 
         /**
          * 监听关键字搜索

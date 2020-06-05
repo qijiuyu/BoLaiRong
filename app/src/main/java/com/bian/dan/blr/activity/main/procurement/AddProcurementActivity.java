@@ -196,7 +196,18 @@ public class AddProcurementActivity extends BaseActivity {
         //新增、编辑回执
         if(resultCode==200){
             if(editGoods==null){
-                goodsList.add(goods);
+                boolean isThe=false;
+                for (int i=0;i<goodsList.size();i++){
+                    if(goodsList.get(i).getGoodId()==goods.getGoodId()){
+                        isThe=true;
+                        break;
+                    }
+                }
+                if(isThe){
+                    ToastUtil.showLong("不能重复添加物料");
+                }else{
+                    goodsList.add(goods);
+                }
             }else{
                 for (int i=0;i<goodsList.size();i++){
                     if(editGoods.equals(goodsList.get(i))){

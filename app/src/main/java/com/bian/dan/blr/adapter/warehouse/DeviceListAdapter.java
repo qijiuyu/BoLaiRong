@@ -53,7 +53,7 @@ public class DeviceListAdapter extends BaseAdapter {
         Device.ListBean listBean=list.get(position);
         holder.tvName.setText(Html.fromHtml("设备名称：<font color=\"#000000\">"+listBean.getEquipName()+"</font>"));
         holder.tvType.setText(Html.fromHtml("设备类型：<font color=\"#000000\">"+listBean.getTypeName()+"</font>"));
-        holder.tvSpec.setText(Html.fromHtml("规格型号：<font color=\"#000000\">"+listBean.getSpec()+"</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">"+listBean.getSpec()+"</font>"));
         holder.tvDepartment.setText(Html.fromHtml("归属部门：<font color=\"#000000\">"+listBean.getDeptName()+"</font>"));
         return view;
     }

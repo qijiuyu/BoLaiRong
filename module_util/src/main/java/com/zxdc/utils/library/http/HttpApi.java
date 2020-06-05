@@ -21,6 +21,7 @@ import com.zxdc.utils.library.bean.Income;
 import com.zxdc.utils.library.bean.Inventory;
 import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.LedTable;
+import com.zxdc.utils.library.bean.LedTableDetails;
 import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
@@ -51,6 +52,7 @@ import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
 import com.zxdc.utils.library.bean.parameter.AddFinancialP;
+import com.zxdc.utils.library.bean.parameter.AddLedTableP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
 import com.zxdc.utils.library.bean.parameter.AddProcurementP;
@@ -323,6 +325,13 @@ public interface HttpApi {
 
     @GET(HttpConstant.GET_CUSTOMER)
     Call<CustomerList> getCustomerByStatistical(@Query("privateState") int privateState);
+
+    @PUT(HttpConstant.IP+"outPartRequire/save")
+    Call<BaseBean> addLedTable(@Body AddLedTableP addLedTable);
+
+    @GET(HttpConstant.IP+"outPartRequire/detail")
+    Call<LedTableDetails> getLedTableDetails(@Query("id") int id);
+
 
 
 }

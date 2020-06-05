@@ -30,7 +30,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="请输入物料名称或规格型号"
+            android:hint="请输入物料名称或规格/型号"
             android:textColor="@android:color/black"
             android:textSize="13sp"
             android:layout_marginLeft="40dp"

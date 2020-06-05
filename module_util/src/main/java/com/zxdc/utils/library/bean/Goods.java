@@ -49,6 +49,8 @@ public class Goods implements Serializable {
     private String mobile;
     //仓库类型
     private int stockType;
+    //仓库名称
+    private String stockName;
     //商品批号
     private String batchNo;
     //交付日期
@@ -69,6 +71,8 @@ public class Goods implements Serializable {
     private int chargeId;
     //余废料类别名称
     private String waste;
+    //领取形式
+    private int receiveType;
 
 
 
@@ -179,6 +183,20 @@ public class Goods implements Serializable {
         this.company = company;
         this.contract = contract;
         this.mobile = mobile;
+    }
+
+
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, int stockType,String stockName, String batchNo, int receiveType) {
+        this.goodId = goodId;
+        this.name = name;
+        this.spec = spec;
+        this.unitStr = unitStr;
+        this.brand = brand;
+        this.num = num;
+        this.stockType = stockType;
+        this.stockName=stockName;
+        this.batchNo = batchNo;
+        this.receiveType = receiveType;
     }
 
     public int getId() {
@@ -436,5 +454,21 @@ public class Goods implements Serializable {
 
     public void setFineDes(String fineDes) {
         this.fineDes = fineDes;
+    }
+
+    public int getReceiveType() {
+        return receiveType;
+    }
+
+    public void setReceiveType(int receiveType) {
+        this.receiveType = receiveType;
+    }
+
+    public String getStockName() {
+        return stockName;
+    }
+
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
     }
 }

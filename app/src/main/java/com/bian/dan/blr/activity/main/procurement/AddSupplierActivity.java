@@ -216,8 +216,19 @@ public class AddSupplierActivity extends BaseActivity {
         switch (resultCode) {
             //新增数据
             case 200:
-                goodsList.add(goods);
-                addProductAdapter5.notifyDataSetChanged();
+                boolean isThe=false;
+                for (int i=0;i<goodsList.size();i++){
+                    if(goodsList.get(i).getGoodId()==goods.getGoodId()){
+                        isThe=true;
+                        break;
+                    }
+                }
+                if(isThe){
+                    ToastUtil.showLong("不能重复添加物料");
+                }else{
+                    goodsList.add(goods);
+                    addProductAdapter5.notifyDataSetChanged();
+                }
                 break;
             //编辑老数据
             case 300:

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <include layout="@layout/head"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_receive_people"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="领取人：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_department"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="领取部门：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_create_people"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="操作人：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/tv_create_time"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="操作时间：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:text="领取列表"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="15dp"/>
+
+            <com.zxdc.utils.library.view.MeasureListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.zxdc.utils.library.view.MeasureListView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

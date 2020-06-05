@@ -133,7 +133,7 @@ public class AddDeviceActivity extends BaseActivity {
                     return;
                 }
                 if(TextUtils.isEmpty(spec)){
-                    ToastUtil.showLong("请输入规格型号");
+                    ToastUtil.showLong("请输入规格/型号");
                     return;
                 }
                 if(TextUtils.isEmpty(code)){
