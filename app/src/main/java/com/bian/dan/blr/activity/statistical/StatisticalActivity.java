@@ -277,7 +277,6 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
         //调用静态方法，设置个性化地图样式生效
         MapView.setMapCustomEnable(true);
-
         //解决mapview与scrollView的滑动冲突
         baiduMap.setOnMapTouchListener(new BaiduMap.OnMapTouchListener() {
             public void onTouch(MotionEvent motionEvent) {
@@ -295,10 +294,13 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
          */
         BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.red_marker);
         for (int i=0;i<list.size();i++){
-            MarkerOptions op = new MarkerOptions().position(new LatLng(list.get(i).getLatitude(), list.get(i).getLongitude())).icon(bitmap).title("customer").zIndex(i);
-            baiduMap.addOverlay(op);
+            String latitude=list.get(i).getLatitude();
+            String longitude=list.get(i).getLongitude();
+            if(!TextUtils.isEmpty(latitude) && !TextUtils.isEmpty(longitude)){
+                MarkerOptions op = new MarkerOptions().position(new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude))).icon(bitmap).title("customer").zIndex(i);
+                baiduMap.addOverlay(op);
+            }
         }
-
     }
 
 

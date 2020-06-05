@@ -129,7 +129,7 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
         if (data == null) {
             return;
         }
-        if (resultCode == 100) {
+        if (requestCode==100 && resultCode == 100) {
             inventory = (MaterialInventory.ListBean) data.getSerializableExtra("listBean");
             if(inventory==null){
                 return;
@@ -142,7 +142,7 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
             tvStockType.setText(inventory.getStockTypeStr());
             tvStockType.setTag(inventory.getStockType());
         }
-        if (resultCode == 200) {
+        if (requestCode==200 && resultCode == 100) {
             listBean = (Material.ListBean) data.getSerializableExtra("listBean");
             if (listBean == null) {
                 return;
@@ -162,28 +162,30 @@ public class AddMaterial_LedTable_Activity extends BaseActivity {
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         if (type == 1) {
             etBatchNo.setEnabled(false);
-            etBatchNo.setText(null);
             etBatchNo.setHint(null);
 
             tvStock.setClickable(false);
             tvStock.setHint(null);
+            tvStock.setText(null);
             tvStock.setCompoundDrawables(null, null, null,null);
 
             tvStockType.setClickable(false);
             tvStockType.setHint(null);
+            tvStockType.setText(null);
             tvStockType.setCompoundDrawables(null, null, null,null);
         }else{
             etBatchNo.setEnabled(true);
-            etBatchNo.setText(null);
             etBatchNo.setHint("请输入");
 
             tvStock.setClickable(true);
             tvStock.setHint("请选择");
+            tvStock.setText(null);
             tvStock.setCompoundDrawables(null, null, drawable,null);
 
             tvStockType.setClickable(true);
             tvStockType.setHint("请选择");
-            tvStock.setCompoundDrawables(null, null, drawable,null);
+            tvStockType.setText(null);
+            tvStockType.setCompoundDrawables(null, null, drawable,null);
         }
         etNum.setText(null);
 

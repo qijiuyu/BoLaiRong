@@ -36,22 +36,22 @@ public class Customer implements Serializable {
     private String createDate="";//创建时间
     private String updateDate="";//修改时间
     private String ein="";//税号
-    private double longitude;
-    private double latitude;
+    private String longitude="";
+    private String latitude="";
 
-    public double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 

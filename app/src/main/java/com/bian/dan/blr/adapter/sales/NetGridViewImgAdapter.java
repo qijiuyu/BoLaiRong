@@ -1,6 +1,7 @@
 package com.bian.dan.blr.adapter.sales;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.ShowImgActivity;
 import com.bumptech.glide.Glide;
 import com.zxdc.utils.library.bean.FileBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -52,6 +55,23 @@ public class NetGridViewImgAdapter extends BaseAdapter {
         }
         FileBean fileBean=list.get(position);
         Glide.with(context).load(fileBean.getUrl()).into(holder.image);
+
+        /**
+         * 查看大图
+         */
+        holder.image.setTag(R.id.imageid,position);
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                List<String> imgList=new ArrayList<>();
+                for (int i=0;i<list.size();i++){
+                     imgList.add(list.get(i).getUrl());
+                }
+                Intent intent=new Intent(context, ShowImgActivity.class);
+                intent.putStringArrayListExtra("imgs", (ArrayList<String>) imgList);
+                intent.putExtra("position",(int)v.getTag(R.id.imageid));
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 

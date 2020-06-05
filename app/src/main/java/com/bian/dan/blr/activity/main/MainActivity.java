@@ -12,9 +12,7 @@ import android.widget.LinearLayout;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
-import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
-import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
@@ -25,10 +23,6 @@ import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
-import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
-import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
-import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
-import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
@@ -179,11 +173,11 @@ public class MainActivity extends BaseActivity {
                 break;
             //供应商管理
             case R.id.tv_collect_gysgl:
-                setClass(SupplierListActivity.class);
+//                setClass(SupplierListActivity.class);
                 break;
             //财务报销
             case R.id.tv_collect_cwbx:
-                setClass(FinancialActivity.class);
+//                setClass(FinancialActivity.class);
                 break;
 
 
@@ -195,25 +189,25 @@ public class MainActivity extends BaseActivity {
                 break;
             //手动入库单
             case R.id.tv_house_sdrkd:
-                setClass(SdEnterActivity.class);
+//                setClass(SdEnterActivity.class);
                 break;
             //销售出库单
             case R.id.tv_house_ckd:
-                setClass(SalesOutBoundActivity.class);
+//                setClass(SalesOutBoundActivity.class);
                 break;
            //采购入库单
             case R.id.tv_house_cgrkd:
                 intent.setClass(this,ProcurementActivity.class);
                 intent.putExtra("type",2);
-                startActivity(intent);
+//                startActivity(intent);
                 break;
             //生产出入库
             case R.id.tv_house_sccrk:
-                setClass(OutAndEntryActivity.class);
+//                setClass(OutAndEntryActivity.class);
                 break;
             //请领表
             case R.id.tv_house_qlb:
-                setClass(LedTableActivity.class);
+//                setClass(LedTableActivity.class);
                 break;
             case R.id.tv_house_smsqb:
                 break;
@@ -222,20 +216,20 @@ public class MainActivity extends BaseActivity {
                 setClass(DeviceListActivity.class);
                 break;
             case R.id.tv_house_cwbx:
-                setClass(FinancialActivity.class);
+//                setClass(FinancialActivity.class);
                 break;
 
 
 
             //工资管理
             case R.id.tv_financial_gzgl:
-                setClass(WageManagerActivity.class);
+//                setClass(WageManagerActivity.class);
                 break;
            //财务报销
             case R.id.tv_financial_cwbx:
                 intent.setClass(this,FinancialActivity.class);
                 intent.putExtra("type",1);
-                startActivity(intent);
+//                startActivity(intent);
                 break;
 
 

@@ -254,7 +254,7 @@ public class DateUtils {
      * @return
      */
     public static String getBeforeMonth(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
         Calendar c = Calendar.getInstance();
         c.add(Calendar.MONTH, -1);    //得到前一个月
         String time = format.format(c.getTime());

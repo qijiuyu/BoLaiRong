@@ -35,6 +35,8 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
     TextView tvHead;
     @BindView(R.id.et_key)
     EditText etKey;
+    @BindView(R.id.img_clear)
+    ImageView imgClear;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
@@ -46,8 +48,6 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
     private List<Device.ListBean> listAll=new ArrayList<>();
     //页码
     private int page=1;
-    //要搜索的关键字
-    private String keys;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
@@ -84,7 +84,11 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
             public void afterTextChanged(Editable s) {
-                keys=s.toString();
+                if(s.length()>0){
+                    imgClear.setVisibility(View.VISIBLE);
+                }else{
+                    imgClear.setVisibility(View.GONE);
+                }
                 //获取设备列表
                 reList.startRefresh();
             }
@@ -97,7 +101,7 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
      *
      * @param view
      */
-    @OnClick({R.id.lin_back, R.id.img_right})
+    @OnClick({R.id.lin_back, R.id.img_right, R.id.img_clear})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -106,6 +110,9 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
             //添加
             case R.id.img_right:
                 setClass(AddDeviceActivity.class,1000);
+                break;
+            case R.id.img_clear:
+                etKey.setText(null);
                 break;
             default:
                 break;
@@ -131,14 +138,11 @@ public class DeviceListActivity extends BaseActivity implements MyRefreshLayoutL
      * 获取设备列表
      */
     private void getDeviceList(){
-        HttpMethod.getDeviceList(keys, null, String.valueOf(page),new NetWorkCallBack() {
+        HttpMethod.getDeviceList(etKey.getText().toString().trim(), null, String.valueOf(page),new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
                 Device device= (Device) object;
-                if(device==null){
-                    return;
-                }
                 if(device.isSussess()){
                     List<Device.ListBean> list=device.getData().getRows();
                     listAll.addAll(device.getData().getRows());
