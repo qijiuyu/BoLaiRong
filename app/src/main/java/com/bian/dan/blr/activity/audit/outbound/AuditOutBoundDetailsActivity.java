@@ -155,8 +155,8 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">分期</font>"));
                         }
                         tvReceivableTime.setText(Html.fromHtml("回款日期：<font color=\"#000000\">" + detailsBean.getReceivableDate() + "</font>"));
-                        tvUnpaidMoney.setText(Html.fromHtml("未付金额：<font color=\"#000000\">" + detailsBean.getUnpaidAmount() + "元</font>"));
-                        tvTotalMoney.setText(Html.fromHtml("累计金额：<font color=\"#000000\">" + detailsBean.getAddAmount() + "元</font>"));
+                        tvUnpaidMoney.setText(Html.fromHtml("未付金额(元)：<font color=\"#000000\">" + detailsBean.getUnpaidAmount() + "</font>"));
+                        tvTotalMoney.setText(Html.fromHtml("累计金额(元)：<font color=\"#000000\">" + detailsBean.getAddAmount() + "</font>"));
 
                         /**
                          * 产品列表
@@ -174,7 +174,7 @@ public class AuditOutBoundDetailsActivity extends BaseActivity {
                             totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goodList.getProp2()));
                         }
                         tvProductNum.setText("数量："+totalNum);
-                        tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "元</font>"));
+                        tvProductMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
 
 
                         /**

@@ -57,7 +57,7 @@ public class SupplierDetails_Product_Adapter extends BaseAdapter {
         holder.tvBrand.setText(goodList.getBrand());
         holder.tvSpec.setText(goodList.getSpec());
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitStr() + "</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goodList.getProp1() + "元</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getProp1() + "</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
         return view;
     }

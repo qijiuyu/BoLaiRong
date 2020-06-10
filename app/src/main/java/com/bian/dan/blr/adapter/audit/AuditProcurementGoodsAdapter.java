@@ -55,8 +55,8 @@ public class AuditProcurementGoodsAdapter extends BaseAdapter {
         holder.tvBrand.setText(goodList.getSpec());
         holder.tvUnit.setText(goodList.getUnitStr());
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goodList.getUnitPrice() + "元</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + goodList.getAmount() + "元</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getUnitPrice() + "</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
 
         holder.tvSupplierName.setText(Html.fromHtml("供应商名称：<font color=\"#000000\">" + goodList.getSupplierName() + "</font>"));
         holder.tvContact.setText(goodList.getContacts()+"   "+goodList.getPhone());

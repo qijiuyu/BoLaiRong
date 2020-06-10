@@ -137,7 +137,7 @@ public class FinancialDetailsActivity2 extends BaseActivity {
                     tvAccount.setText(Html.fromHtml("收款人账号：<font color=\"#000000\">" + detailsBean.getAccount() + "</font>"));
                     tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + detailsBean.getOpenBankStr() + "</font>"));
                     tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">" + detailsBean.getMobile() + "</font>"));
-                    tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">" + detailsBean.getAmount() + "元</font>"));
+                    tvMoney.setText(Html.fromHtml("金额(元)：<font color=\"#000000\">" + detailsBean.getAmount() + "</font>"));
                     tvRemark.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">" + detailsBean.getMemo() + "</font>"));
                     //附件
                     gridView.setAdapter(new NetGridViewImgAdapter(activity, detailsBean.getFileList()));
@@ -171,7 +171,7 @@ public class FinancialDetailsActivity2 extends BaseActivity {
                         linTransfer.setVisibility(View.VISIBLE);
                         tvTransfer.setText(Html.fromHtml("转账：<font color=\"#000000\">" + detailsBean.getFinanceName() + "</font>"));
                         tvTransferTime.setText(Html.fromHtml("填写时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
-                        tvTransferMoney.setText(Html.fromHtml("转账金额：<font color=\"#000000\">" + detailsBean.getProp2() + "元</font>"));
+                        tvTransferMoney.setText(Html.fromHtml("转账金额(元)：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         Glide.with(activity).load(detailsBean.getProp3()).into(imgTransfer);
                     }
 

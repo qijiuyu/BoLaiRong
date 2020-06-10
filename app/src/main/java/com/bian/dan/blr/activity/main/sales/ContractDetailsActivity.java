@@ -119,7 +119,7 @@ public class ContractDetailsActivity extends BaseActivity {
                         tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + detailsBean.getCustomerName() + "</font>"));
                         tvSignTime.setText(Html.fromHtml("签订时间：<font color=\"#000000\">" + detailsBean.getSignedTime() + "</font>"));
-                        tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#FF4B4C\">" + detailsBean.getAmount() + "元</font>"));
+                        tvMoney.setText(Html.fromHtml("订单金额(元)：<font color=\"#FF4B4C\">" + detailsBean.getAmount() + "</font>"));
                         if (detailsBean.getPayType() == 1) {
                             tvPayType.setText(Html.fromHtml("支付方式：<font color=\"#000000\">全款</font>"));
                         } else {
