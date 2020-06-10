@@ -14,7 +14,8 @@ import com.bian.dan.blr.persenter.product.AddStoragePersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
-import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.ProductProgress;
+import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.util.ToastUtil;
 
 import butterknife.BindView;
@@ -53,13 +54,15 @@ public class AddStorageProductActivity extends BaseActivity {
     @BindView(R.id.et_remark)
     EditText etRemark;
     private AddStoragePersenter addStoragePersenter;
-    //用户对象
-    private UserInfo userInfo;
+    //要编辑的对象
+    private ProductProgress.EntryList entryList;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_put_storage_product);
         ButterKnife.bind(this);
         initView();
+        //显示要编辑的内容
+        showEidtData();
     }
 
     /**
@@ -68,6 +71,7 @@ public class AddStorageProductActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("添加产品");
         addStoragePersenter=new AddStoragePersenter(this);
+        entryList= (ProductProgress.EntryList) getIntent().getSerializableExtra("entryList");
 
     }
 
@@ -96,6 +100,7 @@ public class AddStorageProductActivity extends BaseActivity {
             //提交
             case R.id.tv_submit:
                 String batchNo=etBatchNo.getText().toString().trim();
+                String name=tvName.getText().toString().trim();
                 String stock=tvStock.getText().toString().trim();
                 String stockType=tvStockType.getText().toString().trim();
                 String num=etNum.getText().toString().trim();
@@ -108,8 +113,8 @@ public class AddStorageProductActivity extends BaseActivity {
                     ToastUtil.showLong("请输入批次");
                     return;
                 }
-                if(listBean==null){
-                    ToastUtil.showLong("请选择物料");
+                if(TextUtils.isEmpty(name)){
+                    ToastUtil.showLong("请选择物料名称");
                     return;
                 }
                 if(TextUtils.isEmpty(stock)){
@@ -128,15 +133,39 @@ public class AddStorageProductActivity extends BaseActivity {
                     ToastUtil.showLong("数量不能为0");
                     return;
                 }
-                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
                 Intent intent=new Intent();
-                intent.putExtra("goods",goods);
+                if(entryList==null){
+                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
+                    intent.putExtra("goods",goods);
+                }else{
+                    UpdateEntryGoodP updateEntryGoodP=new UpdateEntryGoodP(entryList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,remark);
+                    intent.putExtra("goods",updateEntryGoodP);
+                }
                  setResult(200,intent);
                  finish();
                 break;
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 显示要编辑的内容
+     */
+    private void showEidtData(){
+        if(entryList==null){
+            return;
+        }
+        etBatchNo.setText(entryList.getBatchNo());
+        tvName.setText(entryList.getGoodsName());
+        tvName.setClickable(false);
+        tvSpec.setText(entryList.getSpec());
+        tvUnit.setText(entryList.getUnitStr());
+        tvStockType.setTag(entryList.getStockType());
+        tvStockType.setText(entryList.getStockTypeStr());
+        etNum.setText(String.valueOf(entryList.getNum()));
+        etRemark.setText(entryList.getMemo());
     }
 
 

@@ -16,13 +16,17 @@ import com.bian.dan.blr.adapter.production.ProductProgressEntryAdapter;
 import com.bian.dan.blr.adapter.production.ProductProgressWasteAdapter;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.persenter.product.ProductProgressPersenter;
+import com.google.gson.Gson;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
+import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
+import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.ClickTextView;
 import com.zxdc.utils.library.view.MeasureListView;
@@ -193,7 +197,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                          */
                         if(productBean.getEntryDetailList()!=null && productBean.getEntryDetailList().size()>0){
                             linEntry.setVisibility(View.VISIBLE);
-                            listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
+                            listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList(),productBean.getEntryStatus()));
                             int entryNum = 0;
                             for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
                                 entryNum += productBean.getEntryDetailList().get(i).getNum();
@@ -206,7 +210,7 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                              */
                             if (productBean.getOddsDetailList() != null && productBean.getOddsDetailList().size() > 0) {
                                 linWaste.setVisibility(View.VISIBLE);
-                                listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList()));
+                                listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList(),productBean.getEntryStatus()));
                                 int wasteNum = 0;
                                 for (int i = 0; i < productBean.getOddsDetailList().size(); i++) {
                                     wasteNum += productBean.getOddsDetailList().get(i).getNum();
@@ -276,6 +280,28 @@ public class ProductProgressDetailsActivity extends BaseActivity {
                 //刷新数据
                 getProductProgress();
                 break;
+             //回执要更新的入库产品
+            case 200:
+                 if(data==null){
+                     return;
+                 }
+                 UpdateEntryGoodP updateEntryGoodP= (UpdateEntryGoodP) data.getSerializableExtra("goods");
+                 if(updateEntryGoodP!=null){
+                     LogUtils.e("+++++++++++++"+new Gson().toJson(updateEntryGoodP));
+                     productProgressPersenter.updateEntryGood(updateEntryGoodP);
+                 }
+                 break;
+            //回执要更新的余废料
+            case 400:
+                if(data==null){
+                    return;
+                }
+                UpdateWasteP updateWasteP= (UpdateWasteP) data.getSerializableExtra("goods");
+                if(updateWasteP!=null){
+                    LogUtils.e("+++++++++++++"+new Gson().toJson(updateWasteP));
+                    productProgressPersenter.updateWaste(updateWasteP);
+                }
+                 break;
             default:
                 break;
         }

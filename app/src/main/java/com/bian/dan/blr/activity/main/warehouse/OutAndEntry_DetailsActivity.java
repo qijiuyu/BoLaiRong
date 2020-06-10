@@ -192,7 +192,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                          */
                         if (productBean.getEntryDetailList().size() > 0) {
                             linEntry.setVisibility(View.VISIBLE);
-                            listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList()));
+                            listEntry.setAdapter(new ProductProgressEntryAdapter(activity, productBean.getEntryDetailList(),productBean.getEntryStatus()));
                             int entryNum = 0;
                             for (int i = 0; i < productBean.getEntryDetailList().size(); i++) {
                                 entryNum += productBean.getEntryDetailList().get(i).getNum();
@@ -205,7 +205,7 @@ public class OutAndEntry_DetailsActivity extends BaseActivity {
                              */
                             if (productBean.getOddsDetailList() != null && productBean.getOddsDetailList().size() > 0) {
                                 linWaste.setVisibility(View.VISIBLE);
-                                listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList()));
+                                listWaste.setAdapter(new ProductProgressWasteAdapter(activity, productBean.getOddsDetailList(),productBean.getEntryStatus()));
                                 int wasteNum = 0;
                                 for (int i = 0; i < productBean.getOddsDetailList().size(); i++) {
                                     wasteNum += productBean.getOddsDetailList().get(i).getNum();

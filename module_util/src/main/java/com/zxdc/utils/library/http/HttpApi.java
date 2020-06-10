@@ -66,9 +66,11 @@ import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
+import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
+import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -331,6 +333,12 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"outPartRequire/detail")
     Call<LedTableDetails> getLedTableDetails(@Query("id") int id);
+
+    @POST(HttpConstant.IP+"entryProductDetail/update")
+    Call<BaseBean> updateEntryGood(@Body UpdateEntryGoodP updateEntryGoodP);
+
+    @POST(HttpConstant.IP+"oddsRejectDetail/update")
+    Call<BaseBean> updateWaste(@Body UpdateWasteP updateWasteP);
 
 
 

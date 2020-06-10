@@ -294,7 +294,9 @@ public class ProductProgress extends BaseBean {
 
 
     public static class EntryList implements Serializable{
+        private int id;
         private String goodsName="";
+        private int stockType;
         private String stockTypeStr="";
         private String spec="";
         private String brand="";
@@ -306,6 +308,21 @@ public class ProductProgress extends BaseBean {
         private String createName="";
         private String createDate="";
 
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getStockType() {
+            return stockType;
+        }
+
+        public void setStockType(int stockType) {
+            this.stockType = stockType;
+        }
 
         public String getGoodsName() {
             return goodsName;
@@ -398,18 +415,72 @@ public class ProductProgress extends BaseBean {
 
 
     public static class WasteList implements Serializable{
+        private int id;
         private String goodsName="";
         private int num;
         private String batchNo="";
         private String spec="";
         private String brand="";
         private String unitsType="";
+        private int type;
         private String typeStr="";
+        private int deptId;
         private String deptName="";
+        private int chargeId;
         private String chargeName="";
         private String createDate="";
         private String memo="";
         private String createName="";
+        private String stockTypeStr="";
+        private int stockType;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getStockTypeStr() {
+            return stockTypeStr;
+        }
+
+        public void setStockTypeStr(String stockTypeStr) {
+            this.stockTypeStr = stockTypeStr;
+        }
+
+        public int getStockType() {
+            return stockType;
+        }
+
+        public void setStockType(int stockType) {
+            this.stockType = stockType;
+        }
+
+        public int getChargeId() {
+            return chargeId;
+        }
+
+        public void setChargeId(int chargeId) {
+            this.chargeId = chargeId;
+        }
+
+        public int getDeptId() {
+            return deptId;
+        }
+
+        public void setDeptId(int deptId) {
+            this.deptId = deptId;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
 
         public String getGoodsName() {
             return goodsName;

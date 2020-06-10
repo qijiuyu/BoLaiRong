@@ -68,8 +68,10 @@ import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
+import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
+import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
 import com.zxdc.utils.library.util.DialogUtil;
@@ -1567,6 +1569,40 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<LedTableDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 更新单条入库明细
+     */
+    public static void updateEntryGood(UpdateEntryGoodP updateEntryGoodP,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateEntryGood(updateEntryGoodP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 更新余废料单条记录
+     */
+    public static void updateWaste(UpdateWasteP updateWasteP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updateWaste(updateWasteP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

@@ -1,14 +1,19 @@
 package com.bian.dan.blr.adapter.production;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.production.AddWasteActivity;
+import com.bian.dan.blr.activity.main.production.ProductProgressDetailsActivity;
+import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.bean.ProductProgress;
 
 import java.util.List;
@@ -20,10 +25,13 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<ProductProgress.WasteList> list;
-    public ProductProgressWasteAdapter(Activity activity, List<ProductProgress.WasteList> list) {
+    //入库状态 0未申请 1未入库 2已入库
+    private int entryStatus;
+    public ProductProgressWasteAdapter(Activity activity, List<ProductProgress.WasteList> list,int entryStatus) {
         super();
         this.activity = activity;
         this.list = list;
+        this.entryStatus=entryStatus;
     }
 
     @Override
@@ -63,6 +71,24 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + wasteList.getUnitsType() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + wasteList.getNum() + "</font>"));
         holder.tvRemark.setText("备注：" + wasteList.getMemo());
+
+
+        /**
+         * 在没申请入库前，只有生产组长才可以编辑
+         */
+        if(entryStatus==0 && MyApplication.getRoleId()==3 && activity instanceof ProductProgressDetailsActivity){
+            holder.imgEdit.setVisibility(View.VISIBLE);
+            holder.imgEdit.setTag(wasteList);
+            holder.imgEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ProductProgress.WasteList wasteList= (ProductProgress.WasteList) v.getTag();
+                    Intent intent=new Intent(activity, AddWasteActivity.class);
+                    intent.putExtra("wasteList",wasteList);
+                    activity.startActivityForResult(intent,400);
+                }
+            });
+        }
         return view;
     }
 
@@ -91,6 +117,8 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
         TextView tvRemark;
         @BindView(R.id.tv_people)
         TextView tvPeople;
+        @BindView(R.id.img_edit)
+        ImageView imgEdit;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

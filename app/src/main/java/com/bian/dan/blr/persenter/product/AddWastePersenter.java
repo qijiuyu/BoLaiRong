@@ -37,7 +37,7 @@ public class AddWastePersenter {
         final PopupWindow popupWindow= DialogUtil.showPopWindow(view);
         popupWindow .showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
         try{
-            CycleWheelView wheel=view.findViewById(R.id.wheel);
+            final CycleWheelView wheel=view.findViewById(R.id.wheel);
             List<String> list=new ArrayList<>();
             if(type==1){
                 list.add("余料");
@@ -56,20 +56,6 @@ public class AddWastePersenter {
             wheel.setSolid(Color.WHITE,Color.WHITE);
             wheel.setLabelColor(Color.GRAY);
             wheel.setLabelSelectColor(Color.BLACK);
-            wheel.setOnWheelItemSelectedListener(new CycleWheelView.WheelItemSelectedListener() {
-                public void onItemSelected(int position, String label) {
-                    textView.setText(label);
-                    if(type==1){
-                        textView.setTag(position+1);
-                    }else{
-                        if(position==0){
-                            textView.setTag(5);
-                        }else{
-                            textView.setTag(6);
-                        }
-                    }
-                }
-            });
 
             view.findViewById(R.id.tv_cancle).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
@@ -80,6 +66,17 @@ public class AddWastePersenter {
             view.findViewById(R.id.tv_confirm).setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     popupWindow.dismiss();
+                    textView.setText(wheel.getSelectLabel());
+                    final int position=wheel.getSelection();
+                    if(type==1){
+                        textView.setTag(position+1);
+                    }else{
+                        if(position==0){
+                            textView.setTag(5);
+                        }else{
+                            textView.setTag(6);
+                        }
+                    }
                 }
             });
         }catch (Exception e){

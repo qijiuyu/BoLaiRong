@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -18,7 +19,9 @@ import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.Goods;
 import com.zxdc.utils.library.bean.Material;
+import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.UserList;
+import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 import com.zxdc.utils.library.util.ToastUtil;
 
 import butterknife.BindView;
@@ -54,12 +57,20 @@ public class AddWasteActivity extends BaseActivity {
     EditText etNum;
     @BindView(R.id.et_remark)
     EditText etRemark;
+    @BindView(R.id.rel_stock)
+    RelativeLayout relStock;
+    @BindView(R.id.rel_stockType)
+    RelativeLayout relStockType;
     private AddWastePersenter addWastePersenter;
+    //要编辑的对象
+    private ProductProgress.WasteList wasteList;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_waste);
         ButterKnife.bind(this);
         initView();
+        //显示要编辑的内容
+        showEditData();
     }
 
 
@@ -69,6 +80,27 @@ public class AddWasteActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("余废料添加产品");
         addWastePersenter=new AddWastePersenter(this);
+        wasteList= (ProductProgress.WasteList) getIntent().getSerializableExtra("wasteList");
+
+        /**
+         * 监听类别输入
+         */
+        tvType.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            public void afterTextChanged(Editable s) {
+                //如果选择的是“损耗”，那么就不需要选择仓库了
+                if(s.toString().equals("损耗")){
+                    relStock.setVisibility(View.GONE);
+                    relStockType.setVisibility(View.GONE);
+                }else{
+                    relStock.setVisibility(View.VISIBLE);
+                    relStockType.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         /**
          * 监听部门输入
@@ -159,6 +191,9 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("请选择责任部门");
                     return;
                 }
+                if(TextUtils.isEmpty(peple)){
+                    tvPeople.setTag(0);
+                }
                 if(TextUtils.isEmpty(batchNo)){
                     ToastUtil.showLong("请输入批次");
                     return;
@@ -175,6 +210,9 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("请选择仓库类别");
                     return;
                 }
+                if(type.equals("损耗")){
+                    tvStockType.setTag(0);
+                }
                 if(TextUtils.isEmpty(num)){
                     ToastUtil.showLong("请输入数量");
                     return;
@@ -183,8 +221,13 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("数量不能为0");
                     return;
                 }
-                Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag());
-                intent.putExtra("goods",goods);
+                if(wasteList==null){
+                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag());
+                    intent.putExtra("goods",goods);
+                }else{
+                    UpdateWasteP updateWasteP=new UpdateWasteP(wasteList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvType.getTag(),(int)tvDepart.getTag(),(int)tvPeople.getTag());
+                    intent.putExtra("goods",updateWasteP);
+                }
                 setResult(400,intent);
                 finish();
                 break;
@@ -193,6 +236,35 @@ public class AddWasteActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * 显示要编辑的内容
+     */
+    private void showEditData(){
+        if(wasteList==null){
+            return;
+        }
+        tvType.setText(wasteList.getTypeStr());
+        tvType.setTag(wasteList.getType());
+        tvDepart.setText(wasteList.getDeptName());
+        tvDepart.setTag(wasteList.getDeptId());
+        tvPeople.setText(wasteList.getChargeName());
+        tvPeople.setTag(wasteList.getChargeId());
+        etBatchNo.setText(wasteList.getBatchNo());
+        tvName.setText(wasteList.getGoodsName());
+        tvName.setClickable(false);
+        tvSpec.setText(wasteList.getSpec());
+        tvUnit.setText(wasteList.getUnitsType());
+        if(wasteList.getType()==3){
+            relStock.setVisibility(View.GONE);
+            relStockType.setVisibility(View.GONE);
+        }else{
+            tvStockType.setText(wasteList.getStockTypeStr());
+            tvStockType.setTag(wasteList.getStockType());
+        }
+        etNum.setText(String.valueOf(wasteList.getNum()));
+        etRemark.setText(wasteList.getMemo());
+    }
 
 
     Material.ListBean listBean;

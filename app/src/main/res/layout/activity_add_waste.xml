@@ -224,6 +224,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rel_stock"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_rel_border"
@@ -254,6 +255,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rel_stockType"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_rel_border"
