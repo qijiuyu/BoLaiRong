@@ -149,7 +149,7 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int goodId, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId) {
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId,String memo) {
         this.goodId = goodId;
         this.name = name;
         this.spec = spec;
@@ -163,6 +163,7 @@ public class Goods implements Serializable {
         this.deptId = deptId;
         this.deptName=deptName;
         this.chargeId = chargeId;
+        this.memo=memo;
     }
 
 

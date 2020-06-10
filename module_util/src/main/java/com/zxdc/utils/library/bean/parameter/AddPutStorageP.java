@@ -126,6 +126,15 @@ public class AddPutStorageP implements Serializable {
         private int type;
         private int deptId;
         private int chargeId;
+        private String memo;
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
+        }
 
         public int getGoodsId() {
             return goodsId;

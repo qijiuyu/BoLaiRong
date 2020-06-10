@@ -222,10 +222,10 @@ public class AddWasteActivity extends BaseActivity {
                     return;
                 }
                 if(wasteList==null){
-                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag());
+                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag(),remark);
                     intent.putExtra("goods",goods);
                 }else{
-                    UpdateWasteP updateWasteP=new UpdateWasteP(wasteList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvType.getTag(),(int)tvDepart.getTag(),(int)tvPeople.getTag());
+                    UpdateWasteP updateWasteP=new UpdateWasteP(wasteList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvType.getTag(),(int)tvDepart.getTag(),(int)tvPeople.getTag(),remark);
                     intent.putExtra("goods",updateWasteP);
                 }
                 setResult(400,intent);

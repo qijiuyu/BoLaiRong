@@ -112,6 +112,7 @@ public class PutStorageActivity extends BaseActivity {
                     entry.setProp2(goodsList.get(i).getRewardDes());
                     entry.setProp3(goodsList.get(i).getFineMoney());
                     entry.setProp4(goodsList.get(i).getFineDes());
+                    entry.setMemo(goodsList.get(i).getMemo());
                     entryList.add(entry);
                 }
                 addPutStorageP.setEntryDetailList(entryList);

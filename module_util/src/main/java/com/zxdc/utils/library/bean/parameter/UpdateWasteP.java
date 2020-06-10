@@ -11,10 +11,11 @@ public class UpdateWasteP implements Serializable {
     private int type;
     private int deptId;
     private int chargeId;
+    private String memo;
 
     public UpdateWasteP(){}
 
-    public UpdateWasteP(int id, int num, int stockType, String batchNo, int type, int deptId, int chargeId) {
+    public UpdateWasteP(int id, int num, int stockType, String batchNo, int type, int deptId, int chargeId,String memo) {
         this.id = id;
         this.num = num;
         this.stockType = stockType;
@@ -22,6 +23,7 @@ public class UpdateWasteP implements Serializable {
         this.type = type;
         this.deptId = deptId;
         this.chargeId = chargeId;
+        this.memo=memo;
     }
 
     public int getId() {

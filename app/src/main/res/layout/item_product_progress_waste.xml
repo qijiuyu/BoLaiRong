@@ -146,7 +146,6 @@
 
         <ImageView
             android:id="@+id/img_edit"
-            android:visibility="gone"
             android:layout_width="17dp"
             android:layout_height="17dp"
             android:src="@mipmap/edit"
