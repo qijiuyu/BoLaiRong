@@ -10,6 +10,7 @@ public class AuditOutBoundP implements Serializable {
     private int state;
     private String status;
     private String prop4;
+    private String prop1;
 
     public AuditOutBoundP(){}
 
@@ -80,5 +81,13 @@ public class AuditOutBoundP implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getProp1() {
+        return prop1;
+    }
+
+    public void setProp1(String prop1) {
+        this.prop1 = prop1;
     }
 }

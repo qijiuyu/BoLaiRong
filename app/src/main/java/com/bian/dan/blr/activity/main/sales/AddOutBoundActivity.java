@@ -135,6 +135,10 @@ public class AddOutBoundActivity extends BaseActivity {
                     ToastUtil.showLong("请输入累计收款");
                     return;
                 }
+                if(goodList.size()==0){
+                    ToastUtil.showLong("请添加产品列表");
+                    return;
+                }
                 OutBoundP outBoundP=new OutBoundP();
                 outBoundP.setCustomerId(listBean.getCustomerId());
                 outBoundP.setProp2(code);

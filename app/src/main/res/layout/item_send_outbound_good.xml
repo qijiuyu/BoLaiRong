@@ -71,7 +71,7 @@
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="单价：20.0"
+            android:text="单价：0"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="25dp"/>
@@ -80,7 +80,7 @@
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="金额：20.0"
+            android:text="金额：0"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="25dp"/>

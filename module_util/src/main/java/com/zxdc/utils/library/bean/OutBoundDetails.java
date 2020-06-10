@@ -51,9 +51,9 @@ public class OutBoundDetails extends BaseBean {
         //数量
         private int num;
         //单价
-        private String prop1="";
+        private String prop1="0";
         //总价
-        private String prop2="";
+        private String prop2="0";
         //备注
         private String memo="";
         //是否开票

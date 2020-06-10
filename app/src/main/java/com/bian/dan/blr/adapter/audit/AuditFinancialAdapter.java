@@ -54,7 +54,7 @@ public class AuditFinancialAdapter extends BaseAdapter {
         Financial.ListBean listBean=list.get(position);
         holder.tvName.setText(Html.fromHtml("申请人：<font color=\"#000000\">"+listBean.getName()+"</font>"));
         holder.tvDes.setText(Html.fromHtml("款项用途及金额：<font color=\"#000000\">"+listBean.getMemo()+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">"+ Util.setDouble(listBean.getAmount(),2) +"</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#000000\">"+ Util.setDouble(listBean.getAmount(),2) +"元</font>"));
         holder.tvTime.setText(listBean.getCreateDate());
         switch (listBean.getState()){
             case 0:

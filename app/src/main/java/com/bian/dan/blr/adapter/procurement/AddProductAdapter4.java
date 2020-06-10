@@ -56,8 +56,8 @@ public class AddProductAdapter4 extends BaseAdapter {
         holder.tvSpec.setText(goods.getSpec());
         holder.tvUnit.setText(goods.getUnitStr());
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goods.getNum()+"</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">"+goods.getPrice()+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goods.getTotalMoney()+"</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">"+goods.getPrice()+"元</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goods.getTotalMoney()+"元</font>"));
         holder.tvRemark.setText("备注："+goods.getMemo());
         holder.tvInvoice.setVisibility(View.GONE);
         return view;

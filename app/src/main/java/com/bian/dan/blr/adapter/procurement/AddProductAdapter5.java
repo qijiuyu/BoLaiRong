@@ -60,7 +60,7 @@ public class AddProductAdapter5 extends BaseAdapter {
         holder.tvBrand.setText(goods.getBrand());
         holder.tvSpec.setText(goods.getSpec());
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goods.getPrice() + "</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">" + goods.getPrice() + "元</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goods.getMemo() + "</font>"));
 
 

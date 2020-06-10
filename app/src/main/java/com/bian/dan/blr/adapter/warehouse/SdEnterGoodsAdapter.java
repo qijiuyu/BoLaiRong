@@ -56,7 +56,7 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
         holder.tvSpec.setText(goodList.getSpec());
         holder.tvUnit.setText(goodList.getUnitsStr());
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
-        holder.tvMonety.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getAmount()+"</font>"));
+        holder.tvMonety.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getAmount()+"元</font>"));
         holder.tvRemark.setText("批号："+goodList.getBatchNo());
         return view;
     }

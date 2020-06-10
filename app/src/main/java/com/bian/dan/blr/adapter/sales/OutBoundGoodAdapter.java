@@ -56,8 +56,8 @@ public class OutBoundGoodAdapter extends BaseAdapter {
         holder.tvSpec.setText(goodList.getSpec());
         holder.tvUnit.setText(goodList.getUnitStr());
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">"+goodList.getProp1()+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getProp2()+"</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价：<font color=\"#000000\">"+goodList.getProp1()+"元</font>"));
+        holder.tvMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">"+goodList.getProp2()+"元</font>"));
         holder.tvRemark.setText("备注："+goodList.getMemo());
         if(goodList.getProp3().equals("1")){
             holder.tvInvoice.setText(Html.fromHtml("是否开票：<font color=\"#000000\">是</font>"));

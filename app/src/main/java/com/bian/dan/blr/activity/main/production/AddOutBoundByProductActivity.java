@@ -76,6 +76,10 @@ public class AddOutBoundByProductActivity extends BaseActivity {
                 if(listBean==null){
                     return;
                 }
+                if(goodList.size()==0){
+                    ToastUtil.showLong("请添加出库产品列表");
+                    return;
+                }
                 AddOutBoundByProductP addOutBoundByProductP=new AddOutBoundByProductP();
                 addOutBoundByProductP.setPlanId(listBean.getId());
                 //获取用户所在部门id

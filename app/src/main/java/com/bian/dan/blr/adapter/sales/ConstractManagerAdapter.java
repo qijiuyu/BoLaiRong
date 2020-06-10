@@ -54,7 +54,7 @@ public class ConstractManagerAdapter extends BaseAdapter {
         holder.tvCode.setText(Html.fromHtml("合同编号：<font color=\"#000000\">"+listBean.getProp2()+"</font>"));
         holder.tvName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">"+listBean.getCustomerName()+"</font>"));
         holder.tvSignTime.setText(Html.fromHtml("签订时间：<font color=\"#000000\">"+listBean.getSignedTime().split(" ")[0]+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#FF4B4C\">"+listBean.getAmount()+"</font>"));
+        holder.tvMoney.setText(Html.fromHtml("订单金额：<font color=\"#FF4B4C\">"+listBean.getAmount()+"元</font>"));
         holder.tvTime.setText(listBean.getCreateDate());
         return view;
     }

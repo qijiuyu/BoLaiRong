@@ -23,7 +23,6 @@ import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
-import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
 import com.bian.dan.blr.application.MyApplication;
 import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
@@ -208,7 +207,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //请领表
             case R.id.tv_house_qlb:
-                setClass(LedTableActivity.class);
+//                setClass(LedTableActivity.class);
                 break;
             case R.id.tv_house_smsqb:
                 break;
@@ -309,7 +308,8 @@ public class MainActivity extends BaseActivity {
             return;
         }
         //设置极光推送的别名
-        JPushInterface.setAliasAndTags(getApplicationContext(), String.valueOf(userInfo.getUser().getUserId()), null, mAliasCallback);
+//        JPushInterface.setAliasAndTags(getApplicationContext(), String.valueOf(userInfo.getUser().getUserId()), null, mAliasCallback);
+        JPushInterface.setAliasAndTags(getApplicationContext(), "5", null, mAliasCallback);
     }
 
 

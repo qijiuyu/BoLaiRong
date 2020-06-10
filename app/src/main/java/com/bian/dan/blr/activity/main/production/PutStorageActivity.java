@@ -94,7 +94,7 @@ public class PutStorageActivity extends BaseActivity {
             //提交
             case R.id.tv_submit:
                 if(goodsList.size()==0){
-                    ToastUtil.showLong("请选择要入库的产品列表");
+                    ToastUtil.showLong("请添加要入库的产品列表");
                     return;
                 }
                 AddPutStorageP addPutStorageP=new AddPutStorageP();

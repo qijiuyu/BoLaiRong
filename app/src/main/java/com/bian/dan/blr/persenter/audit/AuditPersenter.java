@@ -50,18 +50,21 @@ public class AuditPersenter {
                     return;
                 }
                 popupWindow.dismiss();
-                auditOutBoundP.setProp4(remark);
                 switch (type){
                     case 1:
+                         auditOutBoundP.setProp4(remark);
                          AuditOutBound(auditOutBoundP);
                          break;
                     case 2:
+                         auditOutBoundP.setProp1(remark);
                          AuditPlan(auditOutBoundP);
                          break;
                     case 3:
+                         auditOutBoundP.setProp4(remark);
                          AuditProcurement(auditOutBoundP);
                          break;
                     case 4:
+                        auditOutBoundP.setProp4(remark);
                         AuditFinancial(auditOutBoundP);
                         break;
                     default:

@@ -242,6 +242,6 @@ public class AddProcurementActivity extends BaseActivity {
             totalMoney= BigDecimalUtil.add(totalMoney,Double.parseDouble(goodsList.get(i).getTotalMoney()));
         }
         tvProductNum.setText("数量："+totalNum);
-        tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
+        tvProductMoney.setText(Html.fromHtml("金额：<font color=\"#FF4B4C\">" + totalMoney + "元</font>"));
     }
 }
