@@ -299,14 +299,14 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
         }
         AnimatedPieViewConfig config = new AnimatedPieViewConfig();
         List<SimplePieInfo> list = new ArrayList<>();
-        list.add(new SimplePieInfo(stateBean.getName1(), Color.parseColor("#FFFF00"), "潜在客户"));
-        list.add(new SimplePieInfo(stateBean.getName2(), Color.parseColor("#F9B552"), "死单客户"));
-        list.add(new SimplePieInfo(stateBean.getName3(), Color.parseColor("#F29EC2"), "渠道客户"));
-        list.add(new SimplePieInfo(stateBean.getName4(), Color.parseColor("#8C98CC"), "流失客户"));
-        list.add(new SimplePieInfo(stateBean.getName5(), Color.parseColor("#1CFEBC"), "意向客户"));
-        list.add(new SimplePieInfo(stateBean.getName6(), Color.parseColor("#04C8FC"), "培养客户"));
-        list.add(new SimplePieInfo(stateBean.getName7(), Color.parseColor("#468DFF"), "成交客户"));
-        list.add(new SimplePieInfo(stateBean.getName8(), Color.parseColor("#12B5B0"), "客户线索"));
+        list.add(new SimplePieInfo(stateBean.getName1(), Color.parseColor("#FFFF00"), "潜在客户("+stateBean.getName1()+")"));
+        list.add(new SimplePieInfo(stateBean.getName2(), Color.parseColor("#F9B552"), "死单客户("+stateBean.getName2()+")"));
+        list.add(new SimplePieInfo(stateBean.getName3(), Color.parseColor("#F29EC2"), "渠道客户("+stateBean.getName3()+")"));
+        list.add(new SimplePieInfo(stateBean.getName4(), Color.parseColor("#8C98CC"), "流失客户("+stateBean.getName4()+")"));
+        list.add(new SimplePieInfo(stateBean.getName5(), Color.parseColor("#1CFEBC"), "意向客户("+stateBean.getName5()+")"));
+        list.add(new SimplePieInfo(stateBean.getName6(), Color.parseColor("#04C8FC"), "培养客户("+stateBean.getName6()+")"));
+        list.add(new SimplePieInfo(stateBean.getName7(), Color.parseColor("#468DFF"), "成交客户("+stateBean.getName7()+")"));
+        list.add(new SimplePieInfo(stateBean.getName8(), Color.parseColor("#12B5B0"), "客户线索("+stateBean.getName8()+")"));
         for (int i = 0; i < list.size(); i++) {
             config.addData(list.get(i));
         }
@@ -314,10 +314,10 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
                 .duration(2000)// 动画时间
                 .startAngle(-90f)// 开始的角度
                 .drawText(true)// 是否绘制文字描述
-                .textSize(20)// 绘制的文字大小
+                .textSize(22)// 绘制的文字大小
                 .textMargin(8)// 绘制文字与导航线的距离
                 .autoSize(true)// 自动测量甜甜圈半径
-                .pieRadius(130)// 甜甜圈半径
+                .pieRadius(115)// 甜甜圈半径
                 .pieRadiusRatio(0.8f)// 甜甜圈半径占比
                 .guidePointRadius(2)// 设置描述文字的开始小点的大小
                 .guideLineWidth(4)// 设置描述文字的指示线宽度

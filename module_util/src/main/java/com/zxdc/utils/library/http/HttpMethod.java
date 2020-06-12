@@ -1615,7 +1615,7 @@ public class HttpMethod extends BaseRequst {
      * 公告列表查询
      */
     public static void getNoticeList(final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getNoticeList(1,1,5).enqueue(new Callback<Notice>() {
+        Http.getRetrofit().create(HttpApi.class).getNoticeList(1,1,2).enqueue(new Callback<Notice>() {
             public void onResponse(Call<Notice> call, Response<Notice> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

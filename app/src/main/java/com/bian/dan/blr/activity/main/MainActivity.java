@@ -84,6 +84,8 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
         showBanner();
+        //公告列表查询
+        getNoticeList();
         //设置推送
         setPush();
     }
@@ -259,9 +261,10 @@ public class MainActivity extends BaseActivity {
      * 显示banner数据
      */
     private void showBanner() {
-        List<String> list = new ArrayList<>();
-        list.add("http://dyrs.yl-mall.cn/upload/image/20200228/a7b7e86b-60c1-4667-921c-ae536f5aba3a.jpg");
-        list.add("http://dyrs.yl-mall.cn/upload/image/20200228/d1855a98-9b18-4792-b470-767f43028451.jpg");
+        List<Integer> list = new ArrayList<>();
+        list.add(R.mipmap.banner_one);
+        list.add(R.mipmap.banner_two);
+        list.add(R.mipmap.banner_three);
         banner.setVisibility(View.VISIBLE);
         //设置样式，里面有很多种样式可以自己都看看效果
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -283,7 +286,7 @@ public class MainActivity extends BaseActivity {
 
     public class ABImageLoader extends ImageLoader {
         public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(activity).load(path.toString()).into(imageView);
+            Glide.with(activity).load((int)path).into(imageView);
         }
     }
 
@@ -300,7 +303,7 @@ public class MainActivity extends BaseActivity {
              list.add(noticeList.get(i).getTitle());
         }
         tvNotice.setTextList(list);//加入显示内容,集合类型
-        tvNotice.setText(14, 5, Color.BLACK);//设置属性,具体跟踪源码
+        tvNotice.setText(17, 5, Color.BLACK);//设置属性,具体跟踪源码
         tvNotice.setTextStillTime(5000);//设置停留时长间隔
         tvNotice.setAnimTime(800);//设置进入和退出的时间间隔
         tvNotice.startAutoScroll();
@@ -351,8 +354,7 @@ public class MainActivity extends BaseActivity {
             return;
         }
         //设置极光推送的别名
-//        JPushInterface.setAliasAndTags(getApplicationContext(), String.valueOf(userInfo.getUser().getUserId()), null, mAliasCallback);
-        JPushInterface.setAliasAndTags(getApplicationContext(), "5", null, mAliasCallback);
+        JPushInterface.setAliasAndTags(getApplicationContext(), String.valueOf(userInfo.getUser().getUserId()), null, mAliasCallback);
     }
 
 
@@ -377,13 +379,6 @@ public class MainActivity extends BaseActivity {
         }
     };
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //公告列表查询
-        getNoticeList();
-    }
 
     // 按两次退出
     protected long exitTime = 0;
