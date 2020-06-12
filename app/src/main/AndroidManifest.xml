@@ -132,8 +132,8 @@
         <activity android:name=".activity.main.warehouse.AddMaterial_LedTable_Activity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.ShowImgActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.LedTableDetailsActivity"  android:screenOrientation="portrait"/>
-
         <activity android:name=".activity.statistical.MapActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.NoticeDetailsActivity"  android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

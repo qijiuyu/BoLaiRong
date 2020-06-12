@@ -26,6 +26,7 @@ import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
@@ -1603,6 +1604,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 公告列表查询
+     */
+    public static void getNoticeList(final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getNoticeList(1,1,5).enqueue(new Callback<Notice>() {
+            public void onResponse(Call<Notice> call, Response<Notice> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<Notice> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

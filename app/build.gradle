@@ -81,4 +81,7 @@ dependencies {
     compile(name: 'hellocharts-library-release', ext: 'aar')
     compile 'com.hjq:xxpermissions:5.5'
     compile files('libs/BaiduLBS_Android.jar')
+    //上下滚动的textview
+    compile 'com.github.paradoxie:AutoVerticalTextview:0.1'
+    compile 'org.sufficientlysecure:html-textview:3.8'
 }

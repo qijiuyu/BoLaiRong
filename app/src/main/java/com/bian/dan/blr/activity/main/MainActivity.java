@@ -2,6 +2,7 @@ package com.bian.dan.blr.activity.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -24,14 +25,17 @@ import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
 import com.bian.dan.blr.application.MyApplication;
-import com.bian.dan.blr.view.SwitchTextView;
 import com.bumptech.glide.Glide;
+import com.paradoxie.autoscrolltextview.VerticalTextview;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ActivitysLifecycle;
 import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.SPUtil;
@@ -65,7 +69,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.tv_notice)
-    SwitchTextView tvNotice;
+    VerticalTextview tvNotice;
     @BindView(R.id.lin_sales)
     LinearLayout linSales;
     @BindView(R.id.lin_warehouse)
@@ -80,7 +84,6 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initView();
         showBanner();
-        showNotice();
         //设置推送
         setPush();
     }
@@ -288,11 +291,51 @@ public class MainActivity extends BaseActivity {
     /**
      * 显示公告
      */
-    private void showNotice() {
-        List<String> list = new ArrayList<>();
-        list.add("今天是2020年05月份，天气不错");
-        list.add("疫情期间，请大家多注意，谢谢");
-        tvNotice.startPlay(list);
+    private void showNotice(final List<Notice.ListBean> noticeList) {
+        if(noticeList==null || noticeList.size()==0){
+            return;
+        }
+        ArrayList<String> list = new ArrayList<>();
+        for (int i=0;i<noticeList.size();i++){
+             list.add(noticeList.get(i).getTitle());
+        }
+        tvNotice.setTextList(list);//加入显示内容,集合类型
+        tvNotice.setText(14, 5, Color.BLACK);//设置属性,具体跟踪源码
+        tvNotice.setTextStillTime(5000);//设置停留时长间隔
+        tvNotice.setAnimTime(800);//设置进入和退出的时间间隔
+        tvNotice.startAutoScroll();
+        //对单条文字的点击监听
+        tvNotice.setOnItemClickListener(new VerticalTextview.OnItemClickListener() {
+            public void onItemClick(int position) {
+                Notice.ListBean listBean=noticeList.get(position);
+                Intent intent=new Intent(activity,NoticeDetailsActivity.class);
+                intent.putExtra("listBean",listBean);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+
+    /**
+     * 公告列表查询
+     */
+    private void getNoticeList(){
+        HttpMethod.getNoticeList(new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                Notice notice= (Notice) object;
+                if(notice.isSussess()){
+                    //显示公告
+                    showNotice(notice.getData().getRows());
+                }else{
+                    ToastUtil.showLong(notice.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 
 
@@ -334,6 +377,13 @@ public class MainActivity extends BaseActivity {
         }
     };
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //公告列表查询
+        getNoticeList();
+    }
 
     // 按两次退出
     protected long exitTime = 0;

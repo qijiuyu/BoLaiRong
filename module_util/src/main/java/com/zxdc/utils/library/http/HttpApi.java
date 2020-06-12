@@ -26,6 +26,7 @@ import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.LogDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.MaterialInventory;
+import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.Office;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
@@ -339,6 +340,9 @@ public interface HttpApi {
 
     @POST(HttpConstant.IP+"oddsRejectDetail/update")
     Call<BaseBean> updateWaste(@Body UpdateWasteP updateWasteP);
+
+    @GET(HttpConstant.IP+"notice/list")
+    Call<Notice> getNoticeList(@Query("type") int type, @Query("page") int page, @Query("limit") int limit);
 
 
 

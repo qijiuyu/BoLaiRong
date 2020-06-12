@@ -63,14 +63,14 @@
                     android:src="@mipmap/notice"
                     android:layout_centerVertical="true"/>
 
-                <com.bian.dan.blr.view.SwitchTextView
+                <com.paradoxie.autoscrolltextview.VerticalTextview
                     android:id="@+id/tv_notice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="30dp">
-                </com.bian.dan.blr.view.SwitchTextView>
+                </com.paradoxie.autoscrolltextview.VerticalTextview>
 
                 <ImageView
                     android:layout_width="wrap_content"
