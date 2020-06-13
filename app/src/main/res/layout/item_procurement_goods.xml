@@ -24,24 +24,6 @@
                 android:textSize="14sp"
                 android:textColor="@color/color_666666"/>
 
-            <TextView
-                android:id="@+id/tv_brand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7800"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="20dp"/>
-
-            <TextView
-                android:id="@+id/tv_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="片"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="20dp"/>
-
         </LinearLayout>
 
     <LinearLayout
@@ -51,27 +33,27 @@
         android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tv_num"
+            android:id="@+id/tv_spec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="数量：xxx"
+            android:text="规格/型号：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
 
         <TextView
-            android:id="@+id/tv_price"
+            android:id="@+id/tv_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="单价：xxx"
+            android:text="单位：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="20dp"/>
 
         <TextView
-            android:id="@+id/tv_money"
+            android:id="@+id/tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="金额：xxx"
+            android:text="数量：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_marginLeft="20dp"/>
@@ -85,21 +67,55 @@
         android:layout_marginTop="7dp">
 
         <TextView
-            android:id="@+id/tv_supplier_name"
+            android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="供应商名称：xxx"
+            android:text="单价：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="金额：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginLeft="25dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_supplier_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="供应商名称：xxx"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp">
 
         <TextView
             android:id="@+id/tv_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="王经理   15000000000"
+            android:text="联系人：xxx"
             android:textSize="14sp"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="20dp"/>
+            android:textColor="@color/color_666666"/>
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginLeft="25dp"/>
 
 
     </LinearLayout>

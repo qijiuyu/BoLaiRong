@@ -24,11 +24,11 @@ public class AddProductAdapter5 extends BaseAdapter {
     private List<Goods> list;
     private AddSupplierPersenter addSupplierPersenter;
 
-    public AddProductAdapter5(AddSupplierActivity activity, List<Goods> list,AddSupplierPersenter addSupplierPersenter) {
+    public AddProductAdapter5(AddSupplierActivity activity, List<Goods> list, AddSupplierPersenter addSupplierPersenter) {
         super();
         this.activity = activity;
         this.list = list;
-        this.addSupplierPersenter=addSupplierPersenter;
+        this.addSupplierPersenter = addSupplierPersenter;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class AddProductAdapter5 extends BaseAdapter {
         }
         Goods goods = list.get(position);
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand());
-        holder.tvSpec.setText(goods.getSpec());
+        holder.tvBrand.setText(Html.fromHtml("牌号：<font color=\"#000000\">" + goods.getBrand() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goods.getPrice() + "</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goods.getMemo() + "</font>"));
@@ -71,7 +71,7 @@ public class AddProductAdapter5 extends BaseAdapter {
         holder.imgEdit.setTag(goods);
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Goods goods= (Goods) v.getTag();
+                Goods goods = (Goods) v.getTag();
                 activity.gotoEdit(goods);
             }
         });
@@ -84,11 +84,11 @@ public class AddProductAdapter5 extends BaseAdapter {
         holder.imgDelete.setTag(goods);
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Goods goods= (Goods) v.getTag();
-                if(goods.getId()==0){
+                Goods goods = (Goods) v.getTag();
+                if (goods.getId() == 0) {
                     list.remove(goods);
                     notifyDataSetChanged();
-                }else{
+                } else {
                     addSupplierPersenter.deleteSupplierGoods(goods);
                 }
             }
@@ -101,12 +101,12 @@ public class AddProductAdapter5 extends BaseAdapter {
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
+        @BindView(R.id.tv_unit)
+        TextView tvUnit;
         @BindView(R.id.tv_brand)
         TextView tvBrand;
         @BindView(R.id.tv_spec)
         TextView tvSpec;
-        @BindView(R.id.tv_unit)
-        TextView tvUnit;
         @BindView(R.id.tv_price)
         TextView tvPrice;
         @BindView(R.id.tv_remark)

@@ -68,38 +68,23 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_batchNo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="7dp">
-
-            <TextView
-                android:id="@+id/tv_batchNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="批次：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginRight="20dp"/>
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="7dp">
+            android:text="批次：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="7dp"/>
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:text="物料名称：xxx"
             android:textSize="14sp"
             android:textColor="@color/color_666666"/>
-
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,12 +110,12 @@
                 android:layout_marginLeft="25dp"/>
 
             <TextView
-                android:id="@+id/tv_brand"
+                android:id="@+id/tv_spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7800"
+                android:text="规格/型号：xxx"
                 android:textSize="14sp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/color_666666"
                 android:layout_marginLeft="30dp"/>
 
         </LinearLayout>

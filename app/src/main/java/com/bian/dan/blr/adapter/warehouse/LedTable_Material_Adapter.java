@@ -59,8 +59,8 @@ public class LedTable_Material_Adapter extends BaseAdapter {
         }
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand());
-        holder.tvSpec.setText(goods.getSpec());
+        holder.tvBrand.setText(Html.fromHtml("牌号：<font color=\"#000000\">" + goods.getBrand() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
         holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + goods.getStockName() + "</font>"));
         holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + goods.getBatchNo() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("领取数量/更换数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));

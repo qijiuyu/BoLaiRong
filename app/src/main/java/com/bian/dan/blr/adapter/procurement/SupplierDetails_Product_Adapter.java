@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -43,7 +44,6 @@ public class SupplierDetails_Product_Adapter extends BaseAdapter {
     }
 
     ViewHolder holder = null;
-
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
             view = LayoutInflater.from(activity).inflate(R.layout.item_add_product5, null);
@@ -54,8 +54,8 @@ public class SupplierDetails_Product_Adapter extends BaseAdapter {
         }
         SupplierDetails.GoodList goodList = list.get(position);
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
-        holder.tvBrand.setText(goodList.getBrand());
-        holder.tvSpec.setText(goodList.getSpec());
+        holder.tvBrand.setText(Html.fromHtml("牌号：<font color=\"#000000\">" + goodList.getBrand() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goodList.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitStr() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getProp1() + "</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
@@ -67,16 +67,20 @@ public class SupplierDetails_Product_Adapter extends BaseAdapter {
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
+        @BindView(R.id.tv_unit)
+        TextView tvUnit;
         @BindView(R.id.tv_brand)
         TextView tvBrand;
         @BindView(R.id.tv_spec)
         TextView tvSpec;
-        @BindView(R.id.tv_unit)
-        TextView tvUnit;
         @BindView(R.id.tv_price)
         TextView tvPrice;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
+        @BindView(R.id.img_edit)
+        ImageView imgEdit;
+        @BindView(R.id.img_delete)
+        ImageView imgDelete;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

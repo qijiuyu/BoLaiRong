@@ -11,20 +11,13 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="物料名称：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
-
-        </LinearLayout>
+            android:text="物料名称：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,25 +40,16 @@
                 android:text="数量：xxx"
                 android:textSize="14sp"
                 android:textColor="@color/color_666666"
-                android:layout_marginLeft="25dp"/>
-
-            <TextView
-                android:id="@+id/tv_brand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7800"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="25dp"/>
+                android:layout_marginLeft="20dp"/>
 
             <TextView
                 android:id="@+id/tv_spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="WNGA0029"
+                android:text="规格/型号：xxx"
                 android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="25dp"/>
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="20dp"/>
 
         </LinearLayout>
 

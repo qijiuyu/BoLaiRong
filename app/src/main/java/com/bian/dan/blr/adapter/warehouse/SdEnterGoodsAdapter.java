@@ -20,15 +20,16 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<SdEnterDetails.GoodList> list;
-    public SdEnterGoodsAdapter(Activity activity,List<SdEnterDetails.GoodList> list) {
+
+    public SdEnterGoodsAdapter(Activity activity, List<SdEnterDetails.GoodList> list) {
         super();
         this.activity = activity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -50,14 +51,13 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        SdEnterDetails.GoodList goodList=list.get(position);
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goodList.getGoodsName()+"</font>"));
-        holder.tvBrand.setText(goodList.getStockTypeStr());
-        holder.tvSpec.setText(goodList.getSpec());
-        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">"+goodList.getUnitsStr()+"</font>"));
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
-        holder.tvMonety.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">"+goodList.getAmount()+"</font>"));
-        holder.tvRemark.setText("批号："+goodList.getBatchNo());
+        SdEnterDetails.GoodList goodList = list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goodList.getSpec() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitsStr() + "</font>"));
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
+        holder.tvMonety.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
+        holder.tvRemark.setText("批号：" + goodList.getBatchNo());
         return view;
     }
 
@@ -66,12 +66,10 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
-        @BindView(R.id.tv_spec)
-        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_num)
         TextView tvNum;
         @BindView(R.id.tv_price)

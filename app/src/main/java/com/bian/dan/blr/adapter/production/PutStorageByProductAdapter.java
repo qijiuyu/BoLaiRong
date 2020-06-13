@@ -54,7 +54,7 @@ public class PutStorageByProductAdapter extends BaseAdapter {
         Goods goods = list.get(position);
         holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + goods.getBatchNo() + "</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getBrand()+"/"+goods.getSpec());
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
         holder.tvRemark.setText("备注：" + goods.getMemo());
@@ -68,12 +68,12 @@ public class PutStorageByProductAdapter extends BaseAdapter {
         TextView tvBatchNo;
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
         TextView tvNum;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 

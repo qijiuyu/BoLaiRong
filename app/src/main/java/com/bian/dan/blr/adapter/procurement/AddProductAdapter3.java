@@ -54,14 +54,14 @@ public class AddProductAdapter3 extends BaseAdapter {
         }
         Goods goods = list.get(position);
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
-        holder.tvBrand.setText(goods.getSpec());
-        holder.tvUnit.setText(goods.getUnitStr());
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goods.getPrice() + "</font>"));
         holder.tvMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goods.getTotalMoney() + "</font>"));
-
         holder.tvSupplierName.setText(Html.fromHtml("供应商名称：<font color=\"#000000\">" + goods.getCompany() + "</font>"));
-        holder.tvContact.setText(goods.getContract() + "   " + goods.getMobile());
+        holder.tvContact.setText(Html.fromHtml("联系人：<font color=\"#000000\">" + goods.getContract() + "</font>"));
+        holder.tvMobile.setText(Html.fromHtml("电话：<font color=\"#000000\">" + goods.getMobile() + "</font>"));
         holder.tvAddress.setText(Html.fromHtml("地址：<font color=\"#000000\">" + goods.getAddress() + "</font>"));
         if (goods.getPayType() == 1) {
             holder.tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">全款</font>"));
@@ -78,7 +78,7 @@ public class AddProductAdapter3 extends BaseAdapter {
         holder.imgDelete.setTag(goods);
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Goods goods= (Goods) v.getTag();
+                Goods goods = (Goods) v.getTag();
                 list.remove(goods);
                 notifyDataSetChanged();
             }
@@ -91,7 +91,7 @@ public class AddProductAdapter3 extends BaseAdapter {
         holder.imgEdit.setTag(goods);
         holder.imgEdit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Goods goods= (Goods) v.getTag();
+                Goods goods = (Goods) v.getTag();
                 activity.gotoEdit(goods);
             }
         });
@@ -103,8 +103,8 @@ public class AddProductAdapter3 extends BaseAdapter {
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
@@ -117,6 +117,8 @@ public class AddProductAdapter3 extends BaseAdapter {
         TextView tvSupplierName;
         @BindView(R.id.tv_contact)
         TextView tvContact;
+        @BindView(R.id.tv_mobile)
+        TextView tvMobile;
         @BindView(R.id.tv_address)
         TextView tvAddress;
         @BindView(R.id.tv_pay_type)

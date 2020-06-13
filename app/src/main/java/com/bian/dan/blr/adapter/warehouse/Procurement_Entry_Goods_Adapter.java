@@ -21,6 +21,7 @@ public class Procurement_Entry_Goods_Adapter extends BaseAdapter {
 
     private Confirm_Procurement_EntryActivity activity;
     private List<ProcurementDetails.GoodList> list;
+
     public Procurement_Entry_Goods_Adapter(Confirm_Procurement_EntryActivity activity, List<ProcurementDetails.GoodList> list) {
         super();
         this.activity = activity;
@@ -53,14 +54,15 @@ public class Procurement_Entry_Goods_Adapter extends BaseAdapter {
         }
         ProcurementDetails.GoodList goodList = list.get(position);
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
-        holder.tvBrand.setText(goodList.getSpec());
-        holder.tvUnit.setText(goodList.getUnitStr());
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goodList.getSpec() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getUnitPrice() + "</font>"));
         holder.tvMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
 
         holder.tvSupplierName.setText(Html.fromHtml("供应商名称：<font color=\"#000000\">" + goodList.getSupplierName() + "</font>"));
-        holder.tvContact.setText(goodList.getContacts() + "   " + goodList.getPhone());
+        holder.tvContact.setText(Html.fromHtml("联系人：<font color=\"#000000\">" + goodList.getContacts() + "</font>"));
+        holder.tvMobile.setText(Html.fromHtml("电话：<font color=\"#000000\">" + goodList.getPhone() + "</font>"));
         holder.tvAddress.setText(Html.fromHtml("地址：<font color=\"#000000\">" + goodList.getAddress() + "</font>"));
         if (goodList.getPayType() == 1) {
             holder.tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">全款</font>"));
@@ -84,12 +86,13 @@ public class Procurement_Entry_Goods_Adapter extends BaseAdapter {
         return view;
     }
 
+
     static
     class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
@@ -102,6 +105,8 @@ public class Procurement_Entry_Goods_Adapter extends BaseAdapter {
         TextView tvSupplierName;
         @BindView(R.id.tv_contact)
         TextView tvContact;
+        @BindView(R.id.tv_mobile)
+        TextView tvMobile;
         @BindView(R.id.tv_address)
         TextView tvAddress;
         @BindView(R.id.tv_pay_type)

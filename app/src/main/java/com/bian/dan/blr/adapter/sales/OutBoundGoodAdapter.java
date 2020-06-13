@@ -20,15 +20,16 @@ public class OutBoundGoodAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<OutBoundDetails.GoodList> list;
+
     public OutBoundGoodAdapter(Activity activity, List<OutBoundDetails.GoodList> list) {
         super();
         this.activity = activity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -50,39 +51,40 @@ public class OutBoundGoodAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        OutBoundDetails.GoodList goodList=list.get(position);
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goodList.getGoodsName()+"</font>"));
-        holder.tvBrand.setText(goodList.getBrand());
-        holder.tvSpec.setText(goodList.getSpec());
-        holder.tvUnit.setText(goodList.getUnitStr());
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goodList.getNum()+"</font>"));
-        holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">"+goodList.getProp1()+"</font>"));
-        holder.tvMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">"+goodList.getProp2()+"</font>"));
-        holder.tvRemark.setText("备注："+goodList.getMemo());
-        if(goodList.getProp3().equals("1")){
+        OutBoundDetails.GoodList goodList = list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodList.getGoodsName() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitStr() + "</font>"));
+        holder.tvBrand.setText(Html.fromHtml("牌号：<font color=\"#000000\">" + goodList.getBrand() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goodList.getSpec() + "</font>"));
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getProp1() + "</font>"));
+        holder.tvMonety.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getProp2() + "</font>"));
+        holder.tvRemark.setText("备注：" + goodList.getMemo());
+        if (goodList.getProp3().equals("1")) {
             holder.tvInvoice.setText(Html.fromHtml("是否开票：<font color=\"#000000\">是</font>"));
-        }else{
+        } else {
             holder.tvInvoice.setText(Html.fromHtml("是否开票：<font color=\"#000000\">否</font>"));
         }
         return view;
     }
 
 
-    static class ViewHolder {
+    static
+    class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
+        @BindView(R.id.tv_unit)
+        TextView tvUnit;
         @BindView(R.id.tv_brand)
         TextView tvBrand;
         @BindView(R.id.tv_spec)
         TextView tvSpec;
-        @BindView(R.id.tv_unit)
-        TextView tvUnit;
         @BindView(R.id.tv_num)
         TextView tvNum;
         @BindView(R.id.tv_price)
         TextView tvPrice;
         @BindView(R.id.tv_monety)
-        TextView tvMoney;
+        TextView tvMonety;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
         @BindView(R.id.tv_invoice)

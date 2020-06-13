@@ -322,7 +322,7 @@ public class StatisticalActivity extends BaseActivity implements TextWatcher{
                 .guidePointRadius(2)// 设置描述文字的开始小点的大小
                 .guideLineWidth(4)// 设置描述文字的指示线宽度
                 .guideLineMarginStart(9)// 设置描述文字的指示线开始距离外圆半径的大小
-                .textGravity(AnimatedPieViewConfig.ABOVE)// 设置描述文字方向 【-AnimatedPieViewConfig.ABOVE：文字将会在导航线上方绘制-AnimatedPieViewConfig.BELOW：文字在导航线下方绘制-AnimatedPieViewConfig.ALIGN：文字与导航线对齐-AnimatedPieViewConfig.ECTOPIC：文字在1、2象限部分绘制在线的上方，在3、4象限绘制在线的下方】
+                .textGravity(AnimatedPieViewConfig.DYSTOPY)// 设置描述文字方向 【-AnimatedPieViewConfig.ABOVE：文字将会在导航线上方绘制-AnimatedPieViewConfig.BELOW：文字在导航线下方绘制-AnimatedPieViewConfig.ALIGN：文字与导航线对齐-AnimatedPieViewConfig.ECTOPIC：文字在1、2象限部分绘制在线的上方，在3、4象限绘制在线的下方】
                 .canTouch(true)// 是否允许甜甜圈点击放大
                 .splitAngle(0);// 甜甜圈间隙角度
         viewCustomer.applyConfig(config);

@@ -21,6 +21,7 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
 
     private Activity activity;
     private List<ProductProgress.OutBoundList> list;
+
     public ProductProgressByOutBoundAdapter(Activity activity, List<ProductProgress.OutBoundList> list) {
         super();
         this.activity = activity;
@@ -51,21 +52,21 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        ProductProgress.OutBoundList outBoundList= list.get(position);
-        if(!TextUtils.isEmpty(outBoundList.getBatchNo())){
+        ProductProgress.OutBoundList outBoundList = list.get(position);
+        if (!TextUtils.isEmpty(outBoundList.getBatchNo())) {
             holder.tvBatchNo.setVisibility(View.VISIBLE);
             holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + outBoundList.getBatchNo() + "</font>"));
-        }else{
+        } else {
             holder.tvBatchNo.setVisibility(View.GONE);
         }
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + outBoundList.getGoodsName() + "</font>"));
-        holder.tvSpec.setText(outBoundList.getBrand()+"/"+outBoundList.getSpec());
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + outBoundList.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + outBoundList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + outBoundList.getNum() + "</font>"));
-        if(!TextUtils.isEmpty(outBoundList.getProp2())){
+        if (!TextUtils.isEmpty(outBoundList.getProp2())) {
             holder.tvTime.setVisibility(View.VISIBLE);
             holder.tvTime.setText(Html.fromHtml("日期：<font color=\"#000000\">" + outBoundList.getProp2() + "</font>"));
-        }else{
+        } else {
             holder.tvTime.setVisibility(View.GONE);
         }
         holder.tvRemark.setText("备注：" + outBoundList.getMemo());
@@ -79,12 +80,12 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
         TextView tvBatchNo;
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_spec)
-        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
         TextView tvNum;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_time)
         TextView tvTime;
         @BindView(R.id.tv_remark)

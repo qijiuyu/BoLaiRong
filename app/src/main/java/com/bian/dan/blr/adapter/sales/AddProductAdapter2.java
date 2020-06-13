@@ -20,15 +20,16 @@ public class AddProductAdapter2 extends BaseAdapter {
 
     private Activity activity;
     private List<Goods> list;
-    public AddProductAdapter2(Activity activity,List<Goods> list) {
+
+    public AddProductAdapter2(Activity activity, List<Goods> list) {
         super();
         this.activity = activity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
@@ -50,28 +51,26 @@ public class AddProductAdapter2 extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-        Goods goods=list.get(position);
-        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">"+goods.getName()+"</font>"));
-        holder.tvBrand.setText(goods.getBrand());
-        holder.tvSpec.setText(goods.getSpec());
-        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">"+goods.getUnitStr()+"</font>"));
-        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">"+goods.getNum()+"</font>"));
-        holder.tvRemark.setText("备注："+goods.getMemo());
+        Goods goods = list.get(position);
+        holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goods.getName() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
+        holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
+        holder.tvRemark.setText("备注：" + goods.getMemo());
         return view;
     }
 
 
-    static class ViewHolder {
+    static
+    class ViewHolder {
         @BindView(R.id.tv_name)
         TextView tvName;
-        @BindView(R.id.tv_brand)
-        TextView tvBrand;
-        @BindView(R.id.tv_spec)
-        TextView tvSpec;
         @BindView(R.id.tv_unit)
         TextView tvUnit;
         @BindView(R.id.tv_num)
         TextView tvNum;
+        @BindView(R.id.tv_spec)
+        TextView tvSpec;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 
