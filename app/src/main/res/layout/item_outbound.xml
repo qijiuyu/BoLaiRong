@@ -48,6 +48,16 @@
             android:textSize="14sp"
             android:textColor="@color/color_666666"
             android:layout_below="@id/tv_people"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_below="@id/tv_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时间："
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="15dp"/>
 
@@ -59,21 +69,10 @@
             android:layout_centerVertical="true">
 
             <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="xxxxx"
-                android:textColor="@color/color_666666"
-                android:textSize="14sp"
-                android:drawableLeft="@mipmap/time"
-                android:drawablePadding="5dp"/>
-
-            <TextView
                 android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="未审核"
-                android:layout_marginTop="8dp"
                 android:textColor="@color/color_FE8E2C"
                 android:textSize="14sp"
                 android:layout_gravity="right"/>

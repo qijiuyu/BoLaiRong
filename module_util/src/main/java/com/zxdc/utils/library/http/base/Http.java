@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.zxdc.utils.library.base.BaseApplication;
+import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpConstant;
 import com.zxdc.utils.library.util.SPUtil;
 
@@ -13,7 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -96,7 +96,7 @@ public class Http {
     /**
      * 下载文件
      */
-    public static void dowload(String dowloadUrl, final String outPath, final Handler mHandler, final Callback callback) {
+    public static void dowload(String dowloadUrl, final String outPath, final NetWorkCallBack netWorkCallBack, final Callback callback) {
         Request request = new Request.Builder().url(dowloadUrl).build();
         Call call = new OkHttpClient.Builder().readTimeout(60 * 5, TimeUnit.SECONDS).build().newCall(request);
         call.enqueue(new Callback() {
@@ -122,13 +122,13 @@ public class Http {
                 while ((len = is.read(buf)) != -1) {
                     l += len;
                     fos.write(buf, 0, len);
-                    if (null != mHandler) {
-                        format.setMinimumFractionDigits(0);// 设置小数位
-                        Message msg = new Message();
+//                    if (null != mHandler) {
+//                        format.setMinimumFractionDigits(0);// 设置小数位
+//                        Message msg = new Message();
 //                        msg.what = HandlerConstant.DOWNLOAD_PRORESS;
-                        msg.obj = format.format((float) l / (float) length);
-                        mHandler.sendMessage(msg);
-                    }
+//                        msg.obj = format.format((float) l / (float) length);
+//                        mHandler.sendMessage(msg);
+//                    }
                 }
                 fos.flush();
                 is.close();

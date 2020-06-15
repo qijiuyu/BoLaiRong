@@ -56,7 +56,7 @@ public class OutBoundAdapter extends BaseAdapter {
         holder.tvPeople.setText(Html.fromHtml("联系人：<font color=\"#000000\">"+listBean.getContacts()+"</font>"));
         holder.tvMobile.setText(Html.fromHtml("手机号：<font color=\"#000000\">"+listBean.getPhone()+"</font>"));
         holder.tvStatus.setText(listBean.getStateStr());
-        holder.tvTime.setText(listBean.getCreateDate());
+        holder.tvTime.setText(Html.fromHtml("时间：<font color=\"#000000\">"+listBean.getCreateDate()+"</font>"));
         switch (listBean.getState()){
             case 0:
                  holder.tvStatus.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));

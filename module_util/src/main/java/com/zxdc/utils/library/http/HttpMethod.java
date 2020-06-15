@@ -14,6 +14,7 @@ import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
+import com.zxdc.utils.library.bean.DownLoad;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Income;
@@ -1623,6 +1624,25 @@ public class HttpMethod extends BaseRequst {
             public void onFailure(Call<Notice> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 文件下载
+     */
+    public static void download(final DownLoad downLoad, final NetWorkCallBack netWorkCallBack) {
+        Http.dowload(downLoad.getDownPath(), downLoad.getSavePath(),netWorkCallBack, new okhttp3.Callback() {
+            public void onFailure(okhttp3.Call call, IOException e) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(e.getMessage());
+            }
+            public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+                if(response.isSuccessful()){
+                    DialogUtil.closeProgress();
+                    netWorkCallBack.onSuccess(response.body());
+                }
             }
         });
     }

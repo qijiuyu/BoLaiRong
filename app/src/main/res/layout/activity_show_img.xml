@@ -32,6 +32,17 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"/>
 
+        <TextView android:id="@+id/tv_save"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:text="保存"
+            android:textColor="@android:color/white"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_marginRight="15dp"/>
+
     </RelativeLayout>
 
     <RelativeLayout

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.ShowImgActivity;
+import com.bian.dan.blr.activity.main.sales.ContractDetailsActivity;
 import com.bumptech.glide.Glide;
 import com.zxdc.utils.library.bean.FileBean;
 
@@ -21,11 +22,11 @@ import butterknife.ButterKnife;
 
 public class NetGridViewImgAdapter extends BaseAdapter {
 
-    private Activity context;
+    private Activity activity;
     public List<FileBean> list;
-    public NetGridViewImgAdapter(Activity context, List<FileBean> list) {
+    public NetGridViewImgAdapter(Activity activity, List<FileBean> list) {
         super();
-        this.context = context;
+        this.activity = activity;
         this.list = list;
     }
 
@@ -47,14 +48,14 @@ public class NetGridViewImgAdapter extends BaseAdapter {
     ViewHolder holder = null;
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_gridview, null);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_gridview, null);
             holder = new ViewHolder(view);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         FileBean fileBean=list.get(position);
-        Glide.with(context).load(fileBean.getUrl()).into(holder.image);
+        Glide.with(activity).load(fileBean.getUrl()).into(holder.image);
 
         /**
          * 查看大图
@@ -66,10 +67,13 @@ public class NetGridViewImgAdapter extends BaseAdapter {
                 for (int i=0;i<list.size();i++){
                      imgList.add(list.get(i).getUrl());
                 }
-                Intent intent=new Intent(context, ShowImgActivity.class);
+                Intent intent=new Intent(activity, ShowImgActivity.class);
                 intent.putStringArrayListExtra("imgs", (ArrayList<String>) imgList);
                 intent.putExtra("position",(int)v.getTag(R.id.imageid));
-                context.startActivity(intent);
+                if(activity instanceof ContractDetailsActivity){
+                    intent.putExtra("type",1);
+                }
+                activity.startActivity(intent);
             }
         });
         return view;
