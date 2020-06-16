@@ -39,6 +39,7 @@ import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
@@ -347,6 +348,9 @@ public interface HttpApi {
 
     @POST(HttpConstant.IP+"customer/approval")
     Call<BaseBean> auditCustomer(@Body CustomerAuditP customerAuditP);
+
+    @GET(HttpConstant.IP+"selling/getList")
+    Call<SellingOutBound> getSellingList(@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
 
 
 }

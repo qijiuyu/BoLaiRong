@@ -67,13 +67,13 @@ public class CustomerManagerActivity extends BaseActivity {
                 break;
             //我的客户
             case R.id.tv_my_customer:
-                pageIndex = 0;
+                pageIndex = 1;
                 updateViewPager();
                 viewPager.setCurrentItem(0);
                 break;
             //客户公海
             case R.id.tv_customer:
-                pageIndex = 1;
+                pageIndex = 2;
                 updateViewPager();
                 viewPager.setCurrentItem(1);
                 break;

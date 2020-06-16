@@ -40,6 +40,7 @@ import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
@@ -1659,6 +1660,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 售卖出库表
+     */
+    public static void getSellingList(String startDate,String endDate,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSellingList(startDate,endDate,page,limit).enqueue(new Callback<SellingOutBound>() {
+            public void onResponse(Call<SellingOutBound> call, Response<SellingOutBound> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<SellingOutBound> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

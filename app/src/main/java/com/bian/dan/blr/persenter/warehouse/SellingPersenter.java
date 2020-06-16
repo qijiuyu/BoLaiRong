@@ -1,9 +1,9 @@
-package com.bian.dan.blr.persenter.sales;
+package com.bian.dan.blr.persenter.warehouse;
 
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
+import com.bian.dan.blr.activity.main.warehouse.SellingListActivity;
 import com.bian.dan.blr.view.time.CustomDatePicker;
 import com.zxdc.utils.library.util.ToastUtil;
 
@@ -11,11 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class SdEnterPersenter {
+public class SellingPersenter {
 
-    private SdEnterActivity activity;
+    private SellingListActivity activity;
 
-    public SdEnterPersenter(SdEnterActivity activity){
+    public SellingPersenter(SellingListActivity activity){
         this.activity=activity;
     }
 
