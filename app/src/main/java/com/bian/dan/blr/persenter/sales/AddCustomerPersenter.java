@@ -34,8 +34,6 @@ public class AddCustomerPersenter {
     private List<Dict.DictBean> industryList=new ArrayList<>();
     //客户状态集合
     private List<Dict.DictBean> statusList=new ArrayList<>();
-    //开户行集合
-    private List<Dict.DictBean> bankList=new ArrayList<>();
     /**
      * 11：所属行业
      * 3：客户状态
@@ -66,11 +64,6 @@ public class AddCustomerPersenter {
             getDict(type);
             return;
         }
-        if(type==4 && bankList.size()==0){
-            //获取开户行数据
-            getDict(type);
-            return;
-        }
         View view= LayoutInflater.from(activity).inflate(R.layout.wheel_select,null);
         final PopupWindow popupWindow= DialogUtil.showPopWindow(view);
         popupWindow .showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
@@ -84,10 +77,6 @@ public class AddCustomerPersenter {
             }else if(type==3){
                 for (int i=0;i<statusList.size();i++){
                     list.add(statusList.get(i).getName());
-                }
-            }else if(type==4){
-                for (int i=0;i<bankList.size();i++){
-                    list.add(bankList.get(i).getName());
                 }
             }else{
                 list.add("私有");
@@ -110,9 +99,6 @@ public class AddCustomerPersenter {
                     }else if(type==3){
                         textView.setText(statusList.get(position).getName());
                         textView.setTag(statusList.get(position).getId());
-                    }else if(type==4){
-                        textView.setText(bankList.get(position).getName());
-                        textView.setTag(bankList.get(position).getId());
                     }else{
                         textView.setText(label);
                     }
@@ -149,8 +135,6 @@ public class AddCustomerPersenter {
                         industryList.addAll(dict.getList());
                     }else if(type==3){
                         statusList.addAll(dict.getList());
-                    }else{
-                        bankList.addAll(dict.getList());
                     }
                     //展示下拉选择框
                     selectText(textView,type);

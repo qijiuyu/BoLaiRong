@@ -26,7 +26,61 @@ public class SupplierDetails extends BaseBean {
         private String memo="";
         private int createId;
         private String createDate="";
+        private String openAccount;
+        private String openBank;
+        private String openAccName;
+        private String privateAccount;
+        private String privateBank;
+        private String privateAccName;
         private List<GoodList> supplierDetailList;
+
+        public String getOpenAccount() {
+            return openAccount;
+        }
+
+        public void setOpenAccount(String openAccount) {
+            this.openAccount = openAccount;
+        }
+
+        public String getOpenBank() {
+            return openBank;
+        }
+
+        public void setOpenBank(String openBank) {
+            this.openBank = openBank;
+        }
+
+        public String getOpenAccName() {
+            return openAccName;
+        }
+
+        public void setOpenAccName(String openAccName) {
+            this.openAccName = openAccName;
+        }
+
+        public String getPrivateAccount() {
+            return privateAccount;
+        }
+
+        public void setPrivateAccount(String privateAccount) {
+            this.privateAccount = privateAccount;
+        }
+
+        public String getPrivateBank() {
+            return privateBank;
+        }
+
+        public void setPrivateBank(String privateBank) {
+            this.privateBank = privateBank;
+        }
+
+        public String getPrivateAccName() {
+            return privateAccName;
+        }
+
+        public void setPrivateAccName(String privateAccName) {
+            this.privateAccName = privateAccName;
+        }
 
         public int getId() {
             return id;

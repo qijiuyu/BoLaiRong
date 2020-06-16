@@ -15,10 +15,13 @@ public class AddCustomerP implements Serializable {
     private String qq;
     private String email;
     private String url;
-    private String corAccount;
     private String ein;
-    private int openBank;
-    private String accName;
+    private String openAccount;
+    private String openBank;
+    private String openAccName;
+    private String privateAccount;
+    private String privateBank;
+    private String privateAccName;
     private String landline;
     private String postAddress;
     private int privateState;
@@ -112,12 +115,45 @@ public class AddCustomerP implements Serializable {
         this.url = url;
     }
 
-    public String getCorAccount() {
-        return corAccount;
+
+    public String getOpenAccount() {
+        return openAccount;
     }
 
-    public void setCorAccount(String corAccount) {
-        this.corAccount = corAccount;
+    public void setOpenAccount(String openAccount) {
+        this.openAccount = openAccount;
+    }
+
+    public String getOpenAccName() {
+        return openAccName;
+    }
+
+    public void setOpenAccName(String openAccName) {
+        this.openAccName = openAccName;
+    }
+
+    public String getPrivateAccount() {
+        return privateAccount;
+    }
+
+    public void setPrivateAccount(String privateAccount) {
+        this.privateAccount = privateAccount;
+    }
+
+    public String getPrivateBank() {
+        return privateBank;
+    }
+
+    public void setPrivateBank(String privateBank) {
+        this.privateBank = privateBank;
+    }
+
+    public String getPrivateAccName() {
+        return privateAccName;
+    }
+
+    public void setPrivateAccName(String privateAccName) {
+        this.privateAccName = privateAccName;
     }
 
     public String getEin() {
@@ -128,21 +164,14 @@ public class AddCustomerP implements Serializable {
         this.ein = ein;
     }
 
-    public int getOpenBank() {
+    public String getOpenBank() {
         return openBank;
     }
 
-    public void setOpenBank(int openBank) {
+    public void setOpenBank(String openBank) {
         this.openBank = openBank;
     }
 
-    public String getAccName() {
-        return accName;
-    }
-
-    public void setAccName(String accName) {
-        this.accName = accName;
-    }
 
     public String getLandline() {
         return landline;

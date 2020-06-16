@@ -82,6 +82,12 @@ public class CustomerDetailsActivity extends BaseActivity {
     ScrollView scrollView;
     @BindView(R.id.lin_audit)
     LinearLayout linAudit;
+    @BindView(R.id.tv_pri_account)
+    TextView tvPriAccount;
+    @BindView(R.id.tv_pri_bank)
+    TextView tvPriBank;
+    @BindView(R.id.tv_pri_account_name)
+    TextView tvPriAccountName;
     private Customer customer;
     private CustomerPersenter customerPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,16 +105,16 @@ public class CustomerDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
-        customerPersenter=new CustomerPersenter(this);
+        customerPersenter = new CustomerPersenter(this);
         customer = (Customer) getIntent().getSerializableExtra("customer");
-        if(customer!=null){
-            if(customer.getPrivateState()==1){
+        if (customer != null) {
+            if (customer.getPrivateState() == 1) {
                 tvRight.setText("编辑");
             }
         }
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list,R.id.tv_ok,R.id.tv_no,R.id.tv_get})
+    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list, R.id.tv_ok, R.id.tv_no, R.id.tv_get})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -116,23 +122,23 @@ public class CustomerDetailsActivity extends BaseActivity {
                 break;
             //编辑
             case R.id.tv_right:
-                Intent intent=new Intent(this,AddCustomerActivity.class);
-                intent.putExtra("customer",customer);
-                startActivityForResult(intent,1000);
+                Intent intent = new Intent(this, AddCustomerActivity.class);
+                intent.putExtra("customer", customer);
+                startActivityForResult(intent, 1000);
                 break;
-           //查看跟进记录
+            //查看跟进记录
             case R.id.tv_follow_list:
-                 CustomerFollow customerFollow=new CustomerFollow(this,customer.getId());
-                 customerFollow.show();
-                 break;
+                CustomerFollow customerFollow = new CustomerFollow(this, customer.getId());
+                customerFollow.show();
+                break;
             //审核同意
             case R.id.tv_ok:
-                 customerPersenter.showOkAudit(customer);
-                 break;
+                customerPersenter.showOkAudit(customer);
+                break;
             //审核驳回
             case R.id.tv_no:
-                 customerPersenter.showNoAudit(customer);
-                 break;
+                customerPersenter.showNoAudit(customer);
+                break;
             //客户信息-修改私有状态
             case R.id.tv_get:
                 updateCustomerState();
@@ -170,37 +176,40 @@ public class CustomerDetailsActivity extends BaseActivity {
                         tvEmail.setText(Html.fromHtml("邮箱：<font color=\"#000000\">" + customer.getEmail() + "</font>"));
                         tvUrl.setText(Html.fromHtml("网址：<font color=\"#000000\">" + customer.getUrl() + "</font>"));
                         tvProcurementType.setText(Html.fromHtml("采购种类：<font color=\"#000000\">" + customer.getMemo() + "</font>"));
-                        tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + customer.getCorAccount() + "</font>"));
-                        tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + customer.getOpenBank() + "</font>"));
+                        tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + customer.getOpenAccount() + "</font>"));
+                        tvBank.setText(Html.fromHtml("对公开户行：<font color=\"#000000\">" + customer.getOpenBank() + "</font>"));
                         tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
-                        tvAccountName.setText(Html.fromHtml("户名：<font color=\"#000000\">" + customer.getAccName() + "</font>"));
+                        tvAccountName.setText(Html.fromHtml("对公户名：<font color=\"#000000\">" + customer.getOpenAccName() + "</font>"));
+                        tvPriAccount.setText(Html.fromHtml("私有账户：<font color=\"#000000\">" + customer.getPrivateAccount() + "</font>"));
+                        tvPriBank.setText(Html.fromHtml("私有开户行：<font color=\"#000000\">" + customer.getPrivateBank() + "</font>"));
+                        tvPriAccountName.setText(Html.fromHtml("私有户名：<font color=\"#000000\">" + customer.getPrivateAccName() + "</font>"));
                         tvEin.setText(Html.fromHtml("税号：<font color=\"#000000\">" + customer.getEin() + "</font>"));
                         tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
 
                         tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
 
 
-                        if(customer.getState()==0){
+                        if (customer.getState() == 0) {
                             linAudit.setVisibility(View.VISIBLE);
                             tvGet.setVisibility(View.GONE);
                             return;
                         }
 
-                        if(customer.getPrivateState()==2 && customer.getState()==1){
+                        if (customer.getPrivateState() == 2 && customer.getState() == 1) {
                             linAudit.setVisibility(View.GONE);
                             tvGet.setVisibility(View.VISIBLE);
-                        }else{
+                        } else {
                             linAudit.setVisibility(View.GONE);
                             tvGet.setVisibility(View.GONE);
                             RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-                            layoutParams.bottomMargin=5;
+                            layoutParams.bottomMargin = 5;
                             scrollView.setLayoutParams(layoutParams);
                         }
-                        scrollView.scrollTo(0,0);
+                        scrollView.scrollTo(0, 0);
                     } else {
                         ToastUtil.showLong(customerDetails.getMsg());
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -214,17 +223,17 @@ public class CustomerDetailsActivity extends BaseActivity {
     /**
      * 客户信息-修改私有状态
      */
-    private void updateCustomerState(){
+    private void updateCustomerState() {
         if (customer == null) {
             return;
         }
-        DialogUtil.showProgress(this,"领取中");
-        final UserInfo userInfo= MyApplication.getUser();
-        UpdateCustomerStateP updateCustomerStateP=new UpdateCustomerStateP(customer.getId(), userInfo.getUser().getUserId(),1);
+        DialogUtil.showProgress(this, "领取中");
+        final UserInfo userInfo = MyApplication.getUser();
+        UpdateCustomerStateP updateCustomerStateP = new UpdateCustomerStateP(customer.getId(), userInfo.getUser().getUserId(), 1);
         HttpMethod.updateCustomerState(updateCustomerStateP, new NetWorkCallBack() {
             public void onSuccess(Object object) {
-                BaseBean baseBean= (BaseBean)object;
-                if(baseBean.isSussess()){
+                BaseBean baseBean = (BaseBean) object;
+                if (baseBean.isSussess()) {
                     //加载数据
                     EventBus.getDefault().post(new EventBusType(EventStatus.REFRESH_CUSTOMER_LIST));
                     finish();
@@ -242,7 +251,7 @@ public class CustomerDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode){
+        switch (resultCode) {
             //重新刷新详情
             case 1000:
                 getCustomerDetails();

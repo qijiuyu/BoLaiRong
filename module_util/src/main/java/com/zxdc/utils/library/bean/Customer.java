@@ -18,9 +18,12 @@ public class Customer implements Serializable {
     private String qq="";
     private String email="";//邮箱
     private String url="";
-    private String corAccount="";//对公账号
-    private String openBank;//开户行
-    private String accName="";//户名
+    private String openAccount;
+    private String openBank;
+    private String openAccName;
+    private String privateAccount;
+    private String privateBank;
+    private String privateAccName;
     private String landline="";//座机号
     private String postAddress="";//收货地址
     private String address="";//地址
@@ -175,12 +178,13 @@ public class Customer implements Serializable {
         this.url = url;
     }
 
-    public String getCorAccount() {
-        return corAccount;
+
+    public String getOpenAccount() {
+        return openAccount;
     }
 
-    public void setCorAccount(String corAccount) {
-        this.corAccount = corAccount;
+    public void setOpenAccount(String openAccount) {
+        this.openAccount = openAccount;
     }
 
     public String getOpenBank() {
@@ -191,12 +195,36 @@ public class Customer implements Serializable {
         this.openBank = openBank;
     }
 
-    public String getAccName() {
-        return accName;
+    public String getOpenAccName() {
+        return openAccName;
     }
 
-    public void setAccName(String accName) {
-        this.accName = accName;
+    public void setOpenAccName(String openAccName) {
+        this.openAccName = openAccName;
+    }
+
+    public String getPrivateAccount() {
+        return privateAccount;
+    }
+
+    public void setPrivateAccount(String privateAccount) {
+        this.privateAccount = privateAccount;
+    }
+
+    public String getPrivateBank() {
+        return privateBank;
+    }
+
+    public void setPrivateBank(String privateBank) {
+        this.privateBank = privateBank;
+    }
+
+    public String getPrivateAccName() {
+        return privateAccName;
+    }
+
+    public void setPrivateAccName(String privateAccName) {
+        this.privateAccName = privateAccName;
     }
 
     public String getLandline() {

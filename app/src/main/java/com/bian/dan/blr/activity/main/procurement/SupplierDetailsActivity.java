@@ -41,11 +41,22 @@ public class SupplierDetailsActivity extends BaseActivity {
     TextView tvMemo;
     @BindView(R.id.tv_right)
     TextView tvRight;
+    @BindView(R.id.tv_account)
+    TextView tvAccount;
+    @BindView(R.id.tv_bank)
+    TextView tvBank;
+    @BindView(R.id.tv_account_name)
+    TextView tvAccountName;
+    @BindView(R.id.tv_pri_account)
+    TextView tvPriAccount;
+    @BindView(R.id.tv_pri_bank)
+    TextView tvPriBank;
+    @BindView(R.id.tv_pri_account_name)
+    TextView tvPriAccountName;
     //详情id
     private int detailsId;
     //详情对象
     private SupplierDetails.DetailsBean detailsBean;
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_details);
@@ -70,16 +81,16 @@ public class SupplierDetailsActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
-                 finish();
-                 break;
+                finish();
+                break;
             //编辑
             case R.id.tv_right:
-                 if(detailsBean==null){
-                     return;
-                 }
-                 Intent intent=new Intent(this,AddSupplierActivity.class);
-                 intent.putExtra("detailsBean",detailsBean);
-                 startActivityForResult(intent,1000);
+                if (detailsBean == null) {
+                    return;
+                }
+                Intent intent = new Intent(this, AddSupplierActivity.class);
+                intent.putExtra("detailsBean", detailsBean);
+                startActivityForResult(intent, 1000);
                 break;
             default:
                 break;
@@ -104,8 +115,13 @@ public class SupplierDetailsActivity extends BaseActivity {
                         return;
                     }
                     tvName.setText(Html.fromHtml("供应商名称：<font color=\"#000000\">" + detailsBean.getSupplierName() + "</font>"));
-
                     tvIndustry.setText(Html.fromHtml("所属行业：<font color=\"#000000\">" + detailsBean.getIndustryStr() + "</font>"));
+                    tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + detailsBean.getOpenAccount() + "</font>"));
+                    tvBank.setText(Html.fromHtml("对公开户行：<font color=\"#000000\">" + detailsBean.getOpenBank() + "</font>"));
+                    tvAccountName.setText(Html.fromHtml("对公户名：<font color=\"#000000\">" + detailsBean.getOpenAccName() + "</font>"));
+                    tvPriAccount.setText(Html.fromHtml("私有账户：<font color=\"#000000\">" + detailsBean.getPrivateAccount() + "</font>"));
+                    tvPriBank.setText(Html.fromHtml("私有开户行：<font color=\"#000000\">" + detailsBean.getPrivateBank() + "</font>"));
+                    tvPriAccountName.setText(Html.fromHtml("私有户名：<font color=\"#000000\">" + detailsBean.getPrivateAccName() + "</font>"));
                     tvContact.setText(Html.fromHtml("联系人：<font color=\"#000000\">" + detailsBean.getContacts() + "</font>"));
                     tvMobile.setText(Html.fromHtml("电话：<font color=\"#000000\">" + detailsBean.getPhone() + "</font>"));
                     tvAddress.setText(Html.fromHtml("地址：<font color=\"#000000\">" + detailsBean.getSupplierAddress() + "</font>"));
@@ -130,7 +146,7 @@ public class SupplierDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode){
+        switch (resultCode) {
             //编辑成功后，重新刷新界面
             case 1000:
                 getSupplierDetails();

@@ -47,10 +47,22 @@ public class AddSupplierActivity extends BaseActivity {
     MeasureListView listView;
     @BindView(R.id.et_memo)
     EditText etMemo;
+    @BindView(R.id.et_account)
+    EditText etAccount;
+    @BindView(R.id.et_bank)
+    EditText etBank;
+    @BindView(R.id.et_account_name)
+    EditText etAccountName;
+    @BindView(R.id.et_pri_account)
+    EditText etPriAccount;
+    @BindView(R.id.et_pri_bank)
+    EditText etPriBank;
+    @BindView(R.id.et_pri_account_name)
+    EditText etPriAccountName;
     private AddSupplierPersenter addSupplierPersenter;
     private AddProductAdapter5 addProductAdapter5;
     //产品集合
-    private List<Goods> goodsList=new ArrayList<>();
+    private List<Goods> goodsList = new ArrayList<>();
     //详情对象
     private SupplierDetails.DetailsBean detailsBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,11 +80,11 @@ public class AddSupplierActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("新增供应商");
-        addSupplierPersenter=new AddSupplierPersenter(this);
-        detailsBean= (SupplierDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
+        addSupplierPersenter = new AddSupplierPersenter(this);
+        detailsBean = (SupplierDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
 
         //产品列表
-        addProductAdapter5=new AddProductAdapter5(this,goodsList,addSupplierPersenter);
+        addProductAdapter5 = new AddProductAdapter5(this, goodsList, addSupplierPersenter);
         listView.setAdapter(addProductAdapter5);
     }
 
@@ -81,7 +93,7 @@ public class AddSupplierActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
-                 finish();
+                finish();
                 break;
             //选择所属行业
             case R.id.tv_industry:
@@ -89,65 +101,77 @@ public class AddSupplierActivity extends BaseActivity {
                 break;
             //选择供应物料
             case R.id.tv_material:
-                setClass(AddProductActivity5.class,200);
+                setClass(AddProductActivity5.class, 200);
                 break;
             case R.id.tv_submit:
-                String supplierName=etName.getText().toString().trim();
-                String industry=tvIndustry.getText().toString().trim();
-                String contact=etContact.getText().toString().trim();
-                String phone=etMobile.getText().toString().trim();
-                String address=etAddress.getText().toString().trim();
-                String memo=etMemo.getText().toString().trim();
-                if(TextUtils.isEmpty(supplierName)){
+                String supplierName = etName.getText().toString().trim();
+                String industry = tvIndustry.getText().toString().trim();
+                String contact = etContact.getText().toString().trim();
+                String phone = etMobile.getText().toString().trim();
+                String address = etAddress.getText().toString().trim();
+                String memo = etMemo.getText().toString().trim();
+                String account = etAccount.getText().toString().trim();
+                String bank = etBank.getText().toString().trim();
+                String accountName = etAccountName.getText().toString().trim();
+                String priAccount=etPriAccount.getText().toString().trim();
+                String priBank=etPriBank.getText().toString().trim();
+                String priAccountName=etPriAccountName.getText().toString().trim();
+                if (TextUtils.isEmpty(supplierName)) {
                     ToastUtil.showLong("请输入供应商名称");
                     return;
                 }
-                if(TextUtils.isEmpty(industry)){
+                if (TextUtils.isEmpty(industry)) {
                     ToastUtil.showLong("请选择所属行业");
                     return;
                 }
-                if(TextUtils.isEmpty(contact)){
+                if (TextUtils.isEmpty(contact)) {
                     ToastUtil.showLong("请输入联系人");
                     return;
                 }
-                if(TextUtils.isEmpty(phone)){
+                if (TextUtils.isEmpty(phone)) {
                     ToastUtil.showLong("请输入电话");
                     return;
                 }
-                if(TextUtils.isEmpty(address)){
+                if (TextUtils.isEmpty(address)) {
                     ToastUtil.showLong("请输入地址");
                     return;
                 }
-                AddSupplierP addSupplierP=new AddSupplierP();
+                AddSupplierP addSupplierP = new AddSupplierP();
                 addSupplierP.setSupplierName(supplierName);
-                addSupplierP.setIndustry((int)tvIndustry.getTag());
+                addSupplierP.setIndustry((int) tvIndustry.getTag());
                 addSupplierP.setContacts(contact);
                 addSupplierP.setPhone(phone);
                 addSupplierP.setSupplierAddress(address);
                 addSupplierP.setMemo(memo);
-                List<AddSupplierP.GoodList> list=new ArrayList<>();
-                for (int i=0;i<goodsList.size();i++){
-                     if(goodsList.get(i).getId()==0){
-                         AddSupplierP.GoodList good=new AddSupplierP.GoodList(goodsList.get(i).getGoodId(),goodsList.get(i).getMemo(),goodsList.get(i).getPrice());
-                         list.add(good);
-                     }
+                addSupplierP.setOpenAccount(account);
+                addSupplierP.setOpenBank(bank);
+                addSupplierP.setOpenAccName(accountName);
+                addSupplierP.setPrivateAccount(priAccount);
+                addSupplierP.setPrivateBank(priBank);
+                addSupplierP.setPrivateAccName(priAccountName);
+                List<AddSupplierP.GoodList> list = new ArrayList<>();
+                for (int i = 0; i < goodsList.size(); i++) {
+                    if (goodsList.get(i).getId() == 0) {
+                        AddSupplierP.GoodList good = new AddSupplierP.GoodList(goodsList.get(i).getGoodId(), goodsList.get(i).getMemo(), goodsList.get(i).getPrice());
+                        list.add(good);
+                    }
                 }
                 addSupplierP.setSupplierDetailList(list);
 
                 //新增
-                if(detailsBean==null) {
+                if (detailsBean == null) {
                     addSupplierPersenter.checkSupplierName(addSupplierP);
                 }
                 //编辑
-                if(detailsBean!=null){
+                if (detailsBean != null) {
                     addSupplierP.setId(detailsBean.getId());
-                    if(detailsBean.getSupplierName().equals(supplierName)){
+                    if (detailsBean.getSupplierName().equals(supplierName)) {
                         addSupplierPersenter.UpdateSupplier(addSupplierP);
-                    }else{
+                    } else {
                         addSupplierPersenter.checkSupplierName(addSupplierP);
                     }
                 }
-                LogUtils.e("+++++++++"+new Gson().toJson(addSupplierP));
+                LogUtils.e("+++++++++" + new Gson().toJson(addSupplierP));
                 break;
             default:
                 break;
@@ -158,8 +182,8 @@ public class AddSupplierActivity extends BaseActivity {
     /**
      * 进入编辑页面，显示数据
      */
-    private void showEditData(){
-        if(detailsBean==null){
+    private void showEditData() {
+        if (detailsBean == null) {
             return;
         }
         etName.setText(detailsBean.getSupplierName());
@@ -169,19 +193,25 @@ public class AddSupplierActivity extends BaseActivity {
         etMobile.setText(detailsBean.getPhone());
         etAddress.setText(detailsBean.getSupplierAddress());
         etMemo.setText(detailsBean.getMemo());
+        etAccount.setText(detailsBean.getOpenAccount());
+        etBank.setText(detailsBean.getOpenBank());
+        etAccountName.setText(detailsBean.getOpenAccName());
+        etPriAccount.setText(detailsBean.getPrivateAccount());
+        etPriBank.setText(detailsBean.getPrivateBank());
+        etPriAccountName.setText(detailsBean.getPrivateAccName());
 
         //遍历物料列表
-        for (int i=0;i<detailsBean.getSupplierDetailList().size();i++){
-              Goods goods=new Goods();
-              goods.setId(detailsBean.getSupplierDetailList().get(i).getId());
-              goods.setGoodId(detailsBean.getSupplierDetailList().get(i).getGoodsId());
-              goods.setName(detailsBean.getSupplierDetailList().get(i).getGoodsName());
-              goods.setBrand(detailsBean.getSupplierDetailList().get(i).getBrand());
-              goods.setSpec(detailsBean.getSupplierDetailList().get(i).getSpec());
-              goods.setUnitStr(detailsBean.getSupplierDetailList().get(i).getUnitStr());
-              goods.setPrice(detailsBean.getSupplierDetailList().get(i).getProp1());
-              goods.setMemo(detailsBean.getSupplierDetailList().get(i).getMemo());
-              goodsList.add(goods);
+        for (int i = 0; i < detailsBean.getSupplierDetailList().size(); i++) {
+            Goods goods = new Goods();
+            goods.setId(detailsBean.getSupplierDetailList().get(i).getId());
+            goods.setGoodId(detailsBean.getSupplierDetailList().get(i).getGoodsId());
+            goods.setName(detailsBean.getSupplierDetailList().get(i).getGoodsName());
+            goods.setBrand(detailsBean.getSupplierDetailList().get(i).getBrand());
+            goods.setSpec(detailsBean.getSupplierDetailList().get(i).getSpec());
+            goods.setUnitStr(detailsBean.getSupplierDetailList().get(i).getUnitStr());
+            goods.setPrice(detailsBean.getSupplierDetailList().get(i).getProp1());
+            goods.setMemo(detailsBean.getSupplierDetailList().get(i).getMemo());
+            goodsList.add(goods);
         }
         addProductAdapter5.notifyDataSetChanged();
     }
@@ -189,17 +219,19 @@ public class AddSupplierActivity extends BaseActivity {
 
     /**
      * 进入编辑页面
+     *
      * @param goods:要编辑的对象
      */
     private Goods editGoods;
-    public void gotoEdit(Goods goods){
-        this.editGoods=goods;
-        Intent intent=new Intent(this,AddProductActivity5.class);
-        intent.putExtra("goods",editGoods);
-        if(editGoods.getId()!=0){
-            startActivityForResult(intent,300);
-        }else{
-            startActivityForResult(intent,400);
+
+    public void gotoEdit(Goods goods) {
+        this.editGoods = goods;
+        Intent intent = new Intent(this, AddProductActivity5.class);
+        intent.putExtra("goods", editGoods);
+        if (editGoods.getId() != 0) {
+            startActivityForResult(intent, 300);
+        } else {
+            startActivityForResult(intent, 400);
         }
     }
 
@@ -216,16 +248,16 @@ public class AddSupplierActivity extends BaseActivity {
         switch (resultCode) {
             //新增数据
             case 200:
-                boolean isThe=false;
-                for (int i=0;i<goodsList.size();i++){
-                    if(goodsList.get(i).getGoodId()==goods.getGoodId()){
-                        isThe=true;
+                boolean isThe = false;
+                for (int i = 0; i < goodsList.size(); i++) {
+                    if (goodsList.get(i).getGoodId() == goods.getGoodId()) {
+                        isThe = true;
                         break;
                     }
                 }
-                if(isThe){
+                if (isThe) {
                     ToastUtil.showLong("不能重复添加物料");
-                }else{
+                } else {
                     goodsList.add(goods);
                     addProductAdapter5.notifyDataSetChanged();
                 }
@@ -252,7 +284,7 @@ public class AddSupplierActivity extends BaseActivity {
     /**
      * 删除供应物料成功
      */
-    public void deleteSuccess(Goods goods){
+    public void deleteSuccess(Goods goods) {
         goodsList.remove(goods);
         addProductAdapter5.notifyDataSetChanged();
     }
@@ -260,10 +292,10 @@ public class AddSupplierActivity extends BaseActivity {
     /**
      * 编辑供应物料成功
      */
-    public void editSuccess(Goods goods){
-        for (int i=0;i<goodsList.size();i++){
-            if(editGoods.equals(goodsList.get(i))){
-                goodsList.set(i,goods);
+    public void editSuccess(Goods goods) {
+        for (int i = 0; i < goodsList.size(); i++) {
+            if (editGoods.equals(goodsList.get(i))) {
+                goodsList.set(i, goods);
                 break;
             }
         }

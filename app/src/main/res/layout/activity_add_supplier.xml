@@ -83,6 +83,208 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对公账号"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:digits="0987654321"
+                    android:inputType="number"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对公开户行"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对公户名"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="私有账号"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_pri_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:digits="0987654321"
+                    android:inputType="number"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="私有开户行"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_pri_bank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:gravity="right"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="私有户名"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+                <EditText
+                    android:id="@+id/et_pri_account_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:hint="请输入"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:background="@color/color_f9f9f9"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:background="@drawable/bg_rel_border"
                 android:paddingRight="15dp"
                 android:paddingLeft="15dp">
