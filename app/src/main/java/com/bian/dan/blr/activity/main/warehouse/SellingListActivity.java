@@ -1,11 +1,13 @@
 package com.bian.dan.blr.activity.main.warehouse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -66,6 +68,14 @@ public class SellingListActivity extends BaseActivity implements MyRefreshLayout
         sellingPersenter=new SellingPersenter(this);
         reList.setMyRefreshLayoutListener(this);
         listView.setAdapter(sellingAdapter = new SellingAdapter(this,listAll));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(activity,SellingDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                startActivity(intent);
+            }
+        });
 
         /**
          * 监听开始日期

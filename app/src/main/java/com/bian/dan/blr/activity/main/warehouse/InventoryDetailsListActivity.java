@@ -21,7 +21,6 @@ import com.zxdc.utils.library.bean.InventoryDetails;
 import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.http.HttpMethod;
-import com.zxdc.utils.library.util.LogUtils;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
 import com.zxdc.utils.library.view.MyRefreshLayoutListener;
@@ -160,7 +159,6 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
         if(!TextUtils.isEmpty(tvList.getText().toString())){
             stockType=tvList.getTag().toString();
         }
-        LogUtils.e(goodId+"++++++++++++++++++"+type+"+++++++++++++++"+stockType);
         HttpMethod.getInventoryDetails(goodId,type ,stockType, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();

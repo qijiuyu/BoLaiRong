@@ -39,6 +39,7 @@ import com.zxdc.utils.library.bean.ProductProgress;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
+import com.zxdc.utils.library.bean.SellingDetails;
 import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
@@ -351,6 +352,11 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"selling/getList")
     Call<SellingOutBound> getSellingList(@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.IP+"selling/getDetail")
+    Call<SellingDetails> getSellingDetails(@Query("id") int id);
+
+
 
 
 }

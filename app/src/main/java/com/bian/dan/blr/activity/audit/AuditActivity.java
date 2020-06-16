@@ -30,6 +30,8 @@ public class AuditActivity extends BaseActivity {
     TextView tvCgd;
     @BindView(R.id.tv_bxd)
     TextView tvBxd;
+    @BindView(R.id.tv_smsqb)
+    TextView tvSmsqb;
     private AuditPersenter auditPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class AuditActivity extends BaseActivity {
         auditPersenter=new AuditPersenter(this);
     }
 
-    @OnClick({R.id.rel_ckd, R.id.rel_scjh, R.id.rel_cgd, R.id.rel_bxd})
+    @OnClick({R.id.rel_ckd, R.id.rel_scjh, R.id.rel_cgd, R.id.rel_bxd,R.id.rel_smsqb})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //出库单
@@ -57,6 +59,9 @@ public class AuditActivity extends BaseActivity {
             case R.id.rel_bxd:
                 setClass(AuditFinancialActivity.class);
                 break;
+            //售卖申请表
+            case R.id.rel_smsqb:
+                 break;
             default:
                 break;
         }
