@@ -6,6 +6,7 @@ public class Customer implements Serializable {
     private int id;
     private String customerName="";//客户名称
     private int state;//审批状态：0，未审批 1，审批通过 2，审批未通过
+    private String stateStr;
     private int status;//客户性质,读取数据字段pid=3
     private String statusName="";//客户性质名称
     private int industry;//	所属行业id
@@ -18,8 +19,7 @@ public class Customer implements Serializable {
     private String email="";//邮箱
     private String url="";
     private String corAccount="";//对公账号
-    private int openBank;//开户行id
-    private String openBankStr="";//开户行
+    private String openBank;//开户行
     private String accName="";//户名
     private String landline="";//座机号
     private String postAddress="";//收货地址
@@ -38,6 +38,14 @@ public class Customer implements Serializable {
     private String ein="";//税号
     private String longitude="";
     private String latitude="";
+
+    public String getStateStr() {
+        return stateStr;
+    }
+
+    public void setStateStr(String stateStr) {
+        this.stateStr = stateStr;
+    }
 
     public String getLongitude() {
         return longitude;
@@ -175,20 +183,12 @@ public class Customer implements Serializable {
         this.corAccount = corAccount;
     }
 
-    public int getOpenBank() {
+    public String getOpenBank() {
         return openBank;
     }
 
-    public void setOpenBank(int openBank) {
+    public void setOpenBank(String openBank) {
         this.openBank = openBank;
-    }
-
-    public String getOpenBankStr() {
-        return openBankStr;
-    }
-
-    public void setOpenBankStr(String openBankStr) {
-        this.openBankStr = openBankStr;
     }
 
     public String getAccName() {

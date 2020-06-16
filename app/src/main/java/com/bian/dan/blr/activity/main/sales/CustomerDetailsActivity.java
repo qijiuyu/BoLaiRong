@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.application.MyApplication;
+import com.bian.dan.blr.persenter.sales.CustomerPersenter;
 import com.bian.dan.blr.view.CustomerFollow;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.BaseBean;
@@ -78,12 +80,10 @@ public class CustomerDetailsActivity extends BaseActivity {
     TextView tvGet;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.lin_audit)
+    LinearLayout linAudit;
     private Customer customer;
-    /**
-     * 1：私有
-     * 2：公有
-     */
-    private int privateState;
+    private CustomerPersenter customerPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
@@ -99,29 +99,24 @@ public class CustomerDetailsActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
-        tvRight.setText("编辑");
+        customerPersenter=new CustomerPersenter(this);
         customer = (Customer) getIntent().getSerializableExtra("customer");
-        privateState = getIntent().getIntExtra("privateState", 1);
-        if (privateState == 2) {
-            tvRight.setVisibility(View.GONE);
-        }else{
-            tvGet.setVisibility(View.GONE);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
-            scrollView.setLayoutParams(layoutParams);
+        if(customer!=null){
+            if(customer.getPrivateState()==1){
+                tvRight.setText("编辑");
+            }
         }
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list,R.id.tv_get})
+    @OnClick({R.id.lin_back, R.id.tv_right, R.id.tv_follow_list,R.id.tv_ok,R.id.tv_no,R.id.tv_get})
     public void onViewClicked(View view) {
-        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
             //编辑
             case R.id.tv_right:
-                intent.setClass(this,AddCustomerActivity.class);
+                Intent intent=new Intent(this,AddCustomerActivity.class);
                 intent.putExtra("customer",customer);
                 startActivityForResult(intent,1000);
                 break;
@@ -129,6 +124,14 @@ public class CustomerDetailsActivity extends BaseActivity {
             case R.id.tv_follow_list:
                  CustomerFollow customerFollow=new CustomerFollow(this,customer.getId());
                  customerFollow.show();
+                 break;
+            //审核同意
+            case R.id.tv_ok:
+                 customerPersenter.showOkAudit(customer);
+                 break;
+            //审核驳回
+            case R.id.tv_no:
+                 customerPersenter.showNoAudit(customer);
                  break;
             //客户信息-修改私有状态
             case R.id.tv_get:
@@ -142,7 +145,7 @@ public class CustomerDetailsActivity extends BaseActivity {
     /**
      * 获取客户详情
      */
-    private void getCustomerDetails() {
+    public void getCustomerDetails() {
         if (customer == null) {
             return;
         }
@@ -168,13 +171,31 @@ public class CustomerDetailsActivity extends BaseActivity {
                         tvUrl.setText(Html.fromHtml("网址：<font color=\"#000000\">" + customer.getUrl() + "</font>"));
                         tvProcurementType.setText(Html.fromHtml("采购种类：<font color=\"#000000\">" + customer.getMemo() + "</font>"));
                         tvAccount.setText(Html.fromHtml("对公账户：<font color=\"#000000\">" + customer.getCorAccount() + "</font>"));
-                        tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + customer.getOpenBankStr() + "</font>"));
+                        tvBank.setText(Html.fromHtml("开户行：<font color=\"#000000\">" + customer.getOpenBank() + "</font>"));
                         tvCustomerName.setText(Html.fromHtml("客户名称：<font color=\"#000000\">" + customer.getCustomerName() + "</font>"));
                         tvAccountName.setText(Html.fromHtml("户名：<font color=\"#000000\">" + customer.getAccName() + "</font>"));
                         tvEin.setText(Html.fromHtml("税号：<font color=\"#000000\">" + customer.getEin() + "</font>"));
                         tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
 
                         tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
+
+
+                        if(customer.getState()==0){
+                            linAudit.setVisibility(View.VISIBLE);
+                            tvGet.setVisibility(View.GONE);
+                            return;
+                        }
+
+                        if(customer.getPrivateState()==2 && customer.getState()==1){
+                            linAudit.setVisibility(View.GONE);
+                            tvGet.setVisibility(View.VISIBLE);
+                        }else{
+                            linAudit.setVisibility(View.GONE);
+                            tvGet.setVisibility(View.GONE);
+                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+                            layoutParams.bottomMargin=5;
+                            scrollView.setLayoutParams(layoutParams);
+                        }
                         scrollView.scrollTo(0,0);
                     } else {
                         ToastUtil.showLong(customerDetails.getMsg());

@@ -82,11 +82,8 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Customer customer=listAll.get(position);
-                //1：私有    2：公有
-                final int privateState=((CustomerManagerActivity)mActivity).pageIndex;
                 Intent intent=new Intent(mActivity, CustomerDetailsActivity.class);
                 intent.putExtra("customer",customer);
-                intent.putExtra("privateState",privateState);
                 mActivity.startActivity(intent);
             }
         });

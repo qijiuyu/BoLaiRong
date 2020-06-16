@@ -63,6 +63,7 @@ import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierMaterialP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
+import com.zxdc.utils.library.bean.parameter.CustomerAuditP;
 import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
@@ -344,6 +345,8 @@ public interface HttpApi {
     @GET(HttpConstant.IP+"notice/list")
     Call<Notice> getNoticeList(@Query("type") int type, @Query("page") int page, @Query("limit") int limit);
 
+    @POST(HttpConstant.IP+"customer/approval")
+    Call<BaseBean> auditCustomer(@Body CustomerAuditP customerAuditP);
 
 
 }

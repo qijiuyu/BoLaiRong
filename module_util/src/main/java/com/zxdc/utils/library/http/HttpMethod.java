@@ -65,6 +65,7 @@ import com.zxdc.utils.library.bean.parameter.AddSdEnterP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierMaterialP;
 import com.zxdc.utils.library.bean.parameter.AddSupplierP;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
+import com.zxdc.utils.library.bean.parameter.CustomerAuditP;
 import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
@@ -1646,5 +1647,23 @@ public class HttpMethod extends BaseRequst {
             }
         });
     }
+
+
+    /**
+     * 客户审核
+     */
+    public static void auditCustomer(CustomerAuditP customerAuditP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).auditCustomer(customerAuditP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
 
 }

@@ -226,7 +226,7 @@ public class AddCustomerActivity extends BaseActivity {
         etUrl.setText(customer.getUrl());
         etType.setText(customer.getMemo());
         etAccount.setText(customer.getCorAccount());
-        tvBank.setText(customer.getOpenBankStr());
+        tvBank.setText(customer.getOpenBank());
         tvBank.setTag(customer.getOpenBank());
         etAccountName.setText(customer.getAccName());
         etEin.setText(customer.getEin());
