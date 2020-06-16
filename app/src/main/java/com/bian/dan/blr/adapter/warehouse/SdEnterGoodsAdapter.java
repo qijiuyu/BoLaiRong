@@ -56,8 +56,11 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
         holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goodList.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goodList.getUnitsStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodList.getNum() + "</font>"));
+        holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getPrice() + "</font>"));
         holder.tvMonety.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
-        holder.tvRemark.setText("批号：" + goodList.getBatchNo());
+        holder.tvBatchNo.setText(Html.fromHtml("批号：<font color=\"#000000\">" + goodList.getBatchNo() + "</font>"));
+        holder.tvStockType.setText(Html.fromHtml("入库仓库：<font color=\"#000000\">" + goodList.getStockTypeStr() + "</font>"));
+        holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
         return view;
     }
 
@@ -76,6 +79,10 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
         TextView tvPrice;
         @BindView(R.id.tv_monety)
         TextView tvMonety;
+        @BindView(R.id.tv_batchNo)
+        TextView tvBatchNo;
+        @BindView(R.id.tv_stockType)
+        TextView tvStockType;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 

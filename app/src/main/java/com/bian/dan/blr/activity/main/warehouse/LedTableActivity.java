@@ -66,7 +66,7 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
      */
     private void initView() {
         tvHead.setText("请领表");
-        imgRight.setImageResource(R.mipmap.add);
+//        imgRight.setImageResource(R.mipmap.add);
         reList.setMyRefreshLayoutListener(this);
 
         ledTableAdapter=new LedTableAdapter(this,listAll);

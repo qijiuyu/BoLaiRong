@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -177,17 +176,17 @@ public class ProcurementDetailsActivity2 extends BaseActivity {
                     }
 
 
-                    /**
-                     * 底部按钮--审核通过后，以及还没有入库时才可以显示该按钮
-                     */
-                    if (detailsBean.getState() > 0 && goodList.getEntryDetailList().size()==0) {
-                        tvConfirm.setVisibility(View.VISIBLE);
-                    }else{
-                        tvConfirm.setVisibility(View.GONE);
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
-                        scrollView.setLayoutParams(layoutParams);
-                    }
+//                    /**
+//                     * 底部按钮--审核通过后，以及还没有入库时才可以显示该按钮
+//                     */
+//                    if (detailsBean.getState() > 0 && goodList.getEntryDetailList().size()==0) {
+//                        tvConfirm.setVisibility(View.VISIBLE);
+//                    }else{
+//                        tvConfirm.setVisibility(View.GONE);
+//                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+//                        layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+//                        scrollView.setLayoutParams(layoutParams);
+//                    }
                     scrollView.scrollTo(0,0);
                 } else {
                     ToastUtil.showLong(procurementDetails.getMsg());

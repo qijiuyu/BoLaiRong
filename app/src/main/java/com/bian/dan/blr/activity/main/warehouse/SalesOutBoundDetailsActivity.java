@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -211,14 +210,14 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                         /**
                          * 底部按钮变更
                          */
-                        if(detailsBean.getState()==1 && detailsBean.getStatus()==0){  //已审核同意，并且还没有出库
-                            tvSend.setVisibility(View.VISIBLE);
-                        }else{
-                            tvSend.setVisibility(View.GONE);
-                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
-                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
-                            scrollView.setLayoutParams(layoutParams);
-                        }
+//                        if(detailsBean.getState()==1 && detailsBean.getStatus()==0){  //已审核同意，并且还没有出库
+//                            tvSend.setVisibility(View.VISIBLE);
+//                        }else{
+//                            tvSend.setVisibility(View.GONE);
+//                            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
+//                            layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
+//                            scrollView.setLayoutParams(layoutParams);
+//                        }
                         scrollView.scrollTo(0,0);
                     }else{
                         ToastUtil.showLong(outBoundDetails.getMsg());

@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
         android:scrollbars="none">
 
         <LinearLayout
@@ -440,6 +439,7 @@
 
     <com.zxdc.utils.library.view.ClickTextView
         android:id="@+id/tv_send"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

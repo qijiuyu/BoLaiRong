@@ -68,14 +68,13 @@ public class SdEnterActivity extends BaseActivity implements MyRefreshLayoutList
     private void initView() {
         tvHead.setText("手动入库单");
         sdEnterPersenter=new SdEnterPersenter(this);
-        imgRight.setImageResource(R.mipmap.add);
+//        imgRight.setImageResource(R.mipmap.add);
         reList.setMyRefreshLayoutListener(this);
         listView.setAdapter(sdEnterAdapter = new SdEnterAdapter(this,listAll));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SdEnter.ListBean listBean=listAll.get(position);
                 Intent intent=new Intent(activity,SdEnterDetailsActivity.class);
-                intent.putExtra("listBean",listBean);
+                intent.putExtra("listBean",listAll.get(position));
                 startActivity(intent);
             }
         });

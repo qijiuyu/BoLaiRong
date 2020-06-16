@@ -87,11 +87,29 @@ public class SdEnterDetails extends BaseBean {
         private String spec="";
         private String unitsStr="";
         private String goodsTypeStr="";
+        private double price;
         private double amount;
         private String batchNo="";
         private int num;
         private String createName="";
         private String createDate="";
+        private String memo="";
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
 
         public String getStockTypeStr() {
             return stockTypeStr;
