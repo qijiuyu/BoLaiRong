@@ -136,6 +136,7 @@
         <activity android:name=".activity.main.NoticeDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.SellingListActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.SellingDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.UpdatePwdActivity"  android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

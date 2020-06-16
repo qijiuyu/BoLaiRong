@@ -74,6 +74,7 @@ import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
+import com.zxdc.utils.library.bean.parameter.UpdatePwdP;
 import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 
 import retrofit2.Call;
@@ -355,6 +356,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"selling/getDetail")
     Call<SellingDetails> getSellingDetails(@Query("id") int id);
+
+    @POST(HttpConstant.IP+"user/modifyPassword")
+    Call<BaseBean> updatePwd(@Body UpdatePwdP updatePwdP);
 
 
 

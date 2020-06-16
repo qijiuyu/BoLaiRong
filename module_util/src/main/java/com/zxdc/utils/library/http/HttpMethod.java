@@ -76,6 +76,7 @@ import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
+import com.zxdc.utils.library.bean.parameter.UpdatePwdP;
 import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
 import com.zxdc.utils.library.http.base.BaseRequst;
 import com.zxdc.utils.library.http.base.Http;
@@ -1700,5 +1701,23 @@ public class HttpMethod extends BaseRequst {
             }
         });
     }
+
+
+    /**
+     * 修改密码
+     */
+    public static void updatePwd(UpdatePwdP updatePwdP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).updatePwd(updatePwdP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
 
 }

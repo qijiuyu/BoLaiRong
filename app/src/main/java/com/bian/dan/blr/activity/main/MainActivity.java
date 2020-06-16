@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
+import com.bian.dan.blr.activity.UpdatePwdActivity;
 import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
@@ -134,7 +135,7 @@ public class MainActivity extends BaseActivity {
 
 
     private Intent intent=new Intent();
-    @OnClick({R.id.tv_login_out,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_scck, R.id.tv_house_scrk,R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gzgl, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
+    @OnClick({R.id.tv_login_out,R.id.tv_pwd,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_scck, R.id.tv_house_scrk,R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gzgl, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //退出登录
@@ -147,6 +148,10 @@ public class MainActivity extends BaseActivity {
                 //停止推送
                 JPushInterface.stopPush(this);
                 finish();
+                 break;
+            //修改密码
+            case R.id.tv_pwd:
+                 setClass(UpdatePwdActivity.class);
                  break;
             //销售
             //合同管理
