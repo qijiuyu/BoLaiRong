@@ -147,11 +147,11 @@ public class UpdatePwdActivity extends BaseActivity {
                     return;
                 }
                 if(!newPwd.equals(newPwd2)){
-                    ToastUtil.showLong("两次输入的新密码不一致");
+                    ToastUtil.showLong("新密码输入不一致，请核对后重新输入");
                     return;
                 }
                 if(newPwd.equals(oldPwd)){
-                    ToastUtil.showLong("新密码与旧密码不能一致");
+                    ToastUtil.showLong("新旧密码一致，请重新输入密码");
                     return;
                 }
                 UpdatePwdP updatePwdP=new UpdatePwdP();

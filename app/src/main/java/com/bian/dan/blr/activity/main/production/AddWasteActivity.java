@@ -49,16 +49,12 @@ public class AddWasteActivity extends BaseActivity {
     TextView tvSpec;
     @BindView(R.id.tv_unit)
     TextView tvUnit;
-    @BindView(R.id.tv_stock)
-    TextView tvStock;
     @BindView(R.id.tv_stockType)
     TextView tvStockType;
     @BindView(R.id.et_num)
     EditText etNum;
     @BindView(R.id.et_remark)
     EditText etRemark;
-    @BindView(R.id.rel_stock)
-    RelativeLayout relStock;
     @BindView(R.id.rel_stockType)
     RelativeLayout relStockType;
     private AddWastePersenter addWastePersenter;
@@ -93,10 +89,8 @@ public class AddWasteActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 //如果选择的是“损耗”，那么就不需要选择仓库了
                 if(s.toString().equals("损耗")){
-                    relStock.setVisibility(View.GONE);
                     relStockType.setVisibility(View.GONE);
                 }else{
-                    relStock.setVisibility(View.VISIBLE);
                     relStockType.setVisibility(View.VISIBLE);
                 }
             }
@@ -114,22 +108,9 @@ public class AddWasteActivity extends BaseActivity {
                 tvPeople.setText(null);
             }
         });
-
-        /**
-         * 监听仓库输入
-         */
-        tvStock.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            public void afterTextChanged(Editable s) {
-              tvStockType.setText(null);
-            }
-        });
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_type, R.id.tv_depart, R.id.tv_people, R.id.tv_name, R.id.tv_stock, R.id.tv_stockType, R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_type, R.id.tv_depart, R.id.tv_people, R.id.tv_name, R.id.tv_stockType, R.id.tv_submit})
     public void onViewClicked(View view) {
         Intent intent=new Intent();
         switch (view.getId()) {
@@ -138,7 +119,7 @@ public class AddWasteActivity extends BaseActivity {
                 break;
            //选择类别
             case R.id.tv_type:
-                addWastePersenter.selectType(tvType,1);
+                addWastePersenter.selectType(tvType);
                 break;
             //选择部门
             case R.id.tv_depart:
@@ -160,17 +141,9 @@ public class AddWasteActivity extends BaseActivity {
             case R.id.tv_name:
                 setClass(SelectMaterialActivity.class,100);
                 break;
-            //选择仓库
-            case R.id.tv_stock:
-                addWastePersenter.selectType(tvStock,2);
-                break;
             //选择仓库类型
             case R.id.tv_stockType:
-                if(TextUtils.isEmpty(tvStock.getText().toString().trim())){
-                    ToastUtil.showLong("请先选择仓库");
-                    return;
-                }
-                addWastePersenter.getDict((int)tvStock.getTag(),tvStockType);
+                addWastePersenter.getStockList(tvStockType);
                 break;
             //提交
             case R.id.tv_submit:
@@ -179,7 +152,6 @@ public class AddWasteActivity extends BaseActivity {
                 String peple=tvPeople.getText().toString().trim();
                 String batchNo=etBatchNo.getText().toString().trim();
                 String name=tvName.getText().toString().trim();
-                String stock=tvStock.getText().toString().trim();
                 String stockType=tvStockType.getText().toString().trim();
                 String num=etNum.getText().toString().trim();
                 String remark=etRemark.getText().toString().trim();
@@ -202,12 +174,8 @@ public class AddWasteActivity extends BaseActivity {
                     ToastUtil.showLong("请选择物料名称");
                     return;
                 }
-                if(!type.equals("损耗") && TextUtils.isEmpty(stock)){
-                    ToastUtil.showLong("请选择仓库");
-                    return;
-                }
                 if(!type.equals("损耗") && TextUtils.isEmpty(stockType)){
-                    ToastUtil.showLong("请选择仓库类别");
+                    ToastUtil.showLong("请选择仓库类型");
                     return;
                 }
                 if(type.equals("损耗")){
@@ -222,7 +190,7 @@ public class AddWasteActivity extends BaseActivity {
                     return;
                 }
                 if(wasteList==null){
-                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag(),remark);
+                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),(int)tvType.getTag(),type,Integer.parseInt(num),(int)tvStockType.getTag(),stockType,batchNo,(int)tvDepart.getTag(),dept,(int)tvPeople.getTag(),remark);
                     intent.putExtra("goods",goods);
                 }else{
                     UpdateWasteP updateWasteP=new UpdateWasteP(wasteList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,(int)tvType.getTag(),(int)tvDepart.getTag(),(int)tvPeople.getTag(),remark);
@@ -256,10 +224,9 @@ public class AddWasteActivity extends BaseActivity {
         tvSpec.setText(wasteList.getSpec());
         tvUnit.setText(wasteList.getUnitsType());
         if(wasteList.getType()==3){
-            relStock.setVisibility(View.GONE);
             relStockType.setVisibility(View.GONE);
         }else{
-            tvStockType.setText(wasteList.getStockTypeStr());
+            tvStockType.setText(wasteList.getParentStockTypeStr()+"-"+wasteList.getStockTypeStr());
             tvStockType.setTag(wasteList.getStockType());
         }
         etNum.setText(String.valueOf(wasteList.getNum()));

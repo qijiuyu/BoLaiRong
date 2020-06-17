@@ -59,6 +59,7 @@ public class AddWasteAdapter extends BaseAdapter {
         holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + goods.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goods.getNum() + "</font>"));
+        holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + goods.getStockName() + "</font>"));
         holder.tvRemark.setText("备注：" + goods.getMemo());
         return view;
     }
@@ -80,6 +81,8 @@ public class AddWasteAdapter extends BaseAdapter {
         TextView tvNum;
         @BindView(R.id.tv_spec)
         TextView tvSpec;
+        @BindView(R.id.tv_stockType)
+        TextView tvStockType;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 

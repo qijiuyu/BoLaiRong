@@ -27,6 +27,15 @@ public class MaterialInventory extends BaseBean {
         private String batchNo="";
         private int stockType;
         private String stockTypeStr="";
+        private String parentStockTypeStr="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
 
         public int getId() {
             return id;

@@ -51,6 +51,8 @@ public class Goods implements Serializable {
     private int stockType;
     //仓库名称
     private String stockName;
+    //父级仓库名称
+    private String parentStockTypeStr;
     //商品批号
     private String batchNo;
     //交付日期
@@ -117,7 +119,7 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, String deliveryTime,String memo, int stockType, String batchNo) {
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int num, String deliveryTime,String memo, int stockType,String stockName,String parentStockTypeStr, String batchNo) {
         this.goodId = goodId;
         this.name = name;
         this.spec = spec;
@@ -127,11 +129,13 @@ public class Goods implements Serializable {
         this.deliveryTime=deliveryTime;
         this.memo = memo;
         this.stockType = stockType;
+        this.stockName=stockName;
+        this.parentStockTypeStr=parentStockTypeStr;
         this.batchNo = batchNo;
     }
 
 
-    public Goods(int goodId, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType, String batchNo, String rewardMoney,String rewardDes, String fineMoney,String fineDes) {
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, String typeStr, int num, String memo, int stockType,String stockName, String batchNo, String rewardMoney,String rewardDes, String fineMoney,String fineDes) {
         this.goodId = goodId;
         this.name = name;
         this.spec = spec;
@@ -141,6 +145,7 @@ public class Goods implements Serializable {
         this.num = num;
         this.memo = memo;
         this.stockType = stockType;
+        this.stockName=stockName;
         this.batchNo = batchNo;
         this.rewardMoney = rewardMoney;
         this.rewardDes=rewardDes;
@@ -149,7 +154,7 @@ public class Goods implements Serializable {
     }
 
 
-    public Goods(int goodId, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType, String batchNo, int deptId,String deptName, int chargeId,String memo) {
+    public Goods(int goodId, String name, String spec, String unitStr, String brand, int type,String waste, int num, int stockType,String stockName, String batchNo, int deptId,String deptName, int chargeId,String memo) {
         this.goodId = goodId;
         this.name = name;
         this.spec = spec;
@@ -159,6 +164,7 @@ public class Goods implements Serializable {
         this.waste=waste;
         this.num = num;
         this.stockType = stockType;
+        this.stockName=stockName;
         this.batchNo = batchNo;
         this.deptId = deptId;
         this.deptName=deptName;
@@ -471,5 +477,13 @@ public class Goods implements Serializable {
 
     public void setStockName(String stockName) {
         this.stockName = stockName;
+    }
+
+    public String getParentStockTypeStr() {
+        return parentStockTypeStr;
+    }
+
+    public void setParentStockTypeStr(String parentStockTypeStr) {
+        this.parentStockTypeStr = parentStockTypeStr;
     }
 }

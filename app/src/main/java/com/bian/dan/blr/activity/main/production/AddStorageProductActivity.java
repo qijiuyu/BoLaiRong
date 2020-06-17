@@ -37,8 +37,6 @@ public class AddStorageProductActivity extends BaseActivity {
     TextView tvSpec;
     @BindView(R.id.tv_unit)
     TextView tvUnit;
-    @BindView(R.id.tv_stock)
-    TextView tvStock;
     @BindView(R.id.tv_stockType)
     TextView tvStockType;
     @BindView(R.id.et_num)
@@ -72,10 +70,9 @@ public class AddStorageProductActivity extends BaseActivity {
         tvHead.setText("添加产品");
         addStoragePersenter=new AddStoragePersenter(this);
         entryList= (ProductProgress.EntryList) getIntent().getSerializableExtra("entryList");
-
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_name, R.id.tv_stock,R.id.tv_stockType,R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_name,R.id.tv_stockType,R.id.tv_submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
@@ -86,22 +83,13 @@ public class AddStorageProductActivity extends BaseActivity {
                 setClass(SelectMaterialActivity.class,100);
                 break;
             //选择仓库
-            case R.id.tv_stock:
-                 addStoragePersenter.selectType(tvStock,tvStockType);
-                 break;
-            //选择仓库类型
             case R.id.tv_stockType:
-                 if(TextUtils.isEmpty(tvStock.getText().toString().trim())){
-                     ToastUtil.showLong("请先选择仓库");
-                     return;
-                 }
-                addStoragePersenter.getDict((int)tvStock.getTag(),tvStockType);
+                 addStoragePersenter.getStockList(tvStockType);
                  break;
             //提交
             case R.id.tv_submit:
                 String batchNo=etBatchNo.getText().toString().trim();
                 String name=tvName.getText().toString().trim();
-                String stock=tvStock.getText().toString().trim();
                 String stockType=tvStockType.getText().toString().trim();
                 String num=etNum.getText().toString().trim();
                 String rewardMoney=etRewardMoney.getText().toString().trim();
@@ -115,10 +103,6 @@ public class AddStorageProductActivity extends BaseActivity {
                 }
                 if(TextUtils.isEmpty(name)){
                     ToastUtil.showLong("请选择物料名称");
-                    return;
-                }
-                if(TextUtils.isEmpty(stock)){
-                    ToastUtil.showLong("请选择仓库");
                     return;
                 }
                 if(TextUtils.isEmpty(stockType)){
@@ -135,7 +119,7 @@ public class AddStorageProductActivity extends BaseActivity {
                 }
                 Intent intent=new Intent();
                 if(entryList==null){
-                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
+                    Goods goods=new Goods(listBean.getId(),listBean.getName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),listBean.getTypeStr(),Integer.parseInt(num),remark,(int)tvStockType.getTag(),stockType,batchNo,rewardMoney,rewardDes,fineMoney,fineDes);
                     intent.putExtra("goods",goods);
                 }else{
                     UpdateEntryGoodP updateEntryGoodP=new UpdateEntryGoodP(entryList.getId(),Integer.parseInt(num),(int)tvStockType.getTag(),batchNo,remark);
@@ -163,7 +147,7 @@ public class AddStorageProductActivity extends BaseActivity {
         tvSpec.setText(entryList.getSpec());
         tvUnit.setText(entryList.getUnitStr());
         tvStockType.setTag(entryList.getStockType());
-        tvStockType.setText(entryList.getStockTypeStr());
+        tvStockType.setText(entryList.getParentStockTypeStr()+"-"+entryList.getStockTypeStr());
         etNum.setText(String.valueOf(entryList.getNum()));
         etRemark.setText(entryList.getMemo());
     }

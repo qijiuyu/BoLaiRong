@@ -35,7 +35,7 @@ public class UserList extends BaseBean {
         private int deptId;
         private String deptName="";
         private String account="";
-        private int openBank;
+        private String openBank;
         private String openBankStr="";
         private String mobile="";
         private int status;
@@ -90,11 +90,11 @@ public class UserList extends BaseBean {
             this.account = account;
         }
 
-        public int getOpenBank() {
+        public String getOpenBank() {
             return openBank;
         }
 
-        public void setOpenBank(int openBank) {
+        public void setOpenBank(String openBank) {
             this.openBank = openBank;
         }
 

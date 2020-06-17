@@ -121,7 +121,7 @@ public class AddGoodsByProductionActivity extends BaseActivity {
                     ToastUtil.showLong("请选择日期");
                     return;
                 }
-                Goods goods=new Goods(listBean.getGoodsId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),time,remark,listBean.getStockType(),listBean.getBatchNo());
+                Goods goods=new Goods(listBean.getGoodsId(),listBean.getGoodsName(),listBean.getSpec(),listBean.getUnitStr(),listBean.getBrand(),Integer.parseInt(num),time,remark,listBean.getStockType(),listBean.getStockTypeStr(),listBean.getParentStockTypeStr(),listBean.getBatchNo());
                 Intent intent=new Intent();
                 intent.putExtra("goods",goods);
                 setResult(200,intent);

@@ -45,6 +45,7 @@ import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.bean.StockList;
 import com.zxdc.utils.library.bean.Supplier;
 import com.zxdc.utils.library.bean.SupplierDetails;
 import com.zxdc.utils.library.bean.SupplierMaterial;
@@ -1713,6 +1714,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 获取仓库树状列表
+     */
+    public static void getStockList(final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getStockList().enqueue(new Callback<StockList>() {
+            public void onResponse(Call<StockList> call, Response<StockList> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<StockList> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

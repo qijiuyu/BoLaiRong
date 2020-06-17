@@ -44,6 +44,7 @@ import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.StatisticalGoods;
 import com.zxdc.utils.library.bean.StatisticalMaterial;
 import com.zxdc.utils.library.bean.StatisticalSales;
+import com.zxdc.utils.library.bean.StockList;
 import com.zxdc.utils.library.bean.Supplier;
 import com.zxdc.utils.library.bean.SupplierDetails;
 import com.zxdc.utils.library.bean.SupplierMaterial;
@@ -70,9 +71,9 @@ import com.zxdc.utils.library.bean.parameter.EditSupplierGoodsP;
 import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.bean.parameter.OutBoundP;
 import com.zxdc.utils.library.bean.parameter.SalesOutBoundP;
+import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateEntryGoodP;
 import com.zxdc.utils.library.bean.parameter.UpdateFinancial;
-import com.zxdc.utils.library.bean.parameter.UpdateCustomerStateP;
 import com.zxdc.utils.library.bean.parameter.UpdateProductP;
 import com.zxdc.utils.library.bean.parameter.UpdatePwdP;
 import com.zxdc.utils.library.bean.parameter.UpdateWasteP;
@@ -359,6 +360,9 @@ public interface HttpApi {
 
     @POST(HttpConstant.IP+"user/modifyPassword")
     Call<BaseBean> updatePwd(@Body UpdatePwdP updatePwdP);
+
+    @GET(HttpConstant.IP+"stockType/list")
+    Call<StockList> getStockList();
 
 
 

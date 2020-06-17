@@ -210,6 +210,15 @@ public class ProductProgress extends BaseBean {
         private String batchNo="";
         private String memo="";
         private String prop2="";
+        private String parentStockTypeStr="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
 
         public String getGoodsName() {
             return goodsName;
@@ -307,6 +316,15 @@ public class ProductProgress extends BaseBean {
         private String memo="";
         private String createName="";
         private String createDate="";
+        private String parentStockTypeStr="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
 
         public int getId() {
             return id;
@@ -433,6 +451,15 @@ public class ProductProgress extends BaseBean {
         private String createName="";
         private String stockTypeStr="";
         private int stockType;
+        private String parentStockTypeStr="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
 
         public int getId() {
             return id;
