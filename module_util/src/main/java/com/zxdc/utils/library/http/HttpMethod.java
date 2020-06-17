@@ -29,6 +29,7 @@ import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.Office;
+import com.zxdc.utils.library.bean.OutAndEntry;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.OutBoundProduct;
@@ -1731,6 +1732,40 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<StockList> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 生产出库记录查询
+     */
+    public static void getProductOutList(String deptId,String createId,String startDate,String endDate,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProductOutList(2,deptId,createId,startDate,endDate,page,limit).enqueue(new Callback<OutAndEntry>() {
+            public void onResponse(Call<OutAndEntry> call, Response<OutAndEntry> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<OutAndEntry> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 生产入库记录查询
+     */
+    public static void getProductEntryList(String deptId,String createId,String startDate,String endDate,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProductEntryList(2,deptId,createId,startDate,endDate,page,limit).enqueue(new Callback<OutAndEntry>() {
+            public void onResponse(Call<OutAndEntry> call, Response<OutAndEntry> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<OutAndEntry> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

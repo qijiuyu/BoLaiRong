@@ -64,12 +64,6 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
         holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + outBoundList.getSpec() + "</font>"));
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + outBoundList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + outBoundList.getNum() + "</font>"));
-        if (!TextUtils.isEmpty(outBoundList.getProp2())) {
-            holder.tvTime.setVisibility(View.VISIBLE);
-            holder.tvTime.setText(Html.fromHtml("日期：<font color=\"#000000\">" + outBoundList.getProp2() + "</font>"));
-        } else {
-            holder.tvTime.setVisibility(View.GONE);
-        }
         holder.tvRemark.setText("备注：" + outBoundList.getMemo());
         return view;
     }
@@ -89,8 +83,6 @@ public class ProductProgressByOutBoundAdapter extends BaseAdapter {
         TextView tvStock;
         @BindView(R.id.tv_spec)
         TextView tvSpec;
-        @BindView(R.id.tv_time)
-        TextView tvTime;
         @BindView(R.id.tv_remark)
         TextView tvRemark;
 

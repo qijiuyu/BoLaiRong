@@ -28,6 +28,7 @@ import com.zxdc.utils.library.bean.Material;
 import com.zxdc.utils.library.bean.MaterialInventory;
 import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.Office;
+import com.zxdc.utils.library.bean.OutAndEntry;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.OutBoundDetails;
 import com.zxdc.utils.library.bean.OutBoundProduct;
@@ -364,6 +365,11 @@ public interface HttpApi {
     @GET(HttpConstant.IP+"stockType/list")
     Call<StockList> getStockList();
 
+    @GET(HttpConstant.IP+"requireDetail/listByBatchNoAndDeptAndCreator")
+    Call<OutAndEntry> getProductOutList(@Query("outStatus") int outStatus,@Query("deptId") String deptId, @Query("createId") String createId,@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.IP+"entryProductDetail/listByBatchNoAndDeptAndCreator")
+    Call<OutAndEntry> getProductEntryList(@Query("entryStatus") int entryStatus,@Query("deptId") String deptId, @Query("createId") String createId,@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
 
 
 

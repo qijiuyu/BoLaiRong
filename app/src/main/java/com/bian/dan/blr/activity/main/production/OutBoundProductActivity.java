@@ -101,6 +101,7 @@ public class OutBoundProductActivity extends BaseActivity  implements MyRefreshL
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
+                 finish();
                 break;
             //选择生成计划
             case R.id.tv_key:

@@ -3,9 +3,7 @@ package com.bian.dan.blr.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -14,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.application.MyApplication;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
@@ -34,10 +33,8 @@ public class UpdatePwdActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
-    @BindView(R.id.et_username)
-    EditText etUsername;
-    @BindView(R.id.img_clear_username)
-    ImageView imgClearUsername;
+    @BindView(R.id.tv_username)
+    TextView tvUsername;
     @BindView(R.id.et_old_pwd)
     EditText etOldPwd;
     @BindView(R.id.et_new_pwd)
@@ -63,34 +60,14 @@ public class UpdatePwdActivity extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("修改密码");
-
-        /**
-         * 监听用户名输入框
-         */
-        etUsername.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            public void afterTextChanged(Editable s) {
-                if(s.toString().length()>0){
-                    imgClearUsername.setVisibility(View.VISIBLE);
-                }else{
-                    imgClearUsername.setVisibility(View.GONE);
-                }
-            }
-        });
+        tvUsername.setText(MyApplication.getUser().getUser().getUsername());
     }
 
-    @OnClick({R.id.lin_back, R.id.img_clear_username, R.id.img_old_pwd, R.id.img_new_pwd, R.id.img_new_pwd2, R.id.img_confirm})
+    @OnClick({R.id.lin_back, R.id.img_old_pwd, R.id.img_new_pwd, R.id.img_new_pwd2, R.id.img_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
-                break;
-            //清空用户名
-            case R.id.img_clear_username:
-                etUsername.setText(null);
                 break;
             case R.id.img_old_pwd:
                 if (view.getTag().equals("0")) {
@@ -126,14 +103,9 @@ public class UpdatePwdActivity extends BaseActivity {
                 }
                 break;
             case R.id.img_confirm:
-                String userName=etUsername.getText().toString().trim();
                 String oldPwd=etOldPwd.getText().toString().trim();
                 String newPwd=etNewPwd.getText().toString().trim();
                 String newPwd2=etNewPwd2.getText().toString().trim();
-                if(TextUtils.isEmpty(userName)){
-                    ToastUtil.showLong("请输入用户名");
-                    return;
-                }
                 if(TextUtils.isEmpty(oldPwd)){
                     ToastUtil.showLong("请输入旧密码");
                     return;
@@ -155,7 +127,7 @@ public class UpdatePwdActivity extends BaseActivity {
                     return;
                 }
                 UpdatePwdP updatePwdP=new UpdatePwdP();
-                updatePwdP.setUsername(userName);
+                updatePwdP.setUsername(tvUsername.getText().toString().trim());
                 updatePwdP.setPassword(oldPwd);
                 updatePwdP.setNewPassword(newPwd);
                 //修改密码

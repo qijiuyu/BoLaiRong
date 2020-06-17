@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
 import com.bian.dan.blr.activity.UpdatePwdActivity;
-import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
@@ -27,11 +26,9 @@ import com.bian.dan.blr.activity.main.sales.OutBoundActivity;
 import com.bian.dan.blr.activity.main.sales.ProductionPlanActivity;
 import com.bian.dan.blr.activity.main.warehouse.DeviceListActivity;
 import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
-import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
-import com.bian.dan.blr.activity.main.warehouse.OutAndEntryActivity;
-import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
+import com.bian.dan.blr.activity.main.warehouse.ProductEntryActivity;
+import com.bian.dan.blr.activity.main.warehouse.ProductOutActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
-import com.bian.dan.blr.activity.main.warehouse.SellingListActivity;
 import com.bian.dan.blr.application.MyApplication;
 import com.bumptech.glide.Glide;
 import com.paradoxie.autoscrolltextview.VerticalTextview;
@@ -210,48 +207,49 @@ public class MainActivity extends BaseActivity {
                 break;
             //销售出库单
             case R.id.tv_house_ckd:
-                setClass(SalesOutBoundActivity.class);
+//                setClass(SalesOutBoundActivity.class);
                 break;
            //采购入库单
             case R.id.tv_house_cgrkd:
                 intent.setClass(this,ProcurementActivity.class);
                 intent.putExtra("type",2);
-                startActivity(intent);
+//                startActivity(intent);
                 break;
             //生产出库
             case R.id.tv_house_scck:
-                setClass(OutAndEntryActivity.class);
+                setClass(ProductOutActivity.class);
                 break;
             //生产入库
             case R.id.tv_house_scrk:
+                setClass(ProductEntryActivity.class);
                 break;
             //请领表
             case R.id.tv_house_qlb:
-                setClass(LedTableActivity.class);
+//                setClass(LedTableActivity.class);
                 break;
             //售卖申请表
             case R.id.tv_house_smsqb:
-                setClass(SellingListActivity.class);
+//                setClass(SellingListActivity.class);
                 break;
             //设备管理
             case R.id.tv_house_sbgl:
                 setClass(DeviceListActivity.class);
                 break;
             case R.id.tv_house_cwbx:
-                setClass(FinancialActivity.class);
+//                setClass(FinancialActivity.class);
                 break;
 
 
 
             //工资管理
             case R.id.tv_financial_gzgl:
-                setClass(WageManagerActivity.class);
+//                setClass(WageManagerActivity.class);
                 break;
            //财务报销
             case R.id.tv_financial_cwbx:
                 intent.setClass(this,FinancialActivity.class);
                 intent.putExtra("type",1);
-                startActivity(intent);
+//                startActivity(intent);
                 break;
 
 

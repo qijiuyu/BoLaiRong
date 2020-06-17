@@ -122,7 +122,8 @@
         <activity android:name=".activity.main.procurement.SelectSupplierMaterialActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.financial.WageManagerActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.warehouse.ProcurementDetailsActivity2"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.main.warehouse.OutAndEntryActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.warehouse.ProductOutActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".activity.main.warehouse.ProductEntryActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".activity.main.warehouse.OutAndEntry_DetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.financial.FinancialDetailsActivity2"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.financial.TransferActivity"  android:screenOrientation="portrait"/>
