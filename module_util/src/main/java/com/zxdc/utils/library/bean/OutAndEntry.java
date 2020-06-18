@@ -37,9 +37,10 @@ public class OutAndEntry extends BaseBean {
         private String parentStockTypeStr="";
         private String stockTypeStr="";
         private String spec="";
-        private String unitsType="";
+        private String unitStr="";
         private int num;
         private String batchNo="";
+        private String memo="";
 
         public int getId() {
             return id;
@@ -105,12 +106,12 @@ public class OutAndEntry extends BaseBean {
             this.spec = spec;
         }
 
-        public String getUnitsType() {
-            return unitsType;
+        public String getUnitStr() {
+            return unitStr;
         }
 
-        public void setUnitsType(String unitsType) {
-            this.unitsType = unitsType;
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
         }
 
         public int getNum() {
@@ -127,6 +128,14 @@ public class OutAndEntry extends BaseBean {
 
         public void setBatchNo(String batchNo) {
             this.batchNo = batchNo;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
         }
     }
 }

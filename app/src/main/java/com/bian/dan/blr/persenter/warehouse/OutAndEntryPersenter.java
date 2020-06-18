@@ -36,7 +36,7 @@ public class OutAndEntryPersenter {
                 BaseBean baseBean= (BaseBean) object;
                 if(baseBean.isSussess()){
                     //重置详情页面
-                    activity.getProductProgress();
+//                    activity.getProductProgress();
                 }else{
                     ToastUtil.showLong(baseBean.getMsg());
                 }

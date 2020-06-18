@@ -13,7 +13,6 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
         android:layout_marginTop="50dp"
         android:scrollbars="none">
 
@@ -23,382 +22,107 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_apply_peple"
+                android:id="@+id/tv_entry_peple"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/bg_tv_border"
-                android:text="申请人：xxx"
+                android:text="入库人：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
                 android:paddingLeft="15dp"/>
 
             <TextView
-                android:id="@+id/tv_apply_time"
+                android:id="@+id/tv_entry_time"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/bg_tv_border"
-                android:text="申请时间：xxx"
+                android:text="入库时间：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
                 android:paddingLeft="15dp"/>
 
             <TextView
-                android:id="@+id/tv_plan"
+                android:id="@+id/tv_stockType"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:gravity="center_vertical"
-                android:text="生产计划：xxx"
+                android:background="@drawable/bg_tv_border"
+                android:text="仓库类型：xxx"
                 android:textColor="@color/color_666666"
                 android:textSize="14sp"
                 android:paddingLeft="15dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/color_f9f9f9"/>
-
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:gravity="center_vertical"
-                android:text="出库产品列表"
-                android:textColor="@color/colorPrimary"
+                android:background="@drawable/bg_tv_border"
+                android:text="物料名称：xxx"
+                android:textColor="@color/color_666666"
                 android:textSize="14sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="15dp"/>
+                android:paddingLeft="15dp"/>
 
-            <com.zxdc.utils.library.view.MeasureListView
-                android:id="@+id/list_outbound"
+            <TextView
+                android:id="@+id/tv_spec"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </com.zxdc.utils.library.view.MeasureListView>
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="规格/型号：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
 
-            <View
+            <TextView
+                android:id="@+id/tv_uinit"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/color_f9f9f9"/>
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="单位：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
 
-            <RelativeLayout
+            <TextView
+                android:id="@+id/tv_num"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="数量：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="总计"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"/>
-
-                <TextView
-                    android:id="@+id/tv_product_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="数量：xx"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"
-                    android:layout_alignParentRight="true"/>
-
-            </RelativeLayout>
-
-            <View
+            <TextView
+                android:id="@+id/tv_batchNo"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/color_f9f9f9"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="批号：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
 
-
-
-            <!-- 发放人信息-->
-            <LinearLayout
-                android:id="@+id/lin_send"
-                android:visibility="gone"
+            <TextView
+                android:id="@+id/tv_memo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_send_people"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="发放人：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_send_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:text="发放时间：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/color_f9f9f9"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-
-            </LinearLayout>
-
-
-            <!-- 领取人信息-->
-            <LinearLayout
-                android:id="@+id/lin_receive"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_receive_people"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="领取人：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_receive_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:text="领取时间：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/color_f9f9f9"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-
-            </LinearLayout>
-
-
-            <!-- 入库产品信息-->
-            <LinearLayout
-                android:id="@+id/lin_entry"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:text="入库产品列表"
-                    android:textColor="@color/color_70DF5D"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="15dp"/>
-
-                <com.zxdc.utils.library.view.MeasureListView
-                    android:id="@+id/list_entry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </com.zxdc.utils.library.view.MeasureListView>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/color_f9f9f9"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="总计"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_entry_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="数量：xx"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black"
-                        android:layout_alignParentRight="true"/>
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/color_f9f9f9"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"/>
-
-
-                <!-- 余废料信息-->
-                <LinearLayout
-                    android:id="@+id/lin_waste"
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:gravity="center_vertical"
-                        android:text="余废料详情"
-                        android:textColor="@color/color_FE8E2C"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="15dp"/>
-
-                    <com.zxdc.utils.library.view.MeasureListView
-                        android:id="@+id/list_waste"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    </com.zxdc.utils.library.view.MeasureListView>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/color_f9f9f9"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="总计"
-                            android:textColor="@android:color/black"
-                            android:textSize="14sp"/>
-
-                        <TextView
-                            android:id="@+id/tv_waste_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="数量：xx"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                            android:layout_alignParentRight="true"/>
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:background="@color/color_f9f9f9"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lin_warehouse"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_entry_people"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="入库人：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_entry_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_tv_border"
-                    android:text="入库时间：xxx"
-                    android:textColor="@color/color_666666"
-                    android:textSize="14sp"
-                    android:paddingLeft="15dp"/>
-
-            </LinearLayout>
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_tv_border"
+                android:text="备注：xxx"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"/>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <com.zxdc.utils.library.view.ClickTextView
-        android:id="@+id/tv_send_material"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="发放物料"
-        android:textSize="15sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"/>
-
-    <LinearLayout
-        android:id="@+id/lin_play"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
-
-        <TextView
-            android:id="@+id/tv_ok"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:text="确认入库"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/tv_no"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/color_FF4B4C"
-            android:text="拒绝入库"
-            android:textSize="15sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

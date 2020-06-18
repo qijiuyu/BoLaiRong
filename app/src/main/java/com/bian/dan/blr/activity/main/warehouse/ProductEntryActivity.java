@@ -40,6 +40,8 @@ public class ProductEntryActivity extends BaseActivity implements MyRefreshLayou
 
     @BindView(R.id.tv_head)
     TextView tvHead;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
@@ -72,6 +74,7 @@ public class ProductEntryActivity extends BaseActivity implements MyRefreshLayou
      */
     private void initView() {
         tvHead.setText("生产入库");
+        tvRight.setText("重置");
         persenter=new ProductOutPersenter(this);
         reList.setMyRefreshLayoutListener(this);
         outAndEntryAdapter = new ProductOutAdapter(this, listAll);
@@ -79,7 +82,7 @@ public class ProductEntryActivity extends BaseActivity implements MyRefreshLayou
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(activity, OutAndEntry_DetailsActivity.class);
-                intent.putExtra("requireId", listAll.get(position).getId());
+                intent.putExtra("listBean", listAll.get(position));
                 startActivity(intent);
             }
         });
@@ -120,11 +123,22 @@ public class ProductEntryActivity extends BaseActivity implements MyRefreshLayou
     }
 
 
-    @OnClick({R.id.lin_back,R.id.tv_start_time, R.id.tv_end_time,R.id.tv_department,R.id.tv_username})
+    @OnClick({R.id.lin_back,R.id.tv_right,R.id.tv_start_time, R.id.tv_end_time,R.id.tv_department,R.id.tv_username})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
+                break;
+            //重置
+            case R.id.tv_right:
+                tvStartTime.setText(null);
+                tvEndTime.setText(null);
+                tvDepartment.setText(null);
+                tvUsername.setText(null);
+                tvDepartment.setTag(null);
+                tvUsername.setTag(null);
+                //加载数据
+                reList.startRefresh();
                 break;
             //选择采购开始日期
             case R.id.tv_start_time:
