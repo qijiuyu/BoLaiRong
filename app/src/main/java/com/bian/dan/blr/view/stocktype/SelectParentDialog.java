@@ -1,4 +1,4 @@
-package com.bian.dan.blr.view;
+package com.bian.dan.blr.view.stocktype;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.view.CycleWheelView;
 import com.zxdc.utils.library.bean.StockList;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectStockDialog extends Dialog implements View.OnClickListener {
+public class SelectParentDialog extends Dialog implements View.OnClickListener {
 
     private Activity context;
     private TextView textView;
@@ -25,14 +24,10 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
     private List<String> parentName=new ArrayList<>();
     //父类仓库id集合
     private List<Integer> parentId=new ArrayList<>();
-    //子类仓库名称集合
-    private List<String> childName=new ArrayList<>();
-    //子类仓库id集合
-    private List<Integer> childId=new ArrayList<>();
     /**
      * 父类与子类的所选位置
      */
-    private int parentPosition,childPosition;
+    private int parentPosition;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_select_stock);
@@ -44,7 +39,7 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
         initListener();
     }
 
-    public SelectStockDialog(Activity context,List<StockList.ListBean> listAll,TextView textView) {
+    public SelectParentDialog(Activity context, List<StockList.ListBean> listAll, TextView textView) {
         super(context, R.style.ActionSheetDialogStyle);
         this.context = context;
         this.listAll=listAll;
@@ -54,6 +49,7 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
     private void initView() {
         final CycleWheelView wvParent=findViewById(R.id.wv_parent);
         final CycleWheelView wvChild=findViewById(R.id.wv_child);
+        wvChild.setVisibility(View.GONE);
         //获取父类仓库数据
         for (int i=0;i<listAll.size();i++){
              if(listAll.get(i).getParentId()==0){
@@ -62,11 +58,9 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
              }
         }
         wvParent.setLabels(parentName);
-        wvChild.setLabels(childName);
 
         try {
             wvParent.setWheelSize(5);
-            wvChild.setWheelSize(5);
         } catch (CycleWheelView.CycleWheelViewException e) {
             e.printStackTrace();
         }
@@ -79,21 +73,6 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
         wvParent.setOnWheelItemSelectedListener(new CycleWheelView.WheelItemSelectedListener() {
             public void onItemSelected(int position, String label) {
                 parentPosition=position;
-                //通过父类id获取子类数据
-                getChildData(parentId.get(position));
-                wvChild.setLabels(childName);
-            }
-        });
-
-        wvChild.setCycleEnable(false);
-        wvChild.setAlphaGradual(0.5f);
-        wvChild.setDivider(Color.parseColor("#abcdef"),1);
-        wvChild.setSolid(Color.WHITE,Color.WHITE);
-        wvChild.setLabelColor(Color.GRAY);
-        wvChild.setLabelSelectColor(Color.BLACK);
-        wvChild.setOnWheelItemSelectedListener(new CycleWheelView.WheelItemSelectedListener() {
-            public void onItemSelected(int position, String label) {
-                childPosition=position;
             }
         });
     }
@@ -108,8 +87,8 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.confirm:
-                 textView.setText(parentName.get(parentPosition)+"-"+childName.get(childPosition));
-                 textView.setTag(childId.get(childPosition));
+                 textView.setTag(parentId.get(parentPosition));
+                 textView.setText(parentName.get(parentPosition));
                  break;
             case R.id.cancle:
                  break;
@@ -117,21 +96,5 @@ public class SelectStockDialog extends Dialog implements View.OnClickListener {
                  break;
         }
         dismiss();
-    }
-
-
-    /**
-     * 通过父类id获取子类数据
-     * @param parentId
-     */
-    private void getChildData(int parentId){
-        childName.clear();
-        childId.clear();
-        for (int i=0,len=listAll.size();i<len;i++){
-             if(listAll.get(i).getParentId()==parentId){
-                 childName.add(listAll.get(i).getName());
-                 childId.add(listAll.get(i).getId());
-             }
-        }
     }
 }

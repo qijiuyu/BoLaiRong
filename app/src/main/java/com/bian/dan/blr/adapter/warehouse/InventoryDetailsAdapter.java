@@ -57,8 +57,8 @@ public class InventoryDetailsAdapter extends BaseAdapter {
         holder.tvInventory.setText(listBean.getTypeStr());
         holder.tvUnit.setText(listBean.getUnitStr());
         holder.tvNum.setText(String.valueOf(listBean.getSumNum()));
-        holder.tvTop.setText(String.valueOf(listBean.getLowerLimit()));
-        holder.tvBottom.setText(String.valueOf(listBean.getUpperLimit()));
+        holder.tvTop.setText(String.valueOf(listBean.getUpperLimit()));
+        holder.tvBottom.setText(String.valueOf(listBean.getLowerLimit()));
         if(listBean.getColor().equals("0")){
             holder.linBg.setBackgroundResource(R.color.color_4DFF4B4C);
         }else{

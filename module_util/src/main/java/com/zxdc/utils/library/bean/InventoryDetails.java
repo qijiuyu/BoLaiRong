@@ -35,6 +35,7 @@ public class InventoryDetails extends BaseBean {
         private String goodsName="";
         private String spec="";
         private String brand="";
+        private String parentStockTypeStr="";
         private String stockTypeStr="";
         private String unitStr="";
         private String typeStr="";
@@ -109,6 +110,14 @@ public class InventoryDetails extends BaseBean {
 
         public void setTypeStr(String typeStr) {
             this.typeStr = typeStr;
+        }
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
         }
     }
 }

@@ -48,7 +48,7 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
     @BindView(R.id.img_clear)
     ImageView imgClear;
     @BindView(R.id.list_name)
-    RecyclerView listName;
+    MyRecyclerView listName;
     @BindView(R.id.list_other)
     MyRecyclerView listOther;
     @BindView(R.id.sv_room)
@@ -77,6 +77,8 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
 
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
+        //设置不能下刷
+        reList.setRefreshEnable(false);
         listName.setLayoutManager(new LinearLayoutManager(mActivity));
         listOther.setLayoutManager(new LinearLayoutManager(mActivity));
 
@@ -93,7 +95,7 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
 
         //工资列表
         if (isVisibleToUser && view != null && listAll.size() == 0) {
-            reList.startRefresh();
+            getWageList();
         }
         return view;
     }
@@ -122,8 +124,9 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
             //根据时间刷新列表
             case EventStatus.SELECT_WAGE_TIME:
                 listAll.clear();
+                page = 1;
                 if (isVisibleToUser && view != null) {
-                    reList.startRefresh();
+                    getWageList();
                 }
                 break;
             default:
@@ -134,13 +137,10 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
 
     /**
      * 下刷
-     *
      * @param view
      */
     public void onRefresh(View view) {
-        page = 1;
-        listAll.clear();
-        getWageList();
+
     }
 
     /**
@@ -166,13 +166,6 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
                 Wage wage= (Wage) object;
                 if (wage.isSussess()) {
                     List<Wage.ListBean> list = wage.getData().getRows();
-                    listAll.addAll(list);
-                    listAll.addAll(list);
-                    listAll.addAll(list);
-                    listAll.addAll(list);
-                    listAll.addAll(list);
-                    listAll.addAll(list);
-                    listAll.addAll(list);
                     listAll.addAll(list);
                     salesWageAdapter1.notifyDataSetChanged();
                     salesWageAdapter2.notifyDataSetChanged();
@@ -289,7 +282,7 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
         super.setUserVisibleHint(isVisibleToUser);
         this.isVisibleToUser = isVisibleToUser;
         if (isVisibleToUser && view != null && listAll.size() == 0) {
-            reList.startRefresh();
+            getWageList();
         }
     }
 

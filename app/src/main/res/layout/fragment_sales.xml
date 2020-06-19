@@ -48,13 +48,6 @@
 
     </RelativeLayout>
 
-    <com.zxdc.utils.library.view.MyRefreshLayout
-        android:id="@+id/re_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:paddingBottom="10dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -75,7 +68,7 @@
                     android:gravity="center"/>
 
 
-                <android.support.v7.widget.RecyclerView
+                <com.bian.dan.blr.view.MyRecyclerView
                     android:id="@+id/list_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -145,19 +138,23 @@
 
                     </LinearLayout>
 
-                    <com.bian.dan.blr.view.MyRecyclerView
-                        android:id="@+id/list_other"
+                    <com.zxdc.utils.library.view.MyRefreshLayout
+                        android:id="@+id/re_list"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent">
+
+                        <com.bian.dan.blr.view.MyRecyclerView
+                            android:id="@+id/list_other"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.zxdc.utils.library.view.MyRefreshLayout>
 
                 </LinearLayout>
 
             </com.bian.dan.blr.view.ObservableHorizontalScrollView>
 
         </LinearLayout>
-
-    </com.zxdc.utils.library.view.MyRefreshLayout>
-
 
 
 </LinearLayout>

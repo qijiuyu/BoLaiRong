@@ -3,7 +3,7 @@ package com.bian.dan.blr.persenter.product;
 import android.widget.TextView;
 
 import com.bian.dan.blr.activity.main.production.AddStorageProductActivity;
-import com.bian.dan.blr.view.SelectStockDialog;
+import com.bian.dan.blr.view.stocktype.SelectStockDialog;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.StockList;
 import com.zxdc.utils.library.http.HttpMethod;
