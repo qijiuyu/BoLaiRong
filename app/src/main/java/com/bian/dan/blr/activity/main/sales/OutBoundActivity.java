@@ -144,7 +144,7 @@ public class OutBoundActivity extends BaseActivity implements MyRefreshLayoutLis
      * 获取出库单列表
      */
     private void getOutBoundList() {
-        HttpMethod.getOutBoundList((String) tvKey.getTag(), page, new NetWorkCallBack() {
+        HttpMethod.getOutBoundList(null,null,(String) tvKey.getTag(), page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.warehouse.ProcurementDetailsActivity2;
 import com.bian.dan.blr.adapter.procurement.ProcurementAdapter;
+import com.bian.dan.blr.persenter.procurement.ProcurementPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Procurement;
@@ -37,16 +39,20 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
 
     @BindView(R.id.tv_head)
     TextView tvHead;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     @BindView(R.id.img_right)
     ImageView imgRight;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
     MyRefreshLayout reList;
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
     @BindView(R.id.et_key)
     EditText etKey;
-    @BindView(R.id.img_clear)
-    ImageView imgClear;
     //页码
     private int page = 1;
     /**
@@ -56,6 +62,7 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
     private int type;
     private ProcurementAdapter procurementAdapter;
     private List<Procurement.ListBean> listAll=new ArrayList<>();
+    private ProcurementPersenter procurementPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_procurement);
@@ -71,9 +78,12 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
      */
     private void initView() {
         tvHead.setText("采购单");
+        procurementPersenter=new ProcurementPersenter(this);
         type=getIntent().getIntExtra("type",0);
         if(type==1){
             imgRight.setImageResource(R.mipmap.add);
+        }else{
+            tvRight.setText("重置");
         }
         reList.setMyRefreshLayoutListener(this);
         procurementAdapter=new ProcurementAdapter(this,listAll);
@@ -93,40 +103,78 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
 
 
         /**
-         * 监听输入框
+         * 监听开始日期
          */
-        etKey.addTextChangedListener(new TextWatcher() {
-            @Override
+        tvStartTime.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-            @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-            @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()>0){
-                    imgClear.setVisibility(View.VISIBLE);
-                }else{
-                    imgClear.setVisibility(View.GONE);
+                if(s.length()>0 && !TextUtils.isEmpty(tvEndTime.getText().toString())){
+                    //获取手动入库列表
+                    reList.startRefresh();
                 }
+            }
+        });
+
+        /**
+         * 监听结束日期
+         */
+        tvEndTime.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0 && !TextUtils.isEmpty(tvStartTime.getText().toString())){
+                    //获取手动入库列表
+                    reList.startRefresh();
+                }
+            }
+        });
+
+        /**
+         * 监听客户名称输入框
+         */
+        etKey.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            public void afterTextChanged(Editable s) {
                 //加载数据
                 reList.startRefresh();
             }
         });
     }
 
-    @OnClick({R.id.lin_back, R.id.img_right,R.id.img_clear})
+    @OnClick({R.id.lin_back,R.id.tv_right, R.id.img_right,R.id.tv_start_time, R.id.tv_end_time})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
+            //重置
+            case R.id.tv_right:
+                tvStartTime.setText(null);
+                tvEndTime.setText(null);
+                etKey.setText(null);
+                //加载数据
+                reList.startRefresh();
+                break;
+            //添加
             case R.id.img_right:
                 setClass(AddProcurementActivity.class,1000);
                 break;
-            case R.id.img_clear:
-                 etKey.setText(null);
-                 break;
+            //选择开始日期
+            case R.id.tv_start_time:
+                procurementPersenter.selectStartTime(tvStartTime,tvEndTime);
+                break;
+            //选择结束日期
+            case R.id.tv_end_time:
+                procurementPersenter.selectEndTime(tvStartTime,tvEndTime);
+                break;
             default:
                 break;
         }
@@ -151,7 +199,7 @@ public class ProcurementActivity extends BaseActivity  implements MyRefreshLayou
      * 获取采购单列表
      */
     private void getProcurementList(){
-        HttpMethod.getProcurementList(etKey.getText().toString().trim(),page, new NetWorkCallBack() {
+        HttpMethod.getProcurementList(tvStartTime.getText().toString(),tvEndTime.getText().toString(),etKey.getText().toString().trim(),page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

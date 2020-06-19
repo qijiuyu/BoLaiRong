@@ -145,7 +145,7 @@ public interface HttpApi {
     Call<BaseBean> addOutBound(@Body OutBoundP outBoundP);
 
     @GET(HttpConstant.GET_OUTBOUND_LIST)
-    Call<OutBound> getOutBoundList(@Query("customerId") String customerId, @Query("page") int page, @Query("limit") int limit);
+    Call<OutBound> getOutBoundList(@Query("startDate") String startDate,@Query("endDate") String endDate,@Query("customerId") String customerId, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_OUTBOUND_LIST)
     Call<OutBound> getOutBoundListByAudit(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
@@ -253,7 +253,7 @@ public interface HttpApi {
     Call<Procurement> getAuditProcurementList(@Query("stateStr") String stateStr, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_LIST)
-    Call<Procurement> getProcurementList(@Query("purcOrder") String purcOrder,@Query("page") int page, @Query("limit") int limit);
+    Call<Procurement> getProcurementList(@Query("startDate") String startDate,@Query("endDate") String endDate,@Query("purcOrder") String purcOrder,@Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_PROCUREMENT_DETAILS)
     Call<ProcurementDetails> getProcurementDetails(@Query("id") int id);

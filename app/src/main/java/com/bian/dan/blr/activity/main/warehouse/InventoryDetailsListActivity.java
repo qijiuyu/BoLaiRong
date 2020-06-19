@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -44,10 +43,10 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
 
     @BindView(R.id.tv_head)
     TextView tvHead;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     @BindView(R.id.tv_key)
     TextView tvKey;
-    @BindView(R.id.img_clear)
-    ImageView imgClear;
     @BindView(R.id.list_name)
     MyRecyclerView listName;
     @BindView(R.id.list_other)
@@ -83,12 +82,12 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
      */
     private void initView() {
         tvHead.setText("库存明细详情");
+        tvRight.setText("重置");
         inventoryPersenter=new InventoryPersenter(this);
         listBean= (Inventory.ListBean) getIntent().getSerializableExtra("listBean");
         if(listBean!=null){
             tvKey.setTag(listBean.getGoodsId());
             tvKey.setText(listBean.getGoodsName()+"/"+listBean.getBrand()+"/"+listBean.getSpec());
-            imgClear.setVisibility(View.VISIBLE);
         }
 
         /**
@@ -106,9 +105,11 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
                 if(s.length()>0){
                     tvChild.setTag(null);
                     tvChild.setText(null);
+                    //加载数据
+                    reList.startRefresh();
+                }else{
+                    tvParent.setTag(null);
                 }
-                //加载数据
-                reList.startRefresh();
             }
         });
 
@@ -125,8 +126,12 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
             }
             @Override
             public void afterTextChanged(Editable s) {
-                //加载数据
-                reList.startRefresh();
+                if(s.length()>0){
+                    //加载数据
+                    reList.startRefresh();
+                }else{
+                    tvChild.setTag(null);
+                }
             }
         });
 
@@ -141,12 +146,11 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
             }
             public void afterTextChanged(Editable s) {
                 if(s.length()>0){
-                    imgClear.setVisibility(View.VISIBLE);
+                    //加载数据
+                    reList.startRefresh();
                 }else{
-                    imgClear.setVisibility(View.GONE);
+                    tvKey.setTag(null);
                 }
-                //加载数据
-                reList.startRefresh();
             }
         });
     }
@@ -173,12 +177,20 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
         setSyncScrollListener();
     }
 
-    @OnClick({R.id.lin_back, R.id.tv_key,R.id.img_clear,R.id.tv_type, R.id.tv_list})
+    @OnClick({R.id.lin_back,R.id.tv_right, R.id.tv_key,R.id.tv_type, R.id.tv_list})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
+            //重置
+            case R.id.tv_right:
+                 tvParent.setText(null);
+                 tvChild.setText(null);
+                 tvKey.setText(null);
+                 //加载数据
+                 reList.startRefresh();
+                 break;
             //选择仓库
             case R.id.tv_type:
                 inventoryPersenter.getStockList(tvParent);
@@ -191,12 +203,9 @@ public class InventoryDetailsListActivity extends BaseActivity implements MyRefr
                 }
                 inventoryPersenter.showChildStock(tvChild,(int)tvParent.getTag());
                 break;
+            //选择物料
             case R.id.tv_key:
                 setClass(SelectMaterialActivity.class,100);
-                break;
-            case R.id.img_clear:
-                tvKey.setTag(null);
-                tvKey.setText(null);
                 break;
             default:
                 break;

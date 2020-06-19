@@ -96,6 +96,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Query;
 
 public class HttpMethod extends BaseRequst {
 
@@ -462,8 +463,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取出库单列表
      */
-    public static void getOutBoundList(String customerId,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getOutBoundList(customerId,page,limit).enqueue(new Callback<OutBound>() {
+    public static void getOutBoundList(String startDate,String endDate, String customerId, int page, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getOutBoundList(startDate,endDate,customerId,page,limit).enqueue(new Callback<OutBound>() {
             public void onResponse(Call<OutBound> call, Response<OutBound> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -1075,8 +1076,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取采购单列表
      */
-    public static void getProcurementList(String purcOrder,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getProcurementList(purcOrder,page,limit).enqueue(new Callback<Procurement>() {
+    public static void getProcurementList(String startDate,String endDate, String purcOrder,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getProcurementList(startDate,endDate,purcOrder,page,limit).enqueue(new Callback<Procurement>() {
             public void onResponse(Call<Procurement> call, Response<Procurement> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
