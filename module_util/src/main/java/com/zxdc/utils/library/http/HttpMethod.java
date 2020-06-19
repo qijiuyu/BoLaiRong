@@ -62,6 +62,7 @@ import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLedTableP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
+import com.zxdc.utils.library.bean.parameter.AddPaymentP;
 import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
@@ -1766,6 +1767,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<OutAndEntry> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 新增付款明细
+     */
+    public static void addPayMent(AddPaymentP addPaymentP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).addPayMent(addPaymentP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

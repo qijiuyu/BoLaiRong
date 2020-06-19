@@ -60,6 +60,7 @@ import com.zxdc.utils.library.bean.parameter.AddFinancialP;
 import com.zxdc.utils.library.bean.parameter.AddLedTableP;
 import com.zxdc.utils.library.bean.parameter.AddLogP;
 import com.zxdc.utils.library.bean.parameter.AddOutBoundByProductP;
+import com.zxdc.utils.library.bean.parameter.AddPaymentP;
 import com.zxdc.utils.library.bean.parameter.AddProcurementP;
 import com.zxdc.utils.library.bean.parameter.AddProductPlanP;
 import com.zxdc.utils.library.bean.parameter.AddPutStorageP;
@@ -370,6 +371,10 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"entryProductDetail/listByBatchNoAndDeptAndCreator")
     Call<OutAndEntry> getProductEntryList(@Query("entryStatus") int entryStatus,@Query("deptId") String deptId, @Query("createId") String createId,@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
+
+    @PUT(HttpConstant.IP+"contractDetail/save")
+    Call<BaseBean> addPayMent(@Body AddPaymentP addPaymentP);
+
 
 
 

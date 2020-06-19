@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_create_people"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="操作人：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+        <TextView
+            android:id="@+id/tv_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="操作时间：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="付款金额：0"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"
+        android:layout_marginTop="7dp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="付款时间：xxx"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"
+        android:layout_marginTop="7dp"/>
+
+        <TextView
+            android:id="@+id/tv_remark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="备注：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

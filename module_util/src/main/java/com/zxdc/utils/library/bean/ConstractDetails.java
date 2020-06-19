@@ -38,6 +38,7 @@ public class ConstractDetails extends BaseBean {
         private String approvalDate="";//审批时间
         private String createName="";
         private List<FileBean> fileList;
+        private List<PayMent> detailList;
 
         public int getId() {
             return id;
@@ -221,6 +222,63 @@ public class ConstractDetails extends BaseBean {
 
         public void setFileList(List<FileBean> fileList) {
             this.fileList = fileList;
+        }
+
+        public List<PayMent> getDetailList() {
+            return detailList;
+        }
+
+        public void setDetailList(List<PayMent> detailList) {
+            this.detailList = detailList;
+        }
+    }
+
+
+    public static class PayMent implements Serializable{
+        private String payDate="";
+        private double amount;
+        private String memo="";
+        private String createName="";
+        private String createDate="";
+
+        public String getPayDate() {
+            return payDate;
+        }
+
+        public void setPayDate(String payDate) {
+            this.payDate = payDate;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
+        }
+
+        public String getMemo() {
+            return memo;
+        }
+
+        public void setMemo(String memo) {
+            this.memo = memo;
+        }
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
         }
     }
 
