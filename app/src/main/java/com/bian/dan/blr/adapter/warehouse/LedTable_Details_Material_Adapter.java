@@ -54,10 +54,10 @@ public class LedTable_Details_Material_Adapter extends BaseAdapter {
         LedTableDetails.ListBean listBean = list.get(position);
         holder.tvGetType.setText(Html.fromHtml("领取方式：<font color=\"#000000\">"+listBean.getTypeValue()+"</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + listBean.getGoodsName() + "</font>"));
-//        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + goods.getUnitStr() + "</font>"));
-//        holder.tvBrand.setText(goods.getBrand());
-//        holder.tvSpec.setText(goods.getSpec());
-        holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + listBean.getStockTypeStr() + "</font>"));
+        holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + listBean.getUnitStr() + "</font>"));
+        holder.tvBrand.setText(Html.fromHtml("牌号：<font color=\"#000000\">" + listBean.getBrand() + "</font>"));
+        holder.tvSpec.setText(Html.fromHtml("规格/型号：<font color=\"#000000\">" + listBean.getSpec() + "</font>"));
+        holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + listBean.getParentStockTypeStr()+"-"+listBean.getStockTypeStr() + "</font>"));
         holder.tvBatchNo.setText(Html.fromHtml("批次：<font color=\"#000000\">" + listBean.getBatchNo() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("领取数量/更换数量：<font color=\"#000000\">" + listBean.getNum() + "</font>"));
         return view;

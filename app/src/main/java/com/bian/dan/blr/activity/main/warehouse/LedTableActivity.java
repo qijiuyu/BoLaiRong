@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.production.SelectDeptActivity;
 import com.bian.dan.blr.adapter.warehouse.LedTableAdapter;
+import com.bian.dan.blr.persenter.warehouse.LedTablePersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.LedTable;
@@ -37,12 +38,14 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
 
     @BindView(R.id.tv_head)
     TextView tvHead;
-    @BindView(R.id.img_right)
-    ImageView imgRight;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
+    @BindView(R.id.tv_start_time)
+    TextView tvStartTime;
+    @BindView(R.id.tv_end_time)
+    TextView tvEndTime;
     @BindView(R.id.tv_key)
     TextView tvKey;
-    @BindView(R.id.img_clear)
-    ImageView imgClear;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
@@ -51,6 +54,7 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
     private LedTableAdapter ledTableAdapter;
     //页码
     private int page=1;
+    private LedTablePersenter ledTablePersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ledtable);
@@ -66,6 +70,8 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
      */
     private void initView() {
         tvHead.setText("请领表");
+        tvRight.setText("重置");
+        ledTablePersenter=new LedTablePersenter(this);
 //        imgRight.setImageResource(R.mipmap.add);
         reList.setMyRefreshLayoutListener(this);
 
@@ -79,6 +85,39 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
             }
         });
 
+
+        /**
+         * 监听开始日期
+         */
+        tvStartTime.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0 && !TextUtils.isEmpty(tvEndTime.getText().toString())){
+                    //获取手动入库列表
+                    reList.startRefresh();
+                }
+            }
+        });
+
+        /**
+         * 监听结束日期
+         */
+        tvEndTime.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            public void afterTextChanged(Editable s) {
+                if(s.length()>0 && !TextUtils.isEmpty(tvStartTime.getText().toString())){
+                    //获取手动入库列表
+                    reList.startRefresh();
+                }
+            }
+        });
+
         /**
          * 监听关键字搜索
          */
@@ -89,32 +128,44 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
             }
             public void afterTextChanged(Editable s) {
                 if(s.length()>0){
-                    imgClear.setVisibility(View.VISIBLE);
+                    //加载数据
+                    reList.startRefresh();
                 }else{
                     tvKey.setTag("");
-                    imgClear.setVisibility(View.GONE);
                 }
-                //加载数据
-                reList.startRefresh();
+
             }
         });
     }
 
-    @OnClick({R.id.lin_back, R.id.img_right,R.id.tv_key, R.id.img_clear})
+    @OnClick({R.id.lin_back,R.id.tv_right, R.id.img_right,R.id.tv_start_time, R.id.tv_end_time,R.id.tv_key})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.lin_back:
                  finish();
                 break;
+            //重置
+            case R.id.tv_right:
+                tvStartTime.setText(null);
+                tvEndTime.setText(null);
+                tvKey.setText(null);
+                //加载数据
+                reList.startRefresh();
+                break;
             case R.id.img_right:
                 setClass(AddLedTableActivity.class,1000);
                  break;
+            //选择开始日期
+            case R.id.tv_start_time:
+                ledTablePersenter.selectStartTime(tvStartTime,tvEndTime);
+                break;
+            //选择结束日期
+            case R.id.tv_end_time:
+                ledTablePersenter.selectEndTime(tvStartTime,tvEndTime);
+                break;
             //选择部门
             case R.id.tv_key:
                 setClass(SelectDeptActivity.class,500);
-                break;
-            case R.id.img_clear:
-                tvKey.setText(null);
                 break;
             default:
                 break;
@@ -140,7 +191,7 @@ public class LedTableActivity extends BaseActivity implements MyRefreshLayoutLis
      * 查询请领表
      */
     private void getLedTable(){
-        HttpMethod.getLedTable((String) tvKey.getTag(), page, new NetWorkCallBack() {
+        HttpMethod.getLedTable(tvStartTime.getText().toString(),tvEndTime.getText().toString(),(String) tvKey.getTag(), page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

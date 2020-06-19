@@ -73,9 +73,6 @@ public class SelectDeptActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Dept.DeptBean deptBean=listAll.get(position);
-                if(deptBean.getParentId()==0){
-                    return;
-                }
                 Intent intent = new Intent();
                 intent.putExtra("deptBean", deptBean);
                 setResult(500, intent);

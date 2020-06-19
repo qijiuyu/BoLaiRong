@@ -56,8 +56,9 @@ public class ShowBatchNoAdapter extends BaseAdapter {
         ProcurementDetails.EntryList entryList = list.get(position);
         holder.tvName.setText(entryList.getCreateName());
         holder.tvTime.setText(entryList.getCreateDate());
+        holder.tvStockType.setText(entryList.getParentStockTypeStr()+"-"+entryList.getStockTypeStr());
         holder.tvBatchNo.setText(entryList.getBatchNo());
-        holder.tvNum.setText(entryList.getNum()+"");
+        holder.tvNum.setText(entryList.getNum() + "");
         return view;
     }
 
@@ -68,6 +69,8 @@ public class ShowBatchNoAdapter extends BaseAdapter {
         TextView tvName;
         @BindView(R.id.tv_time)
         TextView tvTime;
+        @BindView(R.id.tv_stockType)
+        TextView tvStockType;
         @BindView(R.id.tv_batchNo)
         TextView tvBatchNo;
         @BindView(R.id.tv_num)

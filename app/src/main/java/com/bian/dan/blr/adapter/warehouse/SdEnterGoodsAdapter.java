@@ -59,7 +59,7 @@ public class SdEnterGoodsAdapter extends BaseAdapter {
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodList.getPrice() + "</font>"));
         holder.tvMonety.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + goodList.getAmount() + "</font>"));
         holder.tvBatchNo.setText(Html.fromHtml("批号：<font color=\"#000000\">" + goodList.getBatchNo() + "</font>"));
-        holder.tvStockType.setText(Html.fromHtml("入库仓库：<font color=\"#000000\">" + goodList.getStockTypeStr() + "</font>"));
+        holder.tvStockType.setText(Html.fromHtml("入库仓库：<font color=\"#000000\">" + goodList.getParentStockTypeStr()+"-"+goodList.getStockTypeStr() + "</font>"));
         holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + goodList.getMemo() + "</font>"));
         return view;
     }

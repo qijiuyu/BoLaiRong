@@ -331,7 +331,7 @@ public interface HttpApi {
     Call<BaseBean> updateDevice(@Body AddDeviceP addDeviceP);
 
     @GET(HttpConstant.IP+"outPartRequire/list")
-    Call<LedTable> getLedTable(@Query("deptId") String deptId, @Query("page") int page, @Query("limit") int limit);
+    Call<LedTable> getLedTable(@Query("startDate") String startDate,@Query("endDate") String endDate,@Query("deptId") String deptId, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_CUSTOMER)
     Call<CustomerList> getCustomerByStatistical(@Query("privateState") int privateState);

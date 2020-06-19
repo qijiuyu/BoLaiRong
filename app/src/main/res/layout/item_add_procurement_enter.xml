@@ -135,6 +135,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:text="仓库"
+                android:textSize="12sp"
+                android:textColor="@color/color_666666"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="批次"
                 android:textSize="12sp"
                 android:textColor="@color/color_666666"/>
@@ -142,7 +151,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="数量"
                 android:textSize="12sp"

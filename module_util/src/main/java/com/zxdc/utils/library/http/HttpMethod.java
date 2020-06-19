@@ -96,7 +96,6 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 public class HttpMethod extends BaseRequst {
 
@@ -1521,8 +1520,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 查询请领表
      */
-    public static void getLedTable(String deptId,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getLedTable(deptId,page,limit).enqueue(new Callback<LedTable>() {
+    public static void getLedTable(String startDate,String endDate,String deptId,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getLedTable(startDate,endDate,deptId,page,limit).enqueue(new Callback<LedTable>() {
             public void onResponse(Call<LedTable> call, Response<LedTable> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

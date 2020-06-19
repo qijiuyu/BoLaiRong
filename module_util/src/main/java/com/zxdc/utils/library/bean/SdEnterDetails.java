@@ -86,6 +86,7 @@ public class SdEnterDetails extends BaseBean {
         private String goodsName="";
         private String spec="";
         private String unitsStr="";
+        private String parentStockTypeStr="";
         private String goodsTypeStr="";
         private double price;
         private double amount;
@@ -94,6 +95,14 @@ public class SdEnterDetails extends BaseBean {
         private String createName="";
         private String createDate="";
         private String memo="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
 
         public String getMemo() {
             return memo;

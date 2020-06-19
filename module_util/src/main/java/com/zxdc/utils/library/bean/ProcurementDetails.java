@@ -324,6 +324,7 @@ public class ProcurementDetails extends BaseBean {
     public static class EntryList implements Serializable{
         private String batchNo="";
         private int num;
+        private String parentStockTypeStr="";
         private String stockTypeStr="";
         private String goodsTypeStr="";
         private String createName="";
@@ -377,6 +378,13 @@ public class ProcurementDetails extends BaseBean {
             this.createDate = createDate;
         }
 
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
     }
 
 }

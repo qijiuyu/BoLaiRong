@@ -79,11 +79,47 @@ public class LedTableDetails extends BaseBean {
         private int goodsId;
         private String goodsName="";
         private int stockType;
+        private String parentStockTypeStr="";
         private String stockTypeStr="";
         private String batchNo="";
         private int num;
         private int type;
         private String typeValue="";
+        private String unitStr="";
+        private String brand="";
+        private String spec="";
+
+        public String getParentStockTypeStr() {
+            return parentStockTypeStr;
+        }
+
+        public void setParentStockTypeStr(String parentStockTypeStr) {
+            this.parentStockTypeStr = parentStockTypeStr;
+        }
+
+        public String getUnitStr() {
+            return unitStr;
+        }
+
+        public void setUnitStr(String unitStr) {
+            this.unitStr = unitStr;
+        }
+
+        public String getBrand() {
+            return brand;
+        }
+
+        public void setBrand(String brand) {
+            this.brand = brand;
+        }
+
+        public String getSpec() {
+            return spec;
+        }
+
+        public void setSpec(String spec) {
+            this.spec = spec;
+        }
 
         public int getId() {
             return id;
