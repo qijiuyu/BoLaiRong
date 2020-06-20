@@ -7,11 +7,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
+import com.bian.dan.blr.activity.main.financial.WorkerDetailsActivity;
 import com.bian.dan.blr.activity.main.production.SelectDeptActivity;
 import com.bian.dan.blr.activity.main.sales.SelectUserActivity;
 import com.bian.dan.blr.adapter.financial.WorkersWageAdapter;
@@ -55,8 +57,6 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
     //fragment是否可见
     private boolean isVisibleToUser = false;
     private WorkersWageAdapter workersWageAdapter;
-    //页码
-    private int page=1;
     private List<Wage.ListBean> listAll=new ArrayList<>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +71,17 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
 
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
+        reList.setIsLoadingMoreEnabled(false);
+
         workersWageAdapter=new WorkersWageAdapter(mActivity,listAll);
         listView.setAdapter(workersWageAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(mActivity, WorkerDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                startActivity(intent);
+            }
+        });
 
         //工资列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
@@ -130,19 +139,11 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
      */
     @Override
     public void onRefresh(View view) {
-        page=1;
         listAll.clear();
         getWageList();
     }
-
-    /**
-     * 上拉加载更多
-     * @param view
-     */
     @Override
     public void onLoadMore(View view) {
-        page++;
-        getWageList();
     }
 
 
@@ -150,19 +151,14 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
      * 工资列表
      */
     private void getWageList(){
-        HttpMethod.getWageList((String)tvUsername.getTag(), (String)tvDepartment.getTag(), ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
-            @Override
+        HttpMethod.getWageList((String)tvUsername.getTag(), (String)tvDepartment.getTag(), ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
                 Wage wage= (Wage) object;
                 if(wage.isSussess()){
-                    List<Wage.ListBean> list=wage.getData().getRows();
-                    listAll.addAll(list);
+                    listAll.addAll(wage.getData());
                     workersWageAdapter.notifyDataSetChanged();
-                    if (list.size() < HttpMethod.limit) {
-                        reList.setIsLoadingMoreEnabled(false);
-                    }
                 }else{
                     ToastUtil.showLong(wage.getMsg());
                 }

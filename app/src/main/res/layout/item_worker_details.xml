@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物料名称：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp">
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物料类型：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"/>
+
+            <TextView
+                android:id="@+id/tv_spec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="规格/型号：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="25dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp">
+
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单位：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"/>
+
+            <TextView
+                android:id="@+id/tv_stockType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="仓库类型：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="25dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp">
+
+            <TextView
+                android:id="@+id/tv_batchNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="批号：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"/>
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数量：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="25dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp">
+
+            <TextView
+                android:id="@+id/tv_wage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="计件工资：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"/>
+
+            <TextView
+                android:id="@+id/tv_waste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="废品率(%)：xxx"
+                android:textSize="14sp"
+                android:textColor="@color/color_666666"
+                android:layout_marginLeft="25dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="总收入：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

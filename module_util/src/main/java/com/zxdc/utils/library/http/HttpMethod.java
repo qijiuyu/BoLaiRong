@@ -55,6 +55,7 @@ import com.zxdc.utils.library.bean.Upload;
 import com.zxdc.utils.library.bean.UserInfo;
 import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.Wage;
+import com.zxdc.utils.library.bean.WorkerDetails;
 import com.zxdc.utils.library.bean.parameter.AddContractP;
 import com.zxdc.utils.library.bean.parameter.AddCustomerP;
 import com.zxdc.utils.library.bean.parameter.AddDeviceP;
@@ -1434,8 +1435,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 工资列表
      */
-    public static void getWageList(String createId,String deptId,String month,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getWageList(createId,deptId,month,page,limit).enqueue(new Callback<Wage>() {
+    public static void getWageList(String createId,String deptId,String month,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getWageList(createId,deptId,month).enqueue(new Callback<Wage>() {
             public void onResponse(Call<Wage> call, Response<Wage> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -1784,6 +1785,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 工人工资明细
+     */
+    public static void getWorkerDetails(String month,int createId,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getWorkerDetails(month,createId,page,limit).enqueue(new Callback<WorkerDetails>() {
+            public void onResponse(Call<WorkerDetails> call, Response<WorkerDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<WorkerDetails> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

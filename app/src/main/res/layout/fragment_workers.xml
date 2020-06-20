@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="职位"
+            android:text="部门"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:gravity="center"/>
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="总件数"
+            android:text="工资(元)"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:gravity="center"/>
@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="计件工资"
+            android:text="月份"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             android:gravity="center"/>

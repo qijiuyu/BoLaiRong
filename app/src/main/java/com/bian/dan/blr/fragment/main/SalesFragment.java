@@ -158,14 +158,14 @@ public class SalesFragment extends BaseFragment  implements MyRefreshLayoutListe
      * 工资列表
      */
     private void getWageList() {
-        HttpMethod.getWageList(null, "12", ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
+        HttpMethod.getWageList(null, "12", ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), new NetWorkCallBack() {
             @Override
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
                 Wage wage= (Wage) object;
                 if (wage.isSussess()) {
-                    List<Wage.ListBean> list = wage.getData().getRows();
+                    List<Wage.ListBean> list = wage.getData();
                     listAll.addAll(list);
                     salesWageAdapter1.notifyDataSetChanged();
                     salesWageAdapter2.notifyDataSetChanged();

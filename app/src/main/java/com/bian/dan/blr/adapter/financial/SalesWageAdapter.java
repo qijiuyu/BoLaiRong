@@ -34,19 +34,19 @@ public class SalesWageAdapter extends RecyclerView.Adapter<SalesWageAdapter.MyHo
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int i) {
         Wage.ListBean listBean = list.get(i);
-        if(type==1){
-            holder.tvName.setText(listBean.getUserName());
-            holder.tvTotalSales.setVisibility(View.GONE);
-            holder.tvPosition.setVisibility(View.GONE);
-            holder.tvCutMoney.setVisibility(View.GONE);
-            holder.tvEntryMoney.setVisibility(View.GONE);
-            holder.tvTotalMoney.setVisibility(View.GONE);
-        }else{
-            holder.tvName.setVisibility(View.GONE);
-            holder.tvTotalSales.setText(String.valueOf(listBean.getSales()));
-            holder.tvCutMoney.setText(String.valueOf(listBean.getCutWages()));
-            holder.tvEntryMoney.setText(String.valueOf(listBean.getEntryFee()));
-        }
+//        if(type==1){
+//            holder.tvName.setText(listBean.getUserName());
+//            holder.tvTotalSales.setVisibility(View.GONE);
+//            holder.tvPosition.setVisibility(View.GONE);
+//            holder.tvCutMoney.setVisibility(View.GONE);
+//            holder.tvEntryMoney.setVisibility(View.GONE);
+//            holder.tvTotalMoney.setVisibility(View.GONE);
+//        }else{
+//            holder.tvName.setVisibility(View.GONE);
+//            holder.tvTotalSales.setText(String.valueOf(listBean.getSales()));
+//            holder.tvCutMoney.setText(String.valueOf(listBean.getCutWages()));
+//            holder.tvEntryMoney.setText(String.valueOf(listBean.getEntryFee()));
+//        }
     }
 
     @Override
