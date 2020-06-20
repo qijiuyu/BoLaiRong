@@ -315,8 +315,8 @@ public interface HttpApi {
     @PUT(HttpConstant.IP+"supplier/saveDetailList")
     Call<BaseBean> AddSupplierMaterial(@Body AddSupplierMaterialP addSupplierMaterialP);
 
-    @GET(HttpConstant.IP+"wage/getList")
-    Call<Wage> getWageList(@Query("userId") String userId,@Query("deptId") String deptId,@Query("month") String month, @Query("page") int page, @Query("limit") int limit);
+    @GET(HttpConstant.IP+"entryProductDetail/getWageListOfWorkers")
+    Call<Wage> getWageList(@Query("createId") String createId,@Query("deptId") String deptId,@Query("month") String month, @Query("page") int page, @Query("limit") int limit);
 
     @POST(HttpConstant.IP+"purchase/update")
     Call<BaseBean> EditProcurement(@Body AddProcurementP addProcurementP);

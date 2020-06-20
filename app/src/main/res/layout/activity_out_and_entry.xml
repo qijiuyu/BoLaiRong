@@ -125,7 +125,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="负责人"
+                android:hint="选择人员"
                 android:textSize="13sp"
                 android:textColor="@color/color_333333"
                 android:gravity="center_vertical"

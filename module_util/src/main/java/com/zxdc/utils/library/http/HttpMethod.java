@@ -1434,8 +1434,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 工资列表
      */
-    public static void getWageList(String userId,String deptId,String month,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getWageList(userId,deptId,month,page,limit).enqueue(new Callback<Wage>() {
+    public static void getWageList(String createId,String deptId,String month,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getWageList(createId,deptId,month,page,limit).enqueue(new Callback<Wage>() {
             public void onResponse(Call<Wage> call, Response<Wage> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

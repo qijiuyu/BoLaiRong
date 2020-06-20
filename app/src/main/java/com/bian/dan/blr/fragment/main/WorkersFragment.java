@@ -1,19 +1,24 @@
 package com.bian.dan.blr.fragment.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.main.financial.WageManagerActivity;
+import com.bian.dan.blr.activity.main.production.SelectDeptActivity;
+import com.bian.dan.blr.activity.main.sales.SelectUserActivity;
 import com.bian.dan.blr.adapter.financial.WorkersWageAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
+import com.zxdc.utils.library.bean.Dept;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.UserList;
 import com.zxdc.utils.library.bean.Wage;
 import com.zxdc.utils.library.eventbus.EventBusType;
 import com.zxdc.utils.library.eventbus.EventStatus;
@@ -38,10 +43,10 @@ import butterknife.Unbinder;
  */
 public class WorkersFragment extends BaseFragment implements MyRefreshLayoutListener {
 
-    @BindView(R.id.tv_key)
-    TextView tvKey;
-    @BindView(R.id.img_clear)
-    ImageView imgClear;
+    @BindView(R.id.tv_department)
+    TextView tvDepartment;
+    @BindView(R.id.tv_username)
+    TextView tvUsername;
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
@@ -77,13 +82,22 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
     }
 
 
-    @OnClick({R.id.tv_key, R.id.img_clear})
+    @OnClick({R.id.tv_department,R.id.tv_username})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_key:
+            //选择部门
+            case R.id.tv_department:
+                setClass(SelectDeptActivity.class,500);
                 break;
-            case R.id.img_clear:
-                tvKey.setText(null);
+            //选择负责人
+            case R.id.tv_username:
+                if(TextUtils.isEmpty(tvDepartment.getText())){
+                    ToastUtil.showLong("请先选择部门");
+                    return;
+                }
+                Intent intent=new Intent(mActivity, SelectUserActivity.class);
+                intent.putExtra("deptId",(String)tvDepartment.getTag());
+                startActivityForResult(intent,400);
                 break;
             default:
                 break;
@@ -136,7 +150,7 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
      * 工资列表
      */
     private void getWageList(){
-        HttpMethod.getWageList(null, "2", ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
+        HttpMethod.getWageList((String)tvUsername.getTag(), (String)tvDepartment.getTag(), ((WageManagerActivity) mActivity).tvTime.getText().toString().trim(), page, new NetWorkCallBack() {
             @Override
             public void onSuccess(Object object) {
                 reList.refreshComplete();
@@ -159,6 +173,35 @@ public class WorkersFragment extends BaseFragment implements MyRefreshLayoutList
 
             }
         });
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data==null){
+            return;
+        }
+        if(resultCode==500){
+            Dept.DeptBean deptBean= (Dept.DeptBean) data.getSerializableExtra("deptBean");
+            if(deptBean!=null){
+                tvDepartment.setTag(String.valueOf(deptBean.getId()));
+                tvDepartment.setText(deptBean.getName());
+                tvUsername.setTag(null);
+                tvUsername.setText(null);
+                //加载数据
+                reList.startRefresh();
+            }
+        }
+        if(resultCode==400){
+            UserList.ListBean listBean= (UserList.ListBean) data.getSerializableExtra("listBean");
+            if(listBean!=null){
+                tvUsername.setTag(String.valueOf(listBean.getUserId()));
+                tvUsername.setText(listBean.getName());
+                //加载数据
+                reList.startRefresh();
+            }
+        }
     }
 
 
