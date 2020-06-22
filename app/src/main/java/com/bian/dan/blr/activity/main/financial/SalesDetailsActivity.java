@@ -7,10 +7,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.adapter.financial.WorkerDetailsAdapter;
+import com.bian.dan.blr.adapter.financial.SalesDetailsAdapter;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
-import com.zxdc.utils.library.bean.Wage;
+import com.zxdc.utils.library.bean.SalesWage;
+import com.zxdc.utils.library.bean.SalesWageDetails;
 import com.zxdc.utils.library.bean.WorkerDetails;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
@@ -25,9 +27,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 工人工资明细
+ * 销售工资明细
  */
-public class WorkerDetailsActivity extends BaseActivity implements MyRefreshLayoutListener {
+public class SalesDetailsActivity extends BaseActivity implements MyRefreshLayoutListener {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -35,32 +37,34 @@ public class WorkerDetailsActivity extends BaseActivity implements MyRefreshLayo
     ListView listView;
     @BindView(R.id.re_list)
     MyRefreshLayout reList;
-    //工资列表对象
-    private Wage.ListBean listBean;
+    //销售工资对象
+    private SalesWage.ListBean listBean;
     //页码
     private int page=1;
-    private List<WorkerDetails.ListBean> listAll=new ArrayList<>();
-    private WorkerDetailsAdapter workerDetailsAdapter;
+    private SalesDetailsAdapter salesDetailsAdapter;
+    private List<SalesWageDetails.ListBean> listAll=new ArrayList<>();
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worder_details);
         ButterKnife.bind(this);
         initView();
-        //工人工资明细
+        //销售工资统计
         reList.startRefresh();
     }
+
 
     /**
      * 初始化
      */
-    private void initView(){
-        tvHead.setText("工人工资明细");
-        listBean= (Wage.ListBean) getIntent().getSerializableExtra("listBean");
+    private void initView() {
+        tvHead.setText("销售工资明细");
+        listBean= (SalesWage.ListBean) getIntent().getSerializableExtra("listBean");
 
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
-        workerDetailsAdapter=new WorkerDetailsAdapter(this,listAll);
-        listView.setAdapter(workerDetailsAdapter);
+        salesDetailsAdapter=new SalesDetailsAdapter(this,listAll);
+        listView.setAdapter(salesDetailsAdapter);
     }
 
     @OnClick(R.id.lin_back)
@@ -77,33 +81,33 @@ public class WorkerDetailsActivity extends BaseActivity implements MyRefreshLayo
     public void onRefresh(View view) {
         page=1;
         listAll.clear();
-        getWorkerDetails();
+        getSalesWageDetails();
     }
     @Override
     public void onLoadMore(View view) {
         page++;
-        getWorkerDetails();
+        getSalesWageDetails();
     }
 
 
     /**
-     * 工人工资明细
+     * 销售工资统计
      */
-    private void getWorkerDetails(){
-        HttpMethod.getWorkerDetails(listBean.getMonth(), listBean.getCreateId(), page,new NetWorkCallBack() {
+    private void getSalesWageDetails(){
+        HttpMethod.getSalesWageDetails(listBean.getSalesId(),listBean.getMonth(), page,new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
-                WorkerDetails workerDetails= (WorkerDetails) object;
-                if(workerDetails.isSussess()){
-                    List<WorkerDetails.ListBean> list=workerDetails.getData().getRows();
+                SalesWageDetails salesWageDetails= (SalesWageDetails) object;
+                if(salesWageDetails.isSussess()){
+                    List<SalesWageDetails.ListBean> list=salesWageDetails.getData().getRows();
                     listAll.addAll(list);
-                    workerDetailsAdapter.notifyDataSetChanged();
+                    salesDetailsAdapter.notifyDataSetChanged();
                     if(list.size()<HttpMethod.limit){
                         reList.setIsLoadingMoreEnabled(false);
                     }
                 }else{
-                    ToastUtil.showLong(workerDetails.getMsg());
+                    ToastUtil.showLong(salesWageDetails.getMsg());
                 }
             }
 

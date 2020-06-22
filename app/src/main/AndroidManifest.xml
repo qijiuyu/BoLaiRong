@@ -140,6 +140,8 @@
         <activity android:name=".activity.main.financial.WorkerDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.financial.WorkerListActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.main.financial.SalesWageActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.financial.SalesDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.financial.EntryBonusActivity"  android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

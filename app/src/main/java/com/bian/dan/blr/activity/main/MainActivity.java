@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.LoginActivity;
 import com.bian.dan.blr.activity.UpdatePwdActivity;
+import com.bian.dan.blr.activity.main.financial.EntryBonusActivity;
 import com.bian.dan.blr.activity.main.financial.SalesWageActivity;
 import com.bian.dan.blr.activity.main.financial.WorkerListActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
@@ -253,7 +254,7 @@ public class MainActivity extends BaseActivity {
                 break;
             //录入奖金
             case R.id.tv_financial_lr:
-                setClass(WorkerListActivity.class);
+                setClass(EntryBonusActivity.class);
                 break;
            //财务报销
             case R.id.tv_financial_cwbx:

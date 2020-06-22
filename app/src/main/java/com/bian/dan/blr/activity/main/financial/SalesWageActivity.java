@@ -76,7 +76,9 @@ public class SalesWageActivity extends BaseActivity  implements MyRefreshLayoutL
         listView.setAdapter(salesWageAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent=new Intent(activity,SalesDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
+                startActivity(intent);
             }
         });
 

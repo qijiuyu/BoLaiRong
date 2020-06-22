@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客户名称：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="合同编码：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回款日期：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"/>
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回款金额(元)：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginLeft="25dp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_memo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回款备注信息：0"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_create_people"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="录入人：xxx"
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
