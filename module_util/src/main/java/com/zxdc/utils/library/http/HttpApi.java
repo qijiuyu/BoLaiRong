@@ -15,6 +15,8 @@ import com.zxdc.utils.library.bean.Device;
 import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
+import com.zxdc.utils.library.bean.EntryBonus;
+import com.zxdc.utils.library.bean.EntryBonusDetails;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Income;
@@ -386,6 +388,13 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"contractDetail/list")
     Call<SalesWageDetails> getSalesWageDetails( @Query("salesId") int salesId,@Query("month") String month, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.IP+"customer/getIncomeForSaveCustomer")
+    Call<EntryBonus> getEntryBonus(@Query("createId") String createId, @Query("month") String month);
+
+    @GET(HttpConstant.IP+"customer/getIncomeDetailForSaveCustomer")
+    Call<EntryBonusDetails> getEntryBonusDetails(@Query("createId") int createId, @Query("month") String month, @Query("page") int page, @Query("limit") int limit);
+
 
 
 }

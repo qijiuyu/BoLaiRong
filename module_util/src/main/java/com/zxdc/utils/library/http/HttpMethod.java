@@ -15,6 +15,8 @@ import com.zxdc.utils.library.bean.DeviceDetails;
 import com.zxdc.utils.library.bean.DeviceType;
 import com.zxdc.utils.library.bean.Dict;
 import com.zxdc.utils.library.bean.DownLoad;
+import com.zxdc.utils.library.bean.EntryBonus;
+import com.zxdc.utils.library.bean.EntryBonusDetails;
 import com.zxdc.utils.library.bean.Financial;
 import com.zxdc.utils.library.bean.FinancialDetails;
 import com.zxdc.utils.library.bean.Income;
@@ -1838,6 +1840,41 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<SalesWageDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+
+    /**
+     * 录入客户奖金统计
+     */
+    public static void getEntryBonus(String createId,String month,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getEntryBonus(createId,month).enqueue(new Callback<EntryBonus>() {
+            public void onResponse(Call<EntryBonus> call, Response<EntryBonus> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<EntryBonus> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 录入客户奖金明细
+     */
+    public static void getEntryBonusDetails(int createId,String month,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getEntryBonusDetails(createId,month,page,limit).enqueue(new Callback<EntryBonusDetails>() {
+            public void onResponse(Call<EntryBonusDetails> call, Response<EntryBonusDetails> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<EntryBonusDetails> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }
