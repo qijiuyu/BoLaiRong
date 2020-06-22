@@ -38,6 +38,7 @@ import com.zxdc.utils.library.bean.Procurement;
 import com.zxdc.utils.library.bean.ProcurementDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
+import com.zxdc.utils.library.bean.SalesWage;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
@@ -1802,6 +1803,23 @@ public class HttpMethod extends BaseRequst {
                 netWorkCallBack.onSuccess(response.body());
             }
             public void onFailure(Call<WorkerDetails> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 销售工资统计
+     */
+    public static void getSalesWage(String salesId,String month,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSalesWage(salesId,month).enqueue(new Callback<SalesWage>() {
+            public void onResponse(Call<SalesWage> call, Response<SalesWage> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<SalesWage> call, Throwable t) {
                 DialogUtil.closeProgress();
                 ToastUtil.showLong(t.getMessage());
             }

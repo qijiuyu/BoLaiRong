@@ -37,6 +37,7 @@ import com.zxdc.utils.library.bean.Procurement;
 import com.zxdc.utils.library.bean.ProcurementDetails;
 import com.zxdc.utils.library.bean.ProductPlan;
 import com.zxdc.utils.library.bean.ProductProgress;
+import com.zxdc.utils.library.bean.SalesWage;
 import com.zxdc.utils.library.bean.SdEnter;
 import com.zxdc.utils.library.bean.SdEnterDetails;
 import com.zxdc.utils.library.bean.SelectCustomer;
@@ -378,6 +379,9 @@ public interface HttpApi {
 
     @GET(HttpConstant.IP+"entryProductDetail/list")
     Call<WorkerDetails> getWorkerDetails(@Query("month") String month,@Query("createId") int createId, @Query("page") int page, @Query("limit") int limit);
+
+    @GET(HttpConstant.IP+"contractDetail/getSalesIncome")
+    Call<SalesWage> getSalesWage(@Query("salesId") String salesId,@Query("month") String month);
 
 
 

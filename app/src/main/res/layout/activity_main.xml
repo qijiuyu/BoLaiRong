@@ -524,11 +524,35 @@
                         android:orientation="horizontal">
 
                         <com.zxdc.utils.library.view.ClickTextView
-                            android:id="@+id/tv_financial_gzgl"
+                            android:id="@+id/tv_financial_gr"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="工资管理"
+                            android:text="工人工资"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:drawableTop="@mipmap/gzgl"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_horizontal"/>
+
+                        <com.zxdc.utils.library.view.ClickTextView
+                            android:id="@+id/tv_financial_xs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="销售工资"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:drawableTop="@mipmap/gzgl"
+                            android:drawablePadding="10dp"
+                            android:gravity="center_horizontal"/>
+
+                        <com.zxdc.utils.library.view.ClickTextView
+                            android:id="@+id/tv_financial_lr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="录入奖励"
                             android:textColor="@android:color/black"
                             android:textSize="14sp"
                             android:drawableTop="@mipmap/gzgl"
@@ -546,16 +570,6 @@
                             android:drawableTop="@mipmap/cwbx"
                             android:drawablePadding="10dp"
                             android:gravity="center_horizontal"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
 
                     </LinearLayout>
 
