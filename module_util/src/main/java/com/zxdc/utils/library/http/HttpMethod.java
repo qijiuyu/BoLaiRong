@@ -637,8 +637,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取客户列表
      */
-    public static void getCustomer(int privateState,String privateId,String contacts,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getCustomer(privateState,privateId,contacts,page,limit).enqueue(new Callback<CustomerList>() {
+    public static void getCustomer(String state,int privateState,String privateId,String contacts,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomer(state,privateState,privateId,contacts,page,limit).enqueue(new Callback<CustomerList>() {
             public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

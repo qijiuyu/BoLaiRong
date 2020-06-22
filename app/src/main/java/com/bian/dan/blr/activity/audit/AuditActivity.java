@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.customer.AuditCustomerActivity;
 import com.bian.dan.blr.activity.audit.financial.AuditFinancialActivity;
 import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundActivity;
 import com.bian.dan.blr.activity.audit.procurement.AuditProcurementActivity;
@@ -30,6 +31,8 @@ public class AuditActivity extends BaseActivity {
     TextView tvCgd;
     @BindView(R.id.tv_bxd)
     TextView tvBxd;
+    @BindView(R.id.tv_khxz)
+    TextView tvKhxz;
     @BindView(R.id.tv_smsqb)
     TextView tvSmsqb;
     private AuditPersenter auditPersenter;
@@ -40,7 +43,7 @@ public class AuditActivity extends BaseActivity {
         auditPersenter=new AuditPersenter(this);
     }
 
-    @OnClick({R.id.rel_ckd, R.id.rel_scjh, R.id.rel_cgd, R.id.rel_bxd,R.id.rel_smsqb})
+    @OnClick({R.id.rel_ckd, R.id.rel_scjh, R.id.rel_cgd, R.id.rel_bxd,R.id.rel_khxz,R.id.rel_smsqb})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //出库单
@@ -59,6 +62,10 @@ public class AuditActivity extends BaseActivity {
             case R.id.rel_bxd:
                 setClass(AuditFinancialActivity.class);
                 break;
+            //客户新增
+            case R.id.rel_khxz:
+                setClass(AuditCustomerActivity.class);
+                 break;
             //售卖申请表
             case R.id.rel_smsqb:
                  break;

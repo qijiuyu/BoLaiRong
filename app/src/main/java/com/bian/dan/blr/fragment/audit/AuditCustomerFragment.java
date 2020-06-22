@@ -1,4 +1,4 @@
-package com.bian.dan.blr.fragment.main;
+package com.bian.dan.blr.fragment.audit;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.audit.customer.AuditCustomerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerDetailsActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
 import com.bian.dan.blr.activity.main.sales.SelectCustomerActivity;
@@ -43,16 +44,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class CustomerFragment extends BaseFragment implements MyRefreshLayoutListener {
+public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayoutListener {
 
     @BindView(R.id.listView)
     ListView listView;
     @BindView(R.id.re_list)
     MyRefreshLayout reList;
-    @BindView(R.id.tv_key)
-    public TextView tvKey;
-    @BindView(R.id.img_clear)
-    ImageView imgClear;
     Unbinder unbinder;
     //fragment是否可见
     private boolean isVisibleToUser=false;
@@ -61,10 +58,6 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
     //客户集合
     private List<Customer> listAll=new ArrayList<>();
     private CustomerAdapter customerAdapter;
-    /**
-     * 1：私有    2：公有
-     */
-    private int privateState;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //注册eventBus
@@ -73,7 +66,7 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
 
     View view;
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_customer, container, false);
+        view = inflater.inflate(R.layout.listview, container, false);
         unbinder = ButterKnife.bind(this, view);
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
@@ -88,51 +81,11 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
             }
         });
 
-        /**
-         * 监听客户名称输入框
-         */
-        tvKey.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            public void afterTextChanged(Editable s) {
-                if(s.length()>0){
-                    imgClear.setVisibility(View.VISIBLE);
-                }else{
-                    tvKey.setTag("");
-                    imgClear.setVisibility(View.GONE);
-                }
-                //加载数据
-                reList.startRefresh();
-            }
-        });
-
         //获取客户列表
         if(isVisibleToUser && view!=null && listAll.size()==0){
             reList.startRefresh();
         }
         return view;
-    }
-
-
-    @OnClick({R.id.tv_key, R.id.img_clear})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            //选择客户名称
-            case R.id.tv_key:
-                Intent intent=new Intent(mActivity, SelectCustomerActivity.class);
-                if(privateState==2){
-                    intent.putExtra("type",1);
-                }
-                startActivityForResult(intent,100);
-                break;
-            case R.id.img_clear:
-                tvKey.setText(null);
-                break;
-            default:
-                break;
-        }
     }
 
 
@@ -184,14 +137,15 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
      * 获取客户列表
      */
     private void getCustomer(){
-        privateState=((CustomerManagerActivity)mActivity).pageIndex;
+        final int state=((AuditCustomerActivity)mActivity).state;
+        final int privateState=((AuditCustomerActivity)mActivity).pageIndex;
         //用户id
         String privateId=null;
         if(privateState==1){
             final UserInfo userInfo= MyApplication.getUser();
             privateId=String.valueOf(userInfo.getUser().getUserId());
         }
-        HttpMethod.getCustomer(null,privateState, privateId, (String)tvKey.getTag(), page, new NetWorkCallBack() {
+        HttpMethod.getCustomer(null,privateState, privateId, null, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
@@ -215,17 +169,6 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
         });
     }
 
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==100 && data!=null){
-            Customer customer = (Customer) data.getSerializableExtra("customer");
-            if(customer!=null){
-                tvKey.setTag(String.valueOf(customer.getId()));
-                tvKey.setText(customer.getCustomerName());
-            }
-        }
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
