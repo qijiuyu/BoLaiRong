@@ -11,6 +11,8 @@ import com.bian.dan.blr.activity.audit.financial.AuditFinancialActivity;
 import com.bian.dan.blr.activity.audit.outbound.AuditOutBoundActivity;
 import com.bian.dan.blr.activity.audit.procurement.AuditProcurementActivity;
 import com.bian.dan.blr.activity.audit.production.AuditProductionActivity;
+import com.bian.dan.blr.activity.audit.selling.AuditSellingActivity;
+import com.bian.dan.blr.fragment.audit.AuditSellingFragment;
 import com.bian.dan.blr.persenter.audit.AuditPersenter;
 import com.zxdc.utils.library.base.BaseActivity;
 
@@ -68,6 +70,7 @@ public class AuditActivity extends BaseActivity {
                  break;
             //售卖申请表
             case R.id.rel_smsqb:
+                setClass(AuditSellingActivity.class);
                  break;
             default:
                 break;
@@ -114,6 +117,14 @@ public class AuditActivity extends BaseActivity {
                     tvBxd.setVisibility(View.GONE);
                 }
                 break;
+            case 5:
+                if(total>0){
+                    tvKhxz.setVisibility(View.VISIBLE);
+                    tvKhxz.setText(String.valueOf(total));
+                }else{
+                    tvKhxz.setVisibility(View.GONE);
+                }
+                 break;
             default:
                 break;
         }
@@ -127,5 +138,6 @@ public class AuditActivity extends BaseActivity {
         auditPersenter.getAuditFinancialList();
         auditPersenter.getAuditProcurementList();
         auditPersenter.getPlanList();
+        auditPersenter.getCustomer();
     }
 }

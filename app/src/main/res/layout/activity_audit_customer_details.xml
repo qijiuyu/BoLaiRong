@@ -244,35 +244,87 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
 
-
-            <TextView
-                android:id="@+id/tv_follow_list"
-                android:layout_width="100dp"
+            <LinearLayout
+                android:id="@+id/lin_audit"
+                android:visibility="gone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tv_bottom"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30dp"
-                android:text="跟进记录"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:gravity="center"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_audit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="审批人：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="审批时间：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="审批结果：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tv_audit_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="审批意见：xxx"
+                    android:textColor="@color/color_666666"
+                    android:textSize="15sp"
+                    android:gravity="center_vertical"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/tv_get"
-        android:visibility="gone"
+    <LinearLayout
+        android:id="@+id/lin_play"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="领取"
-        android:textSize="15sp"
-        android:textColor="@android:color/white"
-        android:gravity="center"/>
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="同意"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tv_no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_FE8E2C"
+            android:text="驳回"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

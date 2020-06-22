@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.activity.audit.customer.AuditCustomerActivity;
 import com.bian.dan.blr.activity.audit.customer.AuditCustomerDetailsActivity;
-import com.bian.dan.blr.adapter.sales.CustomerAdapter;
+import com.bian.dan.blr.activity.audit.selling.AuditSellingActivity;
+import com.bian.dan.blr.activity.audit.selling.AuditSellingDetailsActivity;
+import com.bian.dan.blr.adapter.warehouse.SellingAdapter;
 import com.zxdc.utils.library.base.BaseFragment;
-import com.zxdc.utils.library.bean.Customer;
-import com.zxdc.utils.library.bean.CustomerList;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
+import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyRefreshLayout;
@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayoutListener {
+public class AuditSellingFragment extends BaseFragment implements MyRefreshLayoutListener {
 
     @BindView(R.id.listView)
     ListView listView;
@@ -39,8 +39,8 @@ public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayo
     //页码
     private int page=1;
     //客户集合
-    private List<Customer> listAll=new ArrayList<>();
-    private CustomerAdapter customerAdapter;
+    private List<SellingOutBound.ListBean> listAll=new ArrayList<>();
+    private SellingAdapter sellingAdapter;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -51,17 +51,17 @@ public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayo
         unbinder = ButterKnife.bind(this, view);
         //刷新加载
         reList.setMyRefreshLayoutListener(this);
-        customerAdapter=new CustomerAdapter(mActivity,listAll);
-        listView.setAdapter(customerAdapter);
+        sellingAdapter=new SellingAdapter(mActivity,listAll);
+        listView.setAdapter(sellingAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(mActivity, AuditCustomerDetailsActivity.class);
-                intent.putExtra("customer",listAll.get(position));
+                Intent intent=new Intent(mActivity, AuditSellingDetailsActivity.class);
+                intent.putExtra("listBean",listAll.get(position));
                 startActivityForResult(intent,1000);
             }
         });
 
-        //获取客户列表
+        //售卖出库表
         if(isVisibleToUser && view!=null && listAll.size()==0){
             reList.startRefresh();
         }
@@ -80,7 +80,7 @@ public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayo
             public void run() {
                 page=1;
                 listAll.clear();
-                getCustomer();
+                getSellingList();
             }
         },300);
     }
@@ -91,29 +91,28 @@ public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayo
      */
     public void onLoadMore(View view) {
         page++;
-        getCustomer();
+        getSellingList();
     }
 
 
     /**
-     * 获取客户列表
+     * 售卖出库表
      */
-    private void getCustomer(){
-        HttpMethod.getCustomer(((AuditCustomerActivity)mActivity).pageIndex==0 ? "0" : "1,2",null, null, null, page, new NetWorkCallBack() {
+    private void getSellingList(){
+        HttpMethod.getSellingList(((AuditSellingActivity)mActivity).pageIndex==0 ? "0" : "1,2","","", page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();
-                CustomerList customerList= (CustomerList) object;
-                if(customerList.isSussess()){
-                    List<Customer> list=customerList.getData().getRows();
+                SellingOutBound sellingOutBound= (SellingOutBound) object;
+                if(sellingOutBound.isSussess()){
+                    List<SellingOutBound.ListBean> list=sellingOutBound.getData().getRows();
                     listAll.addAll(list);
-                    customerAdapter.notifyDataSetChanged();
-                    if (list.size() < HttpMethod.limit) {
+                    sellingAdapter.notifyDataSetChanged();
+                    if(list.size()<HttpMethod.limit){
                         reList.setIsLoadingMoreEnabled(false);
                     }
-
                 }else{
-                    ToastUtil.showLong(customerList.getMsg());
+                    ToastUtil.showLong(sellingOutBound.getMsg());
                 }
             }
 

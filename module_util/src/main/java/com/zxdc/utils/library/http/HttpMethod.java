@@ -637,8 +637,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取客户列表
      */
-    public static void getCustomer(String state,int privateState,String privateId,String contacts,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getCustomer(state,privateState,privateId,contacts,page,limit).enqueue(new Callback<CustomerList>() {
+    public static void getCustomer(String stateStr,String privateState,String privateId,String contacts,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getCustomer(stateStr,privateState,privateId,contacts,page,limit).enqueue(new Callback<CustomerList>() {
             public void onResponse(Call<CustomerList> call, Response<CustomerList> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -1680,8 +1680,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 售卖出库表
      */
-    public static void getSellingList(String startDate,String endDate,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getSellingList(startDate,endDate,page,limit).enqueue(new Callback<SellingOutBound>() {
+    public static void getSellingList(String stateStr,String startDate,String endDate,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSellingList(stateStr,startDate,endDate,page,limit).enqueue(new Callback<SellingOutBound>() {
             public void onResponse(Call<SellingOutBound> call, Response<SellingOutBound> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());
@@ -1881,5 +1881,21 @@ public class HttpMethod extends BaseRequst {
         });
     }
 
+
+    /**
+     * 审核-售卖出库
+     */
+    public static void AuditSelling(AuditOutBoundP auditOutBoundP, final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).AuditSelling(auditOutBoundP).enqueue(new Callback<BaseBean>() {
+            public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
+                DialogUtil.closeProgress();
+                netWorkCallBack.onSuccess(response.body());
+            }
+            public void onFailure(Call<BaseBean> call, Throwable t) {
+                DialogUtil.closeProgress();
+                ToastUtil.showLong(t.getMessage());
+            }
+        });
+    }
 
 }

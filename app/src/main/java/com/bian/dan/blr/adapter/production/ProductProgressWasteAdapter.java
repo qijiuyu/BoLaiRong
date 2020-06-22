@@ -71,7 +71,7 @@ public class ProductProgressWasteAdapter extends BaseAdapter {
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + wasteList.getUnitsType() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + wasteList.getNum() + "</font>"));
         holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + wasteList.getParentStockTypeStr()+"-"+wasteList.getStockTypeStr() + "</font>"));
-        holder.tvRemark.setText("备注：" + wasteList.getMemo());
+        holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + wasteList.getMemo() + "</font>"));
 
 
         /**

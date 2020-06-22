@@ -191,7 +191,7 @@ public class CustomerFragment extends BaseFragment implements MyRefreshLayoutLis
             final UserInfo userInfo= MyApplication.getUser();
             privateId=String.valueOf(userInfo.getUser().getUserId());
         }
-        HttpMethod.getCustomer(null,privateState, privateId, (String)tvKey.getTag(), page, new NetWorkCallBack() {
+        HttpMethod.getCustomer(null,String.valueOf(privateState), privateId, (String)tvKey.getTag(), page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

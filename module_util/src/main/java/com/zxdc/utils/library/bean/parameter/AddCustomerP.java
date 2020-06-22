@@ -26,6 +26,7 @@ public class AddCustomerP implements Serializable {
     private String postAddress;
     private int privateState;
     private String memo;
+    private int state;
 
     public int getId() {
         return id;
@@ -203,5 +204,13 @@ public class AddCustomerP implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

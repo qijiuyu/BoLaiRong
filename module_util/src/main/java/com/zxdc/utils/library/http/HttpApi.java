@@ -186,7 +186,7 @@ public interface HttpApi {
     Call<BaseBean> addCustomer(@Body AddCustomerP addCustomerP);
 
     @GET(HttpConstant.GET_CUSTOMER)
-    Call<CustomerList> getCustomer(@Query("state") String state,@Query("privateState") int privateState,@Query("privateId")String privateId,@Query("contacts") String contacts, @Query("page") int page, @Query("limit") int limit);
+    Call<CustomerList> getCustomer(@Query("stateStr") String stateStr,@Query("privateState") String privateState,@Query("privateId")String privateId,@Query("contacts") String contacts, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_CUSTOMER_DETAILS)
     Call<CustomerDetails> getCustomerDetails(@Query("id") int id);
@@ -360,7 +360,7 @@ public interface HttpApi {
     Call<BaseBean> auditCustomer(@Body CustomerAuditP customerAuditP);
 
     @GET(HttpConstant.IP+"selling/getList")
-    Call<SellingOutBound> getSellingList(@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
+    Call<SellingOutBound> getSellingList(@Query("stateStr") String stateStr,@Query("startDate") String startDate, @Query("endDate") String endDate, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.IP+"selling/getDetail")
     Call<SellingDetails> getSellingDetails(@Query("id") int id);
@@ -395,6 +395,8 @@ public interface HttpApi {
     @GET(HttpConstant.IP+"customer/getIncomeDetailForSaveCustomer")
     Call<EntryBonusDetails> getEntryBonusDetails(@Query("createId") int createId, @Query("month") String month, @Query("page") int page, @Query("limit") int limit);
 
+    @POST(HttpConstant.IP+"selling/approval")
+    Call<BaseBean> AuditSelling(@Body AuditOutBoundP auditOutBoundP);
 
 
 }

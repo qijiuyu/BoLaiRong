@@ -72,7 +72,7 @@ public class ProductProgressEntryAdapter extends BaseAdapter {
         holder.tvUnit.setText(Html.fromHtml("单位：<font color=\"#000000\">" + entryList.getUnitStr() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + entryList.getNum() + "</font>"));
         holder.tvStockType.setText(Html.fromHtml("仓库类型：<font color=\"#000000\">" + entryList.getParentStockTypeStr()+"-"+entryList.getStockTypeStr() + "</font>"));
-        holder.tvRemark.setText("备注：" + entryList.getMemo());
+        holder.tvRemark.setText(Html.fromHtml("备注：<font color=\"#000000\">" + entryList.getMemo() + "</font>"));
 
 
         /**

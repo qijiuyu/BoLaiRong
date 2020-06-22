@@ -39,6 +39,7 @@ public class SellingOutBound extends BaseBean {
         private int status;
         private int state;
         private String createDate="";
+        private int createId;
 
         public String getCreateDate() {
             return createDate;
@@ -110,6 +111,14 @@ public class SellingOutBound extends BaseBean {
 
         public void setState(int state) {
             this.state = state;
+        }
+
+        public int getCreateId() {
+            return createId;
+        }
+
+        public void setCreateId(int createId) {
+            this.createId = createId;
         }
     }
 }

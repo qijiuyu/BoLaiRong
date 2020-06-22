@@ -138,7 +138,7 @@ public class AuditFinancialDetailsActivity extends BaseActivity {
                          */
                         if(detailsBean.getState()>0){
                             linAudit.setVisibility(View.VISIBLE);
-                            tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
+                            tvAuditPeople.setText(Html.fromHtml("审批人：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
                             tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
                             tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + detailsBean.getStateStr() + "</font>"));
                             tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">" + detailsBean.getProp4() + "</font>"));

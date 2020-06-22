@@ -149,7 +149,7 @@ public class SellingListActivity extends BaseActivity implements MyRefreshLayout
      * 售卖出库表
      */
     private void getSellingList(){
-        HttpMethod.getSellingList(tvStartTime.getText().toString().trim(), tvEndTime.getText().toString().trim(), page, new NetWorkCallBack() {
+        HttpMethod.getSellingList(null,tvStartTime.getText().toString().trim(), tvEndTime.getText().toString().trim(), page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

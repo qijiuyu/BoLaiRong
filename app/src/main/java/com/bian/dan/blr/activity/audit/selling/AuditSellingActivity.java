@@ -1,4 +1,4 @@
-package com.bian.dan.blr.activity.audit.customer;
+package com.bian.dan.blr.activity.audit.selling;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,17 +8,20 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
+
 import com.bian.dan.blr.R;
-import com.bian.dan.blr.fragment.audit.AuditCustomerFragment;
+import com.bian.dan.blr.fragment.audit.AuditSellingFragment;
+import com.bian.dan.blr.fragment.audit.ProductionFragment;
 import com.zxdc.utils.library.base.BaseActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 审核的客户列表
+ * 审核的售卖出库列表
  */
-public class AuditCustomerActivity extends BaseActivity {
+public class AuditSellingActivity extends BaseActivity {
 
     @BindView(R.id.tv_head)
     TextView tvHead;
@@ -42,7 +45,7 @@ public class AuditCustomerActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        tvHead.setText("客户新增");
+        tvHead.setText("售卖出库");
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         viewPager.setOffscreenPageLimit(2);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -99,7 +102,7 @@ public class AuditCustomerActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new AuditCustomerFragment();
+            return new AuditSellingFragment();
         }
     }
 

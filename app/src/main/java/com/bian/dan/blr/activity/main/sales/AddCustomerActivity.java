@@ -197,6 +197,10 @@ public class AddCustomerActivity extends BaseActivity {
                 } else {
                     //修改客户
                     addCustomerP.setId(customer.getId());
+                    //如果修改前是审核未通过状态 需要将state改为0 即未审核
+                    if(customer.getState()==2){
+                        addCustomerP.setState(0);
+                    }
                     if (name.equals(customer.getCustomerName())) {
                         addCustomerPersenter.updateCustomer(addCustomerP);
                     } else {
