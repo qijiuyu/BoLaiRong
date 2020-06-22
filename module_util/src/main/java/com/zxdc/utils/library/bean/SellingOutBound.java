@@ -17,6 +17,16 @@ public class SellingOutBound extends BaseBean {
 
     public static class SellingBean implements Serializable{
 
+        private int total;
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void setTotal(int total) {
+            this.total = total;
+        }
+
         private List<ListBean> rows;
 
         public List<ListBean> getRows() {

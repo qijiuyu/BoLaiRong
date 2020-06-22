@@ -29,10 +29,19 @@ public class SellingDetails extends BaseBean {
         private String approvalDate="";
         private String approvalName="";
         private String sellName="";
+        private int createId;
         private String createDate="";
         private int status;
         private int state;
         private String memo="";
+
+        public int getCreateId() {
+            return createId;
+        }
+
+        public void setCreateId(int createId) {
+            this.createId = createId;
+        }
 
         public int getId() {
             return id;

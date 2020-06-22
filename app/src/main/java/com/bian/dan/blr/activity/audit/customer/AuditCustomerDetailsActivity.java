@@ -81,6 +81,9 @@ public class AuditCustomerDetailsActivity extends BaseActivity {
     TextView tvAuditRemark;
     @BindView(R.id.lin_audit)
     LinearLayout linAudit;
+    //详情id
+    private int detailsId;
+    //详情对象
     private Customer customer;
     private AuditPersenter auditPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,7 +101,7 @@ public class AuditCustomerDetailsActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("客户新增详情");
         auditPersenter = new AuditPersenter(this);
-        customer = (Customer) getIntent().getSerializableExtra("customer");
+        detailsId = getIntent().getIntExtra("detailsId",0);
     }
 
 
@@ -126,16 +129,13 @@ public class AuditCustomerDetailsActivity extends BaseActivity {
      * 获取客户详情
      */
     public void getCustomerDetails() {
-        if (customer == null) {
-            return;
-        }
         DialogUtil.showProgress(this, "数据加载中");
-        HttpMethod.getCustomerDetails(customer.getId(), new NetWorkCallBack() {
+        HttpMethod.getCustomerDetails(detailsId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 try {
                     CustomerDetails customerDetails = (CustomerDetails) object;
                     if (customerDetails.isSussess()) {
-                        Customer customer = customerDetails.getCustomer();
+                        customer = customerDetails.getCustomer();
                         if (customer == null) {
                             return;
                         }

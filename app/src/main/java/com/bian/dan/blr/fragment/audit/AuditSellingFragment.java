@@ -56,7 +56,7 @@ public class AuditSellingFragment extends BaseFragment implements MyRefreshLayou
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditSellingDetailsActivity.class);
-                intent.putExtra("listBean",listAll.get(position));
+                intent.putExtra("detailsId",listAll.get(position).getId());
                 startActivityForResult(intent,1000);
             }
         });
@@ -99,7 +99,7 @@ public class AuditSellingFragment extends BaseFragment implements MyRefreshLayou
      * 售卖出库表
      */
     private void getSellingList(){
-        HttpMethod.getSellingList(((AuditSellingActivity)mActivity).pageIndex==0 ? "0" : "1,2","","", page, new NetWorkCallBack() {
+        HttpMethod.getSellingList(((AuditSellingActivity)mActivity).pageIndex==0 ? "0" : "1,2",null,null, page, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 reList.refreshComplete();
                 reList.loadMoreComplete();

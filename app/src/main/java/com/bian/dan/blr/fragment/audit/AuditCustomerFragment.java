@@ -56,7 +56,7 @@ public class AuditCustomerFragment extends BaseFragment implements MyRefreshLayo
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(mActivity, AuditCustomerDetailsActivity.class);
-                intent.putExtra("customer",listAll.get(position));
+                intent.putExtra("detailsId",listAll.get(position).getId());
                 startActivityForResult(intent,1000);
             }
         });

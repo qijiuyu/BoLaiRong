@@ -56,7 +56,10 @@ public class AuditSellingDetailsActivity extends BaseActivity {
     ScrollView scrollView;
     @BindView(R.id.tv_product_money)
     TextView tvProductMoney;
-    private SellingOutBound.ListBean listBean;
+    //详情id
+    private int detailsId;
+    //详情对象
+    private SellingDetails.DetailsBean detailsBean;
     private AuditPersenter auditPersenter;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,15 +76,15 @@ public class AuditSellingDetailsActivity extends BaseActivity {
     private void initView() {
         tvHead.setText("售卖出库详情");
         auditPersenter=new AuditPersenter(this);
-        listBean= (SellingOutBound.ListBean) getIntent().getSerializableExtra("listBean");
+        detailsId = getIntent().getIntExtra("detailsId",0);
     }
 
 
     @OnClick({R.id.lin_back, R.id.tv_ok, R.id.tv_no})
     public void onViewClicked(View view) {
         AuditOutBoundP auditOutBoundP=new AuditOutBoundP();
-        auditOutBoundP.setId(listBean.getId());
-        auditOutBoundP.setCreateId(listBean.getCreateId());
+        auditOutBoundP.setId(detailsBean.getId());
+        auditOutBoundP.setCreateId(detailsBean.getCreateId());
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
@@ -106,15 +109,12 @@ public class AuditSellingDetailsActivity extends BaseActivity {
      * 售卖明细
      */
     private void getSellingDetails(){
-        if(listBean==null){
-            return;
-        }
         DialogUtil.showProgress(this,"数据加载中");
-        HttpMethod.getSellingDetails(listBean.getId(), new NetWorkCallBack() {
+        HttpMethod.getSellingDetails(detailsId, new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 SellingDetails sellingDetails= (SellingDetails) object;
                 if(sellingDetails.isSussess()){
-                    final SellingDetails.DetailsBean detailsBean=sellingDetails.getSelling();
+                    detailsBean=sellingDetails.getSelling();
                     if(detailsBean==null){
                         return;
                     }

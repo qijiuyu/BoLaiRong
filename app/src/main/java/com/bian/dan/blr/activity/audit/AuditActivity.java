@@ -125,6 +125,14 @@ public class AuditActivity extends BaseActivity {
                     tvKhxz.setVisibility(View.GONE);
                 }
                  break;
+            case 6:
+                if(total>0){
+                    tvSmsqb.setVisibility(View.VISIBLE);
+                    tvSmsqb.setText(String.valueOf(total));
+                }else{
+                    tvSmsqb.setVisibility(View.GONE);
+                }
+                break;
             default:
                 break;
         }
@@ -139,5 +147,6 @@ public class AuditActivity extends BaseActivity {
         auditPersenter.getAuditProcurementList();
         auditPersenter.getPlanList();
         auditPersenter.getCustomer();
+        auditPersenter.getSellingList();
     }
 }

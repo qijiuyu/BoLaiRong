@@ -13,6 +13,7 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.bian.dan.blr.activity.audit.customer.AuditCustomerActivity;
 import com.bian.dan.blr.activity.audit.customer.AuditCustomerDetailsActivity;
+import com.bian.dan.blr.activity.audit.selling.AuditSellingActivity;
 import com.google.gson.Gson;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.Customer;
@@ -22,6 +23,7 @@ import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.OutBound;
 import com.zxdc.utils.library.bean.Procurement;
 import com.zxdc.utils.library.bean.ProductPlan;
+import com.zxdc.utils.library.bean.SellingOutBound;
 import com.zxdc.utils.library.bean.parameter.AuditOutBoundP;
 import com.zxdc.utils.library.bean.parameter.CustomerAuditP;
 import com.zxdc.utils.library.http.HttpMethod;
@@ -393,6 +395,29 @@ public class AuditPersenter {
                     }
                 }else{
                     ToastUtil.showLong(customerList.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 售卖出库表
+     */
+    public void getSellingList(){
+        HttpMethod.getSellingList("0",null,null, 1, new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                SellingOutBound sellingOutBound= (SellingOutBound) object;
+                if(sellingOutBound.isSussess()){
+                    if(activity instanceof AuditActivity){
+                        ((AuditActivity)activity).showNewsNum(6,sellingOutBound.getData().getTotal());
+                    }
+                }else{
+                    ToastUtil.showLong(sellingOutBound.getMsg());
                 }
             }
 
