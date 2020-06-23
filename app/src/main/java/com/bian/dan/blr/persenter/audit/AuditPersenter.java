@@ -125,8 +125,8 @@ public class AuditPersenter {
         view.findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String money=etMoney.getText().toString().trim();
-                if(TextUtils.isEmpty(money)){
-                    ToastUtil.showLong("请输入奖励金额");
+                if(!TextUtils.isEmpty(money) && Double.parseDouble(money)==0){
+                    ToastUtil.showLong("奖励金额不能为0");
                     return;
                 }
                 popupWindow.dismiss();

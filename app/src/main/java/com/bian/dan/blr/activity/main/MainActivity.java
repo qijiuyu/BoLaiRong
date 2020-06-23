@@ -32,6 +32,7 @@ import com.bian.dan.blr.activity.main.warehouse.InventoryDetailsActivity;
 import com.bian.dan.blr.activity.main.warehouse.LedTableActivity;
 import com.bian.dan.blr.activity.main.warehouse.ProductEntryActivity;
 import com.bian.dan.blr.activity.main.warehouse.ProductOutActivity;
+import com.bian.dan.blr.activity.main.warehouse.SalesOutBoundActivity;
 import com.bian.dan.blr.activity.main.warehouse.SdEnterActivity;
 import com.bian.dan.blr.activity.main.warehouse.SellingListActivity;
 import com.bian.dan.blr.application.MyApplication;
@@ -212,13 +213,13 @@ public class MainActivity extends BaseActivity {
                 break;
             //销售出库单
             case R.id.tv_house_ckd:
-//                setClass(SalesOutBoundActivity.class);
+                setClass(SalesOutBoundActivity.class);
                 break;
            //采购入库单
             case R.id.tv_house_cgrkd:
                 intent.setClass(this,ProcurementActivity.class);
                 intent.putExtra("type",2);
-//                startActivity(intent);
+                startActivity(intent);
                 break;
             //生产出库
             case R.id.tv_house_scck:
@@ -262,7 +263,7 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_financial_cwbx:
                 intent.setClass(this,FinancialActivity.class);
                 intent.putExtra("type",1);
-//                startActivity(intent);
+                startActivity(intent);
                 break;
 
 

@@ -41,6 +41,15 @@ public class Customer implements Serializable {
     private String ein="";//税号
     private String longitude="";
     private String latitude="";
+    private String prop2="";
+
+    public String getProp2() {
+        return prop2;
+    }
+
+    public void setProp2(String prop2) {
+        this.prop2 = prop2;
+    }
 
     public String getStateStr() {
         return stateStr;

@@ -8,16 +8,16 @@ public class CustomerAuditP implements Serializable {
     private int state;
     private double entryFee;
     private int createId;
-    private String memo;
+    private String prop2;
 
     public CustomerAuditP(){}
 
-    public CustomerAuditP(int id, int state, double entryFee, int createId,String memo) {
+    public CustomerAuditP(int id, int state, double entryFee, int createId,String prop2) {
         this.id = id;
         this.state = state;
         this.entryFee = entryFee;
         this.createId = createId;
-        this.memo=memo;
+        this.prop2=prop2;
     }
 
     public int getId() {
@@ -52,11 +52,11 @@ public class CustomerAuditP implements Serializable {
         this.createId = createId;
     }
 
-    public String getMemo() {
-        return memo;
+    public String getProp2() {
+        return prop2;
     }
 
-    public void setMemo(String memo) {
-        this.memo = memo;
+    public void setProp2(String prop2) {
+        this.prop2 = prop2;
     }
 }

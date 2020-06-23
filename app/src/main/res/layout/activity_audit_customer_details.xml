@@ -286,7 +286,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginLeft="15dp"
-                    android:text="审批意见：xxx"
                     android:textColor="@color/color_666666"
                     android:textSize="15sp"
                     android:gravity="center_vertical"/>
