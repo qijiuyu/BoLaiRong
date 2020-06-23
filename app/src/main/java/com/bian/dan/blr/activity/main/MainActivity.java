@@ -20,6 +20,7 @@ import com.bian.dan.blr.activity.main.financial.WorkerListActivity;
 import com.bian.dan.blr.activity.main.procurement.ProcurementActivity;
 import com.bian.dan.blr.activity.main.procurement.SupplierListActivity;
 import com.bian.dan.blr.activity.main.production.OutBoundProductActivity;
+import com.bian.dan.blr.activity.main.production.WordListActivity;
 import com.bian.dan.blr.activity.main.sales.ContractManagerActivity;
 import com.bian.dan.blr.activity.main.sales.CustomerManagerActivity;
 import com.bian.dan.blr.activity.main.sales.FinancialActivity;
@@ -43,6 +44,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zxdc.utils.library.base.BaseActivity;
+import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.UserInfo;
@@ -54,6 +56,7 @@ import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.util.error.CockroachUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -94,7 +97,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
-        showBanner();
+        //顶部banner轮播图查询
+        getBanner();
         //公告列表查询
         getNoticeList();
         //设置推送
@@ -138,7 +142,7 @@ public class MainActivity extends BaseActivity {
 
 
     private Intent intent=new Intent();
-    @OnClick({R.id.tv_login_out,R.id.tv_pwd,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_scck, R.id.tv_house_scrk,R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gr,R.id.tv_financial_xs,R.id.tv_financial_lr, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx})
+    @OnClick({R.id.tv_login_out,R.id.tv_pwd,R.id.tv_sales_htgl, R.id.tv_sales_kcmx, R.id.tv_sales_ckd, R.id.tv_sales_scjh, R.id.tv_sales_rz, R.id.tv_sales_khgl, R.id.tv_sales_cwbx, R.id.tv_collect_cgd, R.id.tv_collect_gysgl, R.id.tv_collect_cwbx, R.id.tv_house_ckgl, R.id.tv_house_sdrkd, R.id.tv_house_ckd, R.id.tv_house_cgrkd, R.id.tv_house_scck, R.id.tv_house_scrk,R.id.tv_house_qlb, R.id.tv_house_smsqb, R.id.tv_house_sbgl, R.id.tv_house_cwbx, R.id.tv_financial_gr,R.id.tv_financial_xs,R.id.tv_financial_lr, R.id.tv_financial_cwbx, R.id.tv_production_scjh, R.id.tv_production_ckd, R.id.tv_production_cwbx,R.id.tv_word})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //退出登录
@@ -280,6 +284,10 @@ public class MainActivity extends BaseActivity {
             case R.id.tv_production_cwbx:
                 setClass(FinancialActivity.class);
                 break;
+            //技术文档
+            case R.id.tv_word:
+                setClass(WordListActivity.class);
+                 break;
             default:
                 break;
         }
@@ -289,11 +297,12 @@ public class MainActivity extends BaseActivity {
     /**
      * 显示banner数据
      */
-    private void showBanner() {
-        List<Integer> list = new ArrayList<>();
-        list.add(R.mipmap.banner_one);
-        list.add(R.mipmap.banner_two);
-        list.add(R.mipmap.banner_three);
+    private void showBanner(String imgs) {
+        String[] strImg=imgs.split(",");
+        if(strImg==null || strImg.length==0){
+            return;
+        }
+        List<String> list = Arrays.asList(strImg);
         banner.setVisibility(View.VISIBLE);
         //设置样式，里面有很多种样式可以自己都看看效果
         banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
@@ -315,7 +324,7 @@ public class MainActivity extends BaseActivity {
 
     public class ABImageLoader extends ImageLoader {
         public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(activity).load((int)path).into(imageView);
+            Glide.with(activity).load((String)path).into(imageView);
         }
     }
 
@@ -345,7 +354,32 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
 
+
+    /**
+     * 顶部banner轮播图查询
+     */
+    private void getBanner(){
+        HttpMethod.getNoticeList(3,1,1,new NetWorkCallBack() {
+            public void onSuccess(Object object) {
+                Notice notice= (Notice) object;
+                if(notice.isSussess()){
+                    if(notice.getData()!=null){
+                        if(notice.getData().getRows().size()==1){
+                            //显示banner数据
+                            showBanner(notice.getData().getRows().get(0).getContent());
+                        }
+                    }
+                }else{
+                    ToastUtil.showLong(notice.getMsg());
+                }
+            }
+
+            public void onFail(Throwable t) {
+
+            }
+        });
     }
 
 
@@ -353,7 +387,7 @@ public class MainActivity extends BaseActivity {
      * 公告列表查询
      */
     private void getNoticeList(){
-        HttpMethod.getNoticeList(new NetWorkCallBack() {
+        HttpMethod.getNoticeList(1,1,2,new NetWorkCallBack() {
             public void onSuccess(Object object) {
                 Notice notice= (Notice) object;
                 if(notice.isSussess()){

@@ -33,6 +33,24 @@ public class Notice extends BaseBean {
         private int id;
         private String title="";
         private String content="";
+        private String createName="";
+        private String createDate="";
+
+        public String getCreateName() {
+            return createName;
+        }
+
+        public void setCreateName(String createName) {
+            this.createName = createName;
+        }
+
+        public String getCreateDate() {
+            return createDate;
+        }
+
+        public void setCreateDate(String createDate) {
+            this.createDate = createDate;
+        }
 
         public int getId() {
             return id;

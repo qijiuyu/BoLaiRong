@@ -46,7 +46,7 @@ public class NoticeDetailsActivity extends BaseActivity {
      * 初始化
      */
     private void initView(){
-        tvHead.setText("公告详情");
+        tvHead.setText("详情");
         Notice.ListBean listBean= (Notice.ListBean) getIntent().getSerializableExtra("listBean");
         if(listBean!=null){
             tvTitle.setText(listBean.getTitle());

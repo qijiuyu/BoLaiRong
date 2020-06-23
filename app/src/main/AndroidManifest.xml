@@ -147,6 +147,7 @@
         <activity android:name=".activity.audit.customer.AuditCustomerDetailsActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.audit.selling.AuditSellingActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activity.audit.selling.AuditSellingDetailsActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.main.production.WordListActivity"  android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustPan"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
