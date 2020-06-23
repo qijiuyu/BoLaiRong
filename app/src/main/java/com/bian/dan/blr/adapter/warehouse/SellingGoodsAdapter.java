@@ -57,7 +57,7 @@ public class SellingGoodsAdapter extends BaseAdapter {
         }else{
             holder.tvType.setText(Html.fromHtml("类型：<font color=\"#000000\">设备</font>"));
         }
-        holder.tvStockType.setText(Html.fromHtml("所属仓库/部门：<font color=\"#000000\">" + goodsList.getStockName() + "</font>"));
+        holder.tvStockType.setText(Html.fromHtml("所属仓库/部门：<font color=\"#000000\">" + goodsList.getStockTypeStr()+ "</font>"));
         holder.tvName.setText(Html.fromHtml("物料名称：<font color=\"#000000\">" + goodsList.getGoodsName() + "</font>"));
         holder.tvNum.setText(Html.fromHtml("数量：<font color=\"#000000\">" + goodsList.getNum() + "</font>"));
         holder.tvPrice.setText(Html.fromHtml("单价(元)：<font color=\"#000000\">" + goodsList.getUnitPrice() + "</font>"));

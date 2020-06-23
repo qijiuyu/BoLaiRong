@@ -144,13 +144,13 @@ public class MainActivity extends BaseActivity {
             //退出登录
             case R.id.tv_login_out:
                 SPUtil.getInstance(this).removeMessage(SPUtil.TOKEN);
+                SPUtil.getInstance(this).removeMessage(SPUtil.ACCOUNT);
                 intent.setClass(this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
+                finish();
                 //停止推送
                 JPushInterface.stopPush(this);
-                finish();
                  break;
             //修改密码
             case R.id.tv_pwd:

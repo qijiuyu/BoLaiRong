@@ -123,6 +123,15 @@ public class SellingDetails extends BaseBean {
         //1：物料   2：设备
         private int type;
         private String memo="";
+        private String stockTypeStr="";
+
+        public String getStockTypeStr() {
+            return stockTypeStr;
+        }
+
+        public void setStockTypeStr(String stockTypeStr) {
+            this.stockTypeStr = stockTypeStr;
+        }
 
         public String getMemo() {
             return memo;

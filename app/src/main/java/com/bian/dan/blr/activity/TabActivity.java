@@ -60,8 +60,6 @@ public class TabActivity extends android.app.TabActivity {
         setContentView(R.layout.activity_tab);
         ButterKnife.bind(this);
         initView();
-        //刷新token
-        refreshToken();
 
         // android 7.0系统解决拍照的问题
         PermissionUtil.initPhotoError();
@@ -126,25 +124,6 @@ public class TabActivity extends android.app.TabActivity {
             }
         }
         tabhost.setCurrentTab(type);
-    }
-
-
-    /**
-     * 刷新token
-     */
-    private void refreshToken(){
-        final LoginP loginP= (LoginP) SPUtil.getInstance(this).getObject(SPUtil.ACCOUNT,LoginP.class);
-        HttpMethod.login(loginP, new NetWorkCallBack() {
-            public void onSuccess(Object object) {
-                UserInfo userInfo= (UserInfo) object;
-                if(userInfo.isSussess()){
-                    //存储token
-                    SPUtil.getInstance(TabActivity.this).addString(SPUtil.TOKEN,userInfo.getToken());
-                }
-            }
-            public void onFail(Throwable t) {
-            }
-        });
     }
 
 
