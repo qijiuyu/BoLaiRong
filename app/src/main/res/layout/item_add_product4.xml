@@ -78,29 +78,23 @@
             android:textColor="@color/color_666666"
             android:layout_marginTop="7dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_batchNo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp">
+            android:text="批号：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="7dp"/>
 
-            <TextView
-                android:id="@+id/tv_batchNo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="批号：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"/>
-
-            <TextView
-                android:id="@+id/tv_stockType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="入库仓库：xxx"
-                android:textSize="14sp"
-                android:textColor="@color/color_666666"
-                android:layout_marginLeft="25dp"/>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_stockType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="入库仓库：xxx"
+            android:textSize="14sp"
+            android:textColor="@color/color_666666"
+            android:layout_marginTop="7dp"/>
 
     <TextView
         android:id="@+id/tv_remark"

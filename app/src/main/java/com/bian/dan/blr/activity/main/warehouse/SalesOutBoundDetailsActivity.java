@@ -53,12 +53,6 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
     TextView tvContractCode;
     @BindView(R.id.tv_pay_type)
     TextView tvPayType;
-    @BindView(R.id.tv_receivable_time)
-    TextView tvReceivableTime;
-    @BindView(R.id.tv_unpaid_money)
-    TextView tvUnpaidMoney;
-    @BindView(R.id.tv_total_money)
-    TextView tvTotalMoney;
     @BindView(R.id.listView)
     MeasureListView listView;
     @BindView(R.id.tv_product_money)
@@ -156,9 +150,7 @@ public class SalesOutBoundDetailsActivity extends BaseActivity {
                         }else{
                             tvPayType.setText(Html.fromHtml("付款方式：<font color=\"#000000\">分期</font>"));
                         }
-                        tvReceivableTime.setText(Html.fromHtml("回款日期：<font color=\"#000000\">" + detailsBean.getReceivableDate() + "</font>"));
-                        tvUnpaidMoney.setText(Html.fromHtml("未付金额(元)：<font color=\"#000000\">" + detailsBean.getUnpaidAmount() + "</font>"));
-                        tvTotalMoney.setText(Html.fromHtml("累计金额(元)：<font color=\"#000000\">" + detailsBean.getAddAmount() + "</font>"));
+
 
                         /**
                          * 产品列表

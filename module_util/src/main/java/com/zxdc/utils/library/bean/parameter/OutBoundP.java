@@ -12,6 +12,7 @@ public class OutBoundP {
     private String receivableDate;
     private double unpaidAmount;
     private double addAmount;
+    private String memo;
 
     private List<AddGoodP> outOrderDetailList;
 
@@ -85,5 +86,13 @@ public class OutBoundP {
 
     public void setAddAmount(double addAmount) {
         this.addAmount = addAmount;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

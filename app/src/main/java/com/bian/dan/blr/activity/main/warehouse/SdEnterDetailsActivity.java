@@ -3,6 +3,7 @@ package com.bian.dan.blr.activity.main.warehouse;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -42,6 +43,8 @@ public class SdEnterDetailsActivity extends BaseActivity {
     TextView tvProductMoney;
     @BindView(R.id.tv_product_num)
     TextView tvProductNum;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     private SdEnter.ListBean listBean;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +86,7 @@ public class SdEnterDetailsActivity extends BaseActivity {
                     tvProName.setText(Html.fromHtml("采购员：<font color=\"#000000\">" + detailsBean.getPurcName() + "</font>"));
                     tvProTime.setText(Html.fromHtml("采购日期：<font color=\"#000000\">" + detailsBean.getPurcDate() + "</font>"));
                     tvEnterPeople.setText(Html.fromHtml("录入人：<font color=\"#000000\">" + detailsBean.getCreateName() + "</font>"));
-                    tvApplyTime.setText(Html.fromHtml("申请时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
+                    tvApplyTime.setText(Html.fromHtml("录入时间：<font color=\"#000000\">" + detailsBean.getCreateDate() + "</font>"));
                     /**
                      * 产品列表
                      */
@@ -100,6 +103,8 @@ public class SdEnterDetailsActivity extends BaseActivity {
                     }
                     tvProductNum.setText("数量："+totalNum);
                     tvProductMoney.setText(Html.fromHtml("金额(元)：<font color=\"#FF4B4C\">" + totalMoney + "</font>"));
+
+                    scrollView.scrollTo(0,0);
                 }else{
                     ToastUtil.showLong(sdEnterDetails.getMsg());
                 }

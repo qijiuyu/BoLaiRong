@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.AddProductAdapter;
 import com.bian.dan.blr.persenter.sales.AddOutBoundPersenter;
-import com.bian.dan.blr.view.MyWatcher;
 import com.zxdc.utils.library.base.BaseActivity;
 import com.zxdc.utils.library.bean.ContractCode;
 import com.zxdc.utils.library.bean.Goods;
@@ -42,20 +41,22 @@ public class AddOutBoundActivity extends BaseActivity {
     TextView tvName;
     @BindView(R.id.tv_pay_type)
     TextView tvPayType;
-    @BindView(R.id.tv_time)
-    TextView tvTime;
-    @BindView(R.id.et_no_money)
-    EditText etNoMoney;
-    @BindView(R.id.et_yes_money)
-    EditText etYesMoney;
     @BindView(R.id.listView)
     MeasureListView listView;
+    @BindView(R.id.tv_contact)
+    TextView tvContact;
+    @BindView(R.id.tv_mobile)
+    TextView tvMobile;
+    @BindView(R.id.tv_address)
+    TextView tvAddress;
+    @BindView(R.id.et_remark)
+    EditText etRemark;
     private AddProductAdapter addProductAdapter;
     private AddOutBoundPersenter addOutBoundPersenter;
     //合同对象
     private ContractCode.ListBean listBean;
     //产品列表
-    private List<Goods> goodList=new ArrayList<>();
+    private List<Goods> goodList = new ArrayList<>();
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_outbound);
@@ -67,15 +68,11 @@ public class AddOutBoundActivity extends BaseActivity {
     /**
      * 初始化
      */
-    private void initView(){
-        addOutBoundPersenter=new AddOutBoundPersenter(this);
+    private void initView() {
+        addOutBoundPersenter = new AddOutBoundPersenter(this);
         tvHead.setText("新增出库单");
-        addProductAdapter=new AddProductAdapter(this,goodList);
+        addProductAdapter = new AddProductAdapter(this, goodList);
         listView.setAdapter(addProductAdapter);
-
-        //设置小数点前后的限制
-        etNoMoney.addTextChangedListener(new MyWatcher(7,2));
-        etYesMoney.addTextChangedListener(new MyWatcher(7,2));
     }
 
 
@@ -84,84 +81,64 @@ public class AddOutBoundActivity extends BaseActivity {
      *
      * @param view
      */
-    @OnClick({R.id.lin_back,R.id.tv_code,R.id.tv_pay_type,R.id.tv_time,R.id.tv_product,R.id.tv_submit})
+    @OnClick({R.id.lin_back, R.id.tv_code, R.id.tv_pay_type, R.id.tv_product, R.id.tv_submit})
     public void onViewClicked(View view) {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
             //选择合同编号
             case R.id.tv_code:
-                 intent.setClass(this,SelectContractCodeActivity.class);
-                 startActivityForResult(intent,300);
-                  break;
+                intent.setClass(this, SelectContractCodeActivity.class);
+                startActivityForResult(intent, 300);
+                break;
             //选择付款方式
             case R.id.tv_pay_type:
                 addOutBoundPersenter.selectText(tvPayType);
                 break;
-            //选择回款日期
-            case R.id.tv_time:
-                addOutBoundPersenter.selectTime(tvTime);
-                break;
             //选择产品列表
             case R.id.tv_product:
-                intent.setClass(this,AddProductActivity.class);
-                startActivityForResult(intent,200);
+                intent.setClass(this, AddProductActivity.class);
+                startActivityForResult(intent, 200);
                 break;
             case R.id.tv_submit:
-                 String code=tvCode.getText().toString().trim();
-                 String payType=tvPayType.getText().toString().trim();
-                 String time=tvTime.getText().toString().trim();
-                 String noMoney=etNoMoney.getText().toString().trim();
-                 String yesMoney=etYesMoney.getText().toString().trim();
-                if(TextUtils.isEmpty(code)){
+                String code = tvCode.getText().toString().trim();
+                String payType = tvPayType.getText().toString().trim();
+                String memo=etRemark.getText().toString().trim();
+                if (TextUtils.isEmpty(code)) {
                     ToastUtil.showLong("请选择合同编号");
                     return;
                 }
-                if(TextUtils.isEmpty(payType)){
+                if (TextUtils.isEmpty(payType)) {
                     ToastUtil.showLong("请选择付款方式");
                     return;
                 }
-                if(TextUtils.isEmpty(time)){
-                    ToastUtil.showLong("请选择回款日期");
-                    return;
-                }
-                if(TextUtils.isEmpty(noMoney)){
-                    ToastUtil.showLong("请输入未付金额");
-                    return;
-                }
-                if(TextUtils.isEmpty(yesMoney)){
-                    ToastUtil.showLong("请输入累计收款");
-                    return;
-                }
-                if(goodList.size()==0){
+                if (goodList.size() == 0) {
                     ToastUtil.showLong("请添加产品列表");
                     return;
                 }
-                OutBoundP outBoundP=new OutBoundP();
+                OutBoundP outBoundP = new OutBoundP();
                 outBoundP.setCustomerId(listBean.getCustomerId());
                 outBoundP.setProp2(code);
                 outBoundP.setProp1(listBean.getCreateId());
-                if(payType.equals("全款")){
+                outBoundP.setMemo(memo);
+                if (payType.equals("全款")) {
                     outBoundP.setPayType(1);
-                }else{
+                } else {
                     outBoundP.setPayType(2);
                 }
-                outBoundP.setReceivableDate(time);
-                outBoundP.setUnpaidAmount(Double.parseDouble(noMoney));
-                outBoundP.setAddAmount(Double.parseDouble(yesMoney));
-                List<AddGoodP> list=new ArrayList<>();
-                for (int i=0;i<goodList.size();i++){
-                     Goods goods=goodList.get(i);
-                     AddGoodP addGoodP=new AddGoodP(goods.getGoodId(),goods.getNum(),goods.getPrice(),goods.getTotalMoney(),goods.getIsInvoice(),goods.getMemo());
-                     list.add(addGoodP);
+                List<AddGoodP> list = new ArrayList<>();
+                for (int i = 0; i < goodList.size(); i++) {
+                    Goods goods = goodList.get(i);
+                    AddGoodP addGoodP = new AddGoodP(goods.getGoodId(), goods.getNum(), goods.getPrice(), goods.getTotalMoney(), goods.getIsInvoice(), goods.getMemo());
+                    list.add(addGoodP);
                 }
                 outBoundP.setOutOrderDetailList(list);
                 //增加出库单
-                LogUtils.e("++++++"+SPUtil.gson.toJson(outBoundP));
+                LogUtils.e("++++++" + SPUtil.gson.toJson(outBoundP));
                 addOutBoundPersenter.addOutBound(outBoundP);
-                 break;
+                break;
             default:
                 break;
         }
@@ -171,38 +148,41 @@ public class AddOutBoundActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (resultCode){
+        switch (resultCode) {
             //回执合同编号
             case 300:
-                 if(data!=null){
-                     listBean= (ContractCode.ListBean) data.getSerializableExtra("listBean");
-                     tvCode.setText(listBean.getProp2());
-                     tvName.setText(listBean.getCustomerName());
-                 }
-                 break;
+                if (data != null) {
+                    listBean = (ContractCode.ListBean) data.getSerializableExtra("listBean");
+                    tvCode.setText(listBean.getProp2());
+                    tvName.setText(listBean.getCustomerName());
+                    tvContact.setText(listBean.getContacts());
+                    tvMobile.setText(listBean.getPhone());
+                    tvAddress.setText(listBean.getPostAddress());
+                }
+                break;
             //回执产品列表
             case 200:
-                 if(data!=null){
-                     Goods goods= (Goods) data.getSerializableExtra("goods");
-                     if(goods!=null){
-                         boolean isThe=false;
-                         for (int i=0;i<goodList.size();i++){
-                              if(goodList.get(i).getGoodId()==goods.getGoodId()){
-                                  isThe=true;
-                                  break;
-                              }
-                         }
-                         if(isThe){
-                             ToastUtil.showLong("不能重复添加物料");
-                         }else{
-                             goodList.add(goods);
-                             addProductAdapter.notifyDataSetChanged();
-                         }
-                     }
-                 }
-                 break;
-             default:
-                 break;
+                if (data != null) {
+                    Goods goods = (Goods) data.getSerializableExtra("goods");
+                    if (goods != null) {
+                        boolean isThe = false;
+                        for (int i = 0; i < goodList.size(); i++) {
+                            if (goodList.get(i).getGoodId() == goods.getGoodId()) {
+                                isThe = true;
+                                break;
+                            }
+                        }
+                        if (isThe) {
+                            ToastUtil.showLong("不能重复添加物料");
+                        } else {
+                            goodList.add(goods);
+                            addProductAdapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 

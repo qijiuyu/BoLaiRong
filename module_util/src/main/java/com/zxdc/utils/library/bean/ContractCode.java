@@ -34,6 +34,33 @@ public class ContractCode extends BaseBean {
         private String prop2="";
         private int createId;
         private String createName="";
+        private String contacts="";
+        private String phone="";
+        private String postAddress="";
+
+        public String getContacts() {
+            return contacts;
+        }
+
+        public void setContacts(String contacts) {
+            this.contacts = contacts;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getPostAddress() {
+            return postAddress;
+        }
+
+        public void setPostAddress(String postAddress) {
+            this.postAddress = postAddress;
+        }
 
         public int getId() {
             return id;

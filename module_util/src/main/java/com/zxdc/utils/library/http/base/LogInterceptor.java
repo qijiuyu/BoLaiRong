@@ -1,5 +1,7 @@
 package com.zxdc.utils.library.http.base;
 
+import android.content.Intent;
+
 import com.zxdc.utils.library.base.BaseApplication;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.parameter.LoginP;
