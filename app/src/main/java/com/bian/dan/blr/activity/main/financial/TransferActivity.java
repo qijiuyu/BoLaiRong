@@ -91,6 +91,10 @@ public class TransferActivity extends BaseActivity {
                     ToastUtil.showLong("请输入转账金额");
                     return;
                 }
+                if(Double.parseDouble(money)!=detailsBean.getAmount()){
+                    ToastUtil.showLong("转账金额需要与报销金额保持一致");
+                    return;
+                }
                 if(TextUtils.isEmpty(time)){
                     ToastUtil.showLong("请选择转账时间");
                     return;

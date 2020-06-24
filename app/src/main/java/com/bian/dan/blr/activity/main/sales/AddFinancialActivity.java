@@ -118,6 +118,10 @@ public class AddFinancialActivity extends BaseActivity {
                     ToastUtil.showLong("请输入金额");
                     return;
                 }
+                if(Double.parseDouble(money)==0){
+                    ToastUtil.showLong("金额不能为0");
+                    return;
+                }
                 if(TextUtils.isEmpty(remark)){
                     ToastUtil.showLong("款项用途及金额");
                     return;
@@ -200,7 +204,7 @@ public class AddFinancialActivity extends BaseActivity {
                      tvName.setText(listBean.getName());
                      tvName.setTag(listBean.getUserId());
                      tvAccount.setText(listBean.getAccount());
-                     tvBank.setText(listBean.getOpenBankStr());
+                     tvBank.setText(listBean.getOpenBank());
                      tvMobile.setText(listBean.getMobile());
                  }
                  break;
@@ -224,7 +228,7 @@ public class AddFinancialActivity extends BaseActivity {
         tvName.setTag(detailsBean.getUserId());
         tvAccount.setText(detailsBean.getAccount());
         tvAccount.setTextColor(getResources().getColor(R.color.color_999999));
-        tvBank.setText(detailsBean.getOpenBankStr());
+        tvBank.setText(detailsBean.getOpenBank());
         tvBank.setTextColor(getResources().getColor(R.color.color_999999));
         tvMobile.setText(detailsBean.getMobile());
         tvMobile.setTextColor(getResources().getColor(R.color.color_999999));

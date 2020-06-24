@@ -29,7 +29,7 @@ public class FinancialDetails extends BaseBean {
         private String createName="";
         private String createDate="";
         private String memo="";
-        private String openBankStr="";
+        private String openBank="";
         private String financeName="";
         private double prop2;
         private String prop3="";
@@ -143,12 +143,12 @@ public class FinancialDetails extends BaseBean {
             this.memo = memo;
         }
 
-        public String getOpenBankStr() {
-            return openBankStr;
+        public String getOpenBank() {
+            return openBank;
         }
 
-        public void setOpenBankStr(String openBankStr) {
-            this.openBankStr = openBankStr;
+        public void setOpenBank(String openBank) {
+            this.openBank = openBank;
         }
 
         public String getFinanceName() {
