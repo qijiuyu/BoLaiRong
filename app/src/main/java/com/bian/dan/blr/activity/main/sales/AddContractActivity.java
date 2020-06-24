@@ -222,6 +222,7 @@ public class AddContractActivity extends BaseActivity {
         if(constractDetails==null){
             return;
         }
+        tvHead.setText("编辑合同");
         ConstractDetails.DetailsBean detailsBean=constractDetails.getContract();
         if(detailsBean==null){
             return;

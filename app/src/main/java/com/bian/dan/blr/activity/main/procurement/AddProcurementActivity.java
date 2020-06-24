@@ -140,6 +140,7 @@ public class AddProcurementActivity extends BaseActivity {
         if (detailsBean == null) {
             return;
         }
+        tvHead.setText("编辑采购单");
         tvTime.setText(detailsBean.getPurcDate().split(" ")[0]);
         //遍历采购物料列表
         for (int i=0;i<detailsBean.getPurchaseDetailList().size();i++) {

@@ -141,6 +141,7 @@ public class AddStorageProductActivity extends BaseActivity {
         if(entryList==null){
             return;
         }
+        tvHead.setText("编辑产品");
         etBatchNo.setText(entryList.getBatchNo());
         tvName.setText(entryList.getGoodsName());
         tvName.setClickable(false);

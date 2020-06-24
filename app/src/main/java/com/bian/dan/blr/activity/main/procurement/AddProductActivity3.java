@@ -203,6 +203,7 @@ public class AddProductActivity3 extends BaseActivity {
         if(editGoods==null){
             return;
         }
+        tvHead.setText("编辑产品");
         tvName.setText(editGoods.getName());
         tvType.setText(editGoods.getTypeStr());
         tvSpec.setText(editGoods.getSpec());

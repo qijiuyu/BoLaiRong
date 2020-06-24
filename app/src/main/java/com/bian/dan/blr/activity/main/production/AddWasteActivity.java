@@ -74,7 +74,7 @@ public class AddWasteActivity extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        tvHead.setText("余废料添加产品");
+        tvHead.setText("添加余废料");
         addWastePersenter=new AddWastePersenter(this);
         wasteList= (ProductProgress.WasteList) getIntent().getSerializableExtra("wasteList");
 
@@ -212,6 +212,7 @@ public class AddWasteActivity extends BaseActivity {
         if(wasteList==null){
             return;
         }
+        tvHead.setText("编辑余废料");
         tvType.setText(wasteList.getTypeStr());
         tvType.setTag(wasteList.getType());
         tvDepart.setText(wasteList.getDeptName());

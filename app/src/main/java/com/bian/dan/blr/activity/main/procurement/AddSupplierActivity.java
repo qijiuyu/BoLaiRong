@@ -186,6 +186,7 @@ public class AddSupplierActivity extends BaseActivity {
         if (detailsBean == null) {
             return;
         }
+        tvHead.setText("编辑供应商");
         etName.setText(detailsBean.getSupplierName());
         tvIndustry.setText(detailsBean.getIndustryStr());
         tvIndustry.setTag(detailsBean.getIndustry());

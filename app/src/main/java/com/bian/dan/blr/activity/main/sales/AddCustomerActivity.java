@@ -222,6 +222,7 @@ public class AddCustomerActivity extends BaseActivity {
         if (customer == null) {
             return;
         }
+        tvHead.setText("编辑客户");
         etName.setText(customer.getCustomerName());
         tvIndustry.setText(customer.getIndustryStr());
         tvIndustry.setTag(customer.getIndustry());

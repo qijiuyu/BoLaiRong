@@ -50,7 +50,7 @@ public class AddProductActivity5 extends BaseActivity {
      * 初始化
      */
     private void initView() {
-        tvHead.setText("添加物料");
+        tvHead.setText("添加产品");
         editGood= (Goods) getIntent().getSerializableExtra("goods");
         //限制小数点前后
         etPrice.addTextChangedListener(new MyWatcher(7,2));
@@ -124,6 +124,7 @@ public class AddProductActivity5 extends BaseActivity {
         if(editGood==null){
             return;
         }
+        tvHead.setText("编辑产品");
         tvName.setText(editGood.getName());
         //如果是修改老数据，则只能修改单价
         if(editGood.getId()!=0){

@@ -221,6 +221,7 @@ public class AddFinancialActivity extends BaseActivity {
         if(detailsBean==null){
             return;
         }
+        tvHead.setText("编辑报销单");
         //禁止修改申请人
         tvName.setEnabled(false);
         tvName.setText(detailsBean.getName());

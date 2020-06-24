@@ -202,6 +202,7 @@ public class AddDeviceActivity extends BaseActivity {
         if(detailsBean==null){
             return;
         }
+        tvHead.setText("编辑设备");
         tvDepartment.setText(detailsBean.getDeptName());
         tvDepartment.setTag(detailsBean.getDeptId());
         tvType.setText(detailsBean.getTypeName());
