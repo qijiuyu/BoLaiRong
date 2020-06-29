@@ -21,9 +21,6 @@ public class MyApplication extends BaseApplication {
         super.onCreate();
         setContext(this);
 
-        //刷新token
-        refreshToken();
-
         //开启小强
         CockroachUtil.install();
 
@@ -35,32 +32,6 @@ public class MyApplication extends BaseApplication {
 
         //管理Activity
         registerActivityLifecycleCallbacks(ActivitysLifecycle.getInstance());
-    }
-
-
-    /**
-     * 刷新token
-     */
-    private void refreshToken(){
-        try {
-            final LoginP loginP= (LoginP) SPUtil.getInstance(this).getObject(SPUtil.ACCOUNT,LoginP.class);
-            if(loginP==null){
-                return;
-            }
-            HttpMethod.login(loginP, new NetWorkCallBack() {
-                public void onSuccess(Object object) {
-                    UserInfo userInfo= (UserInfo) object;
-                    if(userInfo.isSussess()){
-                        //存储token
-                        SPUtil.getInstance(getApplicationContext()).addString(SPUtil.TOKEN,userInfo.getToken());
-                    }
-                }
-                public void onFail(Throwable t) {
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
 

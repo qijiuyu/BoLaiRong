@@ -109,7 +109,7 @@ public class FinancialDetailsActivity extends BaseActivity {
                 }
                 Intent intent=new Intent(this,AddFinancialActivity.class);
                 intent.putExtra("detailsBean",detailsBean);
-                startActivityForResult(intent,100);
+                startActivityForResult(intent,1000);
                 break;
             default:
                 break;
@@ -144,7 +144,6 @@ public class FinancialDetailsActivity extends BaseActivity {
                      * 审核信息
                      */
                     if (detailsBean.getState() > 0) {
-                        tvRight.setVisibility(View.GONE);  //已审核之后，就不能编辑了
                         linAudit.setVisibility(View.VISIBLE);
                         tvAuditPeople.setText(Html.fromHtml("审批：<font color=\"#000000\">" + detailsBean.getApprovalName() + "</font>"));
                         tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + detailsBean.getApprovalDate() + "</font>"));
@@ -172,6 +171,13 @@ public class FinancialDetailsActivity extends BaseActivity {
                         tvTransferTime.setText(Html.fromHtml("填写时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
                         tvTransferMoney.setText(Html.fromHtml("转账金额(元)：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         Glide.with(activity).load(detailsBean.getProp3()).into(imgTransfer);
+                    }
+
+                    /**
+                     * 审核后，就不能编辑了
+                     */
+                    if(detailsBean.getState()>0){
+                        tvRight.setVisibility(View.GONE);
                     }
                     scrollView.scrollTo(0, 0);
                 } else {

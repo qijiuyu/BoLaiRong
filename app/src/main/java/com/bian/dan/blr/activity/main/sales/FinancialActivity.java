@@ -185,7 +185,7 @@ public class FinancialActivity extends BaseActivity  implements MyRefreshLayoutL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==100){
+        if(resultCode==1000){
             //重新刷新列表
             reList.startRefresh();
         }

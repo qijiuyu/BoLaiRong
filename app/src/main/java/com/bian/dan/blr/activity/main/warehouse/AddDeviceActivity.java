@@ -13,6 +13,7 @@ import com.bian.dan.blr.R;
 import com.bian.dan.blr.adapter.sales.GridViewImgAdapter;
 import com.bian.dan.blr.persenter.warehouse.AddDevicePersenter;
 import com.bian.dan.blr.utils.SelectPhoto;
+import com.bian.dan.blr.view.MyWatcher;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -79,6 +80,9 @@ public class AddDeviceActivity extends BaseActivity {
         tvHead.setText("新增设备");
         addDevicePersenter=new AddDevicePersenter(this);
         detailsBean= (DeviceDetails.DetailsBean) getIntent().getSerializableExtra("detailsBean");
+
+        //限制小数点前后
+        etMoney.addTextChangedListener(new MyWatcher(7,2));
 
         //图片列表
         gridViewImgAdapter=new GridViewImgAdapter(this,imgList);
@@ -150,6 +154,10 @@ public class AddDeviceActivity extends BaseActivity {
                 }
                 if(TextUtils.isEmpty(money)){
                     ToastUtil.showLong("请输入采购金额");
+                    return;
+                }
+                if(Double.parseDouble(money)==0){
+                    ToastUtil.showLong("采购金额不能为0");
                     return;
                 }
                 if(imgList.size()==0){

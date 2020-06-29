@@ -13,6 +13,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.main.sales.AddFinancialActivity;
 import com.bian.dan.blr.adapter.sales.NetGridViewImgAdapter;
 import com.bumptech.glide.Glide;
 import com.zxdc.utils.library.base.BaseActivity;
@@ -75,6 +76,8 @@ public class FinancialDetailsActivity2 extends BaseActivity {
     TextView tvConfirm;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     private Financial.ListBean listBean;
     //详情对象
     private FinancialDetails.DetailsBean detailsBean;
@@ -93,19 +96,30 @@ public class FinancialDetailsActivity2 extends BaseActivity {
      */
     private void initView() {
         tvHead.setText("详情");
+        tvRight.setText("编辑");
         listBean = (Financial.ListBean) getIntent().getSerializableExtra("listBean");
     }
 
 
-    @OnClick({R.id.lin_back, R.id.tv_confirm})
+    @OnClick({R.id.lin_back, R.id.tv_confirm, R.id.tv_right})
     public void onViewClicked(View view) {
+        Intent intent=new Intent();
         switch (view.getId()) {
             case R.id.lin_back:
                 finish();
                 break;
+            //编辑
+            case R.id.tv_right:
+                if(detailsBean==null){
+                    return;
+                }
+                intent.setClass(this, AddFinancialActivity.class);
+                intent.putExtra("detailsBean",detailsBean);
+                startActivityForResult(intent,1000);
+                break;
             //确认转账
             case R.id.tv_confirm:
-                Intent intent=new Intent(this,TransferActivity.class);
+                intent.setClass(this, TransferActivity.class);
                 intent.putExtra("detailsBean",detailsBean);
                 startActivityForResult(intent,1000);
                 break;
@@ -191,6 +205,13 @@ public class FinancialDetailsActivity2 extends BaseActivity {
                         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) scrollView.getLayoutParams();
                         layoutParams.bottomMargin=5;//将默认的距离底部20dp，改为0，这样底部区域全被listview填满。
                         scrollView.setLayoutParams(layoutParams);
+                    }
+
+                    /**
+                     * 审核后，就不能编辑了
+                     */
+                    if(detailsBean.getState()>0){
+                        tvRight.setVisibility(View.GONE);
                     }
                     scrollView.scrollTo(0,0);
                 } else {

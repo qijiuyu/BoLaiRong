@@ -48,6 +48,7 @@ import com.zxdc.utils.library.bean.Log;
 import com.zxdc.utils.library.bean.NetWorkCallBack;
 import com.zxdc.utils.library.bean.Notice;
 import com.zxdc.utils.library.bean.UserInfo;
+import com.zxdc.utils.library.bean.parameter.LoginP;
 import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.ActivitysLifecycle;
 import com.zxdc.utils.library.util.LogUtils;
@@ -97,10 +98,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
-        //顶部banner轮播图查询
-        getBanner();
-        //公告列表查询
-        getNoticeList();
+        //刷新token
+        refreshToken();
         //设置推送
         setPush();
     }
@@ -354,6 +353,36 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+    /**
+     * 刷新token
+     */
+    private void refreshToken(){
+        try {
+            final LoginP loginP= (LoginP) SPUtil.getInstance(this).getObject(SPUtil.ACCOUNT,LoginP.class);
+            if(loginP==null){
+                return;
+            }
+            HttpMethod.login(loginP, new NetWorkCallBack() {
+                public void onSuccess(Object object) {
+                    UserInfo userInfo= (UserInfo) object;
+                    if(userInfo.isSussess()){
+                        //存储token
+                        SPUtil.getInstance(getApplicationContext()).addString(SPUtil.TOKEN,userInfo.getToken());
+                        //顶部banner轮播图查询
+                        getBanner();
+                        //公告列表查询
+                        getNoticeList();
+                    }
+                }
+                public void onFail(Throwable t) {
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

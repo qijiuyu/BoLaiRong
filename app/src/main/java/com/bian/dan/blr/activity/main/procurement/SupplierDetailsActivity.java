@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
@@ -53,6 +54,8 @@ public class SupplierDetailsActivity extends BaseActivity {
     TextView tvPriBank;
     @BindView(R.id.tv_pri_account_name)
     TextView tvPriAccountName;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
     //详情id
     private int detailsId;
     //详情对象
@@ -131,6 +134,7 @@ public class SupplierDetailsActivity extends BaseActivity {
                      * 物料列表
                      */
                     listView.setAdapter(new SupplierDetails_Product_Adapter(activity, detailsBean.getSupplierDetailList()));
+                    scrollView.scrollTo(0,0);
                 } else {
                     ToastUtil.showLong(supplierDetails.getMsg());
                 }
