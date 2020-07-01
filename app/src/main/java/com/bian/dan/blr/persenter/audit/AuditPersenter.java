@@ -14,6 +14,7 @@ import com.bian.dan.blr.activity.audit.AuditActivity;
 import com.bian.dan.blr.activity.audit.customer.AuditCustomerActivity;
 import com.bian.dan.blr.activity.audit.customer.AuditCustomerDetailsActivity;
 import com.bian.dan.blr.activity.audit.selling.AuditSellingActivity;
+import com.bian.dan.blr.view.MyWatcher;
 import com.google.gson.Gson;
 import com.zxdc.utils.library.bean.BaseBean;
 import com.zxdc.utils.library.bean.Customer;
@@ -122,6 +123,8 @@ public class AuditPersenter {
         final PopupWindow popupWindow= DialogUtil.showPopWindow(view);
         popupWindow.showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM, 0,0);
         final EditText etMoney=view.findViewById(R.id.et_money);
+        //限制小数点前后
+        etMoney.addTextChangedListener(new MyWatcher(7,2));
         view.findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String money=etMoney.getText().toString().trim();

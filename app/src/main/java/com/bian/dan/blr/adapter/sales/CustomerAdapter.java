@@ -58,6 +58,19 @@ public class CustomerAdapter extends BaseAdapter {
         holder.tvPosition.setText(Html.fromHtml("职位：<font color=\"#000000\">" + customer.getPosition() + "</font>"));
         holder.tvStatus.setText(customer.getStatusName());
         holder.tvState.setText(customer.getStateStr());
+        switch (customer.getState()){
+            case 0:
+                holder.tvState.setTextColor(activity.getResources().getColor(R.color.color_FE8E2C));
+                break;
+            case 1:
+                holder.tvState.setTextColor(activity.getResources().getColor(R.color.color_70DF5D));
+                break;
+            case 2:
+                holder.tvState.setTextColor(activity.getResources().getColor(R.color.color_FF4B4C));
+                break;
+            default:
+                break;
+        }
         return view;
     }
 

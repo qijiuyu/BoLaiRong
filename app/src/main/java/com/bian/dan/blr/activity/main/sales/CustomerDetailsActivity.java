@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -84,6 +85,18 @@ public class CustomerDetailsActivity extends BaseActivity {
     TextView tvPriBank;
     @BindView(R.id.tv_pri_account_name)
     TextView tvPriAccountName;
+    @BindView(R.id.tv_audit_name)
+    TextView tvAuditName;
+    @BindView(R.id.tv_audit_time)
+    TextView tvAuditTime;
+    @BindView(R.id.tv_audit_result)
+    TextView tvAuditResult;
+    @BindView(R.id.tv_audit_remark)
+    TextView tvAuditRemark;
+    @BindView(R.id.lin_audit)
+    LinearLayout linAudit;
+    @BindView(R.id.tv_follow_list)
+    TextView tvFollowList;
     private Customer customer;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,8 +184,32 @@ public class CustomerDetailsActivity extends BaseActivity {
                         tvPriAccountName.setText(Html.fromHtml("私有户名：<font color=\"#000000\">" + customer.getPrivateAccName() + "</font>"));
                         tvEin.setText(Html.fromHtml("税号：<font color=\"#000000\">" + customer.getEin() + "</font>"));
                         tvLandline.setText(Html.fromHtml("座机号：<font color=\"#000000\">" + customer.getLandline() + "</font>"));
-
                         tvAddress.setText(Html.fromHtml("收件地址：<font color=\"#000000\">" + customer.getPostAddress() + "</font>"));
+
+                        /**
+                         * 审核信息
+                         */
+                        if (customer.getState() > 0) {
+                            linAudit.setVisibility(View.VISIBLE);
+                            tvAuditName.setText(Html.fromHtml("审批人：<font color=\"#000000\">" + customer.getApprovalName() + "</font>"));
+                            tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + customer.getApprovalDate() + "</font>"));
+                            tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + customer.getStateStr() + "</font>"));
+                            if(customer.getState()==1){
+                                tvAuditRemark.setText(Html.fromHtml("奖励金额(元)：<font color=\"#000000\">"+customer.getEntryFee()+"</font>"));
+                            }else{
+                                tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">"+customer.getProp2()+"</font>"));
+                            }
+                        }
+
+
+                        /**
+                         * 跟进记录按钮只能是审核通过后显示
+                         */
+                        if(customer.getState()==1){
+                            tvFollowList.setVisibility(View.VISIBLE);
+                        }else{
+                            tvFollowList.setVisibility(View.GONE);
+                        }
 
 
                         /**

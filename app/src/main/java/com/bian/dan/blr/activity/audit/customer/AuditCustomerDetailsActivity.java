@@ -170,8 +170,10 @@ public class AuditCustomerDetailsActivity extends BaseActivity {
                             tvAuditName.setText(Html.fromHtml("审批人：<font color=\"#000000\">" + customer.getApprovalName() + "</font>"));
                             tvAuditTime.setText(Html.fromHtml("审批时间：<font color=\"#000000\">" + customer.getApprovalDate() + "</font>"));
                             tvAuditResult.setText(Html.fromHtml("审批结果：<font color=\"#000000\">" + customer.getStateStr() + "</font>"));
-                            if (customer.getState() ==2) {
-                                tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\"></font>"));
+                            if(customer.getState()==1){
+                                tvAuditRemark.setText(Html.fromHtml("奖励金额(元)：<font color=\"#000000\">"+customer.getEntryFee()+"</font>"));
+                            }else{
+                                tvAuditRemark.setText(Html.fromHtml("审核意见：<font color=\"#000000\">"+customer.getProp2()+"</font>"));
                             }
                         }
 

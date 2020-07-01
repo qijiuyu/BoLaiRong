@@ -18,12 +18,12 @@ public class Customer implements Serializable {
     private String qq="";
     private String email="";//邮箱
     private String url="";
-    private String openAccount;
-    private String openBank;
-    private String openAccName;
-    private String privateAccount;
-    private String privateBank;
-    private String privateAccName;
+    private String openAccount="";
+    private String openBank="";
+    private String openAccName="";
+    private String privateAccount="";
+    private String privateBank="";
+    private String privateAccName="";
     private String landline="";//座机号
     private String postAddress="";//收货地址
     private String address="";//地址
@@ -42,6 +42,15 @@ public class Customer implements Serializable {
     private String longitude="";
     private String latitude="";
     private String prop2="";
+    private double entryFee;
+
+    public double getEntryFee() {
+        return entryFee;
+    }
+
+    public void setEntryFee(double entryFee) {
+        this.entryFee = entryFee;
+    }
 
     public String getProp2() {
         return prop2;
