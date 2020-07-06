@@ -20,7 +20,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
             android:layout_weight="1">
 
             <TextView
@@ -44,10 +43,15 @@
 
         </RelativeLayout>
 
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/color_666666"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
             android:layout_weight="1">
 
             <TextView
@@ -55,6 +59,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="采购结束日期"
+                android:textSize="13sp"
+                android:textColor="@color/color_333333"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:background="@drawable/bg__four_border"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/sanjiao"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_start_entry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="入库开始日期"
+                android:textSize="13sp"
+                android:textColor="@color/color_333333"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:background="@drawable/bg__four_border"/>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/sanjiao"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0.5dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/color_666666"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_end_entry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="入库结束日期"
                 android:textSize="13sp"
                 android:textColor="@color/color_333333"
                 android:gravity="center_vertical"

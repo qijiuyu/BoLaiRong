@@ -824,8 +824,8 @@ public class HttpMethod extends BaseRequst {
     /**
      * 获取手动入库列表
      */
-    public static void getSdEnterList(String startPurcDate,String endPurcDate,int page,final NetWorkCallBack netWorkCallBack) {
-        Http.getRetrofit().create(HttpApi.class).getSdEnterList(startPurcDate,endPurcDate,page,limit).enqueue(new Callback<SdEnter>() {
+    public static void getSdEnterList(String startPurcDate,String endPurcDate,String startCreateDate,String endCreateDate,int page,final NetWorkCallBack netWorkCallBack) {
+        Http.getRetrofit().create(HttpApi.class).getSdEnterList(startPurcDate,endPurcDate,startCreateDate,endCreateDate,page,limit).enqueue(new Callback<SdEnter>() {
             public void onResponse(Call<SdEnter> call, Response<SdEnter> response) {
                 DialogUtil.closeProgress();
                 netWorkCallBack.onSuccess(response.body());

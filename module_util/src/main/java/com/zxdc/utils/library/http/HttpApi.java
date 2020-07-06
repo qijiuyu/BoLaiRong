@@ -219,7 +219,7 @@ public interface HttpApi {
     Call<BaseBean> addSdEnter(@Body AddSdEnterP addSdEnterP);
 
     @GET(HttpConstant.GET_SD_ENTER_LIST)
-    Call<SdEnter> getSdEnterList(@Query("startPurcDate") String startPurcDate,@Query("endPurcDate") String endPurcDate, @Query("page") int page, @Query("limit") int limit);
+    Call<SdEnter> getSdEnterList(@Query("startPurcDate") String startPurcDate,@Query("endPurcDate") String endPurcDate,@Query("startCreateDate") String startCreateDate,@Query("endCreateDate") String endCreateDate, @Query("page") int page, @Query("limit") int limit);
 
     @GET(HttpConstant.GET_SD_ENTER_DETAILS)
     Call<SdEnterDetails> getSdEnterDetails(@Query("id") int id);

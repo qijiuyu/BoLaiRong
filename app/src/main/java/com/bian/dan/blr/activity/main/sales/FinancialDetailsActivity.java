@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bian.dan.blr.R;
+import com.bian.dan.blr.activity.ShowImgActivity;
 import com.bian.dan.blr.adapter.sales.NetGridViewImgAdapter;
 import com.bumptech.glide.Glide;
 import com.zxdc.utils.library.base.BaseActivity;
@@ -22,6 +23,9 @@ import com.zxdc.utils.library.http.HttpMethod;
 import com.zxdc.utils.library.util.DialogUtil;
 import com.zxdc.utils.library.util.ToastUtil;
 import com.zxdc.utils.library.view.MyGridView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -171,6 +175,16 @@ public class FinancialDetailsActivity extends BaseActivity {
                         tvTransferTime.setText(Html.fromHtml("填写时间：<font color=\"#000000\">" + detailsBean.getProp5() + "</font>"));
                         tvTransferMoney.setText(Html.fromHtml("转账金额(元)：<font color=\"#000000\">" + detailsBean.getProp2() + "</font>"));
                         Glide.with(activity).load(detailsBean.getProp3()).into(imgTransfer);
+                        imgTransfer.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                List<String> imgList=new ArrayList<>();
+                                imgList.add(detailsBean.getProp3());
+                                Intent intent=new Intent(activity, ShowImgActivity.class);
+                                intent.putStringArrayListExtra("imgs", (ArrayList<String>) imgList);
+                                activity.startActivity(intent);
+                            }
+                        });
                     }
 
                     /**
