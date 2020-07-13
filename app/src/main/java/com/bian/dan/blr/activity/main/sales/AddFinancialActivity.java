@@ -186,6 +186,9 @@ public class AddFinancialActivity extends BaseActivity {
             //返回相册选择图片
             case PictureConfig.CHOOSE_REQUEST:
                 List<LocalMedia> list= PictureSelector.obtainMultipleResult(data);
+                if(list.size()==0){
+                    return;
+                }
                 if(detailsBean==null){
                     //增加-上传图片
                     financialPersenter.uploadFile(list);

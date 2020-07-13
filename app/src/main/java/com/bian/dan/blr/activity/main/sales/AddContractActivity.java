@@ -295,6 +295,9 @@ public class AddContractActivity extends BaseActivity {
             //返回相册选择图片
             case PictureConfig.CHOOSE_REQUEST:
                  List<LocalMedia> list= PictureSelector.obtainMultipleResult(data);
+                 if(list.size()==0){
+                     return;
+                 }
                  if(constractDetails==null){
                     //增加合同-上传图片
                     addContractPersenter.uploadFile(list);
